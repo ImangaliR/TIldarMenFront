@@ -1,0 +1,20 @@
+body {
+  font-family: "Familjen Grotesk", sans-serif;
+  background: #eaf4f4;
+}
+
+button {
+  cursor: pointer;
+}
+
+input {
+  color: black;
+}
+
+.login {
+  font-family: "Saira Condensed", "sans-serif";
+}
+
+.singup {
+  font-family: "Saira Condensed", "sans-serif";
+}
