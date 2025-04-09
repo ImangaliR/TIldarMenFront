@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import TokenService from "../../services/token.service";
 import { useEffect, useState } from "react";
+import IconMenuItem from "./IconMenuItem";
 
 const Sidebar = () => {
   const navigate = useNavigate();
@@ -124,18 +125,15 @@ const Sidebar = () => {
             </p>
           </div>
         </div>
+
+        {/* Sidebar Items */}
         <div className="text-[#949494] h-fit">
           {navigation.map((item, i) => (
-            <button
-              className="flex items-center gap-5 mt-5 pl-2 lg:pl-6 bg-white w-40 lg:w-50 h-9 cursor-pointer rounded-lg"
-              key={i}
-              onClick={() => navigate(item.href)}
-            >
-              <img className="w-5 h-5" src={item.icon} alt={item.icon} />
-              <p className="text-sm">{item.name}</p>
-            </button>
+            <IconMenuItem key={i} item={item} />
           ))}
         </div>
+
+        {/* Logout */}
         <div className="flex justify-center">
           <button
             onClick={handleLogout}
