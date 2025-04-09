@@ -127,7 +127,7 @@ const Sidebar = () => {
         </div>
 
         {/* Sidebar Items */}
-        <div className="text-[#949494] h-fit">
+        <div className="text-[#949494]">
           {navigation.map((item, i) => (
             <IconMenuItem key={i} item={item} />
           ))}
