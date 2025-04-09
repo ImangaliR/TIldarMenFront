@@ -39,7 +39,9 @@ const Navbar = () => {
             <NavLink
               to={item.href}
               key={i}
-              className={({ isActive }) => `${isActive ? "border-b-2" : ""}`}
+              className={({ isActive }) =>
+                `pl-1 pr-1 ${isActive ? "border-b-2" : "hover:border-b-1"}`
+              }
             >
               {item.name}
             </NavLink>
