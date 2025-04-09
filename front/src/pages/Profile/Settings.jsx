@@ -13,7 +13,7 @@ import {
   updatePassword,
   updateProfile,
 } from "../../services/ProfileService/ProfileService";
-import CitiesDropdown from "../../components/CitiesDropdown/CitiesDropdown";
+import CitiesDropdown from "../../components/Dropdown/CitiesDropdown";
 import { useNavigate } from "react-router-dom";
 
 const Settings = () => {
@@ -97,7 +97,7 @@ const Settings = () => {
 
   return (
     <>
-      <main className="bg-white shadow-sm rounded-sm text-sm mt-10 ml-4 mr-4 pt-10 pl-15 pr-15 md:pt-15 md:pr-20 md:pl-20 lg:pt-25 lg:pr-25 lg:pl-25">
+      <main className="bg-white shadow-sm rounded-sm text-sm pt-10 pl-15 pr-15 md:pt-15 md:pr-20 md:pl-20 lg:pt-25 lg:pr-25 lg:pl-25">
         <div className="flex items-center gap-8">
           <img src={profileicon} alt="profile icon" className="w-30 h-30 " />
           <div>

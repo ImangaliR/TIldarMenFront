@@ -1,0 +1,49 @@
+import { useEffect, useState } from "react";
+import api from "./../../services/api";
+
+const TranslationServicesDropdown = () => {
+  const [translationServices, setTranslationServices] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    api
+      .get("/service-types/all")
+      .then((res) => {
+        setTranslationServices(res.data.data); // Adjust this depending on your API's response structure
+      })
+      .catch((err) => {
+        console.error("Error fetching Translation Services:", err);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
+
+  return (
+    <>
+      <div className="w-72">
+        <label className="block mb-2 font-semibold text-black">
+          Type of Translation Services
+        </label>
+        <div className="relative">
+          <select
+            className="w-full bg-[#EAF4F4] border-1 border-[#DCDCDC] text-[##8F8F8F] text-sm rounded-md p-3 pr-10"
+            defaultValue=""
+            disabled={loading}
+          >
+            <option value="" disabled hidden>
+              {loading ? "Loading..." : "Type..."}
+            </option>
+            {translationServices.map((service, i) => (
+              <option key={i} value={service.name}>
+                {service.name}
+              </option>
+            ))}
+          </select>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default TranslationServicesDropdown;
