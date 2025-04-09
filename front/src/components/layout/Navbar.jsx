@@ -3,13 +3,18 @@ import searchicon from "../../assets/search.png";
 import bellicon from "../../assets/bell.png";
 import profileicon from "../../assets/profileicon.png";
 import employericon from "../../assets/employericon.png";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import TokenService from "../../services/token.service";
 
 const Navbar = () => {
   const navigate = useNavigate();
   const userRole = TokenService.getUserRole();
   const userId = TokenService.getUserId();
+  const navigation = [
+    { name: "Home", href: "/home" },
+    { name: "Project Catalogs", href: "/project-catalog" },
+    { name: "Translators", href: "/translators" },
+  ];
 
   const handleProfileClick = () => {
     if (userRole && userId) {
@@ -26,13 +31,19 @@ const Navbar = () => {
   return (
     <>
       <nav className="flex items-center justify-between p-5 bg-white shadow-sm">
-        <h1 className="text-2xl lg:text-3xl font-bold ml-2 md:ml-5 text-[#71C39C] cursor-pointer">
+        <h1 className="text-2xl lg:text-3xl font-bold ml-2 md:ml-5 text-[#71C39C]">
           TildarMen
         </h1>
         <div className="flex items-center justify-between min-w-60 md:min-w-72 lg:min-w-100 text-[#585858] lg:text-lg cursor-pointer">
-          <button onClick={() => navigate("/home")}>Home</button>
-          <button>Project Catalog</button>
-          <button>Translators</button>
+          {navigation.map((item, i) => (
+            <NavLink
+              to={item.href}
+              key={i}
+              className={({ isActive }) => `${isActive ? "border-b-2" : ""}`}
+            >
+              {item.name}
+            </NavLink>
+          ))}
         </div>
         <div className="flex items-center min-w-30 lg:min-w-40 gap-3">
           <button className="bg-[#f1f1f1] rounded-full p-2">

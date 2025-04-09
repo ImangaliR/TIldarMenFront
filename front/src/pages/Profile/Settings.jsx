@@ -10,7 +10,6 @@ import { useUser } from "../../utils/contexts/UserContext";
 import { toast } from "react-toastify";
 import {
   deleteProfile,
-  getProfile,
   updatePassword,
   updateProfile,
 } from "../../services/ProfileService/ProfileService";

@@ -42,6 +42,8 @@ function App() {
             <Route path="/signup" element={<Signup />} />
             <Route index element={<Navigate to="/home" replace />} />
             <Route path="home" element={<Home />} />
+            <Route path="project-catalog" element={<ProjectCatalog />} />
+            <Route path="translators" element={<Translators />} />
 
             {/* Protected Routes */}
             <Route
@@ -53,14 +55,13 @@ function App() {
               }
             >
               <Route element={<BaseLayout />}>
-                <Route path="project-catalog" element={<ProjectCatalog />} />
                 <Route path="profile" element={<Profile />} />
-                <Route path="settings" element={<Settings />} />
                 <Route path="reviews" element={<Reviews />} />
 
                 {/* Translator Routes */}
                 <Route element={<RoleBasedRoute allowedRoles={"TRANSLATOR"} />}>
                   <Route path="translator" element={<TranslatorPage />} />
+                  <Route path="settings" element={<Settings />} />
                   <Route path="profile-edit" element={<ProfileEditing />} />
                   <Route
                     path="applied-projects"
