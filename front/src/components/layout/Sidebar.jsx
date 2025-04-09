@@ -119,6 +119,7 @@ const Sidebar = () => {
             <img
               src={userRole === "EMPLOYER" ? employericon : profileicon}
               alt="profile icon"
+              className="bg-[#337180]"
             />
           </div>
           <p className="font-medium text-center mt-1 w-full">
