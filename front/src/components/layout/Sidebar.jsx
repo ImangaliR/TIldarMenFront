@@ -114,16 +114,16 @@ const Sidebar = () => {
   return (
     <>
       <div className="grid sticky top-0 justify-center bg-[#fcfcfc] pr-2 pl-2 w-68 h-160 mt-0.5 shadow-sm">
-        <div className="flex items-center justify-center mt-5">
+        <div className="flex flex-col items-center justify-center mt-5">
           <div className="grid justify-center w-30 h-30">
             <img
               src={userRole === "EMPLOYER" ? employericon : profileicon}
               alt="profile icon"
             />
-            <p className="font-medium mt-1">
-              {userFirstname} {userLastname}
-            </p>
           </div>
+          <p className="font-medium text-center mt-1 w-full">
+            {userFirstname} {userLastname}
+          </p>
         </div>
 
         {/* Sidebar Items */}
