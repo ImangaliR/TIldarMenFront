@@ -154,7 +154,7 @@ const Settings = () => {
               <p className="ml-2">Email Address</p>
               <input
                 type="email"
-                placeholder={user?.data?.email}
+                value={user?.data?.email}
                 disabled
                 className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-54 md:w-72 lg:w-90 xl:w-114 h-9 mt-1 mb-5 rounded-sm text-sm cursor-not-allowed"
               />
@@ -166,9 +166,7 @@ const Settings = () => {
               <input
                 type="text"
                 disabled
-                placeholder={
-                  userRole === "EMPLOYER" ? "Employer" : "Translator"
-                }
+                value={userRole === "EMPLOYER" ? "Employer" : "Translator"}
                 className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-54 md:w-72 lg:w-90 xl:w-114 h-9 mt-1 mb-5 rounded-sm text-sm cursor-not-allowed"
               />
             </div>
