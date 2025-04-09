@@ -1,13 +1,10 @@
-import { useNavigate } from "react-router-dom";
-import { useUser } from "../../utils/contexts/UserContext";
-const TranslatorPage = () => {
-  const { user, logout } = useUser();
-  const navigate = useNavigate();
+import { Outlet } from "react-router-dom";
 
+const TranslatorPage = () => {
   return (
-    <div>
-      <main></main>
-    </div>
+    <>
+      <Outlet />
+    </>
   );
 };
 
