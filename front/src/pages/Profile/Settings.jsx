@@ -99,7 +99,7 @@ const Settings = () => {
     <>
       <main className="bg-white shadow-sm rounded-sm text-sm mt-10 ml-4 mr-4 pt-10 pl-15 pr-15 md:pt-15 md:pr-20 md:pl-20 lg:pt-25 lg:pr-25 lg:pl-25">
         <div className="flex items-center gap-8">
-          <img src={profileicon} alt="profile icon" />
+          <img src={profileicon} alt="profile icon" className="w-25 h-25" />
           <div>
             <button
               className="border-2 border-[#8F8F8F] rounded-lg text-[#70B27A] pr-6 pl-6 pt-2 pb-2 mb-3"
