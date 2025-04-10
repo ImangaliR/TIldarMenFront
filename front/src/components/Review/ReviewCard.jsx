@@ -1,15 +1,9 @@
-import { useEffect, useState } from "react";
-import api from "../../services/api";
-import TokenService from "../../services/token.service";
-import ReviewCard from "../../components/Review/ReviewCard";
+import React from "react";
 import fullstar from "../../assets/full_star.png";
 import emptystar from "../../assets/empty_star.png";
-import customerreviews from "../../assets/customer_reviews.png";
-import RatingBar from "../../components/Review/RatingBar";
+import employericon from "../../assets/employericon.png";
 
-const Reviews = () => {
-  const userID = TokenService.getUserId();
-  const [reviews, setReviews] = useState([]);
+const ReviewCard = ({ reviews }) => {
   const reviewStars = (rating) => {
     switch (rating) {
       case 1:
@@ -75,73 +69,43 @@ const Reviews = () => {
     }
   };
 
-  useEffect(() => {
-    const fetchReviews = async () => {
-      try {
-        const response = await api.get(`/review/${userID}/all`);
-        setReviews(response.data?.data);
-      } catch (err) {
-        console.error("Axios Error:", err);
-        console.log(err.response?.data || "Failed to fetch cities.");
-      }
+  function formatDate(dateString) {
+    const options = {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true,
     };
-
-    fetchReviews();
-  }, []);
-
-  const totalReviews = reviews?.length;
-  const ratingCounts = { 5: 0, 4: 0, 3: 0, 2: 0, 1: 0 };
-  let totalRating = 0;
-  reviews.forEach(({ rating }) => {
-    ratingCounts[rating]++;
-    totalRating += rating;
-  });
-  const averageRating = (totalRating / totalReviews).toFixed(2);
-  const ratingPercentages = [];
-  for (let star = 1; star <= 5; star++) {
-    ratingPercentages[star] =
-      ((ratingCounts[star] / totalReviews) * 100).toFixed(0) + "%";
+    const date = new Date(dateString);
+    return date.toLocaleDateString("en-US", options).replace(",", " -");
   }
-
-  console.log("Reviews:", reviews);
-  console.log(ratingPercentages);
 
   return (
     <>
-      <main className="flex gap-2 bg-white w-280 h-max min-h-130 rounded-lg p-5">
-        <div className="p-5 rounded-lg border-1 border-[#dcdcdc] border-b-0 rounded-b-none">
-          <div>
-            <div className="flex flex-col items-center w-80">
-              <img
-                src={customerreviews}
-                alt=""
-                className="w-25 h-25 shadow-sm rounded-full"
-              />
-              <h1 className="mt-4 text-lg text-[#5e5e5e]">Customer Reviews</h1>
-              <h1 className="text-2xl font-bold mt-1">{averageRating}</h1>
-              <p className="text-[#a3a2a2] mb-2">{totalReviews} Reviews</p>
-              <p>{reviewStars(Math.floor(averageRating))}</p>
+      {reviews?.map((review, i) => (
+        <div
+          key={i}
+          className="flex gap-3 border-1 border-[#dcdcdc] rounded-lg p-2 m-2"
+        >
+          <img src={employericon} alt="employer icon" className="w-13 h-13" />
+          <div className="w-full mb-8">
+            <div className="flex justify-between items-center">
+              <h1 className="font-semibold text-lg">
+                {review?.firstName} {review?.lastName}
+              </h1>
+              <h1>{reviewStars(review?.rating)}</h1>
             </div>
-            <div className="mt-4">
-              {[5, 4, 3, 2, 1].map((star) => (
-                <RatingBar
-                  key={star}
-                  star={star}
-                  percent={ratingPercentages[star]}
-                  className="flex items-center gap-2"
-                />
-              ))}
-            </div>
+            <p className="text-sm text-[#878787]">
+              {formatDate(review?.creationDate)}
+            </p>
+            <p className="text-[#6e6e6e] mt-1">{review?.comment}</p>
           </div>
         </div>
-        <div className="ml-5">
-          <div className="w-170 border-1 border-[#dcdcdc] border-b-0 rounded-lg rounded-b-none p-1">
-            <ReviewCard reviews={reviews} />
-          </div>
-        </div>
-      </main>
+      ))}
     </>
   );
 };
 
-export default Reviews;
+export default ReviewCard;
