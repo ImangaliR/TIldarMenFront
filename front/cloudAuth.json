@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "titanium-atlas-455912-n2",
+  "private_key_id": "fb20a862a1b9371aac0f30ea7abdc1b1a40dd4cd",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDAkh+k1g0OJ8DE\n4jW2pOZ2GFE/et6JKsRhsqTVO8X16ldpriNSi2ZeI2DRHrp6/KEiBawPXz/ODGkp\nk4IUQMg3lwNh2fu4HmR060kd/AVYptr1ba6gsJ0BlrpsTyQgBlerr0yzm72CFzph\nahWfn7iE1nBm6ThYeDTNQz6wQ/w9w2BLOghGwg8BEhxSzwEyeF7XsjcTDZ8JqV3k\n39JEAXfS6HklkF8kQxS6ebFKUl57h62WhGfGxuCoT1NsYqT5fZCUnGkgOph6cUaA\nCNGOAyxtlkIBektn+AVPYVIFCa2OR8yXgjfGEKGlJHZ6heauMIea3/SBucYTLOL6\n/VGNBFgPAgMBAAECgf8/SWAt/zvkwF8AVXmV4jVSvIkIMZ15mPrxQtW16QAVBMzG\nmR7gimcaIqh7qxUVmnl8ToMKRf8YhT/oR+dnBNI/lNkhT3FIZpJ7DYL6E3LhjY4j\n5198oxb2XaP30k7Z0RmplwQEi5DNdG5l+8yW7V5hfOTJMbpBv2G9JMLKxJ4hRz4k\nlc0H7Wg3J/cKcftaDp/mwBTt1pz/pWCiCg9kaFkNmKnJpom2b+ypCPXapOkXVsuv\n8rUaOgYwtsQIXieysejHqHuMYNmu/GVzxJevKr6CZ6H0Ej7f/YUnpUK2Bsh44+F9\nGnEJwz9uK726mVHI5s9fL8DoULyC9Wjd1LMGM5ECgYEA4aXuy8iWlXD+DxPWsWyl\nhBENV1yD49JQKEZx6VPhWgDdcXE1RbZvt91eeJjRUSCcWDNQj48h6hvM01PgiWxu\nKgghrP3hZ9co9unSIksqRhTMgF7fOOiLO3tXs6zJfrnWPLQA1S6yapYyxBwEWc3c\n9hbfnEgPhsxsSLsP0V1i9YMCgYEA2nkwoXbh7SjwNM/Gize1T1by0hVPfDguruMl\nNVFJ4jMtKTlIqcTszy3DHtzmlhJZn8EXdhX380Bs7cxwF0svBfdHbQB9TUExwRF0\nNzdobtZOZULy6ROZ1iqOpI/5GdanqesPMEJcIMQI6KIJHIusOxRxW5csWFkgLt03\n2UYLGYUCgYEArziWDWKvJE7Ayl6CafZPNRW0wXES7bdkDVJepGxBYw2m56+cSY0Y\nhbN957HrYM8s+QSn+0KPeGasEDJi+vPbPAJifB4NigA3TD1Xss+hfRgrkUeamWti\nqwblnJ2BPkn6xdqVhvWjEEegFk8XRdEpU2OBsq72d5uIPpYb+11EOhcCgYEAoLqe\nK3wB1O/UYJYn1I5khn1KYYKqGpJeze1wl1w5hf/ujrCFI9kr+3QIY/FSd0ACzcRK\nFWcuJrjUKtLH+GsoqjP1SV0d0jNPfmHv5RuPalOiE1+AxDbWa7idfrYpJnhEm37C\niteXXce7YiKrn2Omj0SH7UE3r7vKMJAxoVilm90CgYAoLq6o/EOiQ1itQjhy4NDS\nj/5z6tWrkjdrjebICLsu9GxwSHSwae6XGYBvBlonCFf8f5/vgNB2XaEWOqAUJihS\nzy1eVUZekq/b4SQq0qclfP112Xl4UL3pT2rWDwpGriER9fDzsUY47NUGsximVZxm\nCX7o2z1jWKJjLn/7URdorg==\n-----END PRIVATE KEY-----\n",
+  "client_email": "cloudstorageauth@titanium-atlas-455912-n2.iam.gserviceaccount.com",
+  "client_id": "111215069279139692647",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/cloudstorageauth%40titanium-atlas-455912-n2.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

@@ -26,7 +26,7 @@ const ProfileEditing = () => {
               />
               <div className="">
                 <div className="flex items-center gap-2 mb-3">
-                  <p className="w-35 font-medium">Full Name:</p>
+                  <p className="w-35 font-bold">Full Name:</p>
                   <input
                     type="text"
                     className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-50 md:w-55 lg:w-60 xl:w-80 h-7 rounded-sm text-sm"

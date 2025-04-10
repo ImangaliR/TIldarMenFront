@@ -9,7 +9,7 @@ const TranslationServicesDropdown = () => {
     api
       .get("/service-types/all")
       .then((res) => {
-        setTranslationServices(res.data.data); // Adjust this depending on your API's response structure
+        setTranslationServices(res.data.data);
       })
       .catch((err) => {
         console.error("Error fetching Translation Services:", err);

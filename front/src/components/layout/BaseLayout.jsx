@@ -10,11 +10,10 @@ const BaseLayout = () => {
       {/* Main Content Area */}
       <div className="flex w-full relative">
         <Sidebar />
-        <p className="absolute text-sm text-[#585858] bottom-3 left-8">
-          © 2025 TildarMen. All right reserved.
-        </p>
-        {/* Outlet children (page content) below navbar */}
         <div className="overflow-y-auto overflow-x-auto mt-10 mx-4 mb-8 p-4">
+          {/* <p className="absolute text-sm text-[#585858] bottom-3 left-8">
+            © 2025 TildarMen. All right reserved.
+          </p> */}
           <Outlet />
         </div>
       </div>

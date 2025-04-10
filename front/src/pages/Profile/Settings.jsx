@@ -4,7 +4,7 @@ import key from "../../assets/key.png";
 import openeye from "../../assets/openeye.png";
 import hiddeneye from "../../assets/hiddeneye.png";
 import TokenService from "../../services/token.service";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useUser } from "../../utils/contexts/UserContext";
 import { toast } from "react-toastify";
@@ -12,13 +12,27 @@ import {
   deleteProfile,
   updatePassword,
   updateProfile,
+  getSettings,
 } from "../../services/ProfileService/ProfileService";
 import CitiesDropdown from "../../components/Dropdown/CitiesDropdown";
 import { useNavigate } from "react-router-dom";
 
 const Settings = () => {
+  const [userSettings, setUserSettings] = useState([]);
+  useEffect(() => {
+    const fetchSettings = async () => {
+      try {
+        const response = await getSettings();
+        setUserSettings(response.data);
+      } catch (err) {
+        toast.error("Something went wrong while loading");
+      }
+    };
+    fetchSettings();
+  }, []);
+
   const userRole = TokenService.getUserRole();
-  const { user, logout } = useUser();
+  const { logout } = useUser();
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
   const [currentPassword, setCurrentPassword] = useState("");
@@ -26,12 +40,23 @@ const Settings = () => {
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [name, setName] = useState(user?.data?.firstName || "");
-  const [surname, setSurname] = useState(user?.data?.lastName || "");
-  const [phoneNumber, setPhoneNumber] = useState(user?.data?.phoneNumber || "");
-  const [userLocation, setUserLocation] = useState(user?.data?.location || "");
+  const [name, setName] = useState(userSettings.firstName || "");
+  const [surname, setSurname] = useState(userSettings.lastName || "");
+  const [phoneNumber, setPhoneNumber] = useState(
+    userSettings.phoneNumber || ""
+  );
+  const [userLocation, setUserLocation] = useState(userSettings.location || "");
   const { handleSubmit } = useForm();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!userLocation && userSettings.location) {
+      setUserLocation(userSettings.location);
+      setName(userSettings.firstName);
+      setSurname(userSettings.lastName);
+      setPhoneNumber(userSettings.phoneNumber);
+    }
+  }, [userSettings]);
 
   const userInfo = {
     firstName: name,
@@ -47,6 +72,7 @@ const Settings = () => {
   };
 
   const userInfoUpdate = async () => {
+    console.log(userInfo);
     try {
       const response = await updateProfile(userInfo);
       if (response) {
@@ -123,7 +149,7 @@ const Settings = () => {
               <input
                 type="text"
                 onChange={(e) => setName(e.target.value)}
-                placeholder={user?.data?.firstName}
+                placeholder={userSettings.firstName}
                 className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-54 md:w-72 lg:w-90 xl:w-114 h-9 mt-1 mb-5 rounded-sm text-sm"
               />
             </div>
@@ -132,7 +158,7 @@ const Settings = () => {
               <input
                 type="text"
                 onChange={(e) => setSurname(e.target.value)}
-                placeholder={user?.data?.lastName}
+                placeholder={userSettings.lastName}
                 className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-54 md:w-72 lg:w-90 xl:w-114 h-9 mt-1 mb-5 rounded-sm text-sm"
               />
             </div>
@@ -145,7 +171,7 @@ const Settings = () => {
                 onChange={(e) => setPhoneNumber(e.target.value)}
                 maxLength={11}
                 minLength={11}
-                placeholder={user?.data?.phoneNumber}
+                placeholder={userSettings.phoneNumber}
                 className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-54 md:w-72 lg:w-90 xl:w-114 h-9 mt-1 mb-5 rounded-sm text-sm"
               />
             </div>
@@ -153,7 +179,7 @@ const Settings = () => {
               <p className="ml-2">Email Address</p>
               <input
                 type="email"
-                value={user?.data?.email}
+                value={userSettings.email || ""}
                 disabled
                 className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-54 md:w-72 lg:w-90 xl:w-114 h-9 mt-1 mb-5 rounded-sm text-sm cursor-not-allowed"
               />
