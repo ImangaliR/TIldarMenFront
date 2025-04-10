@@ -100,7 +100,7 @@ const ReviewCard = ({ reviews }) => {
             <p className="text-sm text-[#878787]">
               {formatDate(review?.creationDate)}
             </p>
-            <p className="text-[#6e6e6e] mt-1">{review?.comment}</p>
+            <p className="text-[#6e6e6e] mt-1 max-110">{review?.comment}</p>
           </div>
         </div>
       ))}
