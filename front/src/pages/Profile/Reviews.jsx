@@ -103,9 +103,6 @@ const Reviews = () => {
       ((ratingCounts[star] / totalReviews) * 100).toFixed(0) + "%";
   }
 
-  console.log("Reviews:", reviews);
-  console.log(ratingPercentages);
-
   return (
     <>
       <main className="flex gap-2 bg-white w-280 h-max min-h-130 rounded-lg p-5">
@@ -120,7 +117,7 @@ const Reviews = () => {
               <h1 className="mt-4 text-lg text-[#5e5e5e]">Customer Reviews</h1>
               <h1 className="text-2xl font-bold mt-1">{averageRating}</h1>
               <p className="text-[#a3a2a2] mb-2">{totalReviews} Reviews</p>
-              <p>{reviewStars(Math.floor(averageRating))}</p>
+              {reviewStars(Math.floor(averageRating))}
             </div>
             <div className="mt-4">
               {[5, 4, 3, 2, 1].map((star) => (
