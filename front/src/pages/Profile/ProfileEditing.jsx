@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import profileicon from "../../assets/profileicon.png";
 import pen from "../../assets/pen.png";
 import UploadVideo from "./UploadVideo";
@@ -7,7 +7,30 @@ import LanguageDropdown from "./../../components/Dropdown/LanguageDropdown";
 import TranslationServicesDropdown from "../../components/Dropdown/TranslationServicesDropdown";
 import WorkExperience from "../../components/WorkExperience/WorkExperience";
 
+const editbuttons = [
+  { id: 1, name: "Button One" },
+  { id: 2, name: "Button Two" },
+  { id: 3, name: "Button Three" },
+  { id: 4, name: "Button Four" },
+  { id: 5, name: "Button Five" },
+];
+
 const ProfileEditing = () => {
+  const [editingItemId, setEditingItemId] = useState(null);
+
+  const handleEditClick = (id) => {
+    setEditingItemId(id);
+  };
+
+  const handleCancel = () => {
+    setEditingItemId(null);
+  };
+
+  const handleSave = (id) => {
+    console.log(`Saved item ${id}`);
+    setEditingItemId(null);
+  };
+
   const addWorkExperience = () => {
     <WorkExperience />;
   };
@@ -55,12 +78,32 @@ const ProfileEditing = () => {
                 </div>
               </div>
             </div>
-            <div className="flex w-full justify-end mt-15">
-              <button className="flex items-center gap-2 text-[#38BF4C] border-1 rounded-lg pl-6 pr-6 pt-1 pb-1">
-                Edit
-                <img src={pen} alt="pen icon" className="w-4 h-4" />
-              </button>
-            </div>
+            {editingItemId === 1 ? (
+              <div className="flex justify-end mt-15 gap-2">
+                <button
+                  onClick={handleCancel}
+                  className="w-25 h-8 text-[#38BF4C] border-1 rounded-lg"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={() => handleSave(1)}
+                  className="w-25 h-8 bg-[#38BF4C] text-white border-1 rounded-lg"
+                >
+                  Save
+                </button>
+              </div>
+            ) : (
+              <div className="flex w-full justify-end mt-15">
+                <button
+                  onClick={() => handleEditClick(1)}
+                  className="flex justify-center items-center gap-2 text-[#38BF4C] border-1 rounded-lg w-25 h-8"
+                >
+                  Edit
+                  <img src={pen} alt="pen icon" className="w-4 h-4" />
+                </button>
+              </div>
+            )}
           </div>
           <hr className="mt-10 mb-5" />
           <div className="pl-10 pr-20">
@@ -80,12 +123,32 @@ Max. 300 symbols"
                 <UploadVideo />
               </div>
             </div>
-            <div className="flex w-full justify-end mt-10">
-              <button className="flex items-center gap-2 text-[#38BF4C] border-1 rounded-lg pl-6 pr-6 pt-1 pb-1">
-                Edit
-                <img src={pen} alt="pen icon" className="w-4 h-4" />
-              </button>
-            </div>
+            {editingItemId === 2 ? (
+              <div className="flex justify-end mt-15 gap-2">
+                <button
+                  onClick={handleCancel}
+                  className="w-25 h-8 text-[#38BF4C] border-1 rounded-lg"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={() => handleSave(2)}
+                  className="w-25 h-8 bg-[#38BF4C] text-white border-1 rounded-lg"
+                >
+                  Save
+                </button>
+              </div>
+            ) : (
+              <div className="flex w-full justify-end mt-15">
+                <button
+                  onClick={() => handleEditClick(2)}
+                  className="flex justify-center items-center gap-2 text-[#38BF4C] border-1 rounded-lg w-25 h-8"
+                >
+                  Edit
+                  <img src={pen} alt="pen icon" className="w-4 h-4" />
+                </button>
+              </div>
+            )}
           </div>
           <hr className="mt-10 mb-5" />
           <div className="pl-10 pr-20">
@@ -97,12 +160,32 @@ Max. 300 symbols"
               <TranslationServicesDropdown />
               <SpecializationDropdown />
             </div>
-            <div className="flex w-full justify-end mt-15">
-              <button className="flex items-center gap-2 text-[#38BF4C] border-1 rounded-lg pl-6 pr-6 pt-1 pb-1">
-                Edit
-                <img src={pen} alt="pen icon" className="w-4 h-4" />
-              </button>
-            </div>
+            {editingItemId === 3 ? (
+              <div className="flex justify-end mt-15 gap-2">
+                <button
+                  onClick={handleCancel}
+                  className="w-25 h-8 text-[#38BF4C] border-1 rounded-lg"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={() => handleSave(3)}
+                  className="w-25 h-8 bg-[#38BF4C] text-white border-1 rounded-lg"
+                >
+                  Save
+                </button>
+              </div>
+            ) : (
+              <div className="flex w-full justify-end mt-15">
+                <button
+                  onClick={() => handleEditClick(3)}
+                  className="flex justify-center items-center gap-2 text-[#38BF4C] border-1 rounded-lg w-25 h-8"
+                >
+                  Edit
+                  <img src={pen} alt="pen icon" className="w-4 h-4" />
+                </button>
+              </div>
+            )}
           </div>
           <hr className="mt-10 mb-5" />
           <div className="pl-10 pr-20">
@@ -127,12 +210,32 @@ Max. 300 symbols"
                 className="bg-[#EAF4F4] border-1 border-[#DCDCDC] p-3 w-50 h-30 rounded-sm text-sm"
               />
             </div>
-            <div className="flex w-full justify-end mt-10">
-              <button className="flex items-center gap-2 text-[#38BF4C] border-1 rounded-lg pl-6 pr-6 pt-1 pb-1">
-                Edit
-                <img src={pen} alt="pen icon" className="w-4 h-4" />
-              </button>
-            </div>
+            {editingItemId === 4 ? (
+              <div className="flex justify-end mt-15 gap-2">
+                <button
+                  onClick={handleCancel}
+                  className="w-25 h-8 text-[#38BF4C] border-1 rounded-lg"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={() => handleSave(4)}
+                  className="w-25 h-8 bg-[#38BF4C] text-white border-1 rounded-lg"
+                >
+                  Save
+                </button>
+              </div>
+            ) : (
+              <div className="flex w-full justify-end mt-15">
+                <button
+                  onClick={() => handleEditClick(4)}
+                  className="flex justify-center items-center gap-2 text-[#38BF4C] border-1 rounded-lg w-25 h-8"
+                >
+                  Edit
+                  <img src={pen} alt="pen icon" className="w-4 h-4" />
+                </button>
+              </div>
+            )}
           </div>
           <hr className="mt-10 mb-5" />
           <div className="pl-10 pr-20 pb-5">
@@ -196,12 +299,32 @@ Max. 300 symbols"
                 </div>
               </div>
             </div>
-            <div className="flex w-full justify-end mt-15">
-              <button className="flex items-center gap-2 text-[#38BF4C] border-1 rounded-lg pl-6 pr-6 pt-1 pb-1">
-                Edit
-                <img src={pen} alt="pen icon" className="w-4 h-4" />
-              </button>
-            </div>
+            {editingItemId === 5 ? (
+              <div className="flex justify-end mt-15 gap-2">
+                <button
+                  onClick={handleCancel}
+                  className="w-25 h-8 text-[#38BF4C] border-1 rounded-lg"
+                >
+                  Cancel
+                </button>
+                <button
+                  onClick={() => handleSave(5)}
+                  className="w-25 h-8 bg-[#38BF4C] text-white border-1 rounded-lg"
+                >
+                  Save
+                </button>
+              </div>
+            ) : (
+              <div className="flex w-full justify-end mt-15">
+                <button
+                  onClick={() => handleEditClick(5)}
+                  className="flex justify-center items-center gap-2 text-[#38BF4C] border-1 rounded-lg w-25 h-8"
+                >
+                  Edit
+                  <img src={pen} alt="pen icon" className="w-4 h-4" />
+                </button>
+              </div>
+            )}
           </div>
         </main>
       </div>
