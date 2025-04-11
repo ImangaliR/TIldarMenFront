@@ -58,6 +58,21 @@ export const updateProfile = (profileData) => {
   });
 };
 
+export const updateAvailability = (profileData) => {
+  const userID = TokenService.getUserId();
+  return new Promise((resolve, reject) => {
+    const endpoint = `/translator/${userID}/profile`;
+    api
+      .put(endpoint, profileData)
+      .then((response) => {
+        resolve(response.data);
+      })
+      .catch((err) => {
+        reject(err.response?.data || "Failed to update profile.");
+      });
+  });
+};
+
 export const updatePassword = (passwordData) => {
   const userID = TokenService.getUserId();
   const userRole = TokenService.getUserRole();

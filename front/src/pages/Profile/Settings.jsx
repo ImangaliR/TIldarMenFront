@@ -70,11 +70,6 @@ const Settings = () => {
     location: userLocation,
   };
 
-  const employerInfo = {
-    location: userLocation,
-    introduction: introduction,
-  };
-
   const userPassword = {
     oldPassword: currentPassword,
     password: newPassword,
@@ -92,6 +87,11 @@ const Settings = () => {
     } catch (err) {
       toast.error("Something went wrong while updating.");
     }
+  };
+
+  const employerInfo = {
+    location: userLocation,
+    introduction: introduction,
   };
 
   const employerInfoUpdate = async () => {
