@@ -9,15 +9,20 @@ import WorkExperience from "../../components/WorkExperience/WorkExperience";
 import TokenService from "../../services/token.service";
 import { useUser } from "../../utils/contexts/UserContext";
 import AvaibilityDropdown from "../../components/Dropdown/AvailabilityDropdown";
+import { toast } from "react-toastify";
+import { updateAvailability } from "../../services/ProfileService/ProfileService";
+import { useForm } from "react-hook-form";
 
 const ProfileEditing = () => {
   const { user } = useUser();
-  const userID = TokenService.getUserId();
   const [availability, setAvailability] = useState(
     user?.data?.availability || ""
   );
+  const [userTitle, setUserTitle] = useState(
+    user?.data?.professionalTitle || ""
+  );
   const [editingItemId, setEditingItemId] = useState(null);
-
+  const { handleSubmit } = useForm();
   const handleEditClick = (id) => {
     setEditingItemId(id);
   };
@@ -35,12 +40,38 @@ const ProfileEditing = () => {
     <WorkExperience />;
   };
 
+  useEffect(() => {
+    if (!availability && user.data.availability) {
+      setAvailability(user.data.availability);
+      setUserTitle(user.data.professionalTitle);
+    }
+  }, [user]);
+
+  const userUpdate = {
+    title: userTitle,
+    basedIn: user?.data?.location?.city,
+    availability: availability,
+  };
+
+  const updateProfile = async () => {
+    try {
+      const response = await updateAvailability(userUpdate);
+      toast.success("Updated profile successfully!");
+    } catch (err) {
+      toast.error("Something went wrong.");
+    }
+  };
+
   return (
     <>
       <div>
         <h1 className="text-3xl font-bold ml-10 mb-2">Profile</h1>
         <main className="bg-white shadow-sm rounded-sm p-6">
-          <div className="pl-15 pr-20 pt-10">
+          <form
+            name="update user profile"
+            onSubmit={handleSubmit(updateProfile)}
+            className="pl-15 pr-20 pt-10"
+          >
             <div className="flex items-center gap-10">
               <img
                 src={profileicon}
@@ -62,6 +93,7 @@ const ProfileEditing = () => {
                   <input
                     type="text"
                     disabled
+                    value={user?.data?.location?.city}
                     className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-50 md:w-55 lg:w-60 xl:w-80 h-7 rounded-sm text-sm"
                   />
                 </div>
@@ -69,7 +101,8 @@ const ProfileEditing = () => {
                   <p className="w-35 text-[#8F8F8F]">Professional Title:</p>
                   <input
                     type="text"
-                    placeholder={user.data?.professionalTitle}
+                    placeholder={userTitle}
+                    onChange={(e) => setUserTitle(e.target.value)}
                     className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-50 md:w-55 lg:w-60 xl:w-80 h-7 rounded-sm text-sm"
                   />
                 </div>
@@ -82,34 +115,18 @@ const ProfileEditing = () => {
                 </div>
               </div>
             </div>
-            {editingItemId === 1 ? (
-              <div className="flex justify-end mt-15 gap-2">
-                <button
-                  onClick={handleCancel}
-                  className="w-25 h-8 text-[#38BF4C] border-1 rounded-lg"
-                >
-                  Cancel
-                </button>
-                <button
-                  onClick={() => handleSave(1)}
-                  className="w-25 h-8 bg-[#38BF4C] text-white border-1 rounded-lg"
-                >
-                  Save
-                </button>
-              </div>
-            ) : (
-              <div className="flex w-full justify-end mt-15">
-                <button
-                  onClick={() => handleEditClick(1)}
-                  className="flex justify-center items-center gap-2 text-[#38BF4C] border-1 rounded-lg w-25 h-8"
-                >
-                  Edit
-                  <img src={pen} alt="pen icon" className="w-4 h-4" />
-                </button>
-              </div>
-            )}
-          </div>
+            <div className="flex justify-end mt-15 gap-2">
+              <button
+                type="submit"
+                className="w-25 h-8 bg-[#38BF4C] text-white border-1 rounded-lg"
+              >
+                Save
+              </button>
+            </div>
+          </form>
+
           <hr className="mt-10 mb-5" />
+
           <div className="pl-10 pr-20">
             <h1 className="text-2xl font-bold">Introduction</h1>
             <div className="flex items-center gap-30 pl-5">

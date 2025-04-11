@@ -12,8 +12,8 @@ const AvaibilityDropdown = ({ value, onChange }) => {
           <option disabled value="">
             -- Select --
           </option>
-          <option value="Busy">Busy</option>
-          <option value="Available">Available</option>
+          <option value="BUSY">Busy</option>
+          <option value="AVAILABLE">Available</option>
         </select>
       </div>
     </>
