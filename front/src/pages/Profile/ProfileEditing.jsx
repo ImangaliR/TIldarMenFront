@@ -266,7 +266,7 @@ Max. 300 symbols"
                     />
                   </div>
                   <div className="w-full flex justify-end mt-3">
-                    <button className="text-[#38BF4C] border-2 pl-6 pr-6 pt-1 pb-1 w-60">
+                    <button className="text-[#38BF4C] border-2 rounded-md pl-6 pr-6 pt-1 pb-1 w-60">
                       Add Degree
                     </button>
                   </div>
