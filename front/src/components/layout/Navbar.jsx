@@ -50,13 +50,6 @@ const Navbar = () => {
         <div className="flex items-center min-w-30 lg:min-w-40 gap-3">
           <button className="bg-[#f1f1f1] rounded-full p-2">
             <img
-              src={searchicon}
-              alt="search icon"
-              className="min-w-4 h-4 lg:min-w-5 lg:h-5 opacity-80"
-            />
-          </button>
-          <button className="bg-[#f1f1f1] rounded-full p-2">
-            <img
               src={chaticon}
               alt="chat icon"
               className="min-w-4 h-4 lg:min-w-5 lg:h-5"
