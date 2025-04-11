@@ -6,16 +6,17 @@ import SpecializationDropdown from "../../components/Dropdown/SpecializationDrop
 import LanguageDropdown from "./../../components/Dropdown/LanguageDropdown";
 import TranslationServicesDropdown from "../../components/Dropdown/TranslationServicesDropdown";
 import WorkExperience from "../../components/WorkExperience/WorkExperience";
-import api from "../../services/api";
 import TokenService from "../../services/token.service";
-import { toast } from "react-toastify";
 import { useUser } from "../../utils/contexts/UserContext";
+import AvaibilityDropdown from "../../components/Dropdown/AvailabilityDropdown";
 
 const ProfileEditing = () => {
   const { user } = useUser();
   const userID = TokenService.getUserId();
+  const [availability, setAvailability] = useState(
+    user?.data?.availability || ""
+  );
   const [editingItemId, setEditingItemId] = useState(null);
-  console.log(user);
 
   const handleEditClick = (id) => {
     setEditingItemId(id);
@@ -33,26 +34,6 @@ const ProfileEditing = () => {
   const addWorkExperience = () => {
     <WorkExperience />;
   };
-
-  useEffect(() => {
-    const editProfile = async () => {
-      try {
-        const response = await api.put(`/translator/${userID}/profile`);
-        if (response) {
-          console.log("Profile updated successfully:", response.data);
-          toast.success("Profile updated successfully!");
-        } else {
-          toast.warn(response.data?.data);
-        }
-      } catch (err) {
-        console.error("Axios Error:", err);
-        console.log(err.response?.data || "Failed to edit user profile.");
-        toast.error(err.response?.data || "Failed to edit user profile.");
-      }
-    };
-
-    editProfile();
-  }, []);
 
   return (
     <>
@@ -94,10 +75,9 @@ const ProfileEditing = () => {
                 </div>
                 <div className="flex items-center gap-2 mb-3">
                   <p className="w-35">Availability:</p>
-                  <input
-                    type="text"
-                    placeholder={user.data?.availability}
-                    className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-50 md:w-55 lg:w-60 xl:w-80 h-7 rounded-sm text-sm"
+                  <AvaibilityDropdown
+                    value={availability}
+                    onChange={(e) => setAvailability(e.target.value)}
                   />
                 </div>
               </div>
