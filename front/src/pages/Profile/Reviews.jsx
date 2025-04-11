@@ -106,7 +106,7 @@ const Reviews = () => {
   return (
     <>
       <main className="flex gap-2 bg-white w-280 h-max min-h-130 rounded-lg p-5">
-        <div className="p-5 rounded-lg border-1 border-[#dcdcdc] border-b-0 rounded-b-none">
+        <div className="p-5 rounded-lg border-1 border-[#dcdcdc] sticky top-5 h-max">
           <div>
             <div className="flex flex-col items-center w-80">
               <img
