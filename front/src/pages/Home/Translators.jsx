@@ -1,83 +1,50 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "../../components/layout/Navbar";
 import Search from "../../components/Search/Search";
 import TranslatorCards from "./TranslatorCards";
+import api from "../../services/api";
 
 const Translators = () => {
   const [resultCount, setResultCount] = useState(0);
+  const [userSearch, setUserSearch] = useState("");
+  const [translators, setTranslators] = useState([]);
 
-  const cardExample = [
-    {
-      img: {
-        src: "https://img.freepik.com/premium-vector/profile-icon_933463-643.jpg",
-        alt: "profile icon",
-      },
-      name: "Asar",
-      jobtitle: "Simultaneous interpreter",
-      location: "Almaty",
-      languages: "Arabic, Kazakh, Russian, Turkish",
-      services: "Legal & Contracts; Finance & Banking",
-      specialization: "Simultaneous Interpretation ",
-    },
-    {
-      img: {
-        src: "https://cdn-icons-png.flaticon.com/512/6522/6522516.png",
-        alt: "profile icon",
-      },
-      name: "Asar",
-      jobtitle: "Simultaneous interpreter",
-      location: "Almaty",
-      languages: "Arabic, Kazakh, Russian, Turkish",
-      services: "Legal & Contracts; Finance & Banking",
-      specialization: "Simultaneous Interpretation ",
-    },
-    {
-      img: {
-        src: "https://cdn-icons-png.flaticon.com/512/6522/6522516.png",
-        alt: "profile icon",
-      },
-      name: "Asar",
-      jobtitle: "Simultaneous interpreter",
-      location: "Almaty",
-      languages: "Arabic, Kazakh, Russian, Turkish",
-      services: "Legal & Contracts; Finance & Banking",
-      specialization: "Simultaneous Interpretation ",
-    },
-    {
-      img: {
-        src: "https://cdn-icons-png.flaticon.com/512/6522/6522516.png",
-        alt: "profile icon",
-      },
-      name: "Asar",
-      jobtitle: "Simultaneous interpreter",
-      location: "Almaty",
-      languages: "Arabic, Kazakh, Russian, Turkish",
-      services: "Legal & Contracts; Finance & Banking",
-      specialization: "Simultaneous Interpretation ",
-    },
-  ];
+  useEffect(() => {
+    fetchTranslators(userSearch);
+  }, []);
 
-  const translatorCards = cardExample.map((translator) => (
+  const fetchTranslators = async (searchQuery = "") => {
+    try {
+      const response = await api.get(
+        `/users/translators/search?username=${searchQuery}`
+      );
+      setTranslators(response.data?.data);
+      setResultCount(response.data?.data.length);
+    } catch (err) {
+      console.error("Axios Error:", err);
+      console.log(err.response?.data || "Failed to fetch cities.");
+    }
+  };
+
+  const translatorCards = translators.map((translator, i) => (
     <TranslatorCards
-      img={translator.img}
-      name={translator.name}
-      jobtitle={translator.jobtitle}
-      location={translator.location}
-      languages={translator.languages}
-      services={translator.services}
-      specialization={translator.specialization}
+      key={i}
+      name={translator.firstName}
+      surname={translator?.lastName}
+      email={translator?.email}
+      phoneNumber={translator?.phoneNumber}
     />
   ));
 
   return (
     <>
       <Navbar />
-      <div>
-        <Search />
-        <div>
-          <main className="max-w-200">
-            <p>Results({resultCount})</p>
-            <div className="grid grid-cols-2 gap-x-2 gap-y-5">
+      <div className="grid justify-center">
+        <Search setUserSearch={setUserSearch} handleSearch={fetchTranslators} />
+        <div className="my-10">
+          <main className="max-w-260 w-full">
+            <p className="text-2xl mb-1">Results ({resultCount})</p>
+            <div className="grid grid-cols-3 gap-x-2 gap-y-5">
               {translatorCards}
             </div>
           </main>

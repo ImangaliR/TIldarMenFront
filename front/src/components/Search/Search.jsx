@@ -1,8 +1,20 @@
 import { useState } from "react";
 import filtericon from "../../assets/filter.png";
 
-const Search = () => {
+const Search = ({ setUserSearch, handleSearch }) => {
   const [filterOn, setFilterOn] = useState(false);
+  const [inputValue, setInputValue] = useState("");
+
+  const onSearchClick = () => {
+    setUserSearch(inputValue);
+    handleSearch(inputValue); // trigger search
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      onSearchClick();
+    }
+  };
 
   return (
     <>
@@ -10,11 +22,18 @@ const Search = () => {
         <input
           type="text"
           placeholder="Please enter a language or specialization..."
+          value={inputValue}
+          onChange={(e) => setInputValue(e.target.value)}
+          onKeyDown={handleKeyDown}
           className="min-w-100 lg:min-w-200 xl:min-w-260 bg-white pt-3 pb-3 pl-10 rounded-lg"
         />
-        <button className="lg:w-48 h-12 pl-5 pr-5 text-lg bg-[#38BF4C] text-white ml-2 rounded-lg">
+        <button
+          onClick={onSearchClick}
+          className="lg:w-48 h-12 pl-5 pr-5 text-lg bg-[#38BF4C] text-white ml-2 rounded-lg"
+        >
           Search
         </button>
+
         <div className="relative">
           <button
             className="ml-4 w-12 h-12"
