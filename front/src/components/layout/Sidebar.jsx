@@ -45,11 +45,6 @@ const Sidebar = () => {
             href: "payment",
             icon: null,
           },
-          {
-            name: "Reviews",
-            href: "reviews",
-            icon: reviewicon,
-          },
         ]);
       } else {
         setNavigation([

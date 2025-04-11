@@ -57,11 +57,11 @@ function App() {
               <Route element={<BaseLayout />}>
                 <Route path="profile" element={<Profile />} />
                 <Route path="reviews" element={<Reviews />} />
+                <Route path="settings" element={<Settings />} />
 
                 {/* Translator Routes */}
                 <Route element={<RoleBasedRoute allowedRoles={"TRANSLATOR"} />}>
                   <Route path="translator" element={<TranslatorPage />} />
-                  <Route path="settings" element={<Settings />} />
                   <Route path="profile-edit" element={<ProfileEditing />} />
                   <Route
                     path="applied-projects"

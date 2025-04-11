@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import api from "../../services/api";
 
 const projectData = [
   {
@@ -48,6 +49,37 @@ const statusColors = {
 };
 
 const AppliedProjects = () => {
+  const [applications, setApplications] = useState([]);
+  const [requests, setRequests] = useState([]);
+
+  useEffect(() => {
+    const fetchApplications = async () => {
+      try {
+        const response = await api.get(`/translator/${userID}/applications`);
+        setApplications(response.data?.data);
+      } catch (err) {
+        console.error("Axios Error:", err);
+        console.log(err.response?.data || "Failed to fetch cities.");
+      }
+    };
+
+    fetchApplications();
+  }, []);
+
+  useEffect(() => {
+    const fetchRequests = async () => {
+      try {
+        const response = await api.get(`/translator/${userID}/requests`);
+        setRequests(response.data?.data);
+      } catch (err) {
+        console.error("Axios Error:", err);
+        console.log(err.response?.data || "Failed to fetch cities.");
+      }
+    };
+
+    fetchRequests();
+  }, []);
+
   return (
     <>
       <main className="w-full">

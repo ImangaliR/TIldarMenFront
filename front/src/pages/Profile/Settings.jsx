@@ -1,4 +1,5 @@
 import profileicon from "../../assets/profileicon.png";
+import employericon from "../../assets/employericon.png";
 import location from "../../assets/location.png";
 import key from "../../assets/key.png";
 import openeye from "../../assets/openeye.png";
@@ -46,6 +47,9 @@ const Settings = () => {
     userSettings.phoneNumber || ""
   );
   const [userLocation, setUserLocation] = useState(userSettings.location || "");
+  const [introduction, setIntroduction] = useState(
+    userSettings.introduction || ""
+  );
   const { handleSubmit } = useForm();
   const navigate = useNavigate();
 
@@ -55,6 +59,7 @@ const Settings = () => {
       setName(userSettings.firstName);
       setSurname(userSettings.lastName);
       setPhoneNumber(userSettings.phoneNumber);
+      setIntroduction(userSettings.introduction);
     }
   }, [userSettings]);
 
@@ -65,6 +70,11 @@ const Settings = () => {
     location: userLocation,
   };
 
+  const employerInfo = {
+    location: userLocation,
+    introduction: introduction,
+  };
+
   const userPassword = {
     oldPassword: currentPassword,
     password: newPassword,
@@ -72,9 +82,22 @@ const Settings = () => {
   };
 
   const userInfoUpdate = async () => {
-    console.log(userInfo);
     try {
       const response = await updateProfile(userInfo);
+      if (response) {
+        toast.success("Profile updated successfully!");
+      } else {
+        toast.error("Failed to update profile.");
+      }
+    } catch (err) {
+      toast.error("Something went wrong while updating.");
+    }
+  };
+
+  const employerInfoUpdate = async () => {
+    console.log(employerInfo);
+    try {
+      const response = await updateProfile(employerInfo);
       if (response) {
         toast.success("Profile updated successfully!");
       } else {
@@ -88,16 +111,17 @@ const Settings = () => {
   const passwordChange = async () => {
     try {
       const response = await updatePassword(userPassword);
-      console.log(response);
-      if (response?.message?.includes("updated")) {
-        toast.success("Password updated successfully!");
-      } else if (response?.data?.data?.includes("not match")) {
-        toast.error("New password and confirm password do not match.");
-      } else {
-        toast.error("Incorrect current password.");
-      }
+      toast.success("Password updated successfully!");
     } catch (err) {
-      toast.error("Something went wrong while updating.");
+      if (err?.message?.includes("Oops")) {
+        if (err?.data?.includes("Passwords does not match")) {
+          toast.error("New password and confirm password do not match.");
+        } else {
+          toast.error("Incorrect current password.");
+        }
+      } else {
+        toast.error("Something went wrong while updating.");
+      }
     }
   };
 
@@ -123,209 +147,436 @@ const Settings = () => {
 
   return (
     <>
-      <main className="bg-white shadow-sm rounded-sm text-sm pt-10 pl-15 pr-15 md:pt-15 md:pr-20 md:pl-20 lg:pt-25 lg:pr-25 lg:pl-25">
-        <div className="flex items-center gap-8">
-          <img src={profileicon} alt="profile icon" className="w-30 h-30 " />
-          <div>
-            <button
-              className="border-2 border-[#8F8F8F] rounded-lg text-[#70B27A] pr-6 pl-6 pt-2 pb-2 mb-3"
-              onClick={changeProfilePicture()}
-            >
-              Change Profile Picture
-            </button>
-            <p className="text-[#8F8F8F]">
-              This will be displayed on your profile at the website
-            </p>
-          </div>
-        </div>
-        <form
-          onSubmit={handleSubmit(userInfoUpdate)}
-          name="update user input"
-          className="mt-15"
-        >
-          <div className="flex gap-4">
-            <div>
-              <p className="ml-2">Name</p>
-              <input
-                type="text"
-                onChange={(e) => setName(e.target.value)}
-                placeholder={userSettings.firstName}
-                className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-54 md:w-72 lg:w-90 xl:w-114 h-9 mt-1 mb-5 rounded-sm text-sm"
+      {userRole === "EMPLOYER" ? (
+        <>
+          <main className="bg-white shadow-sm rounded-sm text-sm pt-10 pl-15 pr-15 md:pt-15 md:pr-20 md:pl-20 lg:pt-25 lg:pr-25 lg:pl-25">
+            <div className="flex items-center gap-8">
+              <img
+                src={employericon}
+                alt="employer icon"
+                className="w-30 h-30 "
               />
-            </div>
-            <div>
-              <p className="ml-2">Surname</p>
-              <input
-                type="text"
-                onChange={(e) => setSurname(e.target.value)}
-                placeholder={userSettings.lastName}
-                className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-54 md:w-72 lg:w-90 xl:w-114 h-9 mt-1 mb-5 rounded-sm text-sm"
-              />
-            </div>
-          </div>
-          <div className="flex gap-4">
-            <div>
-              <p className="ml-2">Phone Number</p>
-              <input
-                type="tel"
-                onChange={(e) => setPhoneNumber(e.target.value)}
-                maxLength={11}
-                minLength={11}
-                placeholder={userSettings.phoneNumber}
-                className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-54 md:w-72 lg:w-90 xl:w-114 h-9 mt-1 mb-5 rounded-sm text-sm"
-              />
-            </div>
-            <div>
-              <p className="ml-2">Email Address</p>
-              <input
-                type="email"
-                value={userSettings.email || ""}
-                disabled
-                className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-54 md:w-72 lg:w-90 xl:w-114 h-9 mt-1 mb-5 rounded-sm text-sm cursor-not-allowed"
-              />
-            </div>
-          </div>
-          <div className="flex gap-4">
-            <div>
-              <p className="ml-2">Role</p>
-              <input
-                type="text"
-                disabled
-                value={userRole === "EMPLOYER" ? "Employer" : "Translator"}
-                className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-54 md:w-72 lg:w-90 xl:w-114 h-9 mt-1 mb-5 rounded-sm text-sm cursor-not-allowed"
-              />
-            </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <p className="ml-2">Location</p>
-                <img src={location} alt="location icon" className="w-4 h-4" />
+              <div>
+                <button
+                  className="border-2 border-[#8F8F8F] rounded-lg text-[#70B27A] pr-6 pl-6 pt-2 pb-2 mb-3"
+                  onClick={changeProfilePicture()}
+                >
+                  Change Profile Picture
+                </button>
+                <p className="text-[#8F8F8F]">
+                  This will be displayed on your profile at the website
+                </p>
               </div>
-              <CitiesDropdown
-                value={userLocation}
-                onChange={(e) => setUserLocation(e.target.value)}
-              />
             </div>
-          </div>
-          <div className="flex w-full justify-end">
-            <button
-              type="submit"
-              className="bg-[#38BF4C] text-white font-light rounded-2xl pr-4 pl-4 pt-1 pb-1"
+            <form
+              onSubmit={handleSubmit(employerInfoUpdate)}
+              name="update user input"
+              className="mt-15"
             >
-              Update
-            </button>
-          </div>
-        </form>
+              <div className="flex gap-4">
+                <div>
+                  <p className="ml-2">Company Name</p>
+                  <input
+                    type="text"
+                    disabled
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder={userSettings.firstName}
+                    className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-54 md:w-72 lg:w-90 xl:w-114 h-9 mt-1 mb-5 rounded-sm text-sm"
+                  />
+                </div>
+                <div>
+                  <p className="ml-2">Surname</p>
+                  <input
+                    type="text"
+                    disabled
+                    onChange={(e) => setSurname(e.target.value)}
+                    placeholder={userSettings.lastName}
+                    className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-54 md:w-72 lg:w-90 xl:w-114 h-9 mt-1 mb-5 rounded-sm text-sm"
+                  />
+                </div>
+              </div>
+              <div className="flex gap-4">
+                <div>
+                  <p className="ml-2">Phone Number</p>
+                  <input
+                    type="tel"
+                    onChange={(e) => setPhoneNumber(e.target.value)}
+                    maxLength={11}
+                    minLength={11}
+                    disabled
+                    placeholder={userSettings.phoneNumber}
+                    className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-54 md:w-72 lg:w-90 xl:w-114 h-9 mt-1 mb-5 rounded-sm text-sm"
+                  />
+                </div>
+                <div>
+                  <p className="ml-2">Email Address</p>
+                  <input
+                    type="email"
+                    disabled
+                    value={userSettings.email || ""}
+                    className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-54 md:w-72 lg:w-90 xl:w-114 h-9 mt-1 mb-5 rounded-sm text-sm"
+                  />
+                </div>
+              </div>
+              <div className="flex gap-4">
+                <div>
+                  <div className="flex items-center gap-2">
+                    <p className="ml-2">Location</p>
+                    <img
+                      src={location}
+                      alt="location icon"
+                      className="w-4 h-4"
+                    />
+                  </div>
+                  <CitiesDropdown
+                    value={userLocation}
+                    onChange={(e) => setUserLocation(e.target.value)}
+                  />
+                </div>
+                <div>
+                  <p className="ml-2">Description about company / Yourself</p>
+                  <textarea
+                    type="text"
+                    value={introduction || ""}
+                    onChange={(e) => setIntroduction(e.target.value)}
+                    className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-54 md:w-72 lg:w-90 xl:w-114 h-40 mt-1 mb-5 py-2 rounded-sm text-sm resize-none"
+                  />
+                </div>
+              </div>
+              <div className="flex w-full justify-end">
+                <button
+                  type="submit"
+                  className="bg-[#38BF4C] text-white font-light rounded-2xl pr-4 pl-4 pt-1 pb-1"
+                >
+                  Update
+                </button>
+              </div>
+            </form>
 
-        <form
-          action={handleSubmit(passwordChange)}
-          name="change password"
-          className="mt-15"
-        >
-          <h1>Password & Security</h1>
-          <div className="flex gap-4">
-            <div className="flex items-center relative">
-              <img
-                src={key}
-                alt="key icon"
-                className="w-4 h-4 lg:w-5 lg:h-5 absolute top-3.5 lg:top-3 left-2"
-              />
-              <input
-                type={showCurrentPassword ? "text" : "password"}
-                onChange={(e) => setCurrentPassword(e.target.value)}
-                minLength={8}
-                placeholder="Enter Current Password"
-                className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-9 lg:pl-10 w-54 md:w-72 lg:w-90 xl:w-114 h-9 mt-1 mb-5 rounded-sm text-sm"
-              />
-              <img
-                src={showCurrentPassword ? openeye : hiddeneye}
-                alt={showCurrentPassword ? "hidden eye icon" : "open eye icon"}
-                onClick={() => setShowCurrentPassword(!showCurrentPassword)}
-                className="w-4 h-4 lg:w-5 lg:h-5 absolute top-3.5 lg:top-3 right-2 cursor-pointer"
-              />
-            </div>
-            <div className="flex items-center relative">
-              <img
-                src={key}
-                alt="key icon"
-                className="w-4 h-4 lg:w-5 lg:h-5 absolute top-3.5 lg:top-3 left-2"
-              />
-              <input
-                type={showNewPassword ? "text" : "password"}
-                onChange={(e) => setNewPassword(e.target.value)}
-                minLength={8}
-                placeholder="Enter New Password"
-                className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-9 lg:pl-10 w-54 md:w-72 lg:w-90 xl:w-114 h-9 mt-1 mb-5 rounded-sm text-sm"
-              />
-              <img
-                src={showNewPassword ? openeye : hiddeneye}
-                alt={showNewPassword ? "hidden eye icon" : "open eye icon"}
-                onClick={() => setShowNewPassword(!showNewPassword)}
-                className="w-4 h-4 lg:w-5 lg:h-5 absolute top-3.5 lg:top-3 right-2 cursor-pointer"
-              />
-            </div>
-          </div>
-          <div className="flex items-center justify-between">
-            <div className="relative">
-              <img
-                src={key}
-                alt="key icon"
-                className="w-4 h-4 lg:w-5 lg:h-5 absolute top-3.5 lg:top-3 left-2"
-              />
-              <input
-                type={showConfirmPassword ? "text" : "password"}
-                onChange={(e) => setConfirmNewPassword(e.target.value)}
-                minLength={8}
-                placeholder="Confirm New Password"
-                className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-9 lg:pl-10 w-54 md:w-72 lg:w-90 xl:w-114 h-9 mt-1 mb-5 rounded-sm text-sm"
-              />
-              <img
-                src={showConfirmPassword ? openeye : hiddeneye}
-                alt={showConfirmPassword ? "hidden eye icon" : "open eye icon"}
-                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                className="w-4 h-4 lg:w-5 lg:h-5 absolute top-3.5 lg:top-3 right-2 cursor-pointer"
-              />
-            </div>
-          </div>
-          <div className="flex w-full justify-end">
-            <button
-              type="submit"
-              className="bg-[#38BF4C] text-white font-light rounded-2xl pr-4 pl-4 pt-1 pb-1"
+            <form
+              action={handleSubmit(passwordChange)}
+              name="change password"
+              className="mt-15"
             >
-              Update
-            </button>
-          </div>
-        </form>
+              <h1>Password & Security</h1>
+              <div className="flex gap-4">
+                <div className="flex items-center relative">
+                  <img
+                    src={key}
+                    alt="key icon"
+                    className="w-4 h-4 lg:w-5 lg:h-5 absolute top-3.5 lg:top-3 left-2"
+                  />
+                  <input
+                    type={showCurrentPassword ? "text" : "password"}
+                    onChange={(e) => setCurrentPassword(e.target.value)}
+                    minLength={8}
+                    placeholder="Enter Current Password"
+                    className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-9 lg:pl-10 w-54 md:w-72 lg:w-90 xl:w-114 h-9 mt-1 mb-5 rounded-sm text-sm"
+                  />
+                  <img
+                    src={showCurrentPassword ? openeye : hiddeneye}
+                    alt={
+                      showCurrentPassword ? "hidden eye icon" : "open eye icon"
+                    }
+                    onClick={() => setShowCurrentPassword(!showCurrentPassword)}
+                    className="w-4 h-4 lg:w-5 lg:h-5 absolute top-3.5 lg:top-3 right-2 cursor-pointer"
+                  />
+                </div>
+                <div className="flex items-center relative">
+                  <img
+                    src={key}
+                    alt="key icon"
+                    className="w-4 h-4 lg:w-5 lg:h-5 absolute top-3.5 lg:top-3 left-2"
+                  />
+                  <input
+                    type={showNewPassword ? "text" : "password"}
+                    onChange={(e) => setNewPassword(e.target.value)}
+                    minLength={8}
+                    placeholder="Enter New Password"
+                    className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-9 lg:pl-10 w-54 md:w-72 lg:w-90 xl:w-114 h-9 mt-1 mb-5 rounded-sm text-sm"
+                  />
+                  <img
+                    src={showNewPassword ? openeye : hiddeneye}
+                    alt={showNewPassword ? "hidden eye icon" : "open eye icon"}
+                    onClick={() => setShowNewPassword(!showNewPassword)}
+                    className="w-4 h-4 lg:w-5 lg:h-5 absolute top-3.5 lg:top-3 right-2 cursor-pointer"
+                  />
+                </div>
+              </div>
+              <div className="flex items-center justify-between">
+                <div className="relative">
+                  <img
+                    src={key}
+                    alt="key icon"
+                    className="w-4 h-4 lg:w-5 lg:h-5 absolute top-3.5 lg:top-3 left-2"
+                  />
+                  <input
+                    type={showConfirmPassword ? "text" : "password"}
+                    onChange={(e) => setConfirmNewPassword(e.target.value)}
+                    minLength={8}
+                    placeholder="Confirm New Password"
+                    className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-9 lg:pl-10 w-54 md:w-72 lg:w-90 xl:w-114 h-9 mt-1 mb-5 rounded-sm text-sm"
+                  />
+                  <img
+                    src={showConfirmPassword ? openeye : hiddeneye}
+                    alt={
+                      showConfirmPassword ? "hidden eye icon" : "open eye icon"
+                    }
+                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                    className="w-4 h-4 lg:w-5 lg:h-5 absolute top-3.5 lg:top-3 right-2 cursor-pointer"
+                  />
+                </div>
+              </div>
+              <div className="flex w-full justify-end">
+                <button
+                  type="submit"
+                  className="bg-[#38BF4C] text-white font-light rounded-2xl pr-4 pl-4 pt-1 pb-1"
+                >
+                  Update
+                </button>
+              </div>
+            </form>
 
-        <div className="mt-12 pb-12">
-          <h1 className="text-[#585858] font-semibold text-lg lg:text-xl">
-            Delete you account
-          </h1>
-          <p className="text-[#949494] text-xs lg:text-sm mt-4">
-            When you delete your account, we permanently delete your personal
-            data, and you lose access to account services.
-          </p>
-          <div className="flex mt-4">
-            <input
-              type="checkbox"
-              id="delete"
-              onClick={() => setConfirmDelete(!confirmDelete)}
-            />
-            <label htmlFor="delete" className="text-[#949494] text-sm ml-2">
-              Confirm that I want to delete my account
-            </label>
+            <div className="mt-12 pb-12">
+              <h1 className="text-[#585858] font-semibold text-lg lg:text-xl">
+                Delete you account
+              </h1>
+              <p className="text-[#949494] text-xs lg:text-sm mt-4">
+                When you delete your account, we permanently delete your
+                personal data, and you lose access to account services.
+              </p>
+              <div className="flex mt-4">
+                <input
+                  type="checkbox"
+                  id="delete"
+                  onClick={() => setConfirmDelete(!confirmDelete)}
+                />
+                <label htmlFor="delete" className="text-[#949494] text-sm ml-2">
+                  Confirm that I want to delete my account
+                </label>
+              </div>
+              <div className="flex w-full justify-end mt-4">
+                <button
+                  className={`${
+                    confirmDelete ? "bg-[#FF0000] text-white" : "bg-gray-200"
+                  }  font-light rounded-sm pr-6 pl-6 lg:pr-7 lg:pl-7 pt-1 pb-1`}
+                  onClick={deleteAccount}
+                >
+                  Delete Account
+                </button>
+              </div>
+            </div>
+          </main>
+        </>
+      ) : (
+        <main className="bg-white shadow-sm rounded-sm text-sm pt-10 pl-15 pr-15 md:pt-15 md:pr-20 md:pl-20 lg:pt-25 lg:pr-25 lg:pl-25">
+          <div className="flex items-center gap-8">
+            <img src={profileicon} alt="profile icon" className="w-30 h-30 " />
+            <div>
+              <button
+                className="border-2 border-[#8F8F8F] rounded-lg text-[#70B27A] pr-6 pl-6 pt-2 pb-2 mb-3"
+                onClick={changeProfilePicture()}
+              >
+                Change Profile Picture
+              </button>
+              <p className="text-[#8F8F8F]">
+                This will be displayed on your profile at the website
+              </p>
+            </div>
           </div>
-          <div className="flex w-full justify-end mt-4">
-            <button
-              className={`${
-                confirmDelete ? "bg-[#FF0000] text-white" : "bg-gray-200"
-              }  font-light rounded-sm pr-6 pl-6 lg:pr-7 lg:pl-7 pt-1 pb-1`}
-              onClick={deleteAccount}
-            >
-              Delete Account
-            </button>
+          <form
+            onSubmit={handleSubmit(userInfoUpdate)}
+            name="update user input"
+            className="mt-15"
+          >
+            <div className="flex gap-4">
+              <div>
+                <p className="ml-2">Name</p>
+                <input
+                  type="text"
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder={userSettings.firstName}
+                  className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-54 md:w-72 lg:w-90 xl:w-114 h-9 mt-1 mb-5 rounded-sm text-sm"
+                />
+              </div>
+              <div>
+                <p className="ml-2">Surname</p>
+                <input
+                  type="text"
+                  onChange={(e) => setSurname(e.target.value)}
+                  placeholder={userSettings.lastName}
+                  className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-54 md:w-72 lg:w-90 xl:w-114 h-9 mt-1 mb-5 rounded-sm text-sm"
+                />
+              </div>
+            </div>
+            <div className="flex gap-4">
+              <div>
+                <p className="ml-2">Phone Number</p>
+                <input
+                  type="tel"
+                  onChange={(e) => setPhoneNumber(e.target.value)}
+                  maxLength={11}
+                  minLength={11}
+                  placeholder={userSettings.phoneNumber}
+                  className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-54 md:w-72 lg:w-90 xl:w-114 h-9 mt-1 mb-5 rounded-sm text-sm"
+                />
+              </div>
+              <div>
+                <p className="ml-2">Email Address</p>
+                <input
+                  type="email"
+                  value={userSettings.email || ""}
+                  disabled
+                  className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-54 md:w-72 lg:w-90 xl:w-114 h-9 mt-1 mb-5 rounded-sm text-sm cursor-not-allowed"
+                />
+              </div>
+            </div>
+            <div className="flex gap-4">
+              <div>
+                <p className="ml-2">Role</p>
+                <input
+                  type="text"
+                  disabled
+                  value={userRole === "EMPLOYER" ? "Employer" : "Translator"}
+                  className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-54 md:w-72 lg:w-90 xl:w-114 h-9 mt-1 mb-5 rounded-sm text-sm cursor-not-allowed"
+                />
+              </div>
+              <div>
+                <div className="flex items-center gap-2">
+                  <p className="ml-2">Location</p>
+                  <img src={location} alt="location icon" className="w-4 h-4" />
+                </div>
+                <CitiesDropdown
+                  value={userLocation}
+                  onChange={(e) => setUserLocation(e.target.value)}
+                />
+              </div>
+            </div>
+            <div className="flex w-full justify-end">
+              <button
+                type="submit"
+                className="bg-[#38BF4C] text-white font-light rounded-2xl pr-4 pl-4 pt-1 pb-1"
+              >
+                Update
+              </button>
+            </div>
+          </form>
+
+          <form
+            action={handleSubmit(passwordChange)}
+            name="change password"
+            className="mt-15"
+          >
+            <h1>Password & Security</h1>
+            <div className="flex gap-4">
+              <div className="flex items-center relative">
+                <img
+                  src={key}
+                  alt="key icon"
+                  className="w-4 h-4 lg:w-5 lg:h-5 absolute top-3.5 lg:top-3 left-2"
+                />
+                <input
+                  type={showCurrentPassword ? "text" : "password"}
+                  onChange={(e) => setCurrentPassword(e.target.value)}
+                  minLength={8}
+                  placeholder="Enter Current Password"
+                  className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-9 lg:pl-10 w-54 md:w-72 lg:w-90 xl:w-114 h-9 mt-1 mb-5 rounded-sm text-sm"
+                />
+                <img
+                  src={showCurrentPassword ? openeye : hiddeneye}
+                  alt={
+                    showCurrentPassword ? "hidden eye icon" : "open eye icon"
+                  }
+                  onClick={() => setShowCurrentPassword(!showCurrentPassword)}
+                  className="w-4 h-4 lg:w-5 lg:h-5 absolute top-3.5 lg:top-3 right-2 cursor-pointer"
+                />
+              </div>
+              <div className="flex items-center relative">
+                <img
+                  src={key}
+                  alt="key icon"
+                  className="w-4 h-4 lg:w-5 lg:h-5 absolute top-3.5 lg:top-3 left-2"
+                />
+                <input
+                  type={showNewPassword ? "text" : "password"}
+                  onChange={(e) => setNewPassword(e.target.value)}
+                  minLength={8}
+                  placeholder="Enter New Password"
+                  className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-9 lg:pl-10 w-54 md:w-72 lg:w-90 xl:w-114 h-9 mt-1 mb-5 rounded-sm text-sm"
+                />
+                <img
+                  src={showNewPassword ? openeye : hiddeneye}
+                  alt={showNewPassword ? "hidden eye icon" : "open eye icon"}
+                  onClick={() => setShowNewPassword(!showNewPassword)}
+                  className="w-4 h-4 lg:w-5 lg:h-5 absolute top-3.5 lg:top-3 right-2 cursor-pointer"
+                />
+              </div>
+            </div>
+            <div className="flex items-center justify-between">
+              <div className="relative">
+                <img
+                  src={key}
+                  alt="key icon"
+                  className="w-4 h-4 lg:w-5 lg:h-5 absolute top-3.5 lg:top-3 left-2"
+                />
+                <input
+                  type={showConfirmPassword ? "text" : "password"}
+                  onChange={(e) => setConfirmNewPassword(e.target.value)}
+                  minLength={8}
+                  placeholder="Confirm New Password"
+                  className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-9 lg:pl-10 w-54 md:w-72 lg:w-90 xl:w-114 h-9 mt-1 mb-5 rounded-sm text-sm"
+                />
+                <img
+                  src={showConfirmPassword ? openeye : hiddeneye}
+                  alt={
+                    showConfirmPassword ? "hidden eye icon" : "open eye icon"
+                  }
+                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                  className="w-4 h-4 lg:w-5 lg:h-5 absolute top-3.5 lg:top-3 right-2 cursor-pointer"
+                />
+              </div>
+            </div>
+            <div className="flex w-full justify-end">
+              <button
+                type="submit"
+                className="bg-[#38BF4C] text-white font-light rounded-2xl pr-4 pl-4 pt-1 pb-1"
+              >
+                Update
+              </button>
+            </div>
+          </form>
+
+          <div className="mt-12 pb-12">
+            <h1 className="text-[#585858] font-semibold text-lg lg:text-xl">
+              Delete you account
+            </h1>
+            <p className="text-[#949494] text-xs lg:text-sm mt-4">
+              When you delete your account, we permanently delete your personal
+              data, and you lose access to account services.
+            </p>
+            <div className="flex mt-4">
+              <input
+                type="checkbox"
+                id="delete"
+                onClick={() => setConfirmDelete(!confirmDelete)}
+              />
+              <label htmlFor="delete" className="text-[#949494] text-sm ml-2">
+                Confirm that I want to delete my account
+              </label>
+            </div>
+            <div className="flex w-full justify-end mt-4">
+              <button
+                className={`${
+                  confirmDelete ? "bg-[#FF0000] text-white" : "bg-gray-200"
+                }  font-light rounded-sm pr-6 pl-6 lg:pr-7 lg:pl-7 pt-1 pb-1`}
+                onClick={deleteAccount}
+              >
+                Delete Account
+              </button>
+            </div>
           </div>
-        </div>
-      </main>
+        </main>
+      )}
     </>
   );
 };

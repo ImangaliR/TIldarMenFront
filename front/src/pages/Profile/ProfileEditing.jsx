@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import profileicon from "../../assets/profileicon.png";
 import pen from "../../assets/pen.png";
 import UploadVideo from "./UploadVideo";
@@ -6,17 +6,16 @@ import SpecializationDropdown from "../../components/Dropdown/SpecializationDrop
 import LanguageDropdown from "./../../components/Dropdown/LanguageDropdown";
 import TranslationServicesDropdown from "../../components/Dropdown/TranslationServicesDropdown";
 import WorkExperience from "../../components/WorkExperience/WorkExperience";
-
-const editbuttons = [
-  { id: 1, name: "Button One" },
-  { id: 2, name: "Button Two" },
-  { id: 3, name: "Button Three" },
-  { id: 4, name: "Button Four" },
-  { id: 5, name: "Button Five" },
-];
+import api from "../../services/api";
+import TokenService from "../../services/token.service";
+import { toast } from "react-toastify";
+import { useUser } from "../../utils/contexts/UserContext";
 
 const ProfileEditing = () => {
+  const { user } = useUser();
+  const userID = TokenService.getUserId();
   const [editingItemId, setEditingItemId] = useState(null);
+  console.log(user);
 
   const handleEditClick = (id) => {
     setEditingItemId(id);
@@ -35,6 +34,26 @@ const ProfileEditing = () => {
     <WorkExperience />;
   };
 
+  useEffect(() => {
+    const editProfile = async () => {
+      try {
+        const response = await api.put(`/translator/${userID}/profile`);
+        if (response) {
+          console.log("Profile updated successfully:", response.data);
+          toast.success("Profile updated successfully!");
+        } else {
+          toast.warn(response.data?.data);
+        }
+      } catch (err) {
+        console.error("Axios Error:", err);
+        console.log(err.response?.data || "Failed to edit user profile.");
+        toast.error(err.response?.data || "Failed to edit user profile.");
+      }
+    };
+
+    editProfile();
+  }, []);
+
   return (
     <>
       <div>
@@ -52,13 +71,8 @@ const ProfileEditing = () => {
                   <p className="w-35 font-bold">Full Name:</p>
                   <input
                     type="text"
-                    className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-50 md:w-55 lg:w-60 xl:w-80 h-7 rounded-sm text-sm"
-                  />
-                </div>
-                <div className="flex items-center gap-2 mb-3">
-                  <p className="w-35 text-[#8F8F8F]">Professional Title:</p>
-                  <input
-                    type="text"
+                    disabled
+                    value={"John Doe"}
                     className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-50 md:w-55 lg:w-60 xl:w-80 h-7 rounded-sm text-sm"
                   />
                 </div>
@@ -66,6 +80,15 @@ const ProfileEditing = () => {
                   <p className="w-35">Based In:</p>
                   <input
                     type="text"
+                    disabled
+                    className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-50 md:w-55 lg:w-60 xl:w-80 h-7 rounded-sm text-sm"
+                  />
+                </div>
+                <div className="flex items-center gap-2 mb-3">
+                  <p className="w-35 text-[#8F8F8F]">Professional Title:</p>
+                  <input
+                    type="text"
+                    placeholder={user.data?.professionalTitle}
                     className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-50 md:w-55 lg:w-60 xl:w-80 h-7 rounded-sm text-sm"
                   />
                 </div>
@@ -73,6 +96,7 @@ const ProfileEditing = () => {
                   <p className="w-35">Availability:</p>
                   <input
                     type="text"
+                    placeholder={user.data?.availability}
                     className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-50 md:w-55 lg:w-60 xl:w-80 h-7 rounded-sm text-sm"
                   />
                 </div>

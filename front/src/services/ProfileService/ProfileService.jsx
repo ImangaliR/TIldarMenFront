@@ -14,7 +14,6 @@ export const getProfile = () => {
       .get(endpoint)
       .then((response) => resolve(response.data))
       .catch((err) => {
-        console.error("Axios Error:", err);
         reject(err.response?.data || "Failed to fetch profile.");
       });
   });
@@ -28,23 +27,28 @@ export const getSettings = () => {
     const endpoint =
       userRole === "TRANSLATOR"
         ? `/translator/${userID}/settings`
-        : `/employer/${userID}/settings`;
+        : `/employer/${userID}/profile`;
     api
       .get(endpoint)
       .then((response) => resolve(response.data))
       .catch((err) => {
-        console.error("Axios Error:", err);
         reject(err.response?.data || "Failed to fetch settings.");
       });
   });
 };
 
 export const updateProfile = (profileData) => {
+  const userRole = TokenService.getUserRole();
   const userID = TokenService.getUserId();
   return new Promise((resolve, reject) => {
+    const endpoint =
+      userRole === "TRANSLATOR"
+        ? `/translator/${userID}/settings`
+        : `/employer/${userID}/profile/update`;
     api
-      .put(`/translator/${userID}/settings`, profileData)
+      .put(endpoint, profileData)
       .then((response) => {
+        console.log("Profile updated successfully:", response.data);
         resolve(response.data);
       })
       .catch((err) => {
