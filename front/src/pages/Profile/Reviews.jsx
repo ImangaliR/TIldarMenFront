@@ -98,7 +98,9 @@ const Reviews = () => {
   });
   const averageRating = (totalRating / totalReviews).toFixed(2);
   const ratingPercentages = [];
+  const count = [];
   for (let star = 1; star <= 5; star++) {
+    count[star] = ratingCounts[star].toFixed(0);
     ratingPercentages[star] =
       ((ratingCounts[star] / totalReviews) * 100).toFixed(0) + "%";
   }
@@ -125,6 +127,7 @@ const Reviews = () => {
                   key={star}
                   star={star}
                   percent={ratingPercentages[star]}
+                  count={count[star]}
                   className="flex items-center gap-2"
                 />
               ))}
