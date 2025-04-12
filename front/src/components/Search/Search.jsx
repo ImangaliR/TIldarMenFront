@@ -21,7 +21,7 @@ const Search = ({ setUserSearch, handleSearch }) => {
       <div className="search flex items-center justify-center mt-12">
         <input
           type="text"
-          placeholder="Please enter a language or specialization..."
+          placeholder="Please enter name or surname"
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
           onKeyDown={handleKeyDown}

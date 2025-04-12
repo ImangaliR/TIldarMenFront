@@ -6,10 +6,12 @@ import fullstar from "../../assets/full_star.png";
 import emptystar from "../../assets/empty_star.png";
 import customerreviews from "../../assets/customer_reviews.png";
 import RatingBar from "../../components/Review/RatingBar";
+import { useUser } from "../../utils/contexts/UserContext";
 
 const Reviews = () => {
   const userID = TokenService.getUserId();
   const [reviews, setReviews] = useState([]);
+  const { user } = useUser();
   const reviewStars = (rating) => {
     switch (rating) {
       case 1:
@@ -96,7 +98,6 @@ const Reviews = () => {
     ratingCounts[rating]++;
     totalRating += rating;
   });
-  const averageRating = (totalRating / totalReviews).toFixed(2);
   const ratingPercentages = [];
   const count = [];
   for (let star = 1; star <= 5; star++) {
@@ -117,9 +118,11 @@ const Reviews = () => {
                 className="w-25 h-25 shadow-sm rounded-full"
               />
               <h1 className="mt-4 text-lg text-[#5e5e5e]">Customer Reviews</h1>
-              <h1 className="text-2xl font-bold mt-1">{averageRating}</h1>
-              <p className="text-[#a3a2a2] mb-2">{totalReviews} Reviews</p>
-              {reviewStars(Math.floor(averageRating))}
+              <h1 className="text-2xl font-bold mt-1">{user?.data?.rating}</h1>
+              <p className="text-[#a3a2a2] mb-2">
+                {user?.data?.reviews} Reviews
+              </p>
+              {reviewStars(Math.floor(user?.data?.rating))}
             </div>
             <div className="mt-4">
               {[5, 4, 3, 2, 1].map((star) => (

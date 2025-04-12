@@ -6,7 +6,6 @@ import SpecializationDropdown from "../../components/Dropdown/SpecializationDrop
 import LanguageDropdown from "./../../components/Dropdown/LanguageDropdown";
 import TranslationServicesDropdown from "../../components/Dropdown/TranslationServicesDropdown";
 import WorkExperience from "../../components/WorkExperience/WorkExperience";
-import TokenService from "../../services/token.service";
 import { useUser } from "../../utils/contexts/UserContext";
 import AvaibilityDropdown from "../../components/Dropdown/AvailabilityDropdown";
 import { toast } from "react-toastify";

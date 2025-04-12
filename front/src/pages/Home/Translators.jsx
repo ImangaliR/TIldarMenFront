@@ -3,6 +3,7 @@ import Navbar from "../../components/layout/Navbar";
 import Search from "../../components/Search/Search";
 import TranslatorCards from "./TranslatorCards";
 import api from "../../services/api";
+import { toast } from "react-toastify";
 
 const Translators = () => {
   const [resultCount, setResultCount] = useState(0);
@@ -21,8 +22,7 @@ const Translators = () => {
       setTranslators(response.data?.data);
       setResultCount(response.data?.data.length);
     } catch (err) {
-      console.error("Axios Error:", err);
-      console.log(err.response?.data || "Failed to fetch cities.");
+      toast.error("Failed to fetch translators.");
     }
   };
 
