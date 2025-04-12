@@ -1,7 +1,7 @@
 import React from "react";
 import fullstar from "../../assets/full_star.png";
 
-const RatingBar = ({ star, percent }) => {
+const RatingBar = ({ star, percent, count }) => {
   return (
     <div className="flex items-center justify-evenly text-sm text-gray-600 mb-3">
       <div className="flex items-center border-1 border-[#bdbdbd] rounded-full w-6 justify-center font-medium text-black">
@@ -14,7 +14,7 @@ const RatingBar = ({ star, percent }) => {
           style={{ width: percent }}
         ></div>
       </div>
-      <div className="w-10 text-right text-sm">{percent}</div>
+      <div className="w-3 text-right text-sm">{count}</div>
     </div>
   );
 };

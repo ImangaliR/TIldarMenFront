@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import api from "../../services/api";
+import TokenService from "../../services/token.service";
 
 const projectData = [
   {
@@ -49,6 +50,7 @@ const statusColors = {
 };
 
 const AppliedProjects = () => {
+  const userID = TokenService.getUserId();
   const [applications, setApplications] = useState([]);
   const [requests, setRequests] = useState([]);
 
