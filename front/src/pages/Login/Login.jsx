@@ -7,19 +7,17 @@ import { toast } from "react-toastify";
 import useAuth from "../../utils/hooks/useAuth";
 import SimpleLoader from "../../components/Loader/SimpleLoader";
 import { useUser } from "../../utils/contexts/UserContext";
-import TokenService from "../../services/token.service";
 import { useForm } from "react-hook-form";
 
 function Login() {
   const navigate = useNavigate();
   const { handleSubmit } = useForm();
-  const { login, user } = useUser();
+  const { login, user, userRole } = useUser();
   const { loginUser, error } = useAuth();
   const [loading, setLoading] = useState(false);
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const userRole = TokenService.getUserRole();
 
   const handleLogin = async () => {
     setLoading(true);
@@ -33,10 +31,7 @@ function Login() {
       if (user || userRole) {
         login(user);
       } else {
-        toast.warn("Incorrect email or password");
-        setTimeout(() => {
-          console.log("Redirecting to login page...");
-        }, 2000);
+        alert("Incorrect email or password");
         return;
       }
       toast.success("Logged in successfully!");
