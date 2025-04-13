@@ -48,11 +48,9 @@ export const updateProfile = (profileData) => {
     api
       .put(endpoint, profileData)
       .then((response) => {
-        console.log("Profile updated successfully:", response.data);
         resolve(response.data);
       })
       .catch((err) => {
-        console.error("Axios PUT Error:", err);
         reject(err.response?.data || "Failed to update profile.");
       });
   });
