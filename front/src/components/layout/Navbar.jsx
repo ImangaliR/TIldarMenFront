@@ -63,9 +63,9 @@ const Navbar = () => {
           <button className="ml-2 md:ml-4" onClick={handleProfileClick}>
             <img
               src={
-                userRole === "TRANSLATOR"
-                  ? user?.data?.profileImageUrl || profileicon
-                  : user?.data?.profileImageUrl || employericon
+                userRole === "EMPLOYER"
+                  ? user?.data?.profileImageUrl || employericon
+                  : user?.data?.profileImageUrl || profileicon
               }
               alt="profile icon"
               className="w-8 h-8 lg:w-10 lg:h-10 rounded-full"
