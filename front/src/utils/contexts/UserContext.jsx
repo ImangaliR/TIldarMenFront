@@ -67,6 +67,8 @@ export const UserProvider = ({ children }) => {
   // Function to logout user
   const logout = () => {
     setUser(null);
+    setUserRole(null);
+    setUserId(null);
     localStorage.removeItem("user");
     TokenService.removeTokens();
   };
