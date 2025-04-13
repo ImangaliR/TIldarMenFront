@@ -5,6 +5,8 @@ import { getProfile } from "../../services/ProfileService/ProfileService";
 const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
+  const [userRole, setUserRole] = useState(null);
+  const [userId, setUserId] = useState(null);
   const [user, setUser] = useState(() => {
     try {
       return JSON.parse(localStorage.getItem("user")) || null;
@@ -54,6 +56,8 @@ export const UserProvider = ({ children }) => {
     try {
       const profile = await getProfile();
       setUser(profile);
+      setUserRole(TokenService.getUserRole());
+      setUserId(TokenService.getUserId());
       localStorage.setItem("user", JSON.stringify(profile));
     } catch (error) {
       console.error("Failed to fetch profile after login:", error);
@@ -68,7 +72,9 @@ export const UserProvider = ({ children }) => {
   };
 
   return (
-    <UserContext.Provider value={{ user, setUser, isLoading, login, logout }}>
+    <UserContext.Provider
+      value={{ userId, userRole, user, setUser, isLoading, login, logout }}
+    >
       {children}
     </UserContext.Provider>
   );
