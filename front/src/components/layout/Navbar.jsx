@@ -1,15 +1,13 @@
 import chaticon from "../../assets/chat.png";
-import searchicon from "../../assets/search.png";
 import bellicon from "../../assets/bell.png";
 import profileicon from "../../assets/profileicon.png";
 import employericon from "../../assets/employericon.png";
 import { NavLink, useNavigate } from "react-router-dom";
-import TokenService from "../../services/token.service";
+import { useUser } from "../../utils/contexts/UserContext";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const userRole = TokenService.getUserRole();
-  const userId = TokenService.getUserId();
+  const { user, userRole, userId } = useUser();
   const navigation = [
     { name: "Home", href: "/home" },
     { name: "Project Catalogs", href: "/project-catalog" },
@@ -64,9 +62,13 @@ const Navbar = () => {
           </button>
           <button className="ml-2 md:ml-4" onClick={handleProfileClick}>
             <img
-              src={userRole === "TRANSLATOR" ? profileicon : employericon}
+              src={
+                userRole === "TRANSLATOR"
+                  ? user?.data?.profileImageUrl || profileicon
+                  : user?.data?.profileImageUrl || employericon
+              }
               alt="profile icon"
-              className="min-w-8 h-8 lg:min-w-10 lg:h-10"
+              className="w-8 h-8 lg:w-10 lg:h-10 rounded-full"
             />
           </button>
         </div>

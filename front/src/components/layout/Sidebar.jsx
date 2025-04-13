@@ -109,8 +109,13 @@ const Sidebar = () => {
         <div className="flex flex-col items-center justify-center mt-5">
           <div className="grid justify-center w-30 h-30">
             <img
-              src={userRole === "EMPLOYER" ? employericon : profileicon}
+              src={
+                userRole === "TRANSLATOR"
+                  ? user?.data?.profileImageUrl || profileicon
+                  : user?.data?.profileImageUrl || employericon
+              }
               alt="profile icon"
+              className="w-25 h-25 rounded-full"
             />
           </div>
           <p className="font-medium text-center mt-2 w-full">
