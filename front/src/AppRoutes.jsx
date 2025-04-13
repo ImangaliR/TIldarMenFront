@@ -49,6 +49,7 @@ const AppRoutes = () => {
           {/* Translator Routes */}
           <Route element={<RoleBasedRoute allowedRoles={"TRANSLATOR"} />}>
             <Route path="translator" element={<TranslatorPage />} />
+            <Route path="translator/settings" element={<Settings />} />
             <Route path="profile-edit" element={<ProfileEditing />} />
             <Route path="applied-projects" element={<AppliedProjects />} />
           </Route>
