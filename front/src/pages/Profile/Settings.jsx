@@ -4,7 +4,6 @@ import location from "../../assets/location.png";
 import key from "../../assets/key.png";
 import openeye from "../../assets/openeye.png";
 import hiddeneye from "../../assets/hiddeneye.png";
-import TokenService from "../../services/token.service";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useUser } from "../../utils/contexts/UserContext";
@@ -32,8 +31,7 @@ const Settings = () => {
     fetchSettings();
   }, []);
 
-  const userRole = TokenService.getUserRole();
-  const { logout } = useUser();
+  const { userRole, logout } = useUser();
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
   const [currentPassword, setCurrentPassword] = useState("");
