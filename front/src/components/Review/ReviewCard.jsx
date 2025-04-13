@@ -102,6 +102,7 @@ const ReviewCard = ({ reviews }) => {
             </p>
             <textarea
               defaultValue={review?.comment || ""}
+              disabled
               className="text-[#6e6e6e] mt-1 resize-none w-full pr-2"
             />
           </div>
