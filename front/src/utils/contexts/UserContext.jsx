@@ -5,8 +5,8 @@ import { getProfile } from "../../services/ProfileService/ProfileService";
 const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
-  const [userRole, setUserRole] = useState(TokenService?.getUserRole || null);
-  const [userId, setUserId] = useState(TokenService?.getUserId || null);
+  const [userRole, setUserRole] = useState(TokenService?.getUserRole() || null);
+  const [userId, setUserId] = useState(TokenService?.getUserId() || null);
   const [user, setUser] = useState(() => {
     try {
       return JSON.parse(localStorage.getItem("user")) || null;
