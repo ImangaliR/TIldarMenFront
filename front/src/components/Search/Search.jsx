@@ -1,13 +1,13 @@
 import { useState } from "react";
 import filtericon from "../../assets/filter.png";
 
-const Search = ({ setUserSearch, handleSearch }) => {
+const Search = ({ setUserSearch, handleSearch, placeholder }) => {
   const [filterOn, setFilterOn] = useState(false);
   const [inputValue, setInputValue] = useState("");
 
   const onSearchClick = () => {
-    setUserSearch(inputValue);
-    handleSearch(inputValue); // trigger search
+    setUserSearch?.(inputValue);
+    handleSearch?.(inputValue); // trigger search
   };
 
   const handleKeyDown = (e) => {
@@ -21,7 +21,7 @@ const Search = ({ setUserSearch, handleSearch }) => {
       <div className="search flex items-center justify-center mt-12">
         <input
           type="text"
-          placeholder="Please enter name or surname"
+          placeholder={placeholder}
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
           onKeyDown={handleKeyDown}

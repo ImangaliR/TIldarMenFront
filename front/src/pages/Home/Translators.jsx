@@ -40,7 +40,11 @@ const Translators = () => {
     <>
       <Navbar />
       <div className="grid justify-center">
-        <Search setUserSearch={setUserSearch} handleSearch={fetchTranslators} />
+        <Search
+          setUserSearch={setUserSearch}
+          handleSearch={fetchTranslators}
+          placeholder={"Please enter name or surname"}
+        />
         <div className="my-10">
           <main className="max-w-260 w-full">
             <p className="text-2xl mb-1">Results ({resultCount})</p>
