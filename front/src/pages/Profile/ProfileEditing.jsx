@@ -83,7 +83,7 @@ const ProfileEditing = () => {
                   <input
                     type="text"
                     disabled
-                    value={"John Doe"}
+                    value={user?.data?.firstName + " " + user?.data?.lastName}
                     className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-50 md:w-55 lg:w-60 xl:w-80 h-7 rounded-sm text-sm"
                   />
                 </div>
@@ -97,7 +97,7 @@ const ProfileEditing = () => {
                   />
                 </div>
                 <div className="flex items-center gap-2 mb-3">
-                  <p className="w-35 text-[#8F8F8F]">Professional Title:</p>
+                  <p className="w-35">Professional Title:</p>
                   <input
                     type="text"
                     placeholder={userTitle}
