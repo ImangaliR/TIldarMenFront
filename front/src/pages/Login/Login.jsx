@@ -55,59 +55,61 @@ function Login() {
               <SimpleLoader className="h-9 w-9 text-blue-500" />
             </div>
           )}
-          <form
-            onSubmit={handleSubmit(handleLogin)}
-            name="login-form"
-            className="flex flex-col items-center bg-white w-100 h-fit md:w-140 rounded-2xl mx-auto shadow-lg outline-1"
-          >
-            <img src={logo} alt="logo" className="w-17.5 h-17.5 mt-10" />
+          <div className="flex flex-col items-center bg-white w-100 h-fit md:w-140 rounded-2xl mx-auto shadow-lg outline-1">
+            <button onClick={() => navigate("/")}>
+              <img src={logo} alt="logo" className="w-17.5 h-17.5 mt-10" />
+            </button>
             <h1 className="text-2xl md:text-3xl font-semibold mt-5">
               WELCOME BACK!
             </h1>
             <p className="text-[#474747] text-sm md:text-lg">
               Please enter your details
             </p>
-            <input
-              type="email"
-              placeholder="Email"
-              className="rounded-3xl border-2 border-[#d1d5d8] bg-white
-            pl-4 pt-3 pb-3 shadow-xs w-75 md:w-94 mb-3 mt-7"
-              onChange={(e) => setEmail(e.target.value)}
-              value={email}
-              required
-            />
-            <div className="relative">
+            <form
+              onSubmit={handleSubmit(handleLogin)}
+              name="login-form"
+              className="flex flex-col items-center"
+            >
               <input
-                type={showPassword ? "text" : "password"}
-                placeholder="Password"
-                className="rounded-3xl border-2 border-[#d1d5d8] bg-white
-            pl-4 pt-3 pb-3 shadow-xs w-75 md:w-94"
-                onChange={(e) => setPassword(e.target.value)}
-                value={password}
+                type="email"
+                placeholder="Email"
+                className="rounded-3xl border-2 border-[#d1d5d8] bg-white pl-4 pt-3 pb-3 shadow-xs w-75 md:w-94 mb-3 mt-7"
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
                 required
               />
-              <img
-                src={showPassword ? openeye : hiddeneye}
-                alt={showPassword ? "hidden eye icon" : "open eye icon"}
-                className="w-5 h-5 md:w-6 md:h-6 absolute right-4 bottom-4 md:bottom-3.5 cursor-pointer"
-                onClick={() => setShowPassword(!showPassword)}
-              />
-            </div>
-            <div className="flex justify-end w-73 md:w-88">
-              <button className="text-[#8F8F8F] text-sm mt-2 mb-5">
-                Forgot password?
+              <div className="relative">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Password"
+                  className="rounded-3xl border-2 border-[#d1d5d8] bg-white pl-4 pt-3 pb-3 shadow-xs w-75 md:w-94"
+                  onChange={(e) => setPassword(e.target.value)}
+                  value={password}
+                  required
+                />
+                <img
+                  src={showPassword ? openeye : hiddeneye}
+                  alt={showPassword ? "hidden eye icon" : "open eye icon"}
+                  className="w-5 h-5 md:w-6 md:h-6 absolute right-4 bottom-4 md:bottom-3.5 cursor-pointer"
+                  onClick={() => setShowPassword(!showPassword)}
+                />
+              </div>
+              <div className="flex justify-end w-73 md:w-88">
+                <button className="text-[#8F8F8F] text-sm mt-2 mb-5">
+                  Forgot password?
+                </button>
+              </div>
+              <button className="w-75 h-12 md:w-94 md:h-14 bg-[#2A9E97] text-white rounded-3xl text-lg md:text-xl font-medium">
+                Login
               </button>
-            </div>
-            <button className="w-75 h-12 md:w-94 md:h-14 bg-[#2A9E97] text-white rounded-3xl text-lg md:text-xl font-medium">
-              Login
-            </button>
+            </form>
             <button
               onClick={() => navigate("/signup")}
               className="text-[#3949AB] font-semibold lg:text-lg mt-13 mb-1"
             >
               Create new account?
             </button>
-          </form>
+          </div>
         </main>
 
         <footer className="text-center text-[#333333] font-medium text-lg md:text-xl cursor-pointer mb-3">

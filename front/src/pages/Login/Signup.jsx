@@ -70,7 +70,9 @@ function Signup() {
             name="signup-form"
             className="bg-white w-150 h-fit md:180 lg:w-235 pl-15 pr-15 rounded-2xl shadow-sm"
           >
-            <img src={logo} alt="logo" className="w-15 h-15 mt-8 mb-2" />
+            <button onClick={() => navigate("/home")}>
+              <img src={logo} alt="logo" className="w-15 h-15 mt-8 mb-2" />
+            </button>
             <h1 className="text-3xl md:text-5xl">Sign up</h1>
             <p className="text-[#8B9AA6] text-sm md:text-lg mt-1">
               Enter your details below to create your account and get started
