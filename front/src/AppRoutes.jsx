@@ -18,6 +18,7 @@ import Payment from "./pages/Profile/Payment";
 import PostProjects from "./pages/Profile/PostProjects";
 import ProjectApplicants from "./pages/Profile/ProjectApplicants";
 import RoleBasedRoute from "./components/rounting/RoleBasedRoute.jsx/RoleBasedRoute";
+import TranslatorDetails from "./pages/Home/TranslatorDetails";
 
 const AppRoutes = () => {
   const { userRole, userId } = useUser();
@@ -31,6 +32,10 @@ const AppRoutes = () => {
       <Route path="home" element={<Home />} />
       <Route path="project-catalog" element={<ProjectCatalog />} />
       <Route path="translators" element={<Translators />} />
+      <Route
+        path="translators/translator-details"
+        element={<TranslatorDetails />}
+      />
 
       {/* Protected Routes */}
       <Route
@@ -43,22 +48,29 @@ const AppRoutes = () => {
       >
         <Route element={<BaseLayout />}>
           <Route path="profile" element={<Profile />} />
-          <Route path="reviews" element={<Reviews />} />
-          <Route path="settings" element={<Settings />} />
+          {/* <Route path="settings" element={<Settings />} /> */}
 
           {/* Translator Routes */}
           <Route element={<RoleBasedRoute allowedRoles={"TRANSLATOR"} />}>
-            <Route path="translator" element={<TranslatorPage />} />
-            <Route path="profile-edit" element={<ProfileEditing />} />
-            <Route path="applied-projects" element={<AppliedProjects />} />
+            <Route path="translator" element={<TranslatorPage />}>
+              <Route path="profile-edit" element={<ProfileEditing />} />
+              <Route path="applied-projects" element={<AppliedProjects />} />
+              <Route path="reviews" element={<Reviews />} />
+              <Route path="settings" element={<Settings />} />
+            </Route>
           </Route>
 
           {/* Employer Routes */}
           <Route element={<RoleBasedRoute allowedRoles={"EMPLOYER"} />}>
-            <Route path="employer" element={<EmployerPage />} />
-            <Route path="payment" element={<Payment />} />
-            <Route path="post-projects" element={<PostProjects />} />
-            <Route path="project-applicants" element={<ProjectApplicants />} />
+            <Route path="employer" element={<EmployerPage />}>
+              <Route path="payment" element={<Payment />} />
+              <Route path="post-projects" element={<PostProjects />} />
+              <Route
+                path="project-applicants"
+                element={<ProjectApplicants />}
+              />
+              <Route path="settings" element={<Settings />} />
+            </Route>
           </Route>
         </Route>
       </Route>

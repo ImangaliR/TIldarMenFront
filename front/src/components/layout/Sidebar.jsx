@@ -8,15 +8,12 @@ import logouticon from "../../assets/logout.png";
 import { useUser } from "../../utils/contexts/UserContext";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import TokenService from "../../services/token.service";
 import { useEffect, useState } from "react";
 import IconMenuItem from "./IconMenuItem";
 
 const Sidebar = () => {
   const navigate = useNavigate();
-  const userRole = TokenService.getUserRole();
-  const userId = TokenService.getUserId();
-  const { logout, user } = useUser();
+  const { logout, user, userRole, userId } = useUser();
   const userFirstname = user?.data?.firstName;
   const userLastname = user?.data?.lastName;
   const [navigation, setNavigation] = useState([]);
@@ -27,22 +24,22 @@ const Sidebar = () => {
         setNavigation([
           {
             name: "Account Settings",
-            href: "settings",
+            href: "employer/settings",
             icon: accountsettings,
           },
           {
             name: "Post Projects",
-            href: "post-projects",
+            href: "employer/post-projects",
             icon: null,
           },
           {
             name: "Project Applicants",
-            href: "project-applicants",
+            href: "employer/project-applicants",
             icon: timemanagement,
           },
           {
             name: "Payment",
-            href: "payment",
+            href: "employer/payment",
             icon: null,
           },
         ]);
@@ -50,22 +47,22 @@ const Sidebar = () => {
         setNavigation([
           {
             name: "Account Settings",
-            href: "settings",
+            href: "translator/settings",
             icon: accountsettings,
           },
           {
             name: "Profile Editing",
-            href: "profile-edit",
+            href: "translator/profile-edit",
             icon: profiledit,
           },
           {
             name: "Applied Projects",
-            href: "applied-projects",
+            href: "translator/applied-projects",
             icon: timemanagement,
           },
           {
             name: "Reviews",
-            href: "reviews",
+            href: "translator/reviews",
             icon: reviewicon,
           },
         ]);

@@ -1,10 +1,7 @@
-import { useNavigate } from "react-router-dom";
-import { useUser } from "../../utils/contexts/UserContext";
-const EmployerPage = () => {
-  const { user } = useUser();
-  const navigate = useNavigate();
+import { Outlet } from "react-router-dom";
 
-  return <main className=""></main>;
+const EmployerPage = () => {
+  return <Outlet />;
 };
 
 export default EmployerPage;
