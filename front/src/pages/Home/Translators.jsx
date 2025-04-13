@@ -29,10 +29,14 @@ const Translators = () => {
   const translatorCards = translators.map((translator, i) => (
     <TranslatorCards
       key={i}
-      name={translator.firstName}
-      surname={translator?.lastName}
-      email={translator?.email}
-      phoneNumber={translator?.phoneNumber}
+      id={translator?.id || null}
+      name={translator?.firstName || ""}
+      profileImageUrl={translator?.profileImageUrl || null}
+      surname={translator?.lastName || ""}
+      serviceTypes={translator?.serviceTypes || []}
+      specializations={translator?.specializations || []}
+      languages={translator?.languages || []}
+      location={translator?.location || null}
     />
   ));
 
@@ -48,7 +52,7 @@ const Translators = () => {
         <div className="my-10">
           <main className="max-w-260 w-full">
             <p className="text-2xl mb-1">Results ({resultCount})</p>
-            <div className="grid grid-cols-3 gap-x-2 gap-y-5">
+            <div className="grid grid-cols-3 gap-x-3 gap-y-5">
               {translatorCards}
             </div>
           </main>
