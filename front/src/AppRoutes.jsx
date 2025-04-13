@@ -32,10 +32,7 @@ const AppRoutes = () => {
       <Route path="home" element={<Home />} />
       <Route path="project-catalog" element={<ProjectCatalog />} />
       <Route path="translators" element={<Translators />} />
-      <Route
-        path="translators/translator-details"
-        element={<TranslatorDetails />}
-      />
+      <Route path="translator-details/:id" element={<TranslatorDetails />} />
 
       {/* Protected Routes */}
       <Route
