@@ -16,6 +16,7 @@ import {
 } from "../../services/ProfileService/ProfileService";
 import CitiesDropdown from "../../components/Dropdown/CitiesDropdown";
 import { useNavigate } from "react-router-dom";
+import UploadProfilePicture from "./UploadProfilePicture";
 
 const Settings = () => {
   const [userSettings, setUserSettings] = useState([]);
@@ -93,7 +94,6 @@ const Settings = () => {
   };
 
   const employerInfoUpdate = async () => {
-    console.log(employerInfo);
     try {
       const response = await updateProfile(employerInfo);
       if (response) {
@@ -141,8 +141,6 @@ const Settings = () => {
     }
   };
 
-  const changeProfilePicture = () => {};
-
   return (
     <>
       {userRole === "EMPLOYER" ? (
@@ -155,12 +153,7 @@ const Settings = () => {
                 className="w-30 h-30 "
               />
               <div>
-                <button
-                  className="border-2 border-[#8F8F8F] rounded-lg text-[#70B27A] pr-6 pl-6 pt-2 pb-2 mb-3"
-                  onClick={changeProfilePicture()}
-                >
-                  Change Profile Picture
-                </button>
+                <UploadProfilePicture />
                 <p className="text-[#8F8F8F]">
                   This will be displayed on your profile at the website
                 </p>
@@ -375,15 +368,16 @@ const Settings = () => {
               className="w-30 h-30 rounded-full"
             />
             <div>
-              <button
+              {/* <button
                 className="border-2 border-[#8F8F8F] rounded-lg text-[#70B27A] pr-6 pl-6 pt-2 pb-2 mb-3"
-                onClick={changeProfilePicture()}
+                onClick={changeProfilePicture}
               >
                 Change Profile Picture
               </button>
               <p className="text-[#8F8F8F]">
                 This will be displayed on your profile at the website
-              </p>
+              </p> */}
+              <UploadProfilePicture />
             </div>
           </div>
           <form
