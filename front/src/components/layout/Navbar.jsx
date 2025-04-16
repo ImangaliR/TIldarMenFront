@@ -30,7 +30,7 @@ const Navbar = () => {
     <>
       <nav className="flex items-center justify-between p-5 bg-white shadow-sm">
         <h1 className="text-2xl lg:text-3xl font-bold ml-2 md:ml-5 text-[#71C39C]">
-          TildarMen
+          <button onClick={() => navigate("/home")}>TildarMen</button>
         </h1>
         <div className="flex items-center justify-between min-w-60 md:min-w-72 lg:min-w-100 text-[#585858] lg:text-lg cursor-pointer">
           {navigation.map((item, i) => (

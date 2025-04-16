@@ -57,7 +57,7 @@ function Signup() {
     <>
       <div className="signup flex flex-col min-h-screen overflow-hidden">
         <header className="text-3xl md:text-4xl text-center font-extrabold p-8 m-2 bg-[#71C39C] text-[#E8EAF6] rounded-2xl">
-          TildarMen
+          <button onClick={() => navigate("/home")}>TildarMen</button>
         </header>
         <main className="flex flex-col flex-grow items-center scale-95">
           {loading && (

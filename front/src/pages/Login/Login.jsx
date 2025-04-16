@@ -47,7 +47,7 @@ function Login() {
     <>
       <div className="login flex flex-col min-h-screen overflow-hidden">
         <header className="text-3xl md:text-4xl text-center font-extrabold p-8 mt-2 mr-2 ml-2 mb-7 bg-[#71C39C] text-[#E8EAF6] rounded-2xl">
-          TildarMen
+          <button onClick={() => navigate("/home")}>TildarMen</button>
         </header>
         <main className="flex-grow mt-5">
           {loading && (
