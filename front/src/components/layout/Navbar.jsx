@@ -68,7 +68,7 @@ const Navbar = () => {
                   : user?.data?.profileImageUrl || profileicon
               }
               alt="profile icon"
-              className="w-8 h-8 lg:w-10 lg:h-10 rounded-full"
+              className="w-8 h-8 lg:w-10 lg:h-10 rounded-full object-cover"
             />
           </button>
         </div>

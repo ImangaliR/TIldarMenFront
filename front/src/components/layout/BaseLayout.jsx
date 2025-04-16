@@ -8,7 +8,7 @@ const BaseLayout = () => {
     <div className="h-screen w-full">
       <Navbar />
       {/* Main Content Area */}
-      <div className="flex w-full relative">
+      <div className="flex flex-1 relative">
         <Sidebar />
         <div className=" mt-10 mx-4 mb-8 p-4">
           {/* <p className="absolute text-sm text-[#585858] bottom-3 left-8">

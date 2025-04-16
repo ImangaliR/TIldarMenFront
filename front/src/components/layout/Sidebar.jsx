@@ -115,7 +115,7 @@ const Sidebar = () => {
                   : user?.data?.profileImageUrl || employericon
               }
               alt="profile icon"
-              className="w-25 h-25 rounded-full"
+              className="w-25 h-25 rounded-full object-cover"
             />
           </div>
           <p className="font-medium text-center mt-2 w-full">
