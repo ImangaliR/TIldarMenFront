@@ -30,12 +30,11 @@ function Login() {
       const user = await loginUser(data);
       if (user || userRole) {
         login(user);
+        toast.success("Logged in successfully!");
+        navigate("/home");
       } else {
-        alert("Incorrect email or password");
-        return;
+        toast.error("Incorrect email or password");
       }
-      toast.success("Logged in successfully!");
-      navigate("/home");
     } catch (err) {
       toast.warn("Something went wrong");
     } finally {
