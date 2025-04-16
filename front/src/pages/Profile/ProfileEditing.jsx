@@ -75,7 +75,7 @@ const ProfileEditing = () => {
               <img
                 src={user?.data?.profileImageUrl || profileicon}
                 alt="profile icon"
-                className="w-35 h-35 rounded-full"
+                className="w-35 h-35 rounded-full object-cover"
               />
               <div className="">
                 <div className="flex items-center gap-2 mb-3">

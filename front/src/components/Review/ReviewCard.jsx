@@ -89,7 +89,11 @@ const ReviewCard = ({ reviews }) => {
           key={i}
           className="max-w-170 flex gap-3 border-1 border-[#dcdcdc] rounded-lg p-2 m-2"
         >
-          <img src={employericon} alt="employer icon" className="w-13 h-13" />
+          <img
+            src={employericon}
+            alt="employer icon"
+            className="w-13 h-13 object-cover"
+          />
           <div className="w-full mb-5">
             <div className="flex justify-between items-center">
               <h1 className="font-semibold text-lg">
