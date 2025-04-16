@@ -33,30 +33,21 @@ const Search = ({ setUserSearch, handleSearch, placeholder }) => {
         >
           Search
         </button>
-
         <div className="relative">
-          <button
-            className="ml-4 w-12 h-12"
-            onClick={() => setFilterOn(!filterOn)}
-          >
-            <img src={filtericon} alt="filter icon" className="rounded-sm" />
-          </button>
-          {filterOn ? (
-            <section className="absolute w-55 right-1 top-25">
-              <div className="flex items-center justify-between mb-2">
-                <h1 className="text-xl font-bold">Filters</h1>
-                <p className="text-sm text-[#192DF7] cursor-pointer">reset</p>
-              </div>
-              <div className="text-lg font-medium">
-                <h1 className="mb-12">Language Filters</h1>
-                <h1 className="mb-12">Specialization Filters</h1>
-                <h1 className="mb-12">Experience & Credentials</h1>
-                <h1 className="mb-12">Availability & Work Type</h1>
-                <h1 className="mb-12">Location Filters</h1>
-                <h1 className="mb-12">Services</h1>
-              </div>
-            </section>
-          ) : null}
+          <section className="absolute w-42 right-1 top-25">
+            <div className="flex items-center justify-between mb-2">
+              <h1 className="text-xl font-bold">Filters</h1>
+              <p className="text-sm text-[#192DF7] cursor-pointer">reset</p>
+            </div>
+            <div className="text-lg font-medium">
+              <h1 className="mb-12">Language Filters</h1>
+              <h1 className="mb-12">Specialization Filters</h1>
+              <h1 className="mb-12">Experience & Credentials</h1>
+              <h1 className="mb-12">Availability & Work Type</h1>
+              <h1 className="mb-12">Location Filters</h1>
+              <h1 className="mb-12">Services</h1>
+            </div>
+          </section>
         </div>
       </div>
     </>
