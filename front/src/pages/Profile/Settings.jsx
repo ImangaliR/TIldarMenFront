@@ -146,19 +146,8 @@ const Settings = () => {
       {userRole === "EMPLOYER" ? (
         <>
           <main className="bg-white shadow-sm rounded-sm text-sm pt-10 pl-15 pr-15 md:pt-15 md:pr-20 md:pl-20 lg:pt-25 lg:pr-25 lg:pl-25">
-            <div className="flex items-center gap-8">
-              <img
-                src={user?.data?.profileImageUrl || employericon}
-                alt="employer icon"
-                className="w-30 h-30 "
-              />
-              <div>
-                <UploadProfilePicture />
-                <p className="text-[#8F8F8F]">
-                  This will be displayed on your profile at the website
-                </p>
-              </div>
-            </div>
+            <UploadProfilePicture />
+
             <form
               onSubmit={handleSubmit(employerInfoUpdate)}
               name="update user input"
@@ -361,14 +350,14 @@ const Settings = () => {
         </>
       ) : (
         <main className="bg-white shadow-sm rounded-sm text-sm pt-10 pl-15 pr-15 md:pt-15 md:pr-20 md:pl-20 lg:pt-25 lg:pr-25 lg:pl-25">
-          <div className="flex items-center gap-8">
-            <img
+          {/* <div className="flex items-center gap-8"> */}
+          {/* <img
               src={user?.data?.profileImageUrl || profileicon}
               alt="profile icon"
               className="w-30 h-30 rounded-full"
-            />
-            <div>
-              {/* <button
+            /> */}
+
+          {/* <button
                 className="border-2 border-[#8F8F8F] rounded-lg text-[#70B27A] pr-6 pl-6 pt-2 pb-2 mb-3"
                 onClick={changeProfilePicture}
               >
@@ -377,9 +366,8 @@ const Settings = () => {
               <p className="text-[#8F8F8F]">
                 This will be displayed on your profile at the website
               </p> */}
-              <UploadProfilePicture />
-            </div>
-          </div>
+          <UploadProfilePicture />
+          {/* </div> */}
           <form
             onSubmit={handleSubmit(userInfoUpdate)}
             name="update user input"
