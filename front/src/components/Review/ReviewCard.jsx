@@ -90,9 +90,9 @@ const ReviewCard = ({ reviews }) => {
           className="max-w-170 flex gap-3 border-1 border-[#dcdcdc] rounded-lg p-2 m-2"
         >
           <img
-            src={employericon}
+            src={review?.profileImageUrl || employericon}
             alt="employer icon"
-            className="w-13 h-13 object-cover"
+            className="w-13 h-13 rounded-full object-cover"
           />
           <div className="w-full mb-5">
             <div className="flex justify-between items-center">

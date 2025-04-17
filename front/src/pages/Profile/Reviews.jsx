@@ -118,7 +118,9 @@ const Reviews = () => {
                 className="w-25 h-25 shadow-sm rounded-full"
               />
               <h1 className="mt-4 text-lg text-[#5e5e5e]">Customer Reviews</h1>
-              <h1 className="text-2xl font-bold mt-1">{user?.data?.rating}</h1>
+              <h1 className="text-2xl font-bold mt-1">
+                {user?.data?.rating.toFixed(2)}
+              </h1>
               <p className="text-[#a3a2a2] mb-2">
                 {user?.data?.reviews} Reviews
               </p>
