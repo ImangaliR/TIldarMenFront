@@ -20,7 +20,7 @@ const TranslatorCards = ({
           <img
             src={profileImageUrl || profileicon}
             alt="profile icon"
-            className="w-25 h-25 rounded-full"
+            className="w-25 h-25 rounded-full object-cover"
           />
           <div className="w-50 h-30 ml-5 pt-5 text-[#8F8F8F]">
             <p className="text-lg truncate block w-full pr-5">
