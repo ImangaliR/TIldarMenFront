@@ -8,7 +8,11 @@ const TranslatorDetails = () => {
       <Navbar />
       <div className="flex items-center justify-between px-40 py-5 w-full bg-[#EAF4F4]">
         <div className="flex items-center gap-10">
-          <img src={profileicon} alt="profile icon" className="w-35 h-35" />
+          <img
+            src={profileicon}
+            alt="profile icon"
+            className="w-35 h-35 object-cover"
+          />
           <div>
             <h1>Full Name</h1>
             <p>Professional Title</p>
