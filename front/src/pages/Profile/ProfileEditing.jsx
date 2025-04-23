@@ -117,7 +117,7 @@ const ProfileEditing = () => {
             <div className="flex justify-end mt-15 gap-2">
               <button
                 type="submit"
-                className="w-25 h-8 bg-[#38BF4C] text-white border-1 rounded-lg"
+                className="justify-center items-center gap-2 text-[#38BF4C] border-1 rounded-lg w-25 h-8"
               >
                 Save
               </button>
@@ -175,37 +175,11 @@ Max. 300 symbols"
             <h1 className="text-2xl font-bold">
               Language & Translation Details
             </h1>
-            <div className="flex items-center gap-10 pl-5">
+            <div className="flex items-center gap-10 pl-5 mt-2">
               <LanguageDropdown />
               <TranslationServicesDropdown />
               <SpecializationDropdown />
             </div>
-            {editingItemId === 3 ? (
-              <div className="flex justify-end mt-15 gap-2">
-                <button
-                  onClick={handleCancel}
-                  className="w-25 h-8 text-[#38BF4C] border-1 rounded-lg"
-                >
-                  Cancel
-                </button>
-                <button
-                  onClick={() => handleSave(3)}
-                  className="w-25 h-8 bg-[#38BF4C] text-white border-1 rounded-lg"
-                >
-                  Save
-                </button>
-              </div>
-            ) : (
-              <div className="flex w-full justify-end mt-15">
-                <button
-                  onClick={() => handleEditClick(3)}
-                  className="flex justify-center items-center gap-2 text-[#38BF4C] border-1 rounded-lg w-25 h-8"
-                >
-                  Edit
-                  <img src={pen} alt="pen icon" className="w-4 h-4" />
-                </button>
-              </div>
-            )}
           </div>
           <hr className="mt-10 mb-5" />
           <div className="pl-10 pr-20">

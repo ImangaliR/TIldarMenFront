@@ -1,15 +1,21 @@
 import { useEffect, useState } from "react";
 import api from "./../../services/api";
+import { useForm } from "react-hook-form";
+import { useUser } from "../../utils/contexts/UserContext";
+import { toast } from "react-toastify";
 
 const LanguageDropdown = () => {
   const [languages, setLanguages] = useState([]);
+  const [Language, setLanguage] = useState("");
   const [loading, setLoading] = useState(true);
+  const { handleSubmit } = useForm();
+  const { userId } = useUser();
 
   useEffect(() => {
     api
       .get("/language/all")
       .then((res) => {
-        setLanguages(res.data.data); // Adjust this depending on your API's response structure
+        setLanguages(res.data.data);
       })
       .catch((err) => {
         console.error("Error fetching languages:", err);
@@ -19,14 +25,26 @@ const LanguageDropdown = () => {
       });
   }, []);
 
+  const addLanguage = async () => {
+    try {
+      const response = await api.put(
+        `translator/${userId}/language?language=${Language}`
+      );
+      toast.success("Added the language successfully!");
+    } catch (err) {
+      toast.error("Failed to add languages.");
+    }
+  };
+
   return (
     <>
-      <div className="w-72">
+      <form onSubmit={handleSubmit(addLanguage)} className="w-72">
         <label className="block mb-2 font-semibold text-black">Languages</label>
         <div className="relative">
           <select
             className="w-full bg-[#EAF4F4] border-1 border-[#DCDCDC] text-[##8F8F8F] text-sm rounded-md p-3 pr-10"
             defaultValue=""
+            onChange={(e) => setLanguage(e.target.value)}
             disabled={loading}
           >
             <option value="" disabled hidden>
@@ -39,7 +57,13 @@ const LanguageDropdown = () => {
             ))}
           </select>
         </div>
-      </div>
+        <button
+          type="submit"
+          className="justify-center items-center gap-2 text-[#38BF4C] border-1 rounded-lg w-25 h-8 mt-10"
+        >
+          Update
+        </button>
+      </form>
     </>
   );
 };
