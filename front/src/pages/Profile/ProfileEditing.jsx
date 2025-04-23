@@ -100,7 +100,7 @@ const ProfileEditing = () => {
                   <p className="w-35">Professional Title:</p>
                   <input
                     type="text"
-                    placeholder={userTitle}
+                    value={userTitle}
                     onChange={(e) => setUserTitle(e.target.value)}
                     className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-50 md:w-55 lg:w-60 xl:w-80 h-7 rounded-sm text-sm"
                   />
@@ -146,32 +146,6 @@ Max. 300 symbols"
               </div>
               <UploadVideo />
             </div>
-            {/* {editingItemId === 2 ? (
-              <div className="flex justify-end mt-15 gap-2">
-                <button
-                  onClick={handleCancel}
-                  className="w-25 h-8 text-[#38BF4C] border-1 rounded-lg"
-                >
-                  Cancel
-                </button>
-                <button
-                  onClick={() => handleSave(2)}
-                  className="w-25 h-8 bg-[#38BF4C] text-white border-1 rounded-lg"
-                >
-                  Save
-                </button>
-              </div>
-            ) : (
-              <div className="flex w-full justify-end mt-15">
-                <button
-                  onClick={() => handleEditClick(2)}
-                  className="flex justify-center items-center gap-2 text-[#38BF4C] border-1 rounded-lg w-25 h-8"
-                >
-                  Edit
-                  <img src={pen} alt="pen icon" className="w-4 h-4" />
-                </button>
-              </div>
-            )} */}
           </div>
           <hr className="mt-10 mb-5" />
           <div className="pl-10 pr-20">
