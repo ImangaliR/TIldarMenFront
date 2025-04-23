@@ -61,7 +61,7 @@ const LanguageDropdown = () => {
           type="submit"
           className="justify-center items-center gap-2 text-[#38BF4C] border-1 rounded-lg w-25 h-8 mt-10"
         >
-          Update
+          Add
         </button>
       </form>
     </>

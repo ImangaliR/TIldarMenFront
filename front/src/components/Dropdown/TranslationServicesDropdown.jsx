@@ -6,7 +6,7 @@ import { useUser } from "../../utils/contexts/UserContext";
 
 const TranslationServicesDropdown = () => {
   const [translationServices, setTranslationServices] = useState([]);
-  const [tranlatorServices, setTranslatorServices] = useState("");
+  const [tranlatorService, setTranslatorService] = useState("");
   const [loading, setLoading] = useState(true);
   const { handleSubmit } = useForm();
   const { userId } = useUser();
@@ -25,10 +25,14 @@ const TranslationServicesDropdown = () => {
       });
   }, []);
 
+  if (tranlatorService.includes("&")) {
+    setTranslatorService(tranlatorService.replace(/&/g, "%26"));
+  }
+
   const updateTranslationServices = async () => {
     try {
       const response = await api.put(
-        `translator/${userId}/service?service=${tranlatorServices}`
+        `translator/${userId}/service?service=${tranlatorService}`
       );
       toast.success("Added the service successfully!");
     } catch (err) {
@@ -46,7 +50,7 @@ const TranslationServicesDropdown = () => {
           <select
             className="w-full bg-[#EAF4F4] border-1 border-[#DCDCDC] text-[##8F8F8F] text-sm rounded-md p-3 pr-10"
             defaultValue=""
-            onChange={(e) => setTranslatorServices(e.target.value)}
+            onChange={(e) => setTranslatorService(e.target.value)}
             disabled={loading}
           >
             <option value="" disabled hidden>
@@ -63,7 +67,7 @@ const TranslationServicesDropdown = () => {
           type="submit"
           className="justify-center items-center gap-2 text-[#38BF4C] border-1 rounded-lg w-25 h-8 mt-10"
         >
-          Update
+          Add
         </button>
       </form>
     </>
