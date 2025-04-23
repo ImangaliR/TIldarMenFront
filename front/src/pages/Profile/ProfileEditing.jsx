@@ -11,9 +11,10 @@ import AvaibilityDropdown from "../../components/Dropdown/AvailabilityDropdown";
 import { toast } from "react-toastify";
 import { updateAvailability } from "../../services/ProfileService/ProfileService";
 import { useForm } from "react-hook-form";
+import api from "../../services/api";
 
 const ProfileEditing = () => {
-  const { user } = useUser();
+  const { user, userId } = useUser();
   const [availability, setAvailability] = useState(
     user?.data?.availability || ""
   );
@@ -22,6 +23,7 @@ const ProfileEditing = () => {
   );
   const [editingItemId, setEditingItemId] = useState(null);
   const { handleSubmit } = useForm();
+  const [intro, setIntro] = useState(user?.data?.introduction || "");
   const handleEditClick = (id) => {
     setEditingItemId(id);
   };
@@ -33,6 +35,17 @@ const ProfileEditing = () => {
   const handleSave = (id) => {
     console.log(`Saved item ${id}`);
     setEditingItemId(null);
+  };
+
+  const addIntroduction = async () => {
+    try {
+      const response = await api.put(`translator/${userId}/intro`, {
+        intro: intro,
+      });
+      toast.success("Updated introduction successfully!");
+    } catch (err) {
+      toast.error("Something went wrong.");
+    }
   };
 
   const addWorkExperience = () => {
@@ -133,12 +146,14 @@ const ProfileEditing = () => {
                 <h1 className="font-bold mb-1">About</h1>
                 <textarea
                   maxLength={300}
+                  value={intro}
+                  onChange={(e) => setIntro(e.target.value)}
                   placeholder="Write something to introduce yourself.
 Max. 300 symbols"
                   className="bg-[#EAF4F4] border-1 border-[#DCDCDC] p-3 w-55 h-30 md:w-60 lg:w-75 xl:w-80 rounded-sm text-sm resize-none"
                 />
                 <button
-                  onClick={() => handleSave(2)}
+                  onClick={addIntroduction}
                   className="justify-center items-center gap-2 text-[#38BF4C] border-1 rounded-lg w-25 h-8 mt-10"
                 >
                   Save
@@ -155,27 +170,51 @@ Max. 300 symbols"
             <div className="flex items-start gap-10 pl-5 mt-2">
               <div>
                 <LanguageDropdown />
-                {user?.data?.languages?.map((language, i) => (
-                  <p className="pt-2" key={i}>
-                    {language.name}
-                  </p>
-                ))}
+                <div className="mt-4 relative">
+                  {user?.data?.languages?.map((language, i) => (
+                    <p
+                      className="px-2 py-1 m-2 text-center bg-[#EAF4F4] rounded-lg"
+                      key={i}
+                    >
+                      {language.name}
+                      <button key={i} className="absolute right-4">
+                        x
+                      </button>
+                    </p>
+                  ))}
+                </div>
               </div>
               <div>
                 <TranslationServicesDropdown />
-                {user?.data?.serviceTypes?.map((service, i) => (
-                  <p className="pt-2" key={i}>
-                    {service.name}
-                  </p>
-                ))}
+                <div className="mt-4 relative">
+                  {user?.data?.serviceTypes?.map((service, i) => (
+                    <p
+                      className="px-2 py-1 m-2 text-center bg-[#EAF4F4] rounded-lg"
+                      key={i}
+                    >
+                      {service.name}
+                      <button key={i} className="absolute right-4">
+                        x
+                      </button>
+                    </p>
+                  ))}
+                </div>
               </div>
               <div>
                 <SpecializationDropdown />
-                {user?.data?.specializations?.map((specialization, i) => (
-                  <p className="pt-2" key={i}>
-                    {specialization.name}
-                  </p>
-                ))}
+                <div className="mt-4 relative">
+                  {user?.data?.specializations?.map((specialization, i) => (
+                    <p
+                      className="px-2 py-1 m-2 text-center bg-[#EAF4F4] rounded-lg"
+                      key={i}
+                    >
+                      {specialization.name}
+                      <button key={i} className="absolute right-4">
+                        x
+                      </button>
+                    </p>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
