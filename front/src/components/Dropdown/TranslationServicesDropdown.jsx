@@ -3,13 +3,14 @@ import api from "./../../services/api";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { useUser } from "../../utils/contexts/UserContext";
+import { getProfile } from "../../services/ProfileService/ProfileService";
 
 const TranslationServicesDropdown = () => {
   const [translationServices, setTranslationServices] = useState([]);
   const [tranlatorService, setTranslatorService] = useState("");
   const [loading, setLoading] = useState(true);
   const { handleSubmit } = useForm();
-  const { userId } = useUser();
+  const { userId, setUser } = useUser();
 
   useEffect(() => {
     api
@@ -34,6 +35,8 @@ const TranslationServicesDropdown = () => {
       const response = await api.put(
         `translator/${userId}/service?service=${tranlatorService}`
       );
+      const updatedProfile = await getProfile();
+      setUser(updatedProfile);
       toast.success("Added the service successfully!");
     } catch (err) {
       toast.error("Failed to add service.");

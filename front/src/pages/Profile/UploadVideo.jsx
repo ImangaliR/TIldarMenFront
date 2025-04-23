@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useUser } from "../../utils/contexts/UserContext";
 import api from "../../services/api";
 import { toast } from "react-toastify";
 import SimpleLoader from "../../components/Loader/SimpleLoader";
+import { getProfile } from "./../../services/ProfileService/ProfileService";
 
 const UploadVideo = () => {
   const { user, userId, setUser } = useUser();
@@ -16,9 +17,6 @@ const UploadVideo = () => {
   };
   const cancelUpload = () => {
     setSelectedFile(null);
-  };
-  const handleChange = () => {
-    setPreview(null);
   };
 
   const addVideo = async () => {
@@ -36,15 +34,29 @@ const UploadVideo = () => {
       const response = await api.post(`translator/${userId}/video`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
-      setUser((prev) => ({
-        ...prev,
-        videoUrl: response?.data,
-      }));
+      const updatedProfile = await getProfile();
+      setUser(updatedProfile);
       setPreview(response?.data);
       toast.success("Added video successfully!");
       setSelectedFile(null);
     } catch (err) {
       toast.error("Failed to add video.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const deleteVideo = async () => {
+    setIsLoading(true);
+
+    try {
+      const response = await api.delete(`translator/${userId}/video`);
+      const updatedProfile = await getProfile();
+      setUser(updatedProfile);
+      setPreview(null);
+      toast.success("Deleted video successfully!");
+    } catch (err) {
+      toast.error("Failed to delete video.");
     } finally {
       setIsLoading(false);
     }
@@ -59,7 +71,7 @@ const UploadVideo = () => {
         onChange={handleFileChange}
         className="hidden"
       />
-      <div className="">
+      <div>
         <p className="font-bold mb-1">Video Greeting</p>
         <div className="flex items-center gap-10">
           <div>
@@ -68,42 +80,51 @@ const UploadVideo = () => {
                 <video controls className="w-full h-30 rounded-sm">
                   <source src={preview} type="video/mp4" />
                 </video>
-                <button
-                  onClick={handleChange}
-                  className="border-1 rounded-lg text-[#38BF4C] px-5 py-1 mt-10"
-                >
-                  Change
-                </button>
+                <div className="flex gap-4">
+                  <button
+                    onClick={deleteVideo}
+                    className="border-1 rounded-lg text-[#FF0000] px-5 py-1 mt-10"
+                  >
+                    Delete
+                  </button>
+                  <div>
+                    {isLoading && <SimpleLoader className="w-8 h-8 mt-10" />}
+                  </div>
+                </div>
               </div>
             ) : (
-              <label
-                htmlFor="fileInput"
-                className="block bg-[#EAF4F4] border-1 border-[#DCDCDC] px-18 py-12 rounded-sm text-center cursor-pointer text-gray-500"
-              >
-                Upload
-              </label>
+              <div>
+                <label
+                  htmlFor="fileInput"
+                  className="block bg-[#EAF4F4] border-1 border-[#DCDCDC] px-18 py-12 rounded-sm text-center cursor-pointer text-gray-500"
+                >
+                  Upload
+                </label>
+                <div className="flex gap-4">
+                  {selectedFile && (
+                    <div className="flex items-center gap-2 mt-10">
+                      <button
+                        onClick={cancelUpload}
+                        className="border-1 rounded-lg text-[#38BF4C] px-5 py-1"
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        onClick={addVideo}
+                        className="border-1 rounded-lg text-[#38BF4C] px-5 py-1"
+                      >
+                        Confirm
+                      </button>
+                    </div>
+                  )}
+                  <div>
+                    {isLoading && <SimpleLoader className="w-8 h-8 mt-10" />}
+                  </div>
+                </div>
+              </div>
             )}
           </div>
         </div>
-      </div>
-      <div className="flex gap-4">
-        {selectedFile && (
-          <div className="flex items-center gap-2 mt-10">
-            <button
-              onClick={cancelUpload}
-              className="border-1 rounded-lg text-[#38BF4C] px-5 py-1"
-            >
-              Cancel
-            </button>
-            <button
-              onClick={addVideo}
-              className="border-1 rounded-lg text-[#38BF4C] px-5 py-1"
-            >
-              Confirm
-            </button>
-          </div>
-        )}
-        <div>{isLoading && <SimpleLoader className="w-8 h-8 mt-10" />}</div>
       </div>
     </div>
   );

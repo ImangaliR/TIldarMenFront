@@ -3,13 +3,14 @@ import api from "./../../services/api";
 import { useForm } from "react-hook-form";
 import { useUser } from "../../utils/contexts/UserContext";
 import { toast } from "react-toastify";
+import { getProfile } from "../../services/ProfileService/ProfileService";
 
 const LanguageDropdown = () => {
   const [languages, setLanguages] = useState([]);
   const [Language, setLanguage] = useState("");
   const [loading, setLoading] = useState(true);
   const { handleSubmit } = useForm();
-  const { userId } = useUser();
+  const { userId, setUser } = useUser();
 
   useEffect(() => {
     api
@@ -30,6 +31,8 @@ const LanguageDropdown = () => {
       const response = await api.put(
         `translator/${userId}/language?language=${Language}`
       );
+      const updatedProfile = await getProfile();
+      setUser(updatedProfile);
       toast.success("Added the language successfully!");
     } catch (err) {
       toast.error("Failed to add languages.");

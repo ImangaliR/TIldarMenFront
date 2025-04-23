@@ -3,13 +3,14 @@ import api from "./../../services/api";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { useUser } from "../../utils/contexts/UserContext";
+import { getProfile } from "../../services/ProfileService/ProfileService";
 
 const SpecializationDropdown = () => {
   const [specialization, setSpecialization] = useState([]);
   const [addSpecialization, setAddSpecialization] = useState("");
   const [loading, setLoading] = useState(true);
   const { handleSubmit } = useForm();
-  const { userId } = useUser();
+  const { userId, setUser } = useUser();
 
   useEffect(() => {
     api
@@ -30,6 +31,8 @@ const SpecializationDropdown = () => {
       const response = await api.put(
         `translator/${userId}/specialization?specialization=${addSpecialization}`
       );
+      const updatedProfile = await getProfile();
+      setUser(updatedProfile);
       toast.success("Added the specialization successfully!");
     } catch (err) {
       toast.error("Failed to add specialization.");

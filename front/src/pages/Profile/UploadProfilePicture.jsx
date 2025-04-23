@@ -5,6 +5,7 @@ import { uploadService } from "../../services/Upload/UploadService";
 import SimpleLoader from "./../../components/Loader/SimpleLoader";
 import profileicon from "../../assets/profileicon.png";
 import employericon from "../../assets/employericon.png";
+import { getProfile } from "../../services/ProfileService/ProfileService";
 
 const UploadProfilePicture = () => {
   const { user, setUser, userRole, userId } = useUser();
@@ -30,10 +31,8 @@ const UploadProfilePicture = () => {
 
     try {
       const response = await uploadService(selectedFile, userId, userRole);
-      setUser((prev) => ({
-        ...prev,
-        profileImageUrl: response?.data,
-      }));
+      const updatedProfile = await getProfile();
+      setUser(updatedProfile);
       setPreview(response?.data);
       setSelectedFile(null);
       toast.success("Profile picture updated successfully!");
