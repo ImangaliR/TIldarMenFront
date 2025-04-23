@@ -128,8 +128,8 @@ const ProfileEditing = () => {
 
           <div className="pl-10 pr-20">
             <h1 className="text-2xl font-bold">Introduction</h1>
-            <div className="flex items-center gap-30 pl-5">
-              <div>
+            <div className="flex gap-30 pl-5">
+              <div className="grid">
                 <h1 className="font-bold mb-1">About</h1>
                 <textarea
                   maxLength={300}
@@ -137,13 +137,16 @@ const ProfileEditing = () => {
 Max. 300 symbols"
                   className="bg-[#EAF4F4] border-1 border-[#DCDCDC] p-3 w-55 h-30 md:w-60 lg:w-75 xl:w-80 rounded-sm text-sm resize-none"
                 />
+                <button
+                  onClick={() => handleSave(2)}
+                  className="justify-center items-center gap-2 text-[#38BF4C] border-1 rounded-lg w-25 h-8 mt-10"
+                >
+                  Save
+                </button>
               </div>
-              <div>
-                <h1 className="font-bold mb-1">Video Greeting</h1>
-                <UploadVideo />
-              </div>
+              <UploadVideo />
             </div>
-            {editingItemId === 2 ? (
+            {/* {editingItemId === 2 ? (
               <div className="flex justify-end mt-15 gap-2">
                 <button
                   onClick={handleCancel}
@@ -168,17 +171,38 @@ Max. 300 symbols"
                   <img src={pen} alt="pen icon" className="w-4 h-4" />
                 </button>
               </div>
-            )}
+            )} */}
           </div>
           <hr className="mt-10 mb-5" />
           <div className="pl-10 pr-20">
             <h1 className="text-2xl font-bold">
               Language & Translation Details
             </h1>
-            <div className="flex items-center gap-10 pl-5 mt-2">
-              <LanguageDropdown />
-              <TranslationServicesDropdown />
-              <SpecializationDropdown />
+            <div className="flex items-start gap-10 pl-5 mt-2">
+              <div>
+                <LanguageDropdown />
+                {user?.data?.languages?.map((language, i) => (
+                  <p className="pt-2" key={i}>
+                    {language.name}
+                  </p>
+                ))}
+              </div>
+              <div>
+                <TranslationServicesDropdown />
+                {user?.data?.serviceTypes?.map((service, i) => (
+                  <p className="pt-2" key={i}>
+                    {service.name}
+                  </p>
+                ))}
+              </div>
+              <div>
+                <SpecializationDropdown />
+                {user?.data?.specializations?.map((specialization, i) => (
+                  <p className="pt-2" key={i}>
+                    {specialization.name}
+                  </p>
+                ))}
+              </div>
             </div>
           </div>
           <hr className="mt-10 mb-5" />
