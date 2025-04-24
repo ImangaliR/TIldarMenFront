@@ -84,7 +84,7 @@ const LanguageDropdown = () => {
             Add
           </button>
         </form>
-        <div className="mt-4">
+        <div className="mt-10">
           {user?.data?.languages?.map((language, i) => (
             <p
               className="px-2 py-1 mt-2 bg-[#EAF4F4] rounded-lg relative"

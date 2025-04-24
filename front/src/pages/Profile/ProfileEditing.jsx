@@ -180,13 +180,15 @@ Max. 300 symbols"
             <div>
               <h1 className="font-bold text-lg mb-2">Work</h1>
               <div className="flex items-center gap-10 mb-5">
-                <button
-                  onClick={addWorkExperience}
-                  className="w-20 h-20 bg-[#EAF4F4] outline-1 outline-[#dcdcdc] rounded-sm text-2xl text-[#777777]"
-                >
-                  +
-                </button>
-                <WorkExperience />
+                <div className="flex w-full h-70 gap-10 items-center">
+                  <button
+                    onClick={addWorkExperience}
+                    className="w-20 h-20 bg-[#EAF4F4] outline-1 outline-[#dcdcdc] rounded-sm text-2xl text-[#777777]"
+                  >
+                    +
+                  </button>
+                  {/* <WorkExperience /> */}
+                </div>
               </div>
             </div>
             <div>
