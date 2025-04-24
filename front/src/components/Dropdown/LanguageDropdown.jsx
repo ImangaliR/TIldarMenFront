@@ -84,12 +84,9 @@ const LanguageDropdown = () => {
             Add
           </button>
         </form>
-        <div className="mt-10">
+        <div className="grid grid-cols-2 gap-2 mt-10">
           {user?.data?.languages?.map((language, i) => (
-            <p
-              className="px-2 py-1 mt-2 bg-[#EAF4F4] rounded-lg relative"
-              key={i}
-            >
+            <p className="px-2 py-1 bg-[#EAF4F4] rounded-lg relative" key={i}>
               {language.name}
               <button
                 key={i}
