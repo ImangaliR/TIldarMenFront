@@ -97,7 +97,9 @@ const ProfileEditing = () => {
                   <input
                     type="text"
                     disabled
-                    value={user?.data?.firstName + " " + user?.data?.lastName}
+                    placeholder={
+                      user?.data?.firstName + " " + user?.data?.lastName
+                    }
                     className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-50 md:w-55 lg:w-60 xl:w-80 h-7 rounded-sm text-sm"
                   />
                 </div>
@@ -106,7 +108,7 @@ const ProfileEditing = () => {
                   <input
                     type="text"
                     disabled
-                    value={user?.data?.location?.city}
+                    placeholder={user?.data?.location?.city}
                     className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-50 md:w-55 lg:w-60 xl:w-80 h-7 rounded-sm text-sm"
                   />
                 </div>
