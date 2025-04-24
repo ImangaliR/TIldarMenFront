@@ -17,9 +17,9 @@ const Navbar = () => {
   const handleProfileClick = () => {
     if (userRole && userId) {
       if (userRole === "TRANSLATOR") {
-        navigate("/translator");
+        navigate("/translator/settings");
       } else {
-        navigate("/employer");
+        navigate("/employer/settings");
       }
     } else {
       navigate("/login");
