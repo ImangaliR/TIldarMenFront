@@ -169,66 +169,9 @@ Max. 300 symbols"
               Language & Translation Details
             </h1>
             <div className="flex items-start gap-10 pl-5 mt-2">
-              <div>
-                <LanguageDropdown />
-                <div className="mt-4">
-                  {user?.data?.languages?.map((language, i) => (
-                    <p
-                      className="px-2 py-1 mt-2 bg-[#EAF4F4] rounded-lg relative"
-                      key={i}
-                    >
-                      {language.name}
-                      <button key={i} className="absolute right-0.5 top-2">
-                        <img
-                          src={deletesign}
-                          alt="delete sign"
-                          className="w-5 h-5"
-                        />
-                      </button>
-                    </p>
-                  ))}
-                </div>
-              </div>
-              <div>
-                <TranslationServicesDropdown />
-                <div className="mt-4">
-                  {user?.data?.serviceTypes?.map((service, i) => (
-                    <p
-                      className="px-2 py-1 mt-2 bg-[#EAF4F4] rounded-lg relative"
-                      key={i}
-                    >
-                      {service.name}
-                      <button key={i} className="absolute right-0.5 top-2">
-                        <img
-                          src={deletesign}
-                          alt="delete sign"
-                          className="w-5 h-5"
-                        />
-                      </button>
-                    </p>
-                  ))}
-                </div>
-              </div>
-              <div>
-                <SpecializationDropdown />
-                <div className="mt-4">
-                  {user?.data?.specializations?.map((specialization, i) => (
-                    <p
-                      className="px-2 py-1 mt-2 bg-[#EAF4F4] rounded-lg relative"
-                      key={i}
-                    >
-                      {specialization.name}
-                      <button key={i} className="absolute right-0.5 top-2">
-                        <img
-                          src={deletesign}
-                          alt="delete sign"
-                          className="w-5 h-5"
-                        />
-                      </button>
-                    </p>
-                  ))}
-                </div>
-              </div>
+              <LanguageDropdown />
+              <TranslationServicesDropdown />
+              <SpecializationDropdown />
             </div>
           </div>
           <hr className="mt-10 mb-5" />
