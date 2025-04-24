@@ -8,7 +8,6 @@ export const createAccount = (userData) => {
         resolve(res.data);
       })
       .catch((err) => {
-        console.error("Axios Error:", err);
         if (
           err.response &&
           err.response.data &&

@@ -46,7 +46,7 @@ function Signup() {
       navigate("/login");
     } catch (err) {
       if (err.includes("User with this Email already exists")) {
-        toast.error("User with such email or phonenumber already exists");
+        toast.error("User with such email or phone number already exists");
       } else {
         toast.error("Registration failed");
       }
