@@ -41,7 +41,7 @@ const SpecializationDropdown = () => {
 
   return (
     <>
-      <form onSubmit={handleSubmit(updateSpecialization)} className="w-72">
+      <form onSubmit={handleSubmit(updateSpecialization)} className="w-75">
         <label className="block mb-2 font-semibold text-black">
           Specialization
         </label>

@@ -41,7 +41,7 @@ const LanguageDropdown = () => {
 
   return (
     <>
-      <form onSubmit={handleSubmit(addLanguage)} className="w-72">
+      <form onSubmit={handleSubmit(addLanguage)} className="w-75">
         <label className="block mb-2 font-semibold text-black">Languages</label>
         <div className="relative">
           <select

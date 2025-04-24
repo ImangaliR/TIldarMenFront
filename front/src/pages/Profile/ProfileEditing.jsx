@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import profileicon from "../../assets/profileicon.png";
 import pen from "../../assets/pen.png";
+import deletesign from "../../assets/delete_sign.png";
 import UploadVideo from "./UploadVideo";
 import SpecializationDropdown from "../../components/Dropdown/SpecializationDropdown";
 import LanguageDropdown from "./../../components/Dropdown/LanguageDropdown";
@@ -170,15 +171,19 @@ Max. 300 symbols"
             <div className="flex items-start gap-10 pl-5 mt-2">
               <div>
                 <LanguageDropdown />
-                <div className="mt-4 relative">
+                <div className="mt-4">
                   {user?.data?.languages?.map((language, i) => (
                     <p
-                      className="px-2 py-1 m-2 text-center bg-[#EAF4F4] rounded-lg"
+                      className="px-2 py-1 m-2 bg-[#EAF4F4] rounded-lg relative"
                       key={i}
                     >
                       {language.name}
-                      <button key={i} className="absolute right-4">
-                        x
+                      <button key={i} className="absolute right-0.5 top-2">
+                        <img
+                          src={deletesign}
+                          alt="delete sign"
+                          className="w-5 h-5"
+                        />
                       </button>
                     </p>
                   ))}
@@ -186,15 +191,19 @@ Max. 300 symbols"
               </div>
               <div>
                 <TranslationServicesDropdown />
-                <div className="mt-4 relative">
+                <div className="mt-4">
                   {user?.data?.serviceTypes?.map((service, i) => (
                     <p
-                      className="px-2 py-1 m-2 text-center bg-[#EAF4F4] rounded-lg"
+                      className="px-2 py-1 m-2 bg-[#EAF4F4] rounded-lg relative"
                       key={i}
                     >
                       {service.name}
-                      <button key={i} className="absolute right-4">
-                        x
+                      <button key={i} className="absolute right-0.5 top-2">
+                        <img
+                          src={deletesign}
+                          alt="delete sign"
+                          className="w-5 h-5"
+                        />
                       </button>
                     </p>
                   ))}
@@ -202,15 +211,19 @@ Max. 300 symbols"
               </div>
               <div>
                 <SpecializationDropdown />
-                <div className="mt-4 relative">
+                <div className="mt-4">
                   {user?.data?.specializations?.map((specialization, i) => (
                     <p
-                      className="px-2 py-1 m-2 text-center bg-[#EAF4F4] rounded-lg"
+                      className="px-2 py-1 m-2 bg-[#EAF4F4] rounded-lg relative"
                       key={i}
                     >
                       {specialization.name}
-                      <button key={i} className="absolute right-4">
-                        x
+                      <button key={i} className="absolute right-0.5 top-2">
+                        <img
+                          src={deletesign}
+                          alt="delete sign"
+                          className="w-5 h-5"
+                        />
                       </button>
                     </p>
                   ))}

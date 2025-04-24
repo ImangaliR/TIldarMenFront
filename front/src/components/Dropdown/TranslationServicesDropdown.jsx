@@ -45,7 +45,7 @@ const TranslationServicesDropdown = () => {
 
   return (
     <>
-      <form onSubmit={handleSubmit(updateTranslationServices)} className="w-72">
+      <form onSubmit={handleSubmit(updateTranslationServices)} className="w-75">
         <label className="block mb-2 font-semibold text-black">
           Type of Translation Services
         </label>
