@@ -45,15 +45,10 @@ function Signup() {
       toast.success("Registration successful!");
       navigate("/login");
     } catch (err) {
-      if (
-        err.data?.message.includes("User Already Exists") ||
-        err.message.includes("User Already Exists")
-      ) {
+      if (err.includes("User with this Email already exists")) {
         toast.error("User with such email or phonenumber already exists");
       } else {
-        const errorMessage =
-          err.response?.data?.message || err.message || "Registration failed";
-        toast.error(errorMessage);
+        toast.error("Registration failed");
       }
     } finally {
       setLoading(false);
