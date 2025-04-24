@@ -46,7 +46,7 @@ function Signup() {
       navigate("/login");
     } catch (err) {
       if (
-        err.response?.data?.message.includes("User Already Exists") ||
+        err.data?.message.includes("User Already Exists") ||
         err.message.includes("User Already Exists")
       ) {
         toast.error("User with such email or phonenumber already exists");
