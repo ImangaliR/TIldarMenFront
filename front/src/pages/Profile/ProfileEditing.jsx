@@ -97,9 +97,7 @@ const ProfileEditing = () => {
                   <input
                     type="text"
                     disabled
-                    placeholder={
-                      user?.data?.firstName + " " + user?.data?.lastName
-                    }
+                    value={user?.data?.firstName + " " + user?.data?.lastName}
                     className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-50 md:w-55 lg:w-60 xl:w-80 h-7 rounded-sm text-sm"
                   />
                 </div>
@@ -108,7 +106,7 @@ const ProfileEditing = () => {
                   <input
                     type="text"
                     disabled
-                    placeholder={user?.data?.location?.city}
+                    value={user?.data?.location?.city}
                     className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-50 md:w-55 lg:w-60 xl:w-80 h-7 rounded-sm text-sm"
                   />
                 </div>
@@ -153,7 +151,7 @@ const ProfileEditing = () => {
                   onChange={(e) => setIntro(e.target.value)}
                   placeholder="Write something to introduce yourself.
 Max. 300 symbols"
-                  className="bg-[#EAF4F4] border-1 border-[#DCDCDC] p-3 w-55 h-30 md:w-60 lg:w-75 xl:w-80 rounded-sm text-sm resize-none"
+                  className="bg-[#EAF4F4] border-1 border-[#DCDCDC] p-3 w-55 h-40 md:w-60 lg:w-75 xl:w-90 rounded-sm text-sm resize-none"
                 />
                 <button
                   onClick={addIntroduction}
