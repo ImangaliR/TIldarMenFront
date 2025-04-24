@@ -34,11 +34,15 @@ const UploadVideo = () => {
       const response = await api.post(`translator/${userId}/video`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
-      const updatedProfile = await getProfile();
-      setUser(updatedProfile);
-      setPreview(response?.data);
-      toast.success("Added video successfully!");
-      setSelectedFile(null);
+      if (response.message.inlucdes("Success")) {
+        const updatedProfile = await getProfile();
+        setUser(updatedProfile);
+        setPreview(response?.data);
+        toast.success("Added video successfully!");
+        setSelectedFile(null);
+      } else {
+        toast.error("Video size can't exceed 50mb.");
+      }
     } catch (err) {
       toast.error("Failed to add video.");
     } finally {

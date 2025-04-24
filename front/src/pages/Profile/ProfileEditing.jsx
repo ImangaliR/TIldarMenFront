@@ -176,7 +176,7 @@ Max. 300 symbols"
                 <div className="mt-4">
                   {user?.data?.languages?.map((language, i) => (
                     <p
-                      className="px-2 py-1 m-2 bg-[#EAF4F4] rounded-lg relative"
+                      className="px-2 py-1 mt-2 bg-[#EAF4F4] rounded-lg relative"
                       key={i}
                     >
                       {language.name}
@@ -196,7 +196,7 @@ Max. 300 symbols"
                 <div className="mt-4">
                   {user?.data?.serviceTypes?.map((service, i) => (
                     <p
-                      className="px-2 py-1 m-2 bg-[#EAF4F4] rounded-lg relative"
+                      className="px-2 py-1 mt-2 bg-[#EAF4F4] rounded-lg relative"
                       key={i}
                     >
                       {service.name}
@@ -216,7 +216,7 @@ Max. 300 symbols"
                 <div className="mt-4">
                   {user?.data?.specializations?.map((specialization, i) => (
                     <p
-                      className="px-2 py-1 m-2 bg-[#EAF4F4] rounded-lg relative"
+                      className="px-2 py-1 mt-2 bg-[#EAF4F4] rounded-lg relative"
                       key={i}
                     >
                       {specialization.name}
@@ -250,11 +250,15 @@ Max. 300 symbols"
             </div>
             <div>
               <h1 className="font-bold text-lg mb-2">Projects</h1>
-              <input
-                type="file"
-                placeholder="Upload"
-                className="bg-[#EAF4F4] border-1 border-[#DCDCDC] p-3 w-50 h-30 rounded-sm text-sm"
-              />
+              <input type="file" id="fileInput" className="hidden" />
+              <div>
+                <label
+                  htmlFor="fileInput"
+                  className="bg-[#EAF4F4] border-1 border-[#DCDCDC] p-3 w-50 h-30 rounded-sm text-sm cursor-pointer"
+                >
+                  Upload
+                </label>
+              </div>
             </div>
             {editingItemId === 4 ? (
               <div className="flex justify-end mt-15 gap-2">
