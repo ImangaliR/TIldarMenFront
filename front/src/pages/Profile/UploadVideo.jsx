@@ -21,9 +21,17 @@ const UploadVideo = () => {
 
   const addVideo = async () => {
     setIsLoading(true);
+    const maxSize = 50 * 1024 * 1024;
 
     if (!selectedFile) {
       toast.error("Please select a file first.");
+      return;
+    }
+
+    if (selectedFile.size > maxSize) {
+      toast.error("File size exceeds 50MB limit.");
+      setSelectedFile(null);
+      setIsLoading(false);
       return;
     }
 
@@ -34,15 +42,11 @@ const UploadVideo = () => {
       const response = await api.post(`translator/${userId}/video`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
-      if (response.message.inlucdes("Success")) {
-        const updatedProfile = await getProfile();
-        setUser(updatedProfile);
-        setPreview(response?.data);
-        toast.success("Added video successfully!");
-        setSelectedFile(null);
-      } else {
-        toast.error("Video size can't exceed 50mb.");
-      }
+      const updatedProfile = await getProfile();
+      setUser(updatedProfile);
+      setPreview(response?.data);
+      toast.success("Added video successfully!");
+      setSelectedFile(null);
     } catch (err) {
       toast.error("Failed to add video.");
     } finally {
@@ -81,7 +85,7 @@ const UploadVideo = () => {
           <div>
             {preview ? (
               <div>
-                <video controls className="w-full h-30 rounded-sm">
+                <video controls className="w-80 h-40 rounded-sm">
                   <source src={preview} type="video/mp4" />
                 </video>
                 <div className="flex gap-4">
