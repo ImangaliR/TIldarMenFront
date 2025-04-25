@@ -28,8 +28,7 @@ const JobCards = ({ job }) => {
 
   return (
     <>
-      <p className="text-[#9eff92]"></p>
-      <div className="bg-white shadow-sm rounded-lg p-10">
+      <div className="bg-white shadow-sm rounded-lg px-10 py-6">
         <h1 className="text-lg font-bold">{job?.title}</h1>
         <div className="flex items-center justify-between mb-6">
           <h2 className="flex items-center text-[#949494] gap-2 font-semibold ml-3">

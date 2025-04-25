@@ -4,6 +4,7 @@ import Search from "./../../components/Search/Search";
 import JobCards from "./JobCards";
 import api from "../../services/api";
 import { toast } from "react-toastify";
+import JobsFilter from "../../components/Filter/JobsFilter";
 
 const ProjectCatalog = () => {
   const [jobCount, setJobCount] = useState(0);
@@ -33,7 +34,8 @@ const ProjectCatalog = () => {
           handleSearch={fetchJobs}
           placeholder={"Please enter a job title"}
         />
-        <div className="my-10">
+        <div className="flex gap-5 my-10">
+          <JobsFilter setJobs={setJobs} setJobCount={setJobCount} />
           <main className="w-220 lg:w-260">
             <p className="text-2xl mb-1">Results ({jobCount})</p>
             <div className="grid grid-cols-1 gap-4">

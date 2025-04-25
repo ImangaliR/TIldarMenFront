@@ -2,6 +2,7 @@ import Navbar from "../../components/layout/Navbar";
 import profileicon from "../../assets/profileicon.png";
 import star from "../../assets/full_star.png";
 import emptystar from "../../assets/empty_star.png";
+
 const TranslatorDetails = () => {
   return (
     <>

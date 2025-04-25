@@ -4,6 +4,7 @@ import Search from "../../components/Search/Search";
 import TranslatorCards from "./TranslatorCards";
 import api from "../../services/api";
 import { toast } from "react-toastify";
+import TranslatorsFilter from "../../components/Filter/TranslatorsFilter";
 
 const Translators = () => {
   const [resultCount, setResultCount] = useState(0);
@@ -49,10 +50,14 @@ const Translators = () => {
           handleSearch={fetchTranslators}
           placeholder={"Please enter name or surname"}
         />
-        <div className="my-10">
-          <main className="max-w-260 w-full">
+        <div className="flex gap-5 my-10">
+          <TranslatorsFilter
+            setTranslators={setTranslators}
+            setResultCount={setResultCount}
+          />
+          <main className="max-w-280 w-full">
             <p className="text-2xl mb-1">Results ({resultCount})</p>
-            <div className="grid grid-cols-3 gap-x-3 gap-y-5">
+            <div className="grid grid-cols-2 gap-x-1 gap-y-3 xl:grid-cols-3 xl:gap-x-3 xl:gap-y-5 ">
               {translatorCards}
             </div>
           </main>

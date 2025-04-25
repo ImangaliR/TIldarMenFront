@@ -1,8 +1,6 @@
 import { useState } from "react";
-import filtericon from "../../assets/filter.png";
 
 const Search = ({ setUserSearch, handleSearch, placeholder }) => {
-  const [filterOn, setFilterOn] = useState(false);
   const [inputValue, setInputValue] = useState("");
 
   const onSearchClick = () => {
@@ -25,7 +23,7 @@ const Search = ({ setUserSearch, handleSearch, placeholder }) => {
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
           onKeyDown={handleKeyDown}
-          className="min-w-100 lg:min-w-200 xl:min-w-260 bg-white pt-3 pb-3 pl-10 rounded-lg"
+          className="min-w-280 w-full bg-white pt-3 pb-3 pl-10 rounded-lg border-1"
         />
         <button
           onClick={onSearchClick}
@@ -33,22 +31,6 @@ const Search = ({ setUserSearch, handleSearch, placeholder }) => {
         >
           Search
         </button>
-        <div className="relative">
-          <section className="absolute w-42 right-1 top-25">
-            <div className="flex items-center justify-between mb-2">
-              <h1 className="text-xl font-bold">Filters</h1>
-              <p className="text-sm text-[#192DF7] cursor-pointer">reset</p>
-            </div>
-            <div className="text-lg font-medium">
-              <h1 className="mb-12">Language Filters</h1>
-              <h1 className="mb-12">Specialization Filters</h1>
-              <h1 className="mb-12">Experience & Credentials</h1>
-              <h1 className="mb-12">Availability & Work Type</h1>
-              <h1 className="mb-12">Location Filters</h1>
-              <h1 className="mb-12">Services</h1>
-            </div>
-          </section>
-        </div>
       </div>
     </>
   );
