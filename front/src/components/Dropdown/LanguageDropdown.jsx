@@ -36,7 +36,11 @@ const LanguageDropdown = () => {
       setUser(updatedProfile);
       toast.success("Added the language successfully!");
     } catch (err) {
-      toast.error("Failed to add language.");
+      if (err.response.data.data.includes("Language already exists")) {
+        toast.error("Language already exists");
+      } else {
+        toast.error("Failed to add language.");
+      }
     }
   };
 

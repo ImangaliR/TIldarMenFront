@@ -36,7 +36,11 @@ const SpecializationDropdown = () => {
       setUser(updatedProfile);
       toast.success("Added the specialization successfully!");
     } catch (err) {
-      toast.error("Failed to add specialization.");
+      if (err.response.data.data.includes("Specialization already exists")) {
+        toast.error("Specialization already exists");
+      } else {
+        toast.error("Failed to add specialization.");
+      }
     }
   };
 

@@ -30,21 +30,28 @@ const TranslationServicesDropdown = () => {
   if (tranlatorService.includes("&")) {
     setTranslatorService(tranlatorService.replace(/&/g, "%26"));
   }
-
   const updateTranslationServices = async () => {
     try {
       const response = await api.put(
         `translator/${userId}/service?service=${tranlatorService}`
       );
+
       const updatedProfile = await getProfile();
       setUser(updatedProfile);
       toast.success("Added the service successfully!");
     } catch (err) {
-      toast.error("Failed to add service.");
+      if (err.response.data.data.includes("Service already exists")) {
+        toast.error("Service already exists");
+      } else {
+        toast.error("Failed to add service.");
+      }
     }
   };
 
   const deleteService = async (Service) => {
+    if (Service.includes("&")) {
+      Service = Service.replace(/&/g, "%26");
+    }
     try {
       const response = await api.delete(
         `translator/${userId}/service?service=${Service}`
