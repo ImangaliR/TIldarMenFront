@@ -95,7 +95,11 @@ const TranslatorDetails = () => {
       })
       .catch((err) => console.log(err));
   }, [id]);
-  console.log(translator);
+
+  const encodeSpaces = (url) => {
+    if (!url || typeof url !== "string") return null;
+    return url.replace(/ /g, "%20");
+  };
 
   return (
     <>
@@ -176,8 +180,14 @@ const TranslatorDetails = () => {
             <div className="mt-5">
               <h1 className="font-bold ml-5 mb-2">Video Greeting</h1>
               <div>
-                <video controls className="w-90 h-50 rounded-lg">
-                  <source src={translator?.data?.videoUrl} type="video/mp4" />
+                <video
+                  controls
+                  className="w-full max-w-[600px] aspect-video rounded-lg shadow"
+                >
+                  <source
+                    src={encodeSpaces(translator?.data?.videoUrl)}
+                    type="video/mp4"
+                  />
                 </video>
               </div>
             </div>
@@ -188,7 +198,7 @@ const TranslatorDetails = () => {
             </h1>
             <div>
               <h1 className="ml-5 font-bold mb-2">Languages</h1>
-              <div className="grid grid-cols-4 xl:grid-cols-5 gap-2">
+              <div className="grid grid-cols-4 xl:grid-cols-7 gap-2">
                 {translator?.data?.languages?.map((language, i) => (
                   <p
                     key={i}
@@ -204,7 +214,7 @@ const TranslatorDetails = () => {
               <h1 className="ml-5 font-bold mb-2">
                 Types of Translation Services
               </h1>
-              <div className="grid grid-cols-2 gap-2">
+              <div className="grid grid-cols-4 gap-2">
                 {translator?.data?.serviceTypes?.map((service, i) => (
                   <p
                     key={i}
@@ -218,7 +228,7 @@ const TranslatorDetails = () => {
             </div>
             <div className="mt-10">
               <h1 className="ml-5 font-bold mb-2">Specialization</h1>
-              <div className="grid grid-cols-2 gap-2">
+              <div className="grid grid-cols-4 gap-2">
                 {translator?.data?.specializations?.map((specialization, i) => (
                   <p
                     key={i}
