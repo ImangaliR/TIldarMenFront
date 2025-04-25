@@ -120,7 +120,7 @@ const TranslatorDetails = () => {
             alt="profile icon"
             className="w-40 h-40 rounded-full object-cover"
           />
-          <div className="flex justify-between w-full h-fit">
+          <div className="h-35 flex justify-between w-full">
             <div>
               <h1 className="text-2xl font-bold">
                 {translator?.data?.firstName !== " "
@@ -131,15 +131,15 @@ const TranslatorDetails = () => {
                   : "Name"}
               </h1>
               <p className="text-gray-400 text-sm">
-                {translator?.data?.professionalTitle !== " "
+                {translator?.data?.professionalTitle != null
                   ? translator?.data?.professionalTitle
                   : "Professional Title"}
               </p>
               <h2 className="text-lg mt-2">
                 Based In:{" "}
                 <span className="text-[#2A9E97]">
-                  {translator?.data?.location.city !== " "
-                    ? translator?.data?.location.city
+                  {translator?.data?.location?.city != null
+                    ? translator?.data?.location?.city
                     : "Location"}
                 </span>
               </h2>
@@ -174,7 +174,7 @@ const TranslatorDetails = () => {
           <div>
             <h1 className="text-2xl font-bold">Introduction</h1>
             <div>
-              <h1 className="font-bold ml-5 mb-2">About</h1>
+              <h1 className="font-bold ml-5 mb-2">About me</h1>
               <p>{translator?.data?.introduction}</p>
             </div>
             <div className="mt-5">
@@ -198,11 +198,11 @@ const TranslatorDetails = () => {
             </h1>
             <div>
               <h1 className="ml-5 font-bold mb-2">Languages</h1>
-              <div className="grid grid-cols-4 xl:grid-cols-7 gap-2">
+              <div className="w-fit grid grid-cols-3 xl:grid-cols-5 gap-2">
                 {translator?.data?.languages?.map((language, i) => (
                   <p
                     key={i}
-                    className={`w-fit text-sm text-[#585858] px-3 py-0.5 rounded-md text-center`}
+                    className={`w-fit text-sm text-[#585858] px-3 py-1 rounded-md text-center`}
                     style={{ backgroundColor: languageColors[i] }}
                   >
                     {language?.name}
@@ -214,11 +214,11 @@ const TranslatorDetails = () => {
               <h1 className="ml-5 font-bold mb-2">
                 Types of Translation Services
               </h1>
-              <div className="grid grid-cols-4 gap-2">
+              <div className="w-fit grid grid-cols-2 gap-2">
                 {translator?.data?.serviceTypes?.map((service, i) => (
                   <p
                     key={i}
-                    className={`w-fit text-sm text-[#585858] px-3 py-0.5 rounded-md text-center`}
+                    className={`w-fit text-sm text-[#585858] px-3 py-1 rounded-md text-center`}
                     style={{ backgroundColor: languageColors[i] }}
                   >
                     {service?.name}
@@ -228,11 +228,11 @@ const TranslatorDetails = () => {
             </div>
             <div className="mt-10">
               <h1 className="ml-5 font-bold mb-2">Specialization</h1>
-              <div className="grid grid-cols-4 gap-2">
+              <div className="w-fit grid grid-cols-3 gap-2">
                 {translator?.data?.specializations?.map((specialization, i) => (
                   <p
                     key={i}
-                    className={`w-fit text-[#585858] px-3 py-0.5 rounded-md text-center`}
+                    className={`w-fit text-[#585858] px-3 py-1 rounded-md text-center`}
                     style={{ backgroundColor: languageColors[i] }}
                   >
                     {specialization?.name}
