@@ -120,7 +120,7 @@ const TranslatorDetails = () => {
             alt="profile icon"
             className="w-40 h-40 rounded-full object-cover"
           />
-          <div className="h-35 flex justify-between w-full">
+          <div className="h-fit flex justify-between w-full">
             <div>
               <h1 className="text-2xl font-bold">
                 {translator?.data?.firstName != null
@@ -155,7 +155,7 @@ const TranslatorDetails = () => {
               </h2>
               {reviewStars(Math.floor(translator?.data?.rating))}
             </div>
-            <div className="relative w-43">
+            <div className="relative min-w-43">
               <button className="absolute top-2 right-0 w-fit h-fit text-[#FF0000] bg-white border-1 rounded-sm font-semibold gap-2 px-4 py-1">
                 Report
               </button>
