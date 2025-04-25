@@ -166,12 +166,12 @@ const TranslatorDetails = () => {
         </div>
       </div>
       <main className="bg-white w-full px-40 py-7">
-        <div className="grid grid-cols-2 gap-15 mb-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-15 mb-10">
           <div>
             <h1 className="text-2xl font-bold">Introduction</h1>
             <div>
               <h1 className="font-bold ml-5 mb-2">About</h1>
-              <p className="w-100">{translator?.data?.introduction}</p>
+              <p>{translator?.data?.introduction}</p>
             </div>
             <div className="mt-5">
               <h1 className="font-bold ml-5 mb-2">Video Greeting</h1>
@@ -188,7 +188,7 @@ const TranslatorDetails = () => {
             </h1>
             <div>
               <h1 className="ml-5 font-bold mb-2">Languages</h1>
-              <div className="grid grid-cols-5 gap-2">
+              <div className="grid grid-cols-4 xl:grid-cols-5 gap-2">
                 {translator?.data?.languages?.map((language, i) => (
                   <p
                     key={i}
@@ -240,7 +240,7 @@ const TranslatorDetails = () => {
         </div>
         <div className="mb-10">
           <h1 className="text-2xl font-bold">Education & Certifications</h1>
-          <div className="grid grid-cols-2 gap-15">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-15">
             <div>
               <h1 className="font-bold mb-2 ml-5">Educational Background</h1>
               <div>{translator?.data?.educations}</div>
