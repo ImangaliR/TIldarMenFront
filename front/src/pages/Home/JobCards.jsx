@@ -70,9 +70,9 @@ const JobCards = ({ job }) => {
         </div>
         <div className="flex items-baseline mb-6">
           <h1 className="text-lg font-bold">Specialization: </h1>
-          <div className="ml-2 grid grid-cols-3 gap-2 w-fit">
+          <div className="ml-2 grid grid-cols-3 gap-2">
             {job?.specializations?.map((specialization, i) => (
-              <p key={i} className="text-[#196FD3] w-fit">
+              <p key={i} className="text-[#196FD3]">
                 #{specialization?.name}
               </p>
             ))}
@@ -80,9 +80,9 @@ const JobCards = ({ job }) => {
         </div>
         <div className="flex items-baseline mb-6">
           <h1 className="text-lg font-bold">Service Types: </h1>
-          <div className="ml-2 grid grid-cols-2 gap-2 w-fit">
+          <div className="ml-2 grid grid-cols-2 gap-2">
             {job?.serviceTypes?.map((serviceType, i) => (
-              <p key={i} className="text-[#196FD3] w-fit">
+              <p key={i} className="text-[#196FD3]">
                 #{serviceType?.name}
               </p>
             ))}

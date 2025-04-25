@@ -179,17 +179,19 @@ const TranslatorDetails = () => {
             </div>
             <div className="mt-5">
               <h1 className="font-bold ml-5 mb-2">Video Greeting</h1>
-              <div>
-                <video
-                  controls
-                  className="w-full max-w-[600px] aspect-video rounded-lg shadow"
-                >
-                  <source
-                    src={encodeSpaces(translator?.data?.videoUrl)}
-                    type="video/mp4"
-                  />
-                </video>
-              </div>
+              {translator?.data?.videoUrl && (
+                <div>
+                  <video
+                    controls
+                    className="w-full max-w-[600px] aspect-video rounded-lg shadow"
+                  >
+                    <source
+                      src={encodeSpaces(translator?.data?.videoUrl)}
+                      type="video/mp4"
+                    />
+                  </video>
+                </div>
+              )}
             </div>
           </div>
           <div>
@@ -202,7 +204,7 @@ const TranslatorDetails = () => {
                 {translator?.data?.languages?.map((language, i) => (
                   <p
                     key={i}
-                    className={`w-fit text-sm text-[#585858] px-3 py-1 rounded-md text-center`}
+                    className={`w-full text-sm text-[#585858] px-3 py-1 rounded-md text-center`}
                     style={{ backgroundColor: languageColors[i] }}
                   >
                     {language?.name}
@@ -218,7 +220,7 @@ const TranslatorDetails = () => {
                 {translator?.data?.serviceTypes?.map((service, i) => (
                   <p
                     key={i}
-                    className={`w-fit text-sm text-[#585858] px-3 py-1 rounded-md text-center`}
+                    className={`w-full text-sm text-[#585858] px-3 py-1 rounded-md text-center`}
                     style={{ backgroundColor: languageColors[i] }}
                   >
                     {service?.name}
@@ -228,7 +230,7 @@ const TranslatorDetails = () => {
             </div>
             <div className="mt-10">
               <h1 className="ml-5 font-bold mb-2">Specialization</h1>
-              <div className="w-fit grid grid-cols-3 gap-2">
+              <div className="w-full grid grid-cols-3 gap-2">
                 {translator?.data?.specializations?.map((specialization, i) => (
                   <p
                     key={i}
