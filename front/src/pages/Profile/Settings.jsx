@@ -350,24 +350,7 @@ const Settings = () => {
         </>
       ) : (
         <main className="bg-white shadow-sm rounded-sm text-sm pt-10 pl-15 pr-15 md:pt-15 md:pr-20 md:pl-20 lg:pt-25 lg:pr-25 lg:pl-25">
-          {/* <div className="flex items-center gap-8"> */}
-          {/* <img
-              src={user?.data?.profileImageUrl || profileicon}
-              alt="profile icon"
-              className="w-30 h-30 rounded-full"
-            /> */}
-
-          {/* <button
-                className="border-2 border-[#8F8F8F] rounded-lg text-[#70B27A] pr-6 pl-6 pt-2 pb-2 mb-3"
-                onClick={changeProfilePicture}
-              >
-                Change Profile Picture
-              </button>
-              <p className="text-[#8F8F8F]">
-                This will be displayed on your profile at the website
-              </p> */}
           <UploadProfilePicture />
-          {/* </div> */}
           <form
             onSubmit={handleSubmit(userInfoUpdate)}
             name="update user input"
@@ -378,6 +361,7 @@ const Settings = () => {
                 <p className="ml-2">Name</p>
                 <input
                   type="text"
+                  maxLength={40}
                   onChange={(e) => setName(e.target.value)}
                   placeholder={userSettings.firstName}
                   className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-54 md:w-72 lg:w-90 xl:w-114 h-9 mt-1 mb-5 rounded-sm text-sm"
@@ -387,6 +371,7 @@ const Settings = () => {
                 <p className="ml-2">Surname</p>
                 <input
                   type="text"
+                  maxLength={40}
                   onChange={(e) => setSurname(e.target.value)}
                   placeholder={userSettings.lastName}
                   className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-54 md:w-72 lg:w-90 xl:w-114 h-9 mt-1 mb-5 rounded-sm text-sm"
