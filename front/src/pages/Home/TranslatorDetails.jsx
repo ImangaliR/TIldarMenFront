@@ -123,10 +123,10 @@ const TranslatorDetails = () => {
           <div className="h-35 flex justify-between w-full">
             <div>
               <h1 className="text-2xl font-bold">
-                {translator?.data?.firstName !== null
+                {translator?.data?.firstName != null
                   ? translator?.data?.firstName
                   : "Full"}{" "}
-                {translator?.data?.lastName !== null
+                {translator?.data?.lastName != null
                   ? translator?.data?.lastName
                   : "Name"}
               </h1>
