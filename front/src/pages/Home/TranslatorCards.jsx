@@ -68,7 +68,7 @@ const TranslatorCards = ({
         </div>
         <div className="absolute bottom-0 w-full flex justify-center h-fit my-4">
           <button
-            onClick={() => navigate(`/translator-details:${id}`)}
+            onClick={() => navigate(`translator-details/${id}`)}
             className="px-5 py-2 bg-[#38BF4C] text-white rounded-lg"
           >
             More Details

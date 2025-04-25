@@ -5,11 +5,14 @@ import TranslatorCards from "./TranslatorCards";
 import api from "../../services/api";
 import { toast } from "react-toastify";
 import TranslatorsFilter from "../../components/Filter/TranslatorsFilter";
+import { Outlet } from "react-router-dom";
+import { useMatch } from "react-router-dom";
 
 const Translators = () => {
   const [resultCount, setResultCount] = useState(0);
   const [userSearch, setUserSearch] = useState("");
   const [translators, setTranslators] = useState([]);
+  const isDetailPage = useMatch("/translators/translator-details/:id");
 
   useEffect(() => {
     fetchTranslators(userSearch);
@@ -44,25 +47,29 @@ const Translators = () => {
   return (
     <>
       <Navbar />
-      <div className="grid justify-center">
-        <Search
-          setUserSearch={setUserSearch}
-          handleSearch={fetchTranslators}
-          placeholder={"Please enter name or surname"}
-        />
-        <div className="flex gap-5 my-10">
-          <TranslatorsFilter
-            setTranslators={setTranslators}
-            setResultCount={setResultCount}
+      {isDetailPage ? (
+        <Outlet />
+      ) : (
+        <div className="grid justify-center">
+          <Search
+            setUserSearch={setUserSearch}
+            handleSearch={fetchTranslators}
+            placeholder={"Please enter name or surname"}
           />
-          <main className="max-w-280 w-full">
-            <p className="text-2xl mb-1">Results ({resultCount})</p>
-            <div className="grid grid-cols-2 gap-x-1 gap-y-3 xl:grid-cols-3 xl:gap-x-3 xl:gap-y-5 ">
-              {translatorCards}
-            </div>
-          </main>
+          <div className="flex gap-5 my-10">
+            <TranslatorsFilter
+              setTranslators={setTranslators}
+              setResultCount={setResultCount}
+            />
+            <main className="max-w-280 w-full">
+              <p className="text-2xl mb-1">Results ({resultCount})</p>
+              <div className="grid grid-cols-2 gap-x-1 gap-y-3 xl:grid-cols-3 xl:gap-x-3 xl:gap-y-5 ">
+                {translatorCards}
+              </div>
+            </main>
+          </div>
         </div>
-      </div>
+      )}
     </>
   );
 };

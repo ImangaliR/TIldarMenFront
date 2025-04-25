@@ -31,8 +31,9 @@ const AppRoutes = () => {
       <Route index element={<Navigate to="/home" replace />} />
       <Route path="home" element={<Home />} />
       <Route path="project-catalog" element={<ProjectCatalog />} />
-      <Route path="translators" element={<Translators />} />
-      <Route path="translator-details/:id" element={<TranslatorDetails />} />
+      <Route path="translators" element={<Translators />}>
+        <Route path="translator-details/:id" element={<TranslatorDetails />} />
+      </Route>
 
       {/* Protected Routes */}
       <Route
