@@ -230,11 +230,11 @@ const TranslatorDetails = () => {
             </div>
             <div className="mt-10">
               <h1 className="ml-5 font-bold mb-2">Specialization</h1>
-              <div className="w-full grid grid-cols-3 gap-2">
+              <div className="w-fit grid grid-cols-3 gap-2">
                 {translator?.data?.specializations?.map((specialization, i) => (
                   <p
                     key={i}
-                    className={`w-fit text-[#585858] px-3 py-1 rounded-md text-center`}
+                    className={`w-full text-[#585858] px-3 py-1 rounded-md text-center`}
                     style={{ backgroundColor: languageColors[i] }}
                   >
                     {specialization?.name}
