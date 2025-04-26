@@ -84,7 +84,11 @@ const Settings = () => {
         toast.error("Failed to update profile.");
       }
     } catch (err) {
-      toast.error("Something went wrong while updating.");
+      if (err.data.includes("Could not commit JPA transaction")) {
+        toast.error("Name and Surname can not be empty");
+      } else {
+        toast.error("Something went wrong while updating.");
+      }
     }
   };
 
