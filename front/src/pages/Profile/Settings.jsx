@@ -63,10 +63,10 @@ const Settings = () => {
   }, [userSettings]);
 
   const userInfo = {
-    firstName: name,
-    lastName: surname,
-    phoneNumber: phoneNumber,
-    location: userLocation,
+    firstName: name == "" ? userSettings.firstName : name,
+    lastName: surname == "" ? userSettings.lastName : surname,
+    phoneNumber: phoneNumber == "" ? userSettings.phoneNumber : phoneNumber,
+    location: userLocation == "" ? userSettings.location : userLocation,
   };
 
   const userPassword = {
