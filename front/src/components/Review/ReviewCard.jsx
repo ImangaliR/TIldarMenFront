@@ -39,11 +39,11 @@ const ReviewCard = ({ reviews }) => {
       case 4:
         return (
           <div className="flex items-center gap-2">
-            <img src={reviewstarfull} alt="full star" className="w-5 h-5" />
-            <img src={reviewstarfull} alt="full star" className="w-5 h-5" />
-            <img src={reviewstarfull} alt="full star" className="w-5 h-5" />
-            <img src={reviewstarfull} alt="full star" className="w-5 h-5" />
-            <img src={reviewstar} alt="empty star" className="w-5 h-5" />
+            <img src={reviewstarfull} alt="full star" className="w-4 h-4" />
+            <img src={reviewstarfull} alt="full star" className="w-4 h-4" />
+            <img src={reviewstarfull} alt="full star" className="w-4 h-4" />
+            <img src={reviewstarfull} alt="full star" className="w-4 h-4" />
+            <img src={reviewstar} alt="empty star" className="w-4 h-4" />
           </div>
         );
       case 5:
