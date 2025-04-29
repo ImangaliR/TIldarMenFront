@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import logo from "../../assets/logo.png";
 import hiddeneye from "../../assets/hiddeneye.png";
 import openeye from "../../assets/openeye.png";
@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { createAccount } from "./../../services/auth/authService";
 import { useForm } from "react-hook-form";
 import SimpleLoader from "../../components/Loader/SimpleLoader";
+import api from "../../services/api";
 
 function Signup() {
   const navigate = useNavigate();
@@ -22,6 +23,8 @@ function Signup() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [verificationCode, setverificationCode] = useState("");
+  const [verificationCodeSent, setVerificationCodeSent] = useState(false);
 
   const handleSignup = async () => {
     setLoading(true);
@@ -32,6 +35,7 @@ function Signup() {
       phoneNumber: phoneNumber,
       password: password,
       role: role,
+      code: verificationCode,
     };
 
     if (password !== confirmPassword) {
@@ -52,6 +56,26 @@ function Signup() {
       }
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleVerifyCode = async () => {
+    if (!email) {
+      toast.warn("Please enter an email first");
+      return;
+    }
+
+    const formData = new FormData();
+    formData.append("email", email);
+
+    try {
+      await api.post(`/users/send-val`, formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+      setVerificationCodeSent(true);
+      toast.success("Verification code sent");
+    } catch (err) {
+      toast.error("Something went wrong");
     }
   };
 
@@ -114,15 +138,23 @@ function Signup() {
                 <p className="after:content-['*'] after:text-[#FF0000]">
                   Email
                 </p>
-                <input
-                  type="email"
-                  placeholder="example@gmail.com"
-                  value={email}
-                  required
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="rounded-lg border-2 border-[#d1d5d8] bg-white
-            pl-4 pt-2 pb-2 shadow-xs w-55 lg:w-100 mt-1"
-                />
+                <div className="flex items-end gap-2">
+                  <input
+                    type="email"
+                    placeholder="example@gmail.com"
+                    value={email}
+                    required
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="rounded-lg border-2 border-[#d1d5d8] bg-white
+            pl-4 pt-2 pb-2 shadow-xs w-28 lg:w-73 mt-1"
+                  />
+                  <button
+                    onClick={handleVerifyCode}
+                    className="px-3 py-2  text-[#38BF4C] border-2 rounded-lg shadow-xs"
+                  >
+                    Send code
+                  </button>
+                </div>
               </div>
               <div>
                 <p className="after:content-['*'] after:text-[#FF0000]">
@@ -199,6 +231,24 @@ function Signup() {
                 </div>
               </div>
             </div>
+            {verificationCodeSent && (
+              <div className="mt-3">
+                <p className="after:content-['*'] after:text-[#FF0000]">
+                  Verification Code
+                </p>
+                <input
+                  type="text"
+                  placeholder="Enter the code sent to your email"
+                  maxLength={6}
+                  minLength={6}
+                  required
+                  value={verificationCode}
+                  onChange={(e) => setverificationCode(e.target.value)}
+                  className="rounded-lg border-2 border-[#d1d5d8] bg-white
+            pl-4 pt-2 pb-2 shadow-xs w-55 lg:w-100 mt-1"
+                />
+              </div>
+            )}
             <div className="flex justify-center gap-8 font-medium mt-8">
               <p className="text-[#374753] scale-105 mt-2">You are.....</p>
               <label
