@@ -5,6 +5,8 @@ import reviewstarfull from "../../assets/reviewstarfull.png";
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import api from "./../../services/api";
+import { toast } from "react-toastify";
+import { useUser } from "../../utils/contexts/UserContext";
 
 const languageColors = {
   0: "#FFF27F",
@@ -23,6 +25,10 @@ const TranslatorDetails = () => {
   const { id } = useParams();
   const [translator, setTranslator] = useState();
   const [reviews, setReviews] = useState([]);
+  const [rating, setRating] = useState(0);
+  const [description, setDescription] = useState(0);
+  const [hover, setHover] = useState(0);
+  const { user, userId } = useUser();
   const navigate = useNavigate();
   const reviewStars = (rating) => {
     switch (rating) {
@@ -59,11 +65,11 @@ const TranslatorDetails = () => {
       case 4:
         return (
           <div className="flex items-center gap-2">
-            <img src={reviewstarfull} alt="full star" className="w-5 h-5" />
-            <img src={reviewstarfull} alt="full star" className="w-5 h-5" />
-            <img src={reviewstarfull} alt="full star" className="w-5 h-5" />
-            <img src={reviewstarfull} alt="full star" className="w-5 h-5" />
-            <img src={reviewstar} alt="empty star" className="w-5 h-5" />
+            <img src={reviewstarfull} alt="full star" className="w-4 h-4" />
+            <img src={reviewstarfull} alt="full star" className="w-4 h-4" />
+            <img src={reviewstarfull} alt="full star" className="w-4 h-4" />
+            <img src={reviewstarfull} alt="full star" className="w-4 h-4" />
+            <img src={reviewstar} alt="empty star" className="w-4 h-4" />
           </div>
         );
       case 5:
@@ -125,7 +131,25 @@ const TranslatorDetails = () => {
     return date.toLocaleDateString("en-US", options).replace(",", " -");
   }
 
-  console.log(translator);
+  const addReview = async () => {
+    if (!user || !userId) {
+      toast.warn("User needs to login first to add a review");
+      navigate("/login");
+      return;
+    }
+
+    let data = {
+      comment: description,
+      rating: rating,
+    };
+
+    try {
+      const response = await api.post(`/review/${userId}/create/${id}`, data);
+      toast.success("Added review successfully");
+    } catch (err) {
+      toast.error("Failed to add a review");
+    }
+  };
 
   return (
     <>
@@ -372,8 +396,58 @@ const TranslatorDetails = () => {
         </div>
         <div className="mb-10">
           <h1 className="text-2xl font-bold">Write your Review</h1>
-          <div className="my-4">
+          <div className="flex items-center gap-10 my-4">
             <h1 className="text-xl font-bold">My rate</h1>
+            <div className="flex items-center gap-1">
+              {[1, 2, 3, 4, 5].map((value) => (
+                <button
+                  key={value}
+                  onClick={() => setRating(value)}
+                  onMouseEnter={() => setHover(value)}
+                  onMouseLeave={() => setHover(0)}
+                >
+                  {(hover || rating) >= value ? (
+                    <img
+                      src={reviewstarfull}
+                      alt="star icon"
+                      className="w-5 h-5 text-yellow-400"
+                    />
+                  ) : (
+                    <img
+                      src={reviewstar}
+                      alt="star icon"
+                      className="w-5 h-5 text-gray-400"
+                    />
+                  )}
+                </button>
+              ))}
+            </div>
+          </div>
+          <div>
+            <h1 className="text-xl font-bold">Review</h1>
+            <div className="mt-2">
+              <div className="w-wull h-fit relative">
+                <textarea
+                  name="experience"
+                  id="review"
+                  placeholder="Describe your experience"
+                  onChange={(e) => setDescription(e.target.value)}
+                  className="resize-none rounded-xl border-1 border-[#CACACE] w-full h-35 p-3"
+                  maxLength={300}
+                ></textarea>
+                <p className="absolute bottom-2 right-2 text-[#CACACE]">
+                  {description?.length == null ? "0" : description.length}/300
+                </p>
+              </div>
+              <div className="flex justify-end">
+                <button
+                  onClick={addReview}
+                  className="bg-[#34C759] text-white py-1 px-4 rounded-lg"
+                >
+                  Send
+                </button>
+              </div>
+            </div>
           </div>
         </div>
         <div className="mb-10">
