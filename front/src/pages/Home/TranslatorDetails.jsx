@@ -1,6 +1,7 @@
-import fullstar from "../../assets/full_star.png";
-import emptystar from "../../assets/empty_star.png";
 import profileicon from "../../assets/profileicon.png";
+import employericon from "../../assets/employericon.png";
+import reviewstar from "../../assets/reviewstar.png";
+import reviewstarfull from "../../assets/reviewstarfull.png";
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import api from "./../../services/api";
@@ -21,67 +22,68 @@ const languageColors = {
 const TranslatorDetails = () => {
   const { id } = useParams();
   const [translator, setTranslator] = useState();
+  const [reviews, setReviews] = useState([]);
   const navigate = useNavigate();
   const reviewStars = (rating) => {
     switch (rating) {
       case 1:
         return (
           <div className="flex items-center gap-2">
-            <img src={fullstar} alt="full star" className="w-4 h-4" />
-            <img src={emptystar} alt="empty star" className="w-4 h-4" />
-            <img src={emptystar} alt="empty star" className="w-4 h-4" />
-            <img src={emptystar} alt="empty star" className="w-4 h-4" />
-            <img src={emptystar} alt="empty star" className="w-4 h-4" />
+            <img src={reviewstarfull} alt="full star" className="w-4 h-4" />
+            <img src={reviewstar} alt="empty star" className="w-4 h-4" />
+            <img src={reviewstar} alt="empty star" className="w-4 h-4" />
+            <img src={reviewstar} alt="empty star" className="w-4 h-4" />
+            <img src={reviewstar} alt="empty star" className="w-4 h-4" />
           </div>
         );
       case 2:
         return (
           <div className="flex items-center gap-2">
-            <img src={fullstar} alt="full star" className="w-4 h-4" />
-            <img src={fullstar} alt="full star" className="w-4 h-4" />
-            <img src={emptystar} alt="empty star" className="w-4 h-4" />
-            <img src={emptystar} alt="empty star" className="w-4 h-4" />
-            <img src={emptystar} alt="empty star" className="w-4 h-4" />
+            <img src={reviewstarfull} alt="full star" className="w-4 h-4" />
+            <img src={reviewstarfull} alt="full star" className="w-4 h-4" />
+            <img src={reviewstar} alt="empty star" className="w-4 h-4" />
+            <img src={reviewstar} alt="empty star" className="w-4 h-4" />
+            <img src={reviewstar} alt="empty star" className="w-4 h-4" />
           </div>
         );
       case 3:
         return (
           <div className="flex items-center gap-2">
-            <img src={fullstar} alt="full star" className="w-4 h-4" />
-            <img src={fullstar} alt="full star" className="w-4 h-4" />
-            <img src={fullstar} alt="full star" className="w-4 h-4" />
-            <img src={emptystar} alt="empty star" className="w-4 h-4" />
-            <img src={emptystar} alt="empty star" className="w-4 h-4" />
+            <img src={reviewstarfull} alt="full star" className="w-4 h-4" />
+            <img src={reviewstarfull} alt="full star" className="w-4 h-4" />
+            <img src={reviewstarfull} alt="full star" className="w-4 h-4" />
+            <img src={reviewstar} alt="empty star" className="w-4 h-4" />
+            <img src={reviewstar} alt="empty star" className="w-4 h-4" />
           </div>
         );
       case 4:
         return (
           <div className="flex items-center gap-2">
-            <img src={fullstar} alt="full star" className="w-4 h-4" />
-            <img src={fullstar} alt="full star" className="w-4 h-4" />
-            <img src={fullstar} alt="full star" className="w-4 h-4" />
-            <img src={fullstar} alt="full star" className="w-4 h-4" />
-            <img src={emptystar} alt="empty star" className="w-4 h-4" />
+            <img src={reviewstarfull} alt="full star" className="w-5 h-5" />
+            <img src={reviewstarfull} alt="full star" className="w-5 h-5" />
+            <img src={reviewstarfull} alt="full star" className="w-5 h-5" />
+            <img src={reviewstarfull} alt="full star" className="w-5 h-5" />
+            <img src={reviewstar} alt="empty star" className="w-5 h-5" />
           </div>
         );
       case 5:
         return (
           <div className="flex items-center gap-2">
-            <img src={fullstar} alt="full star" className="w-4 h-4" />
-            <img src={fullstar} alt="full star" className="w-4 h-4" />
-            <img src={fullstar} alt="full star" className="w-4 h-4" />
-            <img src={fullstar} alt="full star" className="w-4 h-4" />
-            <img src={fullstar} alt="full star" className="w-4 h-4" />
+            <img src={reviewstarfull} alt="full star" className="w-4 h-4" />
+            <img src={reviewstarfull} alt="full star" className="w-4 h-4" />
+            <img src={reviewstarfull} alt="full star" className="w-4 h-4" />
+            <img src={reviewstarfull} alt="full star" className="w-4 h-4" />
+            <img src={reviewstarfull} alt="full star" className="w-4 h-4" />
           </div>
         );
       default:
         return (
           <div className="flex items-center gap-2">
-            <img src={emptystar} alt="empty star" className="w-4 h-4" />
-            <img src={emptystar} alt="empty star" className="w-4 h-4" />
-            <img src={emptystar} alt="empty star" className="w-4 h-4" />
-            <img src={emptystar} alt="empty star" className="w-4 h-4" />
-            <img src={emptystar} alt="empty star" className="w-4 h-4" />
+            <img src={reviewstar} alt="empty star" className="w-4 h-4" />
+            <img src={reviewstar} alt="empty star" className="w-4 h-4" />
+            <img src={reviewstar} alt="empty star" className="w-4 h-4" />
+            <img src={reviewstar} alt="empty star" className="w-4 h-4" />
+            <img src={reviewstar} alt="empty star" className="w-4 h-4" />
           </div>
         );
     }
@@ -91,7 +93,16 @@ const TranslatorDetails = () => {
     api
       .get(`/users/translator/${id}/profile`)
       .then((res) => {
-        setTranslator(res.data);
+        setTranslator(res.data.data);
+      })
+      .catch((err) => console.log(err));
+  }, [id]);
+
+  useEffect(() => {
+    api
+      .get(`/review/${id}/all`)
+      .then((res) => {
+        setReviews(res.data.data);
       })
       .catch((err) => console.log(err));
   }, [id]);
@@ -100,6 +111,21 @@ const TranslatorDetails = () => {
     if (!url || typeof url !== "string") return null;
     return url.replace(/ /g, "%20");
   };
+
+  function formatDate(dateString) {
+    const options = {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true,
+    };
+    const date = new Date(dateString);
+    return date.toLocaleDateString("en-US", options).replace(",", " -");
+  }
+
+  console.log(translator);
 
   return (
     <>
@@ -116,44 +142,40 @@ const TranslatorDetails = () => {
         </p>
         <div className="flex items-center gap-8 px-40 py-5 w-full bg-[#EAF4F4]">
           <img
-            src={translator?.data.profileImageUrl || profileicon}
+            src={translator?.profileImageUrl || profileicon}
             alt="profile icon"
             className="w-40 h-40 rounded-full object-cover"
           />
           <div className="h-fit flex justify-between w-full">
             <div>
               <h1 className="text-2xl font-bold">
-                {translator?.data?.firstName != null
-                  ? translator?.data?.firstName
-                  : "Full"}{" "}
-                {translator?.data?.lastName != null
-                  ? translator?.data?.lastName
-                  : "Name"}
+                {translator?.firstName != null ? translator?.firstName : "Full"}{" "}
+                {translator?.lastName != null ? translator?.lastName : "Name"}
               </h1>
               <p className="text-gray-400 text-sm">
-                {translator?.data?.professionalTitle != null
-                  ? translator?.data?.professionalTitle
+                {translator?.professionalTitle != null
+                  ? translator?.professionalTitle
                   : "Professional Title"}
               </p>
               <h2 className="text-lg mt-2">
                 Based In:{" "}
                 <span className="text-[#2A9E97]">
-                  {translator?.data?.location?.city != null
-                    ? translator?.data?.location?.city
+                  {translator?.location?.city != null
+                    ? translator?.location?.city
                     : "Location"}
                 </span>
               </h2>
               <h2 className="text-lg mb-2">
                 Availability:{" "}
                 <span className="text-[#2A9E97]">
-                  {translator?.data?.availability !== " "
-                    ? translator?.data?.availability === "BUSY"
+                  {translator?.availability !== " "
+                    ? translator?.availability === "BUSY"
                       ? "Busy"
                       : "Available"
                     : " "}
                 </span>
               </h2>
-              {reviewStars(Math.floor(translator?.data?.rating))}
+              {reviewStars(Math.floor(translator?.rating))}
             </div>
             <div className="relative min-w-43">
               <button className="absolute top-2 right-0 w-fit h-fit text-[#FF0000] bg-white border-1 rounded-sm font-semibold gap-2 px-4 py-1">
@@ -175,18 +197,18 @@ const TranslatorDetails = () => {
             <h1 className="text-2xl font-bold">Introduction</h1>
             <div>
               <h1 className="font-bold ml-5 mb-2">About me</h1>
-              <p>{translator?.data?.introduction}</p>
+              <p>{translator?.introduction}</p>
             </div>
             <div className="mt-5">
               <h1 className="font-bold ml-5 mb-2">Video Greeting</h1>
-              {translator?.data?.videoUrl && (
+              {translator?.videoUrl && (
                 <div>
                   <video
                     controls
                     className="w-full max-w-[600px] aspect-video rounded-lg shadow"
                   >
                     <source
-                      src={encodeSpaces(translator?.data?.videoUrl)}
+                      src={encodeSpaces(translator?.videoUrl)}
                       type="video/mp4"
                     />
                   </video>
@@ -201,7 +223,7 @@ const TranslatorDetails = () => {
             <div>
               <h1 className="ml-5 font-bold mb-2">Languages</h1>
               <div className="w-fit grid grid-cols-3 xl:grid-cols-5 gap-2">
-                {translator?.data?.languages?.map((language, i) => (
+                {translator?.languages?.map((language, i) => (
                   <p
                     key={i}
                     className={`w-full text-sm text-[#585858] px-3 py-1 rounded-md text-center`}
@@ -217,7 +239,7 @@ const TranslatorDetails = () => {
                 Types of Translation Services
               </h1>
               <div className="w-fit grid grid-cols-2 gap-2">
-                {translator?.data?.serviceTypes?.map((service, i) => (
+                {translator?.serviceTypes?.map((service, i) => (
                   <p
                     key={i}
                     className={`w-full text-sm text-[#585858] px-3 py-1 rounded-md text-center`}
@@ -231,7 +253,7 @@ const TranslatorDetails = () => {
             <div className="mt-10">
               <h1 className="ml-5 font-bold mb-2">Specialization</h1>
               <div className="w-fit grid grid-cols-3 gap-2">
-                {translator?.data?.specializations?.map((specialization, i) => (
+                {translator?.specializations?.map((specialization, i) => (
                   <p
                     key={i}
                     className={`w-full text-[#585858] px-3 py-1 rounded-md text-center`}
@@ -247,7 +269,32 @@ const TranslatorDetails = () => {
         <div className="mb-10">
           <h1 className="text-2xl font-bold">Work & Project Exprience</h1>
           <div>
-            <div>{translator?.data?.workExperiences}</div>
+            <div className="grid grid-cols-2 gap-15">
+              {translator?.workExperiences.map((workExperience, i) => (
+                <div key={i}>
+                  <h1 className="font-bold">
+                    {workExperience.position != "" || null
+                      ? workExperience.position
+                      : "Role/Position"}{" "}
+                    -{" "}
+                    {workExperience.companyName != "" || null
+                      ? workExperience.companyName
+                      : "Company"}
+                  </h1>
+                  <p>
+                    {formatDate(workExperience?.startDate)}
+                    {" - "}
+                    {formatDate(workExperience?.endDate)}
+                  </p>
+                  <p>
+                    <span className="font-semibold">
+                      Description of tasks, responsibilities, and achievements:
+                    </span>{" "}
+                    {workExperience?.description}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
         <div className="mb-10">
@@ -255,21 +302,110 @@ const TranslatorDetails = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-15">
             <div>
               <h1 className="font-bold mb-2 ml-5">Educational Background</h1>
-              <div>{translator?.data?.educations}</div>
+              <div className="grid gap-5">
+                {translator?.educations.map((education, i) => (
+                  <div className="flex gap-5" key={i}>
+                    <div>
+                      <p>
+                        {education?.degree != "" || null
+                          ? education?.degree
+                          : "Degree"}
+                      </p>
+                      <h1 className="font-bold">
+                        {education?.university != "" || null
+                          ? education?.university
+                          : "University/Institution Name"}
+                      </h1>
+                      <h1>
+                        {education?.graduationYear != "" || null
+                          ? education?.graduationYear
+                          : "Graduation Year"}
+                      </h1>
+                    </div>
+                    <ul>
+                      <li className="ml-5 list-disc">
+                        <a
+                          href={education?.degreeUrl}
+                          target="_blank"
+                          className="text-teal-600 no-underline"
+                        >
+                          file.pdf
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                ))}
+              </div>
             </div>
             <div>
               <h1 className="font-bold mb-2 ml-5">
                 Certificates & Accreditations
               </h1>
-              <div>{translator?.data?.certificates}</div>
+              <div className="grid gap-5">
+                {translator?.certificates.map((certificate, i) => (
+                  <div key={i}>
+                    <h1 className="mb-2">
+                      {certificate?.title != "" || null
+                        ? certificate?.title
+                        : "Certificate Title"}
+                      {" - "}
+                      {certificate?.year != "" || null
+                        ? certificate?.year
+                        : "Year of Certification"}
+                    </h1>
+                    <ul>
+                      <li className="ml-5 list-disc">
+                        <a
+                          href={certificate?.certificateUrl}
+                          target="_blank"
+                          className="text-teal-600 no-underline"
+                        >
+                          file.pdf
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
         <div className="mb-10">
           <h1 className="text-2xl font-bold">Write your Review</h1>
+          <div className="my-4">
+            <h1 className="text-xl font-bold">My rate</h1>
+          </div>
         </div>
         <div className="mb-10">
-          <h1 className="text-2xl font-bold">Latest Reviews</h1>
+          <h1 className="text-2xl font-bold mb-10">Latest Reviews</h1>
+          <div className="grid grid-cols-3 gap-8">
+            {reviews
+              ? reviews.map((review, i) => (
+                  <div
+                    className="h-fit border-1 border-[#D9D9D9] rounded-lg px-5 py-8 w-full"
+                    key={i}
+                  >
+                    <div className="mb-3">{reviewStars(review.rating)}</div>
+                    <p className="mb-3 block break-words">{review.comment}</p>
+                    <div className="flex items-center gap-2">
+                      <img
+                        src={review?.profileImageUrl || employericon}
+                        alt="profile image"
+                        className="w-13 h-13 rounded-full object-cover"
+                      />
+                      <div>
+                        <p className="text-[#5c5c5c]">
+                          {review.firstName} {review.lastName}
+                        </p>
+                        <p className="text-[#979797]">
+                          {formatDate(review.creationDate)}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                ))
+              : []}
+          </div>
         </div>
       </main>
     </>

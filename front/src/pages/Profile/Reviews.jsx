@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import api from "../../services/api";
 import TokenService from "../../services/token.service";
 import ReviewCard from "../../components/Review/ReviewCard";
-import fullstar from "../../assets/full_star.png";
-import emptystar from "../../assets/empty_star.png";
+import reviewstar from "../../assets/reviewstar.png";
+import reviewstarfull from "../../assets/reviewstarfull.png";
 import customerreviews from "../../assets/customer_reviews.png";
 import RatingBar from "../../components/Review/RatingBar";
 import { useUser } from "../../utils/contexts/UserContext";
@@ -17,61 +17,61 @@ const Reviews = () => {
       case 1:
         return (
           <div className="flex items-center gap-2">
-            <img src={fullstar} alt="full star" className="w-4 h-4" />
-            <img src={emptystar} alt="empty star" className="w-4 h-4" />
-            <img src={emptystar} alt="empty star" className="w-4 h-4" />
-            <img src={emptystar} alt="empty star" className="w-4 h-4" />
-            <img src={emptystar} alt="empty star" className="w-4 h-4" />
+            <img src={reviewstarfull} alt="full star" className="w-4 h-4" />
+            <img src={reviewstar} alt="empty star" className="w-4 h-4" />
+            <img src={reviewstar} alt="empty star" className="w-4 h-4" />
+            <img src={reviewstar} alt="empty star" className="w-4 h-4" />
+            <img src={reviewstar} alt="empty star" className="w-4 h-4" />
           </div>
         );
       case 2:
         return (
           <div className="flex items-center gap-2">
-            <img src={fullstar} alt="full star" className="w-4 h-4" />
-            <img src={fullstar} alt="full star" className="w-4 h-4" />
-            <img src={emptystar} alt="empty star" className="w-4 h-4" />
-            <img src={emptystar} alt="empty star" className="w-4 h-4" />
-            <img src={emptystar} alt="empty star" className="w-4 h-4" />
+            <img src={reviewstarfull} alt="full star" className="w-4 h-4" />
+            <img src={reviewstarfull} alt="full star" className="w-4 h-4" />
+            <img src={reviewstar} alt="empty star" className="w-4 h-4" />
+            <img src={reviewstar} alt="empty star" className="w-4 h-4" />
+            <img src={reviewstar} alt="empty star" className="w-4 h-4" />
           </div>
         );
       case 3:
         return (
           <div className="flex items-center gap-2">
-            <img src={fullstar} alt="full star" className="w-4 h-4" />
-            <img src={fullstar} alt="full star" className="w-4 h-4" />
-            <img src={fullstar} alt="full star" className="w-4 h-4" />
-            <img src={emptystar} alt="empty star" className="w-4 h-4" />
-            <img src={emptystar} alt="empty star" className="w-4 h-4" />
+            <img src={reviewstarfull} alt="full star" className="w-4 h-4" />
+            <img src={reviewstarfull} alt="full star" className="w-4 h-4" />
+            <img src={reviewstarfull} alt="full star" className="w-4 h-4" />
+            <img src={reviewstar} alt="empty star" className="w-4 h-4" />
+            <img src={reviewstar} alt="empty star" className="w-4 h-4" />
           </div>
         );
       case 4:
         return (
           <div className="flex items-center gap-2">
-            <img src={fullstar} alt="full star" className="w-4 h-4" />
-            <img src={fullstar} alt="full star" className="w-4 h-4" />
-            <img src={fullstar} alt="full star" className="w-4 h-4" />
-            <img src={fullstar} alt="full star" className="w-4 h-4" />
-            <img src={emptystar} alt="empty star" className="w-4 h-4" />
+            <img src={reviewstarfull} alt="full star" className="w-5 h-5" />
+            <img src={reviewstarfull} alt="full star" className="w-5 h-5" />
+            <img src={reviewstarfull} alt="full star" className="w-5 h-5" />
+            <img src={reviewstarfull} alt="full star" className="w-5 h-5" />
+            <img src={reviewstar} alt="empty star" className="w-5 h-5" />
           </div>
         );
       case 5:
         return (
           <div className="flex items-center gap-2">
-            <img src={fullstar} alt="full star" className="w-4 h-4" />
-            <img src={fullstar} alt="full star" className="w-4 h-4" />
-            <img src={fullstar} alt="full star" className="w-4 h-4" />
-            <img src={fullstar} alt="full star" className="w-4 h-4" />
-            <img src={fullstar} alt="full star" className="w-4 h-4" />
+            <img src={reviewstarfull} alt="full star" className="w-4 h-4" />
+            <img src={reviewstarfull} alt="full star" className="w-4 h-4" />
+            <img src={reviewstarfull} alt="full star" className="w-4 h-4" />
+            <img src={reviewstarfull} alt="full star" className="w-4 h-4" />
+            <img src={reviewstarfull} alt="full star" className="w-4 h-4" />
           </div>
         );
       default:
         return (
           <div className="flex items-center gap-2">
-            <img src={emptystar} alt="empty star" className="w-4 h-4" />
-            <img src={emptystar} alt="empty star" className="w-4 h-4" />
-            <img src={emptystar} alt="empty star" className="w-4 h-4" />
-            <img src={emptystar} alt="empty star" className="w-4 h-4" />
-            <img src={emptystar} alt="empty star" className="w-4 h-4" />
+            <img src={reviewstar} alt="empty star" className="w-4 h-4" />
+            <img src={reviewstar} alt="empty star" className="w-4 h-4" />
+            <img src={reviewstar} alt="empty star" className="w-4 h-4" />
+            <img src={reviewstar} alt="empty star" className="w-4 h-4" />
+            <img src={reviewstar} alt="empty star" className="w-4 h-4" />
           </div>
         );
     }

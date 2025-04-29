@@ -1,5 +1,5 @@
 import React from "react";
-import fullstar from "../../assets/full_star.png";
+import reviewstarfull from "../../assets/reviewstarfull.png";
 
 const RatingBar = ({ star, percent, count }) => {
   return (
@@ -7,7 +7,7 @@ const RatingBar = ({ star, percent, count }) => {
       <div className="flex items-center border-1 border-[#bdbdbd] rounded-full w-6 justify-center font-medium text-black">
         {star}
       </div>
-      <img src={fullstar} alt="full star icon" className="w-4 h-4" />
+      <img src={reviewstarfull} alt="full star icon" className="w-4 h-4" />
       <div className="relative w-48 h-3 bg-gray-200 rounded-full overflow-hidden">
         <div
           className="absolute top-0 left-0 h-full bg-purple-500"
