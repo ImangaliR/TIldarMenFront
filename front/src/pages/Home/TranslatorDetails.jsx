@@ -26,9 +26,9 @@ const TranslatorDetails = () => {
   const [translator, setTranslator] = useState();
   const [reviews, setReviews] = useState([]);
   const [rating, setRating] = useState(0);
-  const [description, setDescription] = useState(0);
+  const [description, setDescription] = useState("");
   const [hover, setHover] = useState(0);
-  const { user, userId } = useUser();
+  const { userId } = useUser();
   const navigate = useNavigate();
   const reviewStars = (rating) => {
     switch (rating) {
@@ -132,9 +132,14 @@ const TranslatorDetails = () => {
   }
 
   const addReview = async () => {
-    if (!user || !userId) {
+    if (!userId) {
       toast.warn("User needs to login first to add a review");
       navigate("/login");
+      return;
+    }
+
+    if (rating === 0 || description.length != 0) {
+      toast.warn("Please add a rating and comment");
       return;
     }
 
@@ -434,9 +439,9 @@ const TranslatorDetails = () => {
                   onChange={(e) => setDescription(e.target.value)}
                   className="resize-none rounded-xl border-1 border-[#CACACE] w-full h-35 p-3"
                   maxLength={300}
-                ></textarea>
+                />
                 <p className="absolute bottom-2 right-2 text-[#CACACE]">
-                  {description?.length == null ? "0" : description.length}/300
+                  {description?.length}/300
                 </p>
               </div>
               <div className="flex justify-end">
