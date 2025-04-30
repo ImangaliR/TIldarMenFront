@@ -95,11 +95,6 @@ const CreateProject = () => {
       prev.includes(item) ? prev.filter((i) => i !== item) : [...prev, item]
     );
   };
-  const handleLocationCheck = (item) => {
-    setAddLocations((prev) =>
-      prev.includes(item) ? prev.filter((i) => i !== item) : [...prev, item]
-    );
-  };
   const handleServiceCheck = (item) => {
     setAddTranslatorService((prev) =>
       prev.includes(item) ? prev.filter((i) => i !== item) : [...prev, item]
