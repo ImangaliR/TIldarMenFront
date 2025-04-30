@@ -138,24 +138,25 @@ const CreateProject = () => {
       <h1 className="text-center text-4xl font-bold mb-5">
         Create & post your project
       </h1>
-      <button
-        onClick={() => navigate("/employer/post-projects")}
-        className="text-[#317BFF] my-2"
-      >
-        back
-      </button>
       <div className="w-280 bg-white px-20 py-8 rounded-md shadow-xs">
         <div>
           <form onSubmit={handleSubmit(addJob)}>
             <div className="flex items-center justify-between mb-5">
               <h1 className="text-3xl font-bold">Fill the Information</h1>
-
-              <button
-                type="sumbit"
-                className="py-2 px-4 text-[#38BF4C] border-1 rounded-lg"
-              >
-                Publish
-              </button>
+              <div className="flex items-center gap-5">
+                <button
+                  onClick={() => navigate("/employer/post-projects")}
+                  className="py-2 px-4 border-1 rounded-lg"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="sumbit"
+                  className="py-2 px-4 text-[#38BF4C] border-1 rounded-lg"
+                >
+                  Publish
+                </button>
+              </div>
             </div>
             <div className="grid grid-cols-2 gap-10 items-center mb-5">
               <div>
