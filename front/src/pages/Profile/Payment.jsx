@@ -55,14 +55,16 @@ const Payment = () => {
                       {transaction.translatorFirstName}{" "}
                       {transaction.translatorLastName}
                     </p>
-                    <p className="text-[#70707A]">{transaction.description}</p>
+                    <p className="text-[#70707A] text-sm">
+                      {transaction.description}
+                    </p>
                   </div>
                 </div>
                 <div>
                   <p className="font-semibold">
                     {formatDate(transaction.date)}
                   </p>
-                  <p className="font-light text-[#70707A]">
+                  <p className="font-light text-sm text-[#70707A]">
                     {formateTime(transaction.date)}
                   </p>
                 </div>
