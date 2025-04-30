@@ -33,7 +33,7 @@ const Payment = () => {
 
   return (
     <>
-      <main className="bg-white w-280 py-20 px-20 rounded-md shadow-xs">
+      <main className="bg-white w-280 h-180 py-20 px-20 rounded-md shadow-xs">
         <div className="border-1 border-[#DCDCDC] rounded-xl p-5">
           <h1 className="font-semibold text-xl mb-5">Transcation History</h1>
           {transactions?.length !== 0 ? (
@@ -58,7 +58,7 @@ const Payment = () => {
               </div>
             ))
           ) : (
-            <p className="text-center">No transactions yet</p>
+            <p className="text-center text-[#DCDCDC]">No transactions yet</p>
           )}
         </div>
       </main>
