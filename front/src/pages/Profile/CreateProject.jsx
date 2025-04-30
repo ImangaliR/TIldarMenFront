@@ -197,6 +197,7 @@ const CreateProject = () => {
                     <label key={i} className="flex items-center space-x-2 ">
                       <input
                         type="checkbox"
+                        required
                         value={spec.name}
                         checked={addSpecialization.includes(spec.name)}
                         onChange={() => handleSpecializationCheck(spec.name)}
@@ -215,6 +216,7 @@ const CreateProject = () => {
                     <label key={i} className="flex items-center space-x-2 ">
                       <input
                         type="checkbox"
+                        required
                         value={loc.city}
                         checked={addLocations.includes(loc.city)}
                         onChange={() => handleLocationCheck(loc.city)}
@@ -235,6 +237,7 @@ const CreateProject = () => {
                     <label key={i} className="flex items-center space-x-2 ">
                       <input
                         type="checkbox"
+                        required
                         value={ser.name}
                         checked={addTranslationService.includes(ser.name)}
                         onChange={() => handleServiceCheck(ser.name)}
@@ -253,6 +256,7 @@ const CreateProject = () => {
                     <label key={i} className="flex items-center space-x-2 ">
                       <input
                         type="checkbox"
+                        required
                         value={lang.name}
                         checked={addLanguage.includes(lang.name)}
                         onChange={() => handleLanguageCheck(lang.name)}
@@ -263,27 +267,6 @@ const CreateProject = () => {
                 </div>
               </div>
             </div>
-            {/* <div className="grid grid-cols-2 gap-10 items-center mb-5">
-              <div>
-                <p className="font-semibold mb-2 after:content-['*'] after:text-[#FF0000]">
-                  Skill Level
-                </p>
-                <input
-                  type="text"
-                  className="border-1 border-[#DCDCDC] p-3 w-full rounded-lg py-2"
-                />
-              </div>
-
-              <div>
-                <p className="font-semibold mb-2 after:content-['*'] after:text-[#FF0000]">
-                  Target Language
-                </p>
-                <input
-                  type="text"
-                  className="border-1 border-[#DCDCDC] p-3 w-full rounded-lg py-2"
-                />
-              </div>
-            </div> */}
             <div className="grid grid-cols-2 gap-10 items-center mb-5">
               <div>
                 <p className="font-semibold mb-2 after:content-['*'] after:text-[#FF0000]">
@@ -328,14 +311,14 @@ const CreateProject = () => {
                 className="resize-none w-full h-30 border-1 border-[#DCDCDC] rounded-lg p-3"
               />
             </div>
-            <div className="grid grid-cols-2 gap-5 w-fit">
+            {/* <div className="grid grid-cols-2 gap-5 w-fit">
               <button className="text-[#38BF4C] border-1 rounded-lg py-2 px-4">
                 Preview
               </button>
               <button className="text-[#38BF4C] border-1 rounded-lg py-2 px-4">
                 Save as Draft
               </button>
-            </div>
+            </div> */}
           </form>
         </div>
       </div>
