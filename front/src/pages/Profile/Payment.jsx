@@ -19,27 +19,32 @@ const Payment = () => {
   }, []);
 
   function formatDate(dateString) {
-    const options = {
-      day: "2-digit",
+    const date = new Date(dateString);
+    return date.toLocaleDateString("en-US", {
       month: "short",
+      day: "numeric",
       year: "numeric",
+    });
+  }
+
+  function formateTime(dateString) {
+    const date = new Date(dateString);
+    return date.toLocaleTimeString("en-US", {
       hour: "2-digit",
       minute: "2-digit",
       hour12: true,
-    };
-    const date = new Date(dateString);
-    return date.toLocaleDateString("en-US", options).replace(",", " -");
+    });
   }
 
   return (
     <>
-      <main className="bg-white w-280 h-180 py-20 px-20 rounded-md shadow-xs">
-        <div className="border-1 h-full border-[#DCDCDC] rounded-xl p-6">
+      <main className="bg-white w-280 h-180 py-20 px-25 rounded-md shadow-xs">
+        <div className="border-1 h-full border-[#DCDCDC] rounded-xl p-8">
           <h1 className="font-semibold text-xl mb-5">Transcation History</h1>
           {transactions?.length !== 0 ? (
             transactions.map((transaction, i) => (
               <div key={i} className="flex items-center justify-between py-2">
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-5">
                   <img
                     src={transaction?.profileImageUrl || profileicon}
                     alt="profile image"
@@ -53,7 +58,14 @@ const Payment = () => {
                     <p className="text-[#70707A]">{transaction.description}</p>
                   </div>
                 </div>
-                <p className="font-semibold">{formatDate(transaction.date)}</p>
+                <div>
+                  <p className="font-semibold">
+                    {formatDate(transaction.date)}
+                  </p>
+                  <p className="font-light text-sm text-[#70707A]">
+                    {formateTime(transaction.date)}
+                  </p>
+                </div>
                 <p className="font-semibold">{transaction.price}₸</p>
               </div>
             ))
