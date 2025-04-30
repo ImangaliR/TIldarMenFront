@@ -94,11 +94,17 @@ function Login() {
                 />
               </div>
               <div className="flex justify-end w-73 md:w-88">
-                <button className="text-[#8F8F8F] text-sm mt-2 mb-5">
+                <button
+                  type="button"
+                  className="text-[#8F8F8F] text-sm mt-2 mb-5"
+                >
                   Forgot password?
                 </button>
               </div>
-              <button className="w-75 h-12 md:w-94 md:h-14 bg-[#2A9E97] text-white rounded-3xl text-lg md:text-xl font-medium">
+              <button
+                type="submit"
+                className="w-75 h-12 md:w-94 md:h-14 bg-[#2A9E97] text-white rounded-3xl text-lg md:text-xl font-medium"
+              >
                 Login
               </button>
             </form>
