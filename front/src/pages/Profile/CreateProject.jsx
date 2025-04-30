@@ -123,7 +123,7 @@ const CreateProject = () => {
       locations: addLocations.map((city) => ({ city })),
       languages: addLanguage.map((name) => ({ name })),
       serviceTypes: addTranslationService.map((name) => ({ name })),
-      specialization: addSpecialization.map((name) => ({ name })),
+      specializations: addSpecialization.map((name) => ({ name })),
     };
 
     api
