@@ -187,17 +187,16 @@ const CreateProject = () => {
                 />
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-10 items-center mb-5">
+            <div className="grid grid-cols-2 gap-10 items-top mb-5">
               <div>
                 <p className="font-semibold mb-1 after:content-['*'] after:text-[#FF0000]">
                   Specialization
                 </p>
-                <div className="max-h-30 overflow-y-auto">
+                <div className="max-h-20 overflow-y-auto">
                   {specialization.map((spec, i) => (
                     <label key={i} className="flex items-center space-x-2 ">
                       <input
                         type="checkbox"
-                        required
                         value={spec.name}
                         checked={addSpecialization.includes(spec.name)}
                         onChange={() => handleSpecializationCheck(spec.name)}
@@ -211,19 +210,22 @@ const CreateProject = () => {
                 <p className="font-semibold mb-1 after:content-['*'] after:text-[#FF0000]">
                   Location
                 </p>
-                <div className="max-h-30 overflow-y-auto">
-                  {locations.map((loc, i) => (
-                    <label key={i} className="flex items-center space-x-2 ">
-                      <input
-                        type="checkbox"
-                        required
-                        value={loc.city}
-                        checked={addLocations.includes(loc.city)}
-                        onChange={() => handleLocationCheck(loc.city)}
-                      />
-                      <span className="font-light py-1">{loc.city}</span>
-                    </label>
-                  ))}
+                <div className="">
+                  <select
+                    className="w-full border-1 border-[#DCDCDC] text-[##8F8F8F] text-sm rounded-md p-3 pr-10"
+                    defaultValue=""
+                    onChange={(e) => setAddLocations(e.target.value)}
+                    disabled={loading}
+                  >
+                    <option value="" disabled hidden>
+                      {loading ? "Loading..." : "Type..."}
+                    </option>
+                    {locations.map((loc, i) => (
+                      <option key={i} value={loc.city}>
+                        {loc.city}
+                      </option>
+                    ))}
+                  </select>
                 </div>
               </div>
             </div>
@@ -237,7 +239,6 @@ const CreateProject = () => {
                     <label key={i} className="flex items-center space-x-2 ">
                       <input
                         type="checkbox"
-                        required
                         value={ser.name}
                         checked={addTranslationService.includes(ser.name)}
                         onChange={() => handleServiceCheck(ser.name)}
@@ -256,7 +257,6 @@ const CreateProject = () => {
                     <label key={i} className="flex items-center space-x-2 ">
                       <input
                         type="checkbox"
-                        required
                         value={lang.name}
                         checked={addLanguage.includes(lang.name)}
                         onChange={() => handleLanguageCheck(lang.name)}
