@@ -19,6 +19,7 @@ import PostProjects from "./pages/Profile/PostProjects";
 import ProjectApplicants from "./pages/Profile/ProjectApplicants";
 import RoleBasedRoute from "./components/rounting/RoleBasedRoute.jsx/RoleBasedRoute";
 import TranslatorDetails from "./pages/Home/TranslatorDetails";
+import CreateProject from "./pages/Profile/CreateProject";
 
 const AppRoutes = () => {
   const { userRole, userId } = useUser();
@@ -62,7 +63,9 @@ const AppRoutes = () => {
           <Route element={<RoleBasedRoute allowedRoles={"EMPLOYER"} />}>
             <Route path="employer" element={<EmployerPage />}>
               <Route path="payment" element={<Payment />} />
-              <Route path="post-projects" element={<PostProjects />} />
+              <Route path="post-projects" element={<PostProjects />}>
+                <Route path="create-project" element={<CreateProject />} />
+              </Route>
               <Route
                 path="project-applicants"
                 element={<ProjectApplicants />}
