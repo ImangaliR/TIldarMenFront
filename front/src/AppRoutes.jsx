@@ -65,11 +65,11 @@ const AppRoutes = () => {
               <Route path="payment" element={<Payment />} />
               <Route path="post-projects" element={<PostProjects />}>
                 <Route path="create-project" element={<CreateProject />} />
+                <Route
+                  path="project-applicants/:id"
+                  element={<ProjectApplicants />}
+                />
               </Route>
-              <Route
-                path="project-applicants"
-                element={<ProjectApplicants />}
-              />
               <Route path="settings" element={<Settings />} />
             </Route>
           </Route>

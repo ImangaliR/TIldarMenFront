@@ -34,7 +34,7 @@ const Payment = () => {
   return (
     <>
       <main className="bg-white w-280 h-180 py-20 px-20 rounded-md shadow-xs">
-        <div className="border-1 border-[#DCDCDC] rounded-xl p-5">
+        <div className="border-1 h-full border-[#DCDCDC] rounded-xl p-6">
           <h1 className="font-semibold text-xl mb-5">Transcation History</h1>
           {transactions?.length !== 0 ? (
             transactions.map((transaction, i) => (
@@ -43,7 +43,7 @@ const Payment = () => {
                   <img
                     src={transaction?.profileImageUrl || profileicon}
                     alt="profile image"
-                    className="w-11 h-11"
+                    className="w-11 h-11 rounded-full object-cover"
                   />
                   <div>
                     <p className="font-semibold">

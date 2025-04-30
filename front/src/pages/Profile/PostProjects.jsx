@@ -2,10 +2,14 @@ import { useEffect, useState } from "react";
 import { Outlet, useMatch, useNavigate } from "react-router-dom";
 import { useUser } from "../../utils/contexts/UserContext";
 import api from "../../services/api";
+import pen from "../../assets/pen.png";
 
 const PostProjects = () => {
   const navigate = useNavigate();
   const isCreatePage = useMatch("/employer/post-projects/create-project");
+  const isApplicantsPage = useMatch(
+    "/employer/post-projects/project-applicants/:id"
+  );
   const [projects, setProjects] = useState();
   const { userId } = useUser();
 
@@ -40,7 +44,7 @@ const PostProjects = () => {
 
   return (
     <>
-      {isCreatePage ? (
+      {isCreatePage || isApplicantsPage ? (
         <Outlet />
       ) : (
         <div>
@@ -85,6 +89,7 @@ const PostProjects = () => {
                   {projects?.map((proj, idx) => (
                     <tr
                       key={idx}
+                      onClick={() => navigate(`project-applicants/:${proj.id}`)}
                       className={`hover:bg-blue-50 ${
                         idx === 4 ? "bg-blue-50" : ""
                       }`}
@@ -105,7 +110,10 @@ const PostProjects = () => {
                         {proj.applicantsCount}
                       </td>
                       <td className="px-4 py-2 text-gray-400 text-center cursor-pointer">
-                        ⋮
+                        <button className="flex items-center gap-1 text-[#38BF4C]">
+                          Edit
+                          <img src={pen} alt="pen image" className="w-3 h-3" />
+                        </button>
                       </td>
                     </tr>
                   ))}
