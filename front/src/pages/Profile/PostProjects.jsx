@@ -129,9 +129,7 @@ const PostProjects = () => {
               </div>
             ) : (
               <div className="flex items-center justify-center mt-50">
-                <p className="text-[#8b8b8b] text-3xl">
-                  No existing projects yet
-                </p>
+                <p className="text-[#8b8b8b] text-3xl">No projects yet</p>
               </div>
             )}
           </div>
