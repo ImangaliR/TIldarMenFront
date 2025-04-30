@@ -157,7 +157,7 @@ const CreateProject = () => {
 
               <button
                 type="sumbit"
-                className="py-1 px-3 bg-[#38BF4C] text-white border-1 rounded-lg"
+                className="py-2 px-4 text-[#38BF4C] border-1 rounded-lg"
               >
                 Publish
               </button>
@@ -176,9 +176,13 @@ const CreateProject = () => {
                 />
               </div>
               <div>
-                <p className="font-semibold mb-2">Post Type</p>
+                <p className="font-semibold mb-2 after:content-['*'] after:text-[#FF0000]">
+                  Price
+                </p>
                 <input
                   type="text"
+                  required
+                  onChange={(e) => setPrice(e.target.value)}
                   className="border-1 border-[#DCDCDC] p-3 w-full rounded-lg py-2"
                 />
               </div>
@@ -312,26 +316,6 @@ const CreateProject = () => {
                 />
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-10 items-center mb-5">
-              <div>
-                <p className="font-semibold mb-2">Format</p>
-                <input
-                  type="text"
-                  className="border-1 border-[#DCDCDC] p-3 w-full rounded-lg py-2"
-                />
-              </div>
-              <div>
-                <p className="font-semibold mb-2 after:content-['*'] after:text-[#FF0000]">
-                  Payment
-                </p>
-                <input
-                  type="text"
-                  required
-                  onChange={(e) => setPrice(e.target.value)}
-                  className="border-1 border-[#DCDCDC] p-3 w-full rounded-lg py-2"
-                />
-              </div>
-            </div>
             <div className="mb-5">
               <p className="font-semibold mb-2 after:content-['*'] after:text-[#FF0000]">
                 Description
@@ -342,23 +326,6 @@ const CreateProject = () => {
                 onChange={(e) => setDescription(e.target.value)}
                 placeholder="Write detailed information about project/event..."
                 className="resize-none w-full h-30 border-1 border-[#DCDCDC] rounded-lg p-3"
-              />
-            </div>
-            <div className="mb-5">
-              <p className="mb-2 font-semibold">Attach file (optional)</p>
-              <input type="file" id="fileInput" className="hidden" />
-              <label
-                htmlFor="fileInput"
-                className="flex items-center justify-center w-full h-30 border-1 border-[#DCDCDC] rounded-lg p-3 cursor-pointer"
-              >
-                <img src={upload} alt="upload icon" className="h-8" />
-              </label>
-            </div>
-            <div className="mb-15">
-              <p className="font-semibold mb-2">Contact Information</p>
-              <input
-                type="text"
-                className="border-1 max-w-60 h-10 border-[#DCDCDC] rounded-lg px-2"
               />
             </div>
             <div className="grid grid-cols-2 gap-5 w-fit">
