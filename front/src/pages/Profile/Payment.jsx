@@ -37,8 +37,8 @@ const Payment = () => {
         <div className="border-1 border-[#DCDCDC] rounded-xl p-5">
           <h1 className="font-semibold text-xl mb-5">Transcation History</h1>
           {transactions?.length !== 0 ? (
-            transactions.map((transaction) => (
-              <div className="flex items-center justify-between py-2">
+            transactions.map((transaction, i) => (
+              <div key={i} className="flex items-center justify-between py-2">
                 <div className="flex items-center gap-4">
                   <img
                     src={transaction?.profileImageUrl || profileicon}
