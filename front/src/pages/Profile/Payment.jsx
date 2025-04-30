@@ -58,8 +58,8 @@ const Payment = () => {
               </div>
             ))
           ) : (
-            <div className="flex items-center justify-center">
-              <p className="text-[#8b8b8b] text-lg">No transactions yet</p>
+            <div className="flex items-center justify-center mt-50">
+              <p className="text-[#8b8b8b] text-3xl">No transactions yet</p>
             </div>
           )}
         </div>
