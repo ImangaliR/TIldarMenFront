@@ -10,7 +10,7 @@ const PostProjects = () => {
   const isApplicantsPage = useMatch(
     "/employer/post-projects/project-applicants/:id"
   );
-  const [projects, setProjects] = useState();
+  const [projects, setProjects] = useState([]);
   const { userId } = useUser();
 
   useEffect(() => {
@@ -59,8 +59,8 @@ const PostProjects = () => {
               </button>
             </div>
             {projects?.length !== 0 ? (
-              <div className="overflow-x-auto">
-                <table className="min-w-full divide-y divide-gray-200 text-sm">
+              <div className="overflow-x-auto shadow-xs">
+                <table className="min-w-full divide-y divide-gray-200 text-sm shadow-xs">
                   <thead className="bg-gray-50">
                     <tr>
                       <th className="px-4 py-2 text-center font-semibold text-gray-600">
@@ -91,7 +91,7 @@ const PostProjects = () => {
                       <tr
                         key={idx}
                         onClick={() =>
-                          navigate(`project-applicants/:${proj.id}`)
+                          navigate(`project-applicants/${proj.id}`)
                         }
                         className={`hover:bg-blue-50 ${
                           idx === 4 ? "bg-blue-50" : ""

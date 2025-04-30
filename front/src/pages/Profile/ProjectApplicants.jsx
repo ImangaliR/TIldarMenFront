@@ -21,6 +21,20 @@ const ProjectApplicants = () => {
       });
   }, []);
 
+  function formatDate(dateString) {
+    const options = {
+      timeZone: "Asia/Almaty",
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true,
+    };
+    const date = new Date(dateString);
+    return date.toLocaleDateString("en-US", options).replace(",", " -");
+  }
+
   return (
     <>
       <main className="w-full">
@@ -32,25 +46,25 @@ const ProjectApplicants = () => {
         </button>
         <div className="bg-white w-280 h-200 rounded-lg shadow-xs">
           <div className="overflow-x-auto p-20">
-            <table className="min-w-full divide-y divide-gray-200 text-sm">
+            <table className="min-w-full divide-y divide-gray-200 text-sm shadow-xs">
               <thead className="bg-gray-50">
                 <tr>
-                  <th className="px-4 py-2 text-center font-semibold text-gray-600">
+                  <th className="py-2 text-center font-semibold text-gray-600">
                     Profile Image
                   </th>
-                  <th className="px-4 py-2 text-center font-semibold text-gray-600">
+                  <th className="py-2 text-center font-semibold text-gray-600">
                     Full Name
                   </th>
-                  <th className="px-4 py-2 text-center font-semibold text-gray-600">
+                  <th className="py-2 text-center font-semibold text-gray-600">
                     Status
                   </th>
-                  <th className="px-4 py-2 text-center font-semibold text-gray-600">
+                  <th className="py-2 text-center font-semibold text-gray-600">
                     Send at
                   </th>
-                  <th className="px-4 py-2 text-center font-semibold text-gray-600">
+                  <th className="py-2 text-center font-semibold text-gray-600">
                     Price
                   </th>
-                  <th className="px-4 py-2 text-center font-semibold text-gray-600">
+                  <th className="py-2 text-center font-semibold text-gray-600">
                     Rating
                   </th>
                 </tr>
@@ -63,11 +77,11 @@ const ProjectApplicants = () => {
                       idx === 4 ? "bg-blue-50" : ""
                     }`}
                   >
-                    <td className="px-4 py-2 text-center">
+                    <td className="flex justify-center px-4 py-2">
                       <img
                         src={applicant?.profileImageUrl || profileicon}
                         alt="profile image"
-                        className="w-6 h-6 rounded-full object-cover"
+                        className="w-10 h-10 rounded-full object-cover"
                       />
                     </td>
 
@@ -80,20 +94,13 @@ const ProjectApplicants = () => {
                     </td>
 
                     <td className="px-4 py-2 text-center text-blue-600">
-                      {applicant.sendAt}
+                      {formatDate(applicant.sendAt)}
                     </td>
 
                     <td className="px-4 py-2 text-center">{applicant.price}</td>
 
                     <td className="px-4 py-2 text-center">
                       {applicant.rating}
-                    </td>
-
-                    <td className="px-4 py-2 text-gray-400 text-center cursor-pointer">
-                      <button className="flex items-center gap-1 text-[#38BF4C]">
-                        Edit
-                        <img src={pen} alt="pen image" className="w-3 h-3" />
-                      </button>
                     </td>
                   </tr>
                 ))}
