@@ -13,15 +13,35 @@ const Translators = () => {
   const [userSearch, setUserSearch] = useState("");
   const [translators, setTranslators] = useState([]);
   const isDetailPage = useMatch("/translators/translator-details/:id");
+  const [selectedLanguages, setSelectedLanguages] = useState([]);
+  const [selectedSpecializations, setSelectedSpecializations] = useState([]);
+  const [selectedAvailabilities, setSelectedAvailabilities] = useState([]);
+  const [selectedLocations, setSelectedLocations] = useState([]);
+  const [selectedServices, setSelectedServices] = useState([]);
 
   useEffect(() => {
     fetchTranslators(userSearch);
-  }, []);
+  }, [
+    selectedLanguages,
+    selectedSpecializations,
+    selectedAvailabilities,
+    selectedLocations,
+    selectedServices,
+  ]);
 
   const fetchTranslators = async (searchQuery = "") => {
+    var postChecks = {
+      locations: selectedLocations,
+      languages: selectedLanguages,
+      serviceTypes: selectedServices,
+      specializations: selectedSpecializations,
+      availability: selectedAvailabilities[0] || null,
+    };
+
     try {
-      const response = await api.get(
-        `/users/translators/search?username=${searchQuery}`
+      const response = await api.post(
+        `/users/translators/filter?username=${searchQuery}`,
+        postChecks
       );
       setTranslators(response.data?.data);
       setResultCount(response.data?.data.length);
@@ -58,8 +78,16 @@ const Translators = () => {
           />
           <div className="flex gap-5 my-10">
             <TranslatorsFilter
-              setTranslators={setTranslators}
-              setResultCount={setResultCount}
+              selectedLanguages={selectedLanguages}
+              selectedSpecializations={selectedSpecializations}
+              selectedAvailabilities={selectedAvailabilities}
+              selectedLocations={selectedLocations}
+              selectedServices={selectedServices}
+              setSelectedLanguages={setSelectedLanguages}
+              setSelectedSpecializations={setSelectedSpecializations}
+              setSelectedAvailabilities={setSelectedAvailabilities}
+              setSelectedLocations={setSelectedLocations}
+              setSelectedServices={setSelectedServices}
             />
             <main className="max-w-280 w-full">
               <p className="text-2xl mb-1">Results ({resultCount})</p>

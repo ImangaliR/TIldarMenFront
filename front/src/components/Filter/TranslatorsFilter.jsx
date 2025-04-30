@@ -1,21 +1,23 @@
 import { useEffect, useState } from "react";
 import api from "../../services/api";
 
-const TranslatorsFilter = ({ setTranslators, setResultCount }) => {
+const TranslatorsFilter = ({
+  setSelectedServices,
+  setSelectedLocations,
+  setSelectedAvailabilities,
+  setSelectedSpecializations,
+  setSelectedLanguages,
+  selectedServices,
+  selectedLocations,
+  selectedAvailabilities,
+  selectedSpecializations,
+  selectedLanguages,
+}) => {
   const [languages, setLanguages] = useState([]);
-  const [selectedLanguages, setSelectedLanguages] = useState([]);
-
   const [specialization, setSpecialization] = useState([]);
-  const [selectedSpecializations, setSelectedSpecializations] = useState([]);
-
   const availability = ["Busy", "Available"];
-  const [selectedAvailabilities, setSelectedAvailabilities] = useState([]);
-
   const [location, setLocation] = useState([]);
-  const [selectedLocations, setSelectedLocations] = useState([]);
-
   const [service, setService] = useState([]);
-  const [selectedServices, setSelectedServices] = useState([]);
 
   const handleReset = () => {
     setSelectedAvailabilities([]);
@@ -94,36 +96,6 @@ const TranslatorsFilter = ({ setTranslators, setResultCount }) => {
       prev.includes(item) ? prev.filter((i) => i !== item) : [...prev, item]
     );
   };
-
-  const fetchFilteredTranslators = () => {
-    var postChecks = {
-      locations: selectedLocations,
-      languages: selectedLanguages,
-      serviceTypes: selectedServices,
-      specializations: selectedSpecializations,
-      availability: selectedAvailabilities[0] || null,
-    };
-
-    api
-      .post(`/users/translators/filter`, postChecks)
-      .then((res) => {
-        setTranslators(res.data.data);
-        setResultCount(res.data.data.length);
-      })
-      .catch((err) => {
-        console.error("Error filtering users:", err);
-      });
-  };
-
-  useEffect(() => {
-    fetchFilteredTranslators();
-  }, [
-    selectedLanguages,
-    selectedSpecializations,
-    selectedAvailabilities,
-    selectedLocations,
-    selectedServices,
-  ]);
 
   return (
     <>

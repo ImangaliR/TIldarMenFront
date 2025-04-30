@@ -1,22 +1,24 @@
 import { useEffect, useState } from "react";
 import api from "../../services/api";
 
-const JobsFilter = ({ setJobs, setJobCount }) => {
+const JobsFilter = ({
+  setSelectedServices,
+  setSelectedLocations,
+  setSelectedSpecializations,
+  setSelectedLanguages,
+  selectedServices,
+  selectedLocations,
+  selectedSpecializations,
+  selectedLanguages,
+}) => {
   const [languages, setLanguages] = useState([]);
-  const [selectedLanguages, setSelectedLanguages] = useState([]);
-
   const [specialization, setSpecialization] = useState([]);
-  const [selectedSpecializations, setSelectedSpecializations] = useState([]);
-
-  /* const [location, setLocation] = useState([]);
-  const [selectedLocations, setSelectedLocations] = useState([]); */
-
+  const [location, setLocation] = useState([]);
   const [service, setService] = useState([]);
-  const [selectedServices, setSelectedServices] = useState([]);
 
   const handleReset = () => {
     setSelectedLanguages([]);
-    /* setSelectedLocations([]); */
+    setSelectedLocations([]);
     setSelectedServices([]);
     setSelectedSpecializations([]);
   };
@@ -54,7 +56,7 @@ const JobsFilter = ({ setJobs, setJobCount }) => {
       });
   }, []);
 
-  /* useEffect(() => {
+  useEffect(() => {
     api
       .get("/location/all")
       .then((res) => {
@@ -63,7 +65,7 @@ const JobsFilter = ({ setJobs, setJobCount }) => {
       .catch((err) => {
         console.error("Error fetching locations:", err);
       });
-  }, []); */
+  }, []);
 
   const handleLanguageCheck = (item) => {
     setSelectedLanguages((prev) =>
@@ -75,44 +77,16 @@ const JobsFilter = ({ setJobs, setJobCount }) => {
       prev.includes(item) ? prev.filter((i) => i !== item) : [...prev, item]
     );
   };
-  /* const handleLocationCheck = (item) => {
+  const handleLocationCheck = (item) => {
     setSelectedLocations((prev) =>
       prev.includes(item) ? prev.filter((i) => i !== item) : [...prev, item]
     );
-  }; */
+  };
   const handleServiceCheck = (item) => {
     setSelectedServices((prev) =>
       prev.includes(item) ? prev.filter((i) => i !== item) : [...prev, item]
     );
   };
-
-  const fetchFilteredJobs = () => {
-    var postChecks = {
-      /* locations: selectedLocations, */
-      languages: selectedLanguages,
-      serviceTypes: selectedServices,
-      specializations: selectedSpecializations,
-    };
-
-    api
-      .post(`/jobs/filter`, postChecks)
-      .then((res) => {
-        setJobs(res.data.data);
-        setJobCount(res.data.data.length);
-      })
-      .catch((err) => {
-        console.error("Error filtering users:", err);
-      });
-  };
-
-  useEffect(() => {
-    fetchFilteredJobs();
-  }, [
-    selectedLanguages,
-    selectedSpecializations,
-    /* selectedLocations, */
-    selectedServices,
-  ]);
 
   return (
     <>
@@ -130,7 +104,7 @@ const JobsFilter = ({ setJobs, setJobCount }) => {
 
           <div className="text-lg font-medium">
             <div className="mb-5">
-              <h1>Language Filters</h1>
+              <h1 className="font-semibold">Languages</h1>
               <div className="max-h-50 overflow-y-auto mt-1">
                 {languages.map((lang, i) => (
                   <label key={i} className="flex items-center space-x-2 ">
@@ -147,7 +121,7 @@ const JobsFilter = ({ setJobs, setJobCount }) => {
             </div>
 
             <div className="mb-5">
-              <h1>Specialization Filters</h1>
+              <h1 className="font-semibold">Specializations</h1>
               <div className="max-h-60 overflow-y-auto mt-1">
                 {specialization.map((spec, i) => (
                   <label key={i} className="flex items-center space-x-2 ">
@@ -163,8 +137,8 @@ const JobsFilter = ({ setJobs, setJobCount }) => {
               </div>
             </div>
 
-            {/* <div className="mb-5">
-              <h1>Location Filters</h1>
+            <div className="mb-5">
+              <h1 className="font-semibold">Locations</h1>
               <div className="max-h-60 overflow-y-auto mt-1">
                 {location.map((loc, i) => (
                   <label key={i} className="flex items-center space-x-2 ">
@@ -178,10 +152,10 @@ const JobsFilter = ({ setJobs, setJobCount }) => {
                   </label>
                 ))}
               </div>
-            </div> */}
+            </div>
 
             <div className="mb-5">
-              <h1>Services</h1>
+              <h1 className="font-semibold">Services</h1>
               <div className="max-h-60 overflow-y-auto mt-1">
                 {service.map((ser, i) => (
                   <label key={i} className="flex items-center space-x-2 ">

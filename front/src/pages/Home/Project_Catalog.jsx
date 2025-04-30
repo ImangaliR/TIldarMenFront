@@ -10,14 +10,33 @@ const ProjectCatalog = () => {
   const [jobCount, setJobCount] = useState(0);
   const [jobs, setJobs] = useState([]);
   const [userSearch, setUserSearch] = useState("");
+  const [selectedLanguages, setSelectedLanguages] = useState([]);
+  const [selectedSpecializations, setSelectedSpecializations] = useState([]);
+  const [selectedLocations, setSelectedLocations] = useState([]);
+  const [selectedServices, setSelectedServices] = useState([]);
 
   useEffect(() => {
     fetchJobs(userSearch);
-  }, []);
+  }, [
+    selectedLanguages,
+    selectedSpecializations,
+    selectedLocations,
+    selectedServices,
+  ]);
 
   const fetchJobs = async (searchQuery = "") => {
+    var postChecks = {
+      locations: selectedLocations,
+      languages: selectedLanguages,
+      serviceTypes: selectedServices,
+      specializations: selectedSpecializations,
+    };
+
     try {
-      const response = await api.get(`/jobs/search?title=${searchQuery}`);
+      const response = await api.post(
+        `/jobs/filter?title=${searchQuery}`,
+        postChecks
+      );
       setJobs(response?.data?.data);
       setJobCount(response?.data?.data.length);
     } catch (err) {
@@ -35,7 +54,16 @@ const ProjectCatalog = () => {
           placeholder={"Please enter a job title"}
         />
         <div className="flex gap-5 my-10">
-          <JobsFilter setJobs={setJobs} setJobCount={setJobCount} />
+          <JobsFilter
+            setSelectedLanguages={setSelectedLanguages}
+            selectedLanguages={selectedLanguages}
+            setSelectedSpecializations={setSelectedSpecializations}
+            selectedSpecializations={selectedSpecializations}
+            setSelectedLocations={setSelectedLocations}
+            selectedLocations={selectedLocations}
+            setSelectedServices={setSelectedServices}
+            selectedServices={selectedServices}
+          />
           <main className="w-220 lg:w-260">
             <p className="text-2xl mb-1">Results ({jobCount})</p>
             <div className="grid grid-cols-1 gap-4">
