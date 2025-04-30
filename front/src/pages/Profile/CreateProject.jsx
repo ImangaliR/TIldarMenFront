@@ -145,6 +145,7 @@ const CreateProject = () => {
               <h1 className="text-3xl font-bold">Fill the Information</h1>
               <div className="flex items-center gap-5">
                 <button
+                  type="button"
                   onClick={() => navigate("/employer/post-projects")}
                   className="py-2 px-4 border-1 rounded-lg"
                 >

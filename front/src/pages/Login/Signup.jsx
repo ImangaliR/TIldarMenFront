@@ -149,6 +149,7 @@ function Signup() {
             pl-4 pt-2 pb-2 shadow-xs w-28 lg:w-73 mt-1"
                   />
                   <button
+                    type="button"
                     onClick={handleVerifyCode}
                     className="px-3 py-2  text-[#38BF4C] border-2 rounded-lg shadow-xs"
                   >
