@@ -5,6 +5,7 @@ import profiledit from "../../assets/profile-edit.png";
 import timemanagement from "../../assets/time-management.png";
 import reviewicon from "../../assets/review.png";
 import logouticon from "../../assets/logout.png";
+import payment from "../../assets/payment.png";
 import { useUser } from "../../utils/contexts/UserContext";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -30,17 +31,12 @@ const Sidebar = () => {
           {
             name: "Post Projects",
             href: "employer/post-projects",
-            icon: null,
-          },
-          {
-            name: "Project Applicants",
-            href: "employer/project-applicants",
             icon: timemanagement,
           },
           {
             name: "Payment",
             href: "employer/payment",
-            icon: null,
+            icon: payment,
           },
         ]);
       } else {
