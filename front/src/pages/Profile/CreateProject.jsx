@@ -22,7 +22,7 @@ const CreateProject = () => {
   const [addLanguage, setAddLanguage] = useState([]);
 
   const [locations, setLocations] = useState([]);
-  const [addLocations, setAddLocations] = useState([]);
+  const [addLocations, setAddLocations] = useState("");
 
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
@@ -120,7 +120,7 @@ const CreateProject = () => {
       startDate: convertToISOString(startDate),
       endDate: convertToISOString(endDate),
       price: price,
-      locations: addLocations.map((city) => ({ city })),
+      location: addLocations,
       languages: addLanguage.map((name) => ({ name })),
       serviceTypes: addTranslationService.map((name) => ({ name })),
       specializations: addSpecialization.map((name) => ({ name })),
