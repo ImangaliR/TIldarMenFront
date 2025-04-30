@@ -138,7 +138,7 @@ const TranslatorDetails = () => {
       return;
     }
 
-    if (rating === 0 || description.length != 0) {
+    if (rating === 0 || description.length === 0) {
       toast.warn("Please add a rating and comment");
       return;
     }
