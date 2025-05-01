@@ -86,6 +86,8 @@ const Settings = () => {
     } catch (err) {
       if (err.data.includes("Could not commit JPA transaction")) {
         toast.error("Name and Surname can not be empty");
+      } else if (err.data.includes("Phone number")) {
+        toast.error("User with this phone number already exists");
       } else {
         toast.error("Something went wrong while updating.");
       }
@@ -103,13 +105,19 @@ const Settings = () => {
   const employerInfoUpdate = async () => {
     try {
       const response = await updateProfile(employerInfo);
-      if (response) {
-        toast.success("Profile updated successfully!");
-      } else {
-        toast.error("Failed to update profile.");
-      }
+
+      toast.success("Profile updated successfully!");
+
+      toast.error("Failed to update profile.");
     } catch (err) {
-      toast.error("Something went wrong while updating.");
+      if (err)
+        if (err.data.includes("Could not commit JPA transaction")) {
+          toast.error("Name and Surname can not be empty");
+        } else if (err.data.includes("Phone number")) {
+          toast.error("User with this phone number already exists");
+        } else {
+          toast.error("Something went wrong while updating.");
+        }
     }
   };
 
@@ -188,8 +196,7 @@ const Settings = () => {
                     onChange={(e) => setPhoneNumber(e.target.value)}
                     maxLength={11}
                     minLength={11}
-                    disabled
-                    value={userSettings.phoneNumber}
+                    placeholder={userSettings.phoneNumber}
                     className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-54 md:w-72 lg:w-90 xl:w-114 h-9 mt-1 mb-5 rounded-sm text-sm"
                   />
                 </div>
