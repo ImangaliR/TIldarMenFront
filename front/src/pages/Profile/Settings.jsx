@@ -93,8 +93,11 @@ const Settings = () => {
   };
 
   const employerInfo = {
-    location: userLocation,
+    location: userLocation == "" ? userSettings.location : userLocation,
     introduction: introduction,
+    firstName: name == "" ? userSettings.firstName : name,
+    lastName: surname == "" ? userSettings.lastName : surname,
+    phoneNumber: phoneNumber == "" ? userSettings.phoneNumber : phoneNumber,
   };
 
   const employerInfoUpdate = async () => {
@@ -162,7 +165,6 @@ const Settings = () => {
                   <p className="ml-2">Company Name</p>
                   <input
                     type="text"
-                    disabled
                     onChange={(e) => setName(e.target.value)}
                     placeholder={userSettings.firstName}
                     className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-54 md:w-72 lg:w-90 xl:w-114 h-9 mt-1 mb-5 rounded-sm text-sm"
@@ -172,7 +174,6 @@ const Settings = () => {
                   <p className="ml-2">Surname</p>
                   <input
                     type="text"
-                    disabled
                     onChange={(e) => setSurname(e.target.value)}
                     placeholder={userSettings.lastName}
                     className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-54 md:w-72 lg:w-90 xl:w-114 h-9 mt-1 mb-5 rounded-sm text-sm"
@@ -188,7 +189,7 @@ const Settings = () => {
                     maxLength={11}
                     minLength={11}
                     disabled
-                    placeholder={userSettings.phoneNumber}
+                    value={userSettings.phoneNumber}
                     className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-54 md:w-72 lg:w-90 xl:w-114 h-9 mt-1 mb-5 rounded-sm text-sm"
                   />
                 </div>
