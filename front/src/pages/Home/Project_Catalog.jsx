@@ -53,7 +53,7 @@ const ProjectCatalog = () => {
           handleSearch={fetchJobs}
           placeholder={"Please enter a job title"}
         />
-        <div className="flex gap-5 my-10">
+        <div className="flex gap-5 my-10 w-full">
           <JobsFilter
             setSelectedLanguages={setSelectedLanguages}
             selectedLanguages={selectedLanguages}

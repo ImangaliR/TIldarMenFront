@@ -108,42 +108,52 @@ const Reviews = () => {
 
   return (
     <>
-      <main className="flex gap-2 bg-white w-280 h-max min-h-130 rounded-lg p-5">
-        <div className="p-5 rounded-lg border-1 border-[#dcdcdc] sticky top-5 h-max">
-          <div>
-            <div className="flex flex-col items-center w-80">
-              <img
-                src={customerreviews}
-                alt=""
-                className="w-25 h-25 shadow-sm rounded-full"
-              />
-              <h1 className="mt-4 text-lg text-[#5e5e5e]">Customer Reviews</h1>
-              <h1 className="text-2xl font-bold mt-1">
-                {user?.data?.rating.toFixed(2)}
-              </h1>
-              <p className="text-[#a3a2a2] mb-2">
-                {user?.data?.reviews} Reviews
-              </p>
-              {reviewStars(Math.floor(user?.data?.rating))}
+      <main className=" bg-white w-280 h-max min-h-130 rounded-lg p-5">
+        {reviews?.length !== 0 ? (
+          <div className="flex gap-2">
+            <div className="p-5 rounded-lg border-1 border-[#dcdcdc] sticky top-5 h-max">
+              <div>
+                <div className="flex flex-col items-center w-80">
+                  <img
+                    src={customerreviews}
+                    alt=""
+                    className="w-25 h-25 shadow-sm rounded-full"
+                  />
+                  <h1 className="mt-4 text-lg text-[#5e5e5e]">
+                    Customer Reviews
+                  </h1>
+                  <h1 className="text-2xl font-bold mt-1">
+                    {user?.data?.rating.toFixed(2)}
+                  </h1>
+                  <p className="text-[#a3a2a2] mb-2">
+                    {user?.data?.reviews} Reviews
+                  </p>
+                  {reviewStars(Math.floor(user?.data?.rating))}
+                </div>
+                <div className="mt-4">
+                  {[5, 4, 3, 2, 1].map((star) => (
+                    <RatingBar
+                      key={star}
+                      star={star}
+                      percent={ratingPercentages[star]}
+                      count={count[star]}
+                      className="flex items-center gap-2"
+                    />
+                  ))}
+                </div>
+              </div>
             </div>
-            <div className="mt-4">
-              {[5, 4, 3, 2, 1].map((star) => (
-                <RatingBar
-                  key={star}
-                  star={star}
-                  percent={ratingPercentages[star]}
-                  count={count[star]}
-                  className="flex items-center gap-2"
-                />
-              ))}
+            <div className="ml-5">
+              <div className="w-170 border-1 border-[#dcdcdc] border-b-0 rounded-lg rounded-b-none p-1">
+                <ReviewCard reviews={reviews} />
+              </div>
             </div>
           </div>
-        </div>
-        <div className="ml-5">
-          <div className="w-170 border-1 border-[#dcdcdc] border-b-0 rounded-lg rounded-b-none p-1">
-            <ReviewCard reviews={reviews} />
+        ) : (
+          <div className="flex items-center justify-center mt-50">
+            <p className="text-[#8b8b8b] text-3xl">No reviews yet</p>
           </div>
-        </div>
+        )}
       </main>
     </>
   );

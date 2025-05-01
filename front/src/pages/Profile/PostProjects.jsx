@@ -59,29 +59,29 @@ const PostProjects = () => {
               </button>
             </div>
             {projects?.length !== 0 ? (
-              <div className="overflow-x-auto shadow-xs">
-                <table className="min-w-full divide-y divide-gray-200 text-sm shadow-xs">
-                  <thead className="bg-gray-50">
+              <div className="overflow-x-auto shadow-sm">
+                <table className="min-w-full divide-y divide-gray-200 text-sm">
+                  <thead className="text-[#7D7D7D]">
                     <tr>
-                      <th className="px-4 py-2 text-center font-semibold text-gray-600">
+                      <th className="px-4 py-4 text-center font-semibold">
                         Project Title
                       </th>
-                      <th className="px-4 py-2 text-center font-semibold text-gray-600">
+                      <th className="px-4 py-4 text-center font-semibold">
                         Start Date
                       </th>
-                      <th className="px-4 py-2 text-center font-semibold text-gray-600">
+                      <th className="px-4 py-4 text-center font-semibold">
                         End Date
                       </th>
-                      <th className="px-4 py-2 text-center font-semibold text-gray-600">
+                      <th className="px-4 py-4 text-center font-semibold">
                         Published Date
                       </th>
-                      <th className="px-4 py-2 text-center font-semibold text-gray-600">
+                      <th className="px-4 py-4 text-center font-semibold">
                         Price
                       </th>
-                      <th className="px-4 py-2 text-center font-semibold text-gray-600">
+                      <th className="px-4 py-4 text-center font-semibold">
                         Number of Applicants
                       </th>
-                      <th className="px-4 py-2 text-center font-semibold text-gray-600">
+                      <th className="px-4 py-4 text-center font-semibold">
                         Actions
                       </th>
                     </tr>
@@ -93,26 +93,24 @@ const PostProjects = () => {
                         onClick={() =>
                           navigate(`project-applicants/${proj.id}`)
                         }
-                        className={`hover:bg-blue-50 ${
-                          idx === 4 ? "bg-blue-50" : ""
-                        }`}
+                        className={`hover:bg-blue-50`}
                       >
-                        <td className="px-4 py-2 text-center">{proj.title}</td>
+                        <td className="px-4 py-3 text-center">{proj.title}</td>
 
-                        <td className="px-4 py-2 text-center">
+                        <td className="px-4 py-3 text-center">
                           {formatDate(proj.startDate)}
                         </td>
-                        <td className="px-4 py-2 text-center">
+                        <td className="px-4 py-3 text-center">
                           {formatDate(proj.endDate)}
                         </td>
-                        <td className="px-4 py-2 text-center text-blue-600">
+                        <td className="px-4 py-3 text-center text-blue-600">
                           {formatDateRange(proj.publicationDate)}
                         </td>
-                        <td className="px-4 py-2 text-center">{proj.price}</td>
-                        <td className="px-4 py-2 text-center">
+                        <td className="px-4 py-3 text-center">{proj.price}</td>
+                        <td className="px-4 py-3 text-center">
                           {proj.applicantsCount}
                         </td>
-                        <td className="px-4 py-2 text-gray-400 text-center cursor-pointer">
+                        <td className="px-4 py-3 text-gray-400 text-center cursor-pointer">
                           <button className="flex items-center gap-1 text-[#38BF4C]">
                             Edit
                             <img

@@ -59,8 +59,8 @@ const JobCards = ({ job }) => {
           </div>
         </div>
         <div className="flex items-baseline mb-6">
-          <h1 className="text-lg font-bold">Location: </h1>
-          <p>{job?.location}</p>
+          <h1 className="text-lg font-bold mr-2">Location: </h1>
+          <p> {job?.location}</p>
         </div>
         <div className="mb-6">
           <h1 className="text-lg font-bold mb-1">Description</h1>
