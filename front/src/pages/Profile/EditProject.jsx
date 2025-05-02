@@ -343,7 +343,7 @@ const EditProject = () => {
                 onClick={() => setConfirmDelete(!confirmDelete)}
               />
               <label htmlFor="delete" className="text-[#949494] text-sm ml-2">
-                Confirm that I want to delete my account
+                Confirm that I want to delete this project
               </label>
             </div>
             <div className="mt-4">
