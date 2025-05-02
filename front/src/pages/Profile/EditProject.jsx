@@ -135,7 +135,8 @@ const EditProject = () => {
     }
 
     try {
-      const res = api.delete(`/jobs/${userId}}/delete/${id}`);
+      const res = api.delete(`/jobs/${userId}/delete/${id}`);
+      console.log(userId);
       toast.success("Successfully deleted job");
       navigate("/employer/post-projects");
     } catch (err) {
