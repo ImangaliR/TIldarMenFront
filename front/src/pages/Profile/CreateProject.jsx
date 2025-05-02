@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import api from "../../services/api";
 import { useEffect, useState } from "react";
-import upload from "../../assets/upload.png";
 import { toast } from "react-toastify";
 import { useUser } from "../../utils/contexts/UserContext";
 import { useForm } from "react-hook-form";
