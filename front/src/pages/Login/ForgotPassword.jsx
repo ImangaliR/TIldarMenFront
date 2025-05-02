@@ -38,32 +38,13 @@ function ForgotPassword() {
       setCodeIsSent(true);
       toast.success("Code is sent to your email");
     } catch (err) {
-      toast.error("Failed to send code");
+      if (err.response?.data?.data?.includes("User not found")) {
+        toast.error("User not found");
+      } else {
+        toast.error("Failed to send code");
+      }
     } finally {
       setLoading(false);
-    }
-  };
-
-  const verifyCode = async () => {
-    if (!email) {
-      toast.warn("Please enter an email first");
-      return;
-    }
-
-    let data = {
-      email: email,
-      code: code,
-    };
-
-    try {
-      await api.post(`/users/verify-code`, data);
-    } catch (err) {
-      if (err.response?.data?.data?.includes("Invalid verification code")) {
-        toast.error("Invalid verification code");
-      } else {
-        toast.error("Something went wrong");
-      }
-      throw err;
     }
   };
 
@@ -82,17 +63,11 @@ function ForgotPassword() {
       return;
     }
 
-    try {
-      await verifyCode();
-    } catch (err) {
-      setLoading(false);
-      return;
-    }
-
     let data = {
       email: email,
       password: password,
       confirmPassword: confirmPassword,
+      code: code,
     };
 
     try {
@@ -101,7 +76,12 @@ function ForgotPassword() {
       toast.success("Password reset successfully");
       navigate("/login");
     } catch (err) {
-      toast.error("Failed to reset password");
+      console.log(err.response.data.data);
+      if (err.response?.data?.data?.includes("Invalid verification code")) {
+        toast.error("Invalid verification code");
+      } else {
+        toast.error("Failed to reset password");
+      }
     } finally {
       setLoading(false);
     }
