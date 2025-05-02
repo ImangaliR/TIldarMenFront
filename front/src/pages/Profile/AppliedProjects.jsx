@@ -90,15 +90,12 @@ const AppliedProjects = () => {
             <table className="min-w-full bg-white shadow-sm rounded-lg">
               <thead>
                 <tr className="text-left text-sm font-medium text-gray-500 border-b">
-                  <th className="p-3">
-                    <input type="checkbox" className="accent-blue-500" />
-                  </th>
-                  <th className="p-3">Project Name</th>
-                  <th className="p-3">Status</th>
-                  <th className="p-3">Price</th>
-                  <th className="p-3">Deadline</th>
-                  <th className="p-3">Activity</th>
-                  <th className="p-3"></th>
+                  <th className="py-3 px-4">Project Name</th>
+                  <th className="py-3 px-4">Status</th>
+                  <th className="py-3 px-4">Price</th>
+                  <th className="py-3 px-4">Deadline</th>
+                  <th className="py-3 px-4">Activity</th>
+                  <th className="py-3 px-4"></th>
                 </tr>
               </thead>
               <tbody className="text-sm">
@@ -109,17 +106,10 @@ const AppliedProjects = () => {
                       project.selected ? "bg-gray-100" : ""
                     }`}
                   >
-                    <td className="p-3">
-                      <input
-                        type="checkbox"
-                        className="accent-blue-500"
-                        defaultChecked={project.selected}
-                      />
-                    </td>
-                    <td className="p-3 font-medium text-gray-800">
+                    <td className="py-3 px-4 font-medium text-gray-800">
                       {project.name}
                     </td>
-                    <td className="p-3">
+                    <td className="py-3 px-4">
                       <span
                         className={`text-xs px-3 py-1 rounded-full font-semibold ${
                           statusColors[project.status]
@@ -128,9 +118,9 @@ const AppliedProjects = () => {
                         {project.status}
                       </span>
                     </td>
-                    <td className="p-3">{project.price}</td>
-                    <td className="p-3">{project.deadline}</td>
-                    <td className="p-3">
+                    <td className="py-3 px-4">{project.price}</td>
+                    <td className="py-3 px-4">{project.deadline}</td>
+                    <td className="py-3 px-4">
                       {project.activity === "Chat" && (
                         <button className="bg-indigo-600 text-white text-xs px-4 py-1 rounded-full">
                           Chat
