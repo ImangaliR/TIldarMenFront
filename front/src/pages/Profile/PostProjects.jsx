@@ -10,6 +10,7 @@ const PostProjects = () => {
   const isApplicantsPage = useMatch(
     "/employer/post-projects/project-applicants/:id"
   );
+  const isEditPage = useMatch("/employer/post-projects/edit-project/:id");
   const [projects, setProjects] = useState([]);
   const { userId } = useUser();
 
@@ -44,7 +45,7 @@ const PostProjects = () => {
 
   return (
     <>
-      {isCreatePage || isApplicantsPage ? (
+      {isCreatePage || isApplicantsPage || isEditPage ? (
         <Outlet />
       ) : (
         <div>
@@ -90,28 +91,61 @@ const PostProjects = () => {
                     {projects?.map((proj, idx) => (
                       <tr
                         key={idx}
-                        onClick={() =>
-                          navigate(`project-applicants/${proj.id}`)
-                        }
-                        className={`hover:bg-blue-50`}
+                        className={`hover:bg-blue-50 cursor-pointer`}
                       >
-                        <td className="px-4 py-3 text-center">{proj.title}</td>
-
-                        <td className="px-4 py-3 text-center">
+                        <td
+                          onClick={() =>
+                            navigate(`project-applicants/${proj.id}`)
+                          }
+                          className="px-4 py-3 text-center"
+                        >
+                          {proj.title}
+                        </td>
+                        <td
+                          onClick={() =>
+                            navigate(`project-applicants/${proj.id}`)
+                          }
+                          className="px-4 py-3 text-center"
+                        >
                           {formatDate(proj.startDate)}
                         </td>
-                        <td className="px-4 py-3 text-center">
+                        <td
+                          onClick={() =>
+                            navigate(`project-applicants/${proj.id}`)
+                          }
+                          className="px-4 py-3 text-center"
+                        >
                           {formatDate(proj.endDate)}
                         </td>
-                        <td className="px-4 py-3 text-center text-blue-600">
+                        <td
+                          onClick={() =>
+                            navigate(`project-applicants/${proj.id}`)
+                          }
+                          className="px-4 py-3 text-center text-blue-600"
+                        >
                           {formatDateRange(proj.publicationDate)}
                         </td>
-                        <td className="px-4 py-3 text-center">{proj.price}</td>
-                        <td className="px-4 py-3 text-center">
+                        <td
+                          onClick={() =>
+                            navigate(`project-applicants/${proj.id}`)
+                          }
+                          className="px-4 py-3 text-center"
+                        >
+                          {proj.price}
+                        </td>
+                        <td
+                          onClick={() =>
+                            navigate(`project-applicants/${proj.id}`)
+                          }
+                          className="px-4 py-3 text-center"
+                        >
                           {proj.applicantsCount}
                         </td>
-                        <td className="px-4 py-3 text-gray-400 text-center cursor-pointer">
-                          <button className="flex items-center gap-1 text-[#38BF4C]">
+                        <td
+                          onClick={() => navigate(`edit-project/${proj.id}`)}
+                          className="px-4 py-3 text-gray-400 text-center cursor-pointer hover:brightness-120"
+                        >
+                          <button className="flex items-center gap-1 text-[#38BF4C] w-full">
                             Edit
                             <img
                               src={pen}

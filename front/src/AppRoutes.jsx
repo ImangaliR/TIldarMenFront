@@ -21,6 +21,7 @@ import RoleBasedRoute from "./components/rounting/RoleBasedRoute.jsx/RoleBasedRo
 import TranslatorDetails from "./pages/Home/TranslatorDetails";
 import CreateProject from "./pages/Profile/CreateProject";
 import ForgotPassword from "./pages/Login/ForgotPassword";
+import EditProject from "./pages/Profile/EditProject";
 
 const AppRoutes = () => {
   const { userRole, userId } = useUser();
@@ -71,6 +72,7 @@ const AppRoutes = () => {
                   path="project-applicants/:id"
                   element={<ProjectApplicants />}
                 />
+                <Route path="edit-project/:id" element={<EditProject />} />
               </Route>
               <Route path="settings" element={<Settings />} />
             </Route>
