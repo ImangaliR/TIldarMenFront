@@ -44,7 +44,7 @@ function ForgotPassword() {
     }
   };
 
-  const handleVerifyCode = async () => {
+  const verifyCode = async () => {
     if (!email) {
       toast.warn("Please enter an email first");
       return;
@@ -58,7 +58,7 @@ function ForgotPassword() {
     try {
       await api.post(`/users/verify-code`, data);
     } catch (err) {
-      if (err.data?.includes("Invalid verification code")) {
+      if (err.response?.data?.data?.includes("Invalid verification code")) {
         toast.error("Invalid verification code");
       } else {
         toast.error("Something went wrong");
@@ -83,8 +83,8 @@ function ForgotPassword() {
     }
 
     try {
-      await handleVerifyCode();
-    } catch {
+      await verifyCode();
+    } catch (err) {
       setLoading(false);
       return;
     }
@@ -157,7 +157,7 @@ function ForgotPassword() {
                     maxLength={6}
                     minLength={6}
                     className="rounded-lg border-2 border-[#d1d5d8] bg-white
-            pl-4 pt-2 pb-2 shadow-xs w-55 lg:w-100 mt-1"
+            pl-4 pt-2 pb-2 shadow-xs mt-1"
                   />
                   <div className="relative">
                     <input
@@ -169,8 +169,8 @@ function ForgotPassword() {
                       }}
                       value={password}
                       minLength={8}
-                      className="rounded-lg border-2 border-[#d1d5d8] bg-white
-            pl-4 pt-2 pb-2 shadow-xs w-55 lg:w-100 mt-1"
+                      className="rounded-lg border-2 w-full border-[#d1d5d8] bg-white
+            pl-4 pt-2 pb-2 shadow-xs mt-1"
                     />
                     <img
                       src={showPassword ? openeye : hiddeneye}
@@ -190,8 +190,8 @@ function ForgotPassword() {
                       }}
                       value={confirmPassword}
                       minLength={8}
-                      className={`rounded-lg border-2 border-[#d1d5d8] bg-white
-            pl-4 pt-2 pb-2 shadow-xs w-55 lg:w-100 mt-1 ${
+                      className={`rounded-lg border-2 w-full border-[#d1d5d8] bg-white
+            pl-4 pt-2 pb-2 shadow-xs mt-1 ${
               !passwordMatch ? "border-red-400" : "border-gray-300"
             }`}
                     />
