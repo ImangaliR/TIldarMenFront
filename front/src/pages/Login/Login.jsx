@@ -96,6 +96,7 @@ function Login() {
               <div className="flex justify-end w-73 md:w-88">
                 <button
                   type="button"
+                  onClick={() => navigate("/forgot-password")}
                   className="text-[#8F8F8F] text-sm mt-2 mb-5"
                 >
                   Forgot password?

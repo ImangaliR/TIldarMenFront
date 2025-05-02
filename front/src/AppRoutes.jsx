@@ -20,6 +20,7 @@ import ProjectApplicants from "./pages/Profile/ProjectApplicants";
 import RoleBasedRoute from "./components/rounting/RoleBasedRoute.jsx/RoleBasedRoute";
 import TranslatorDetails from "./pages/Home/TranslatorDetails";
 import CreateProject from "./pages/Profile/CreateProject";
+import ForgotPassword from "./pages/Login/ForgotPassword";
 
 const AppRoutes = () => {
   const { userRole, userId } = useUser();
@@ -29,6 +30,7 @@ const AppRoutes = () => {
       {/* Public Routes */}
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
+      <Route path="/forgot-password" element={<ForgotPassword />} />
       <Route index element={<Navigate to="/home" replace />} />
       <Route path="home" element={<Home />} />
       <Route path="project-catalog" element={<ProjectCatalog />} />
