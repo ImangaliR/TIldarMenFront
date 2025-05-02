@@ -100,17 +100,8 @@ const EditProject = () => {
   }, []);
 
   const toInputDate = (dateStr) => {
-    try {
-      // Remove microseconds if present (e.g., "2025-04-20T16:45:33.76785" → "2025-04-20T16:45:33.767")
-      const safeDateStr = dateStr.replace(/\.\d{4,}/, (match) =>
-        match.slice(0, 4)
-      );
-      const date = new Date(safeDateStr);
-      if (isNaN(date)) return "";
-      return date.toISOString().split("T")[0];
-    } catch {
-      return "";
-    }
+    if (!dateStr) return "";
+    return dateStr.split("T")[0];
   };
 
   const handleLanguageCheck = (item) => {
@@ -180,7 +171,7 @@ const EditProject = () => {
       .finally(setLoading(false));
   };
 
-  console.log(startDate);
+  console.log(jobDetails);
 
   return (
     <>

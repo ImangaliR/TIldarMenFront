@@ -55,7 +55,7 @@ const JobCards = ({ job }) => {
                 ))}
               </div>
             </div>
-            <h1 className="top-0 text-lg font-bold">Price: {job?.price}</h1>
+            <h1 className="top-0 text-lg font-bold">Price: {job?.price}₸</h1>
           </div>
         </div>
         <div className="flex items-baseline mb-6">

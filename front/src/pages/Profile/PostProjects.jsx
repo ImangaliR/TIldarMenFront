@@ -91,13 +91,13 @@ const PostProjects = () => {
                     {projects?.map((proj, idx) => (
                       <tr
                         key={idx}
-                        className={`hover:bg-blue-50 cursor-pointer`}
+                        className={`hover:bg-blue-50 cursor-pointer text-[#7D7D7D]`}
                       >
                         <td
                           onClick={() =>
                             navigate(`project-applicants/${proj.id}`)
                           }
-                          className="px-4 py-3 text-center"
+                          className="px-4 py-3 text-center text-black"
                         >
                           {proj.title}
                         </td>
@@ -131,13 +131,13 @@ const PostProjects = () => {
                           }
                           className="px-4 py-3 text-center"
                         >
-                          {proj.price}
+                          {proj.price}₸
                         </td>
                         <td
                           onClick={() =>
                             navigate(`project-applicants/${proj.id}`)
                           }
-                          className="px-4 py-3 text-center"
+                          className="px-4 py-3 text-center text-blue-600"
                         >
                           {proj.applicantsCount}
                         </td>
