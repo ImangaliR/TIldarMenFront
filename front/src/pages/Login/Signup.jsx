@@ -34,6 +34,7 @@ function Signup() {
       email: email,
       phoneNumber: phoneNumber,
       password: password,
+      confirmPassword: confirmPassword,
       role: role,
       code: verificationCode,
     };
