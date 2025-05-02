@@ -152,7 +152,7 @@ const CreateProject = () => {
                   Cancel
                 </button>
                 <button
-                  type="sumbit"
+                  type="submit"
                   className="py-2 px-4 text-[#38BF4C] border-1 rounded-lg"
                 >
                   Publish
@@ -308,14 +308,6 @@ const CreateProject = () => {
                 className="resize-none w-full h-30 border-1 border-[#DCDCDC] rounded-lg p-3"
               />
             </div>
-            {/* <div className="grid grid-cols-2 gap-5 w-fit">
-              <button className="text-[#38BF4C] border-1 rounded-lg py-2 px-4">
-                Preview
-              </button>
-              <button className="text-[#38BF4C] border-1 rounded-lg py-2 px-4">
-                Save as Draft
-              </button>
-            </div> */}
           </form>
         </div>
       </div>
