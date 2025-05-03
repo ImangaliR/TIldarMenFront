@@ -254,6 +254,28 @@ Max. 300 symbols"
                     className="border rounded"
                     title="PDF Preview"
                   />
+                  <div className="flex gap-3 mt-5">
+                    <button
+                      onClick={() => {
+                        setProject(null);
+                        setProjectPreview(null);
+                      }}
+                      className="w-22 h-8 border-1 rounded-lg"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      onClick={addProject}
+                      className="w-22 h-8 text-[#38BF4C] border-1 rounded-lg"
+                    >
+                      Add
+                    </button>
+                    {loading && (
+                      <div className="flex h-full items-center justify-center">
+                        <SimpleLoader className="h-7" />
+                      </div>
+                    )}
+                  </div>
                 </>
               ) : (
                 <label
@@ -264,36 +286,13 @@ Max. 300 symbols"
                 </label>
               )}
               <div className="flex justify-start mt-10 gap-5">
-                {user?.data?.projectUrls?.[0] ? (
+                {user?.data?.projectUrls?.[0] && (
                   <button
                     onClick={deleteProject}
                     className="w-25 h-8 text-[#FF0000] border-1 rounded-lg"
                   >
                     Delete
                   </button>
-                ) : (
-                  <div className="flex gap-5">
-                    <button
-                      onClick={() => {
-                        setProject(null);
-                        setProjectPreview(null);
-                      }}
-                      className="w-25 h-8 border-1 rounded-lg"
-                    >
-                      Cancel
-                    </button>
-                    <button
-                      onClick={addProject}
-                      className="w-25 h-8 text-[#38BF4C] border-1 rounded-lg"
-                    >
-                      Add
-                    </button>
-                  </div>
-                )}
-                {loading && (
-                  <div className="flex h-full items-center justify-center">
-                    <SimpleLoader className="h-7" />
-                  </div>
                 )}
               </div>
             </div>

@@ -114,13 +114,38 @@ const Certificate = () => {
                   required
                 />
                 {certificate ? (
-                  <iframe
-                    src={certificate || previewUrl}
-                    width={240}
-                    height="100%"
-                    className="border rounded mt-1"
-                    title="PDF Preview"
-                  />
+                  <div>
+                    <iframe
+                      src={certificate || previewUrl}
+                      width={240}
+                      height={150}
+                      className="border rounded mt-1"
+                      title="PDF Preview"
+                    />
+                    <div className="flex items-center justify-end gap-3 mt-5">
+                      {loading && (
+                        <div className="flex h-full items-center justify-center">
+                          <SimpleLoader className="h-7" />
+                        </div>
+                      )}
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setPreviewUrl(null);
+                          setCertificate(null);
+                        }}
+                        className="w-22 h-8 border-1 rounded-lg"
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        type="submit"
+                        className="w-22 h-8 text-[#38BF4C] border-1 rounded-lg"
+                      >
+                        Add
+                      </button>
+                    </div>
+                  </div>
                 ) : (
                   <label
                     htmlFor="fileIn"
@@ -130,33 +155,10 @@ const Certificate = () => {
                   </label>
                 )}
               </div>
-              <div className="flex items-center justify-end mt-5 gap-5">
-                {loading && (
-                  <div className="flex h-full items-center justify-center">
-                    <SimpleLoader className="h-7" />
-                  </div>
-                )}
-                <button
-                  type="button"
-                  onClick={() => {
-                    setPreviewUrl(null);
-                    setCertificate(null);
-                  }}
-                  className="w-22 h-8 border-1 rounded-lg"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  className="w-22 h-8 text-[#38BF4C] border-1 rounded-lg"
-                >
-                  Add
-                </button>
-              </div>
             </div>
           </div>
         </form>
-        <div>
+        <div className="mt-10">
           {user?.data?.certificates &&
             user?.data?.certificates.map((certificate) => (
               <div>
@@ -197,11 +199,6 @@ const Certificate = () => {
                   </div>
                 </div>
                 <div className="flex justify-end mt-3 gap-5">
-                  {loading && (
-                    <div className="flex h-full items-center justify-center">
-                      <SimpleLoader className="h-7" />
-                    </div>
-                  )}
                   <button
                     type="button"
                     onClick={() => deleteCertificate(certificate?.id)}
