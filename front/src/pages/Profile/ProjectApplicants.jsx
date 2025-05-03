@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import api from "../../services/api";
 import { useNavigate, useParams } from "react-router-dom";
 import profileicon from "../../assets/profileicon.png";
+import vector from "../../assets/vector.png";
 
 const statusColors = {
   REJECTED: "#FDD3D0",
@@ -46,12 +47,16 @@ const ProjectApplicants = () => {
   return (
     <>
       <main className="w-full">
-        <button
-          onClick={() => navigate("/employer/post-projects")}
-          className="text-[#317BFF] my-2"
-        >
-          back
-        </button>
+        <div className="flex items-center text-lg gap-3 ml-5">
+          <button
+            onClick={() => navigate("/employer/post-projects")}
+            className="my-2"
+          >
+            Post projects
+          </button>
+          <img src={vector} alt="vector icon" className="w-2" />
+          <h1 className="text-[#317BFF]">Project applicants</h1>
+        </div>
         <div className="bg-white w-280 h-200 rounded-lg shadow-xs">
           <div className="overflow-x-auto p-20">
             {applicants?.length !== 0 ? (

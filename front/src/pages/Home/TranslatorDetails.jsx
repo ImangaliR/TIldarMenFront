@@ -156,6 +156,16 @@ const TranslatorDetails = () => {
     }
   };
 
+  const report = async () => {};
+  const leaveRequest = async () => {
+    try {
+      const res = api.post("/job-request/13/send/15/job/2");
+      toast.success("Successfully send request!");
+    } catch (err) {
+      toast.error("Failed to leave request");
+    }
+  };
+
   return (
     <>
       <div>
@@ -207,10 +217,16 @@ const TranslatorDetails = () => {
               {reviewStars(Math.floor(translator?.rating))}
             </div>
             <div className="relative min-w-43">
-              <button className="absolute top-2 right-0 w-fit h-fit text-[#FF0000] bg-white border-1 rounded-sm font-semibold gap-2 px-4 py-1">
+              <button
+                onClick={report}
+                className="absolute top-2 right-0 w-fit h-fit text-[#FF0000] bg-white border-1 rounded-sm font-semibold gap-2 px-4 py-1"
+              >
                 Report
               </button>
-              <button className="absolute bottom-10 right-0 w-fit h-fit bg-[#2A9E97] text-white px-4 py-1 rounded-2xl">
+              <button
+                onClick={leaveRequest}
+                className="absolute bottom-10 right-0 w-fit h-fit bg-[#2A9E97] text-white px-4 py-1 rounded-2xl"
+              >
                 Leave request
               </button>
               <button className="absolute bottom-0 right-0 w-fit h-fit text-[#2A9E97] border-1 px-4 py-1 rounded-2xl">
