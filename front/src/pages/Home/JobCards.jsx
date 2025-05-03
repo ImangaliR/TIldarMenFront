@@ -48,7 +48,7 @@ const JobCards = ({ job }) => {
                   <p
                     key={i}
                     className={`text-[#585858] px-3 py-0.5 rounded-md text-center`}
-                    style={{ backgroundColor: languageColors[i] }}
+                    style={{ backgroundColor: languageColors[i % 10] }}
                   >
                     {language?.name}
                   </p>

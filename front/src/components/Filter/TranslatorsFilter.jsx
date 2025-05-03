@@ -100,8 +100,8 @@ const TranslatorsFilter = ({
   return (
     <>
       <div className="">
-        <section className=" w-65 top-25 bg-white px-3 py-5 rounded-md border-1">
-          <div className="flex items-center justify-between mb-2">
+        <section className=" w-65 top-25 px-3 py-5">
+          <div className="flex items-center justify-between mb-2 bg-white rounded-md p-2">
             <h1 className="text-xl font-bold">Filters</h1>
             <button
               onClick={handleReset}
@@ -112,7 +112,7 @@ const TranslatorsFilter = ({
           </div>
 
           <div className="text-lg font-medium">
-            <div className="mb-5">
+            <div className="mb-5 bg-white rounded-md p-2">
               <h1>Language Filters</h1>
               <div className="max-h-50 overflow-y-auto mt-1">
                 {languages.map((lang, i) => (
@@ -129,7 +129,7 @@ const TranslatorsFilter = ({
               </div>
             </div>
 
-            <div className="mb-5">
+            <div className="mb-5 bg-white rounded-md p-2">
               <h1>Specialization Filters</h1>
               <div className="max-h-60 overflow-y-auto mt-1">
                 {specialization.map((spec, i) => (
@@ -146,7 +146,7 @@ const TranslatorsFilter = ({
               </div>
             </div>
 
-            <div className="mb-5">
+            <div className="mb-5 bg-white rounded-md p-2">
               <h1>Availability & Work Type</h1>
               <div className="mt-1">
                 {availability.map((avai, i) => (
@@ -163,7 +163,7 @@ const TranslatorsFilter = ({
               </div>
             </div>
 
-            <div className="mb-5">
+            <div className="mb-5 bg-white rounded-md p-2">
               <h1>Location Filters</h1>
               <div className="max-h-60 overflow-y-auto mt-1">
                 {location.map((loc, i) => (
@@ -180,7 +180,7 @@ const TranslatorsFilter = ({
               </div>
             </div>
 
-            <div className="mb-5">
+            <div className="mb-5 bg-white rounded-md p-2">
               <h1>Services</h1>
               <div className="max-h-60 overflow-y-auto mt-1">
                 {service.map((ser, i) => (

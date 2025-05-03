@@ -90,8 +90,8 @@ const JobsFilter = ({
 
   return (
     <>
-      <section className="h-fit w-65 bg-white px-3 py-5 rounded-md border-1">
-        <div className="flex items-center justify-between mb-2">
+      <section className="h-fit w-65 px-3 py-5">
+        <div className="flex items-center justify-between mb-2 bg-white rounded-md p-2">
           <h1 className="text-xl font-bold">Filters</h1>
           <button
             onClick={handleReset}
@@ -102,7 +102,7 @@ const JobsFilter = ({
         </div>
 
         <div className="text-lg font-medium">
-          <div className="mb-5">
+          <div className="mb-5 bg-white rounded-md p-2">
             <h1 className="font-semibold">Languages</h1>
             <div className="max-h-50 overflow-y-auto mt-1">
               {languages.map((lang, i) => (
@@ -119,7 +119,7 @@ const JobsFilter = ({
             </div>
           </div>
 
-          <div className="mb-5">
+          <div className="mb-5 bg-white rounded-md p-2">
             <h1 className="font-semibold">Specializations</h1>
             <div className="max-h-60 overflow-y-auto mt-1">
               {specialization.map((spec, i) => (
@@ -136,7 +136,7 @@ const JobsFilter = ({
             </div>
           </div>
 
-          <div className="mb-5">
+          <div className="mb-5 bg-white rounded-md p-2">
             <h1 className="font-semibold">Locations</h1>
             <div className="max-h-60 overflow-y-auto mt-1">
               {location.map((loc, i) => (
@@ -153,7 +153,7 @@ const JobsFilter = ({
             </div>
           </div>
 
-          <div className="mb-5">
+          <div className="mb-5 bg-white rounded-md p-2">
             <h1 className="font-semibold">Services</h1>
             <div className="max-h-60 overflow-y-auto mt-1">
               {service.map((ser, i) => (
