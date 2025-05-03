@@ -39,9 +39,16 @@ function Signup() {
       code: verificationCode,
     };
 
+    if (verificationCode === "") {
+      toast.warn("Verify your email first");
+      setLoading(false);
+      return;
+    }
+
     if (password !== confirmPassword) {
       setPasswordMatch(false);
       toast.warn("Passwords don't match");
+      setLoading(false);
       return;
     }
 
@@ -97,7 +104,7 @@ function Signup() {
             name="signup-form"
             className="bg-white w-150 h-fit md:180 lg:w-235 pl-15 pr-15 rounded-2xl shadow-sm"
           >
-            <button onClick={() => navigate("/home")}>
+            <button type="button" onClick={() => navigate("/home")}>
               <img src={logo} alt="logo" className="w-15 h-15 mt-8 mb-2" />
             </button>
             <h1 className="text-3xl md:text-5xl">Sign up</h1>
@@ -283,7 +290,10 @@ function Signup() {
               </label>
             </div>
             <div className="flex justify-between w-full mt-8 font-medium">
-              <button className="w-55 lg:w-100 pt-2 pb-2 rounded-lg outline-1 outline-[#838383]">
+              <button
+                type="button"
+                className="w-55 lg:w-100 pt-2 pb-2 rounded-lg outline-1 outline-[#838383]"
+              >
                 Cancel
               </button>
               <button
@@ -296,6 +306,7 @@ function Signup() {
             <div className="flex justify-center w-full mt-8 text-[#838383] font-medium md:text-lg mb-2">
               <p>Already have an account?</p>
               <button
+                type="button"
                 onClick={() => navigate("/login")}
                 className="text-[#3949AB]"
               >

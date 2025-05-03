@@ -256,7 +256,7 @@ const TranslatorDetails = () => {
                   <p
                     key={i}
                     className={`w-full text-sm text-[#585858] px-3 py-1 rounded-md text-center`}
-                    style={{ backgroundColor: languageColors[i] }}
+                    style={{ backgroundColor: languageColors[i % 10] }}
                   >
                     {language?.name}
                   </p>
@@ -272,7 +272,7 @@ const TranslatorDetails = () => {
                   <p
                     key={i}
                     className={`w-full text-sm text-[#585858] px-3 py-1 rounded-md text-center`}
-                    style={{ backgroundColor: languageColors[i] }}
+                    style={{ backgroundColor: languageColors[i % 10] }}
                   >
                     {service?.name}
                   </p>
@@ -286,7 +286,7 @@ const TranslatorDetails = () => {
                   <p
                     key={i}
                     className={`w-full text-[#585858] px-3 py-1 rounded-md text-center`}
-                    style={{ backgroundColor: languageColors[i] }}
+                    style={{ backgroundColor: languageColors[i % 10] }}
                   >
                     {specialization?.name}
                   </p>
