@@ -292,6 +292,7 @@ function Signup() {
             <div className="flex justify-between w-full mt-8 font-medium">
               <button
                 type="button"
+                onClick={() => navigate("/login")}
                 className="w-55 lg:w-100 pt-2 pb-2 rounded-lg outline-1 outline-[#838383]"
               >
                 Cancel
