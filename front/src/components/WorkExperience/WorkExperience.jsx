@@ -130,52 +130,51 @@ const WorkExperience = ({ works }) => {
         </form>
         {works &&
           works?.map((work, i) => (
-            <div
-              key={i}
-              className="grid justify-center bg-[#EAF4F4] outline-1 outline-[#dcdcdc] rounded-sm py-5"
-            >
-              <div className="flex gap-3">
-                <p className="min-w-20">Role*</p>
-                <input
-                  type="text"
-                  defaultValue={work?.position}
-                  className="px-3 bg-[#EAF4F4] border-1 border-[#DCDCDC] rounded-sm w-70 h-8"
-                />
-              </div>
-              <div className="flex gap-3 mt-2">
-                <p className="min-w-20">Company</p>
-                <input
-                  type="text"
-                  defaultValue={work?.companyName}
-                  className="px-3 bg-[#EAF4F4] border-1 border-[#DCDCDC] rounded-sm w-70 h-8"
-                />
-              </div>
-              <div className="flex gap-3 mt-2">
-                <p className="min-w-20">Duration*</p>
-                <div className="flex gap-2">
+            <div key={i}>
+              <div className="grid justify-center bg-[#EAF4F4] outline-1 outline-[#dcdcdc] rounded-sm py-5">
+                <div className="flex gap-3">
+                  <p className="min-w-20">Role*</p>
                   <input
-                    type="date"
-                    defaultValue={toInputDate(work?.startDate)}
-                    placeholder="Start Date"
-                    className="px-3 bg-[#EAF4F4] border-1 border-[#DCDCDC] rounded-sm w-34 h-8 pl-3 text-sm"
+                    type="text"
+                    defaultValue={work?.position}
+                    className="px-3 bg-[#EAF4F4] border-1 border-[#DCDCDC] rounded-sm w-70 h-8"
                   />
+                </div>
+                <div className="flex gap-3 mt-2">
+                  <p className="min-w-20">Company</p>
                   <input
-                    type="date"
-                    defaultValue={toInputDate(work?.endDate)}
-                    placeholder="End Date"
-                    className="px-3 bg-[#EAF4F4] border-1 border-[#DCDCDC] rounded-sm w-34 h-8 pl-3 text-sm"
+                    type="text"
+                    defaultValue={work?.companyName}
+                    className="px-3 bg-[#EAF4F4] border-1 border-[#DCDCDC] rounded-sm w-70 h-8"
+                  />
+                </div>
+                <div className="flex gap-3 mt-2">
+                  <p className="min-w-20">Duration*</p>
+                  <div className="flex gap-2">
+                    <input
+                      type="date"
+                      defaultValue={toInputDate(work?.startDate)}
+                      placeholder="Start Date"
+                      className="px-3 bg-[#EAF4F4] border-1 border-[#DCDCDC] rounded-sm w-34 h-8 pl-3 text-sm"
+                    />
+                    <input
+                      type="date"
+                      defaultValue={toInputDate(work?.endDate)}
+                      placeholder="End Date"
+                      className="px-3 bg-[#EAF4F4] border-1 border-[#DCDCDC] rounded-sm w-34 h-8 pl-3 text-sm"
+                    />
+                  </div>
+                </div>
+                <div className="flex gap-3 mt-2">
+                  <p className="min-w-20">Description</p>
+                  <textarea
+                    type="text"
+                    defaultValue={work?.description}
+                    className="px-3 bg-[#EAF4F4] border-1 border-[#DCDCDC] p-3 w-70 h-30 rounded-sm text-sm resize-none"
                   />
                 </div>
               </div>
-              <div className="flex gap-3 mt-2">
-                <p className="min-w-20">Description</p>
-                <textarea
-                  type="text"
-                  defaultValue={work?.description}
-                  className="px-3 bg-[#EAF4F4] border-1 border-[#DCDCDC] p-3 w-70 h-30 rounded-sm text-sm resize-none"
-                />
-              </div>
-              <div className="flex justify-end mt-4">
+              <div className="flex justify-end mt-10">
                 <button
                   onClick={() => deleteWork(work?.id)}
                   className="w-25 h-8 text-[#FF0000] border-1 rounded-lg"
