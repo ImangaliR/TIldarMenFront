@@ -38,10 +38,13 @@ const ProfileEditing = () => {
     user?.data?.workExperiences?.length || 0
   );
 
-  const handleProjectChange = (e) => {
+  const handleFileChange = (e) => {
     const file = e.target.files[0];
-    setProject(file);
-    setProjectPreview(URL.createObjectURL(file));
+    console.log(file);
+    if (file) {
+      setProject(file);
+      setProjectPreview(URL.createObjectURL(file));
+    }
   };
 
   const addIntroduction = async () => {
@@ -57,17 +60,26 @@ const ProfileEditing = () => {
 
   const addProject = async () => {
     setLoading(true);
+
+    if (!project) {
+      toast.warn("Select a file first");
+      setLoading(false);
+      return;
+    }
+
     const formData = new FormData();
     formData.append("file", project);
 
     try {
       const response = await api.post(
-        `translator/${userId}/certificate`,
+        `translator/${userId}/project`,
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },
         }
       );
+      const updatedProfile = await getProfile();
+      setUser(updatedProfile);
       toast.success("Added project successfully!");
     } catch (err) {
       toast.error("Something went wrong.");
@@ -76,7 +88,19 @@ const ProfileEditing = () => {
     }
   };
 
+  const deleteProject = async () => {
+    try {
+      const response = await api.delete(`translator/${userId}/project/1`);
+      const updatedProfile = await getProfile();
+      setUser(updatedProfile);
+      toast.success("Deleted project successfully!");
+    } catch (err) {
+      toast.error("Something went wrong.");
+    }
+  };
+
   useEffect(() => {
+    setProject(user?.data?.projectUrls?.[0]);
     setWork(user?.data?.workExperiences);
     if (!availability && user.data.availability) {
       setAvailability(user.data.availability);
@@ -98,8 +122,6 @@ const ProfileEditing = () => {
       toast.error("Something went wrong.");
     }
   };
-
-  console.log(user);
 
   return (
     <>
@@ -189,7 +211,9 @@ Max. 300 symbols"
               <UploadVideo />
             </div>
           </div>
+
           <hr className="mt-10 mb-5" />
+
           <div className="pl-10 pr-20">
             <h1 className="text-2xl font-bold">
               Language & Translation Details
@@ -200,7 +224,9 @@ Max. 300 symbols"
               <SpecializationDropdown />
             </div>
           </div>
+
           <hr className="mt-10 mb-5" />
+
           <div className="pl-10 pr-20">
             <h1 className="text-2xl font-bold">Work & Project Experience</h1>
             <div>
@@ -209,42 +235,72 @@ Max. 300 symbols"
                 <WorkExperience works={work} />
               </div>
             </div>
+
             <div className="mt-10">
               <h1 className="font-bold text-lg mb-2">Projects</h1>
               <input
+                id="file"
                 type="file"
-                id="fileInput"
+                accept=".pdf,image/*,video/*"
+                onChange={handleFileChange}
                 className="hidden"
-                onChange={handleProjectChange}
               />
               {project ? (
-                <iframe
-                  src={project || projectPreview}
-                  width={240}
-                  height="100%"
-                  className="border"
-                  title="PDF Preview"
-                />
+                <>
+                  <iframe
+                    src={project || projectPreview}
+                    width={240}
+                    height="100%"
+                    className="border rounded"
+                    title="PDF Preview"
+                  />
+                </>
               ) : (
                 <label
-                  htmlFor="fileInput"
+                  htmlFor="file"
                   className="block bg-[#EAF4F4] border-1 border-[#DCDCDC] p-3 w-50 h-30 rounded-sm text-center pt-12 cursor-pointer"
                 >
                   Upload
                 </label>
               )}
-
-              <div className="flex justify-end w-50 mt-10 gap-2">
-                <button
-                  onClick={addProject}
-                  className="w-25 h-8 text-[#38BF4C] border-1 rounded-lg"
-                >
-                  Add
-                </button>
+              <div className="flex justify-start mt-10 gap-5">
+                {user?.data?.projectUrls?.[0] ? (
+                  <button
+                    onClick={deleteProject}
+                    className="w-25 h-8 text-[#FF0000] border-1 rounded-lg"
+                  >
+                    Delete
+                  </button>
+                ) : (
+                  <div className="flex gap-5">
+                    <button
+                      onClick={() => {
+                        setProject(null);
+                        setProjectPreview(null);
+                      }}
+                      className="w-25 h-8 border-1 rounded-lg"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      onClick={addProject}
+                      className="w-25 h-8 text-[#38BF4C] border-1 rounded-lg"
+                    >
+                      Add
+                    </button>
+                  </div>
+                )}
+                {loading && (
+                  <div className="flex h-full items-center justify-center">
+                    <SimpleLoader className="h-7" />
+                  </div>
+                )}
               </div>
             </div>
           </div>
+
           <hr className="mt-10 mb-5" />
+
           <div className="pl-10 pr-20 pb-5">
             <h1 className="text-2xl font-bold">Education & Certifications</h1>
             <div className="flex justify-between">

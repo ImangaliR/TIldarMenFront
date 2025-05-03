@@ -25,6 +25,8 @@ const PostProjects = () => {
       });
   }, []);
 
+  useEffect(() => {}, [projects]);
+
   const formatDate = (isoDate) => {
     const date = new Date(isoDate);
     return date.toLocaleDateString("en-GB"); // outputs "13/04/2025"
