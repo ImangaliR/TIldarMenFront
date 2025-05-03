@@ -4,6 +4,7 @@ import { useUser } from "../../utils/contexts/UserContext";
 import SimpleLoader from "../Loader/SimpleLoader";
 import { toast } from "react-toastify";
 import api from "../../services/api";
+import { getProfile } from "../../services/ProfileService/ProfileService";
 
 const Education = () => {
   const [loading, setLoading] = useState(false);
@@ -71,6 +72,9 @@ const Education = () => {
       setUser(updatedProfile);
       setEducationPreview(null);
       setEducation(null);
+      setEducationUni("");
+      setEducationDegree("");
+      setEducationYear("");
       toast.success("Deleted education successfully!");
     } catch (err) {
       toast.error("Something went wrong.");
