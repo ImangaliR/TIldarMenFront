@@ -2,6 +2,7 @@ import profileicon from "../../assets/profileicon.png";
 import employericon from "../../assets/employericon.png";
 import reviewstar from "../../assets/reviewstar.png";
 import reviewstarfull from "../../assets/reviewstarfull.png";
+import deletesign from "../../assets/delete_sign.png";
 import { useParams, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import api from "./../../services/api";
@@ -23,77 +24,27 @@ const languageColors = {
 
 const TranslatorDetails = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [translator, setTranslator] = useState();
+  const [jobs, setJobs] = useState([]);
   const [reviews, setReviews] = useState([]);
   const [rating, setRating] = useState(0);
   const [description, setDescription] = useState("");
   const [hover, setHover] = useState(0);
-  const { userId } = useUser();
-  const navigate = useNavigate();
-  const reviewStars = (rating) => {
-    switch (rating) {
-      case 1:
-        return (
-          <div className="flex items-center gap-2">
-            <img src={reviewstarfull} alt="full star" className="w-4 h-4" />
-            <img src={reviewstar} alt="empty star" className="w-4 h-4" />
-            <img src={reviewstar} alt="empty star" className="w-4 h-4" />
-            <img src={reviewstar} alt="empty star" className="w-4 h-4" />
-            <img src={reviewstar} alt="empty star" className="w-4 h-4" />
-          </div>
-        );
-      case 2:
-        return (
-          <div className="flex items-center gap-2">
-            <img src={reviewstarfull} alt="full star" className="w-4 h-4" />
-            <img src={reviewstarfull} alt="full star" className="w-4 h-4" />
-            <img src={reviewstar} alt="empty star" className="w-4 h-4" />
-            <img src={reviewstar} alt="empty star" className="w-4 h-4" />
-            <img src={reviewstar} alt="empty star" className="w-4 h-4" />
-          </div>
-        );
-      case 3:
-        return (
-          <div className="flex items-center gap-2">
-            <img src={reviewstarfull} alt="full star" className="w-4 h-4" />
-            <img src={reviewstarfull} alt="full star" className="w-4 h-4" />
-            <img src={reviewstarfull} alt="full star" className="w-4 h-4" />
-            <img src={reviewstar} alt="empty star" className="w-4 h-4" />
-            <img src={reviewstar} alt="empty star" className="w-4 h-4" />
-          </div>
-        );
-      case 4:
-        return (
-          <div className="flex items-center gap-2">
-            <img src={reviewstarfull} alt="full star" className="w-4 h-4" />
-            <img src={reviewstarfull} alt="full star" className="w-4 h-4" />
-            <img src={reviewstarfull} alt="full star" className="w-4 h-4" />
-            <img src={reviewstarfull} alt="full star" className="w-4 h-4" />
-            <img src={reviewstar} alt="empty star" className="w-4 h-4" />
-          </div>
-        );
-      case 5:
-        return (
-          <div className="flex items-center gap-2">
-            <img src={reviewstarfull} alt="full star" className="w-4 h-4" />
-            <img src={reviewstarfull} alt="full star" className="w-4 h-4" />
-            <img src={reviewstarfull} alt="full star" className="w-4 h-4" />
-            <img src={reviewstarfull} alt="full star" className="w-4 h-4" />
-            <img src={reviewstarfull} alt="full star" className="w-4 h-4" />
-          </div>
-        );
-      default:
-        return (
-          <div className="flex items-center gap-2">
-            <img src={reviewstar} alt="empty star" className="w-4 h-4" />
-            <img src={reviewstar} alt="empty star" className="w-4 h-4" />
-            <img src={reviewstar} alt="empty star" className="w-4 h-4" />
-            <img src={reviewstar} alt="empty star" className="w-4 h-4" />
-            <img src={reviewstar} alt="empty star" className="w-4 h-4" />
-          </div>
-        );
-    }
-  };
+  const { userId, userRole } = useUser();
+  const [isOpen, setIsOpen] = useState(false);
+  const reviewStars = (rating) => (
+    <div className="flex items-center gap-1">
+      {[...Array(5)].map((_, i) => (
+        <img
+          key={i}
+          src={i < rating ? reviewstarfull : reviewstar}
+          alt={i < rating ? "full star" : "empty star"}
+          className="w-4 h-4"
+        />
+      ))}
+    </div>
+  );
 
   useEffect(() => {
     api
@@ -156,13 +107,42 @@ const TranslatorDetails = () => {
     }
   };
 
+  useEffect(() => {
+    api
+      .get(`/employer/${userId}/jobs`)
+      .then((res) => {
+        setJobs(res.data.data);
+      })
+      .catch((err) => {
+        console.error("Error fetching locations:", err);
+      });
+  }, [userId]);
+
   const report = async () => {};
-  const leaveRequest = async () => {
+
+  const handleLeaveRequest = () => {
+    if (userRole !== "EMPLOYER") {
+      toast.warn("Only employers can leave a request");
+      return;
+    }
+    setIsOpen(!isOpen);
+  };
+  const leaveRequest = async (jobId) => {
     try {
-      const res = api.post("/job-request/13/send/15/job/2");
+      const res = await api.post(
+        `/job-request/${userId}/send/${id}/job/${jobId}`
+      );
       toast.success("Successfully send request!");
     } catch (err) {
-      toast.error("Failed to leave request");
+      if (
+        err.response?.data?.data?.includes(
+          "You already have a request for this translator"
+        )
+      ) {
+        toast.error("You already leaved this request for this translator");
+      } else {
+        toast.error("Failed to leave request");
+      }
     }
   };
 
@@ -223,12 +203,46 @@ const TranslatorDetails = () => {
               >
                 Report
               </button>
-              <button
-                onClick={leaveRequest}
-                className="absolute bottom-10 right-0 w-fit h-fit bg-[#2A9E97] text-white px-4 py-1 rounded-2xl"
-              >
-                Leave request
-              </button>
+              <div>
+                {isOpen && (
+                  <div className="fixed inset-0 bg-black/30 backdrop-blur-sm z-50 flex items-center justify-center">
+                    <div className="bg-white w-[600px] rounded-xl max-w-full h-[300px] max-h-full p-6 shadow-lg relative">
+                      {/* Modal Header */}
+                      <div className="flex justify-between items-center mb-4">
+                        <h2 className="text-lg font-semibold">Your Projects</h2>
+                        <button
+                          className="text-gray-500 hover:text-black"
+                          onClick={handleLeaveRequest}
+                        >
+                          <img
+                            src={deletesign}
+                            alt="close sign"
+                            className="w-6 h-6"
+                          />
+                        </button>
+                      </div>
+                      {/* Job List */}
+                      <div className="space-y-3 max-h-45 overflow-y-auto">
+                        {jobs.map((job) => (
+                          <div
+                            key={job.id}
+                            onClick={() => leaveRequest(job.id)}
+                            className="border border-gray-200 rounded p-3 bg-gray-50 cursor-pointer"
+                          >
+                            <p className="text-center">{job.title}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                )}
+                <button
+                  onClick={handleLeaveRequest}
+                  className="absolute bottom-10 right-0 w-fit h-fit bg-[#2A9E97] text-white px-4 py-1 rounded-2xl"
+                >
+                  Leave request
+                </button>
+              </div>
               <button className="absolute bottom-0 right-0 w-fit h-fit text-[#2A9E97] border-1 px-4 py-1 rounded-2xl">
                 Chat with Translator
               </button>
