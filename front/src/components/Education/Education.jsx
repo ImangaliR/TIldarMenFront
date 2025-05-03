@@ -14,15 +14,9 @@ const Education = () => {
     user?.data?.educations?.[0]?.degreeUrl || null
   );
   const [educationPreview, setEducationPreview] = useState(null);
-  const [educationDegree, setEducationDegree] = useState(
-    user?.data?.educations?.[0]?.degree || ""
-  );
-  const [educationYear, setEducationYear] = useState(
-    user?.data?.educations?.[0]?.graduationYear || ""
-  );
-  const [educationUni, setEducationUni] = useState(
-    user?.data?.educations?.[0]?.university || ""
-  );
+  const [educationDegree, setEducationDegree] = useState("");
+  const [educationYear, setEducationYear] = useState("");
+  const [educationUni, setEducationUni] = useState("");
 
   const handleEducationChange = (e) => {
     const file = e.target.files[0];
@@ -62,12 +56,10 @@ const Education = () => {
     }
   };
 
-  const deleteEducation = async () => {
+  const deleteEducation = async (id) => {
     setLoading(true);
     try {
-      const response = await api.delete(
-        `translator/${userId}/education/${user?.data?.educations?.[0].id}`
-      );
+      const response = await api.delete(`translator/${userId}/education/${id}`);
       const updatedProfile = await getProfile();
       setUser(updatedProfile);
       setEducationPreview(null);
@@ -119,17 +111,6 @@ const Education = () => {
                 className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-60 h-7 rounded-sm text-sm"
               />
             </div>
-            <div className="flex justify-end">
-              {education && (
-                <iframe
-                  src={education || educationPreview}
-                  width={240}
-                  height="100%"
-                  className="border rounded"
-                  title="PDF Preview"
-                />
-              )}
-            </div>
             <div className="w-full flex justify-end mt-3">
               <input
                 required
@@ -146,36 +127,81 @@ const Education = () => {
                   </div>
                 )}
                 <div className="flex items-center gap-2">
-                  {user?.data?.educations?.[0] ? (
-                    <div className="flex justify-end">
-                      <button
-                        type="button"
-                        onClick={deleteEducation}
-                        className="w-25 h-8 text-[#FF0000] border-1 rounded-lg"
-                      >
-                        Delete
-                      </button>
-                    </div>
-                  ) : (
-                    <div className="flex items-center justify-end gap-3">
-                      <label
-                        htmlFor="fileInpt"
-                        className="block border-1 pt-2 px-10 h-10 rounded-md cursor-pointer text-center text-[#38BF4C]"
-                      >
-                        Add Degree
-                      </label>
-                      <button
-                        type="submit"
-                        className="py-2 px-4 text-[#38BF4C] border-1 rounded-md"
-                      >
-                        Save
-                      </button>
-                    </div>
-                  )}
+                  <div className="flex items-center justify-end gap-3">
+                    <label
+                      htmlFor="fileInpt"
+                      className="block border-1 pt-1 px-10 h-8 rounded-md cursor-pointer text-center text-[#38BF4C]"
+                    >
+                      Add Degree
+                    </label>
+                    <button
+                      type="submit"
+                      className="py-1 px-4 text-[#38BF4C] border-1 rounded-md"
+                    >
+                      Save
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
           </form>
+          {user?.data?.educations &&
+            user?.data?.educations.map((education, i) => (
+              <div key={i} className="mt-10">
+                <div className="flex items-center gap-2 my-3">
+                  <h1 className="w-30">Degree:</h1>
+                  <input
+                    required
+                    type="text"
+                    value={education?.degree}
+                    onChange={(e) => setEducationDegree(e.target.value)}
+                    className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-60 h-7 rounded-sm text-sm"
+                  />
+                </div>
+                <div className="flex items-center gap-2 mb-3">
+                  <h1 className="w-30">University Name:</h1>
+                  <input
+                    required
+                    type="text"
+                    value={education?.university}
+                    onChange={(e) => setEducationUni(e.target.value)}
+                    className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-60 h-7 rounded-sm text-sm"
+                  />
+                </div>
+                <div className="flex items-center gap-2 mb-3">
+                  <h1 className="w-30">Graduation Year:</h1>
+                  <input
+                    required
+                    type="text"
+                    value={education?.graduationYear}
+                    onChange={(e) => setEducationYear(e.target.value)}
+                    className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-60 h-7 rounded-sm text-sm"
+                  />
+                </div>
+                <div className="flex items-center justify-end gap-5">
+                  <ul>
+                    <li>
+                      <a
+                        href={education?.degreeUrl}
+                        target="_blank"
+                        className="text-[#38BF4C] border-1 py-1.5 px-4 rounded-lg"
+                      >
+                        Degree
+                      </a>
+                    </li>
+                  </ul>
+                  <div>
+                    <button
+                      type="button"
+                      onClick={() => deleteEducation(education?.id)}
+                      className="py-1 px-4 text-[#FF0000] border-1 rounded-lg"
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
         </div>
       </div>
     </>
