@@ -48,6 +48,11 @@ const Education = () => {
       );
       const updatedProfile = await getProfile();
       setUser(updatedProfile);
+      setEducationPreview(null);
+      setEducation(null);
+      setEducationUni("");
+      setEducationDegree("");
+      setEducationYear("");
       toast.success("Added education successfully!");
     } catch (err) {
       toast.error("Something went wrong.");
@@ -120,28 +125,49 @@ const Education = () => {
                 id="fileInpt"
                 className="hidden"
               />
+
               <div className="flex items-center gap-8">
-                {loading && (
-                  <div className="flex h-full items-center justify-center">
-                    <SimpleLoader className="h-7" />
+                {education ? (
+                  <div>
+                    <iframe
+                      src={education || educationPreview}
+                      width={240}
+                      height="100%"
+                      className="border rounded mt-1"
+                      title="PDF Preview"
+                    />
+                    <div className="flex items-center justify-end gap-3 mt-3">
+                      {loading && (
+                        <div className="flex h-full items-center justify-center">
+                          <SimpleLoader className="h-7" />
+                        </div>
+                      )}
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setEducationPreview(null);
+                          setEducation(null);
+                        }}
+                        className="w-22 h-8 border-1 rounded-lg"
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        type="submit"
+                        className="w-22 h-8 text-[#38BF4C] border-1 rounded-lg"
+                      >
+                        Save
+                      </button>
+                    </div>
                   </div>
+                ) : (
+                  <label
+                    htmlFor="fileInpt"
+                    className="block border-1 pt-1 w-60 h-8 rounded-md cursor-pointer text-center text-[#38BF4C]"
+                  >
+                    Add Degree
+                  </label>
                 )}
-                <div className="flex items-center gap-2">
-                  <div className="flex items-center justify-end gap-3">
-                    <label
-                      htmlFor="fileInpt"
-                      className="block border-1 pt-1 px-10 h-8 rounded-md cursor-pointer text-center text-[#38BF4C]"
-                    >
-                      Add Degree
-                    </label>
-                    <button
-                      type="submit"
-                      className="py-1 px-4 text-[#38BF4C] border-1 rounded-md"
-                    >
-                      Save
-                    </button>
-                  </div>
-                </div>
               </div>
             </div>
           </form>
