@@ -1,41 +1,47 @@
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import profileicon from "../../assets/profileicon.png";
-import pen from "../../assets/pen.png";
-import deletesign from "../../assets/delete_sign.png";
 import UploadVideo from "./UploadVideo";
 import SpecializationDropdown from "../../components/Dropdown/SpecializationDropdown";
 import LanguageDropdown from "./../../components/Dropdown/LanguageDropdown";
 import TranslationServicesDropdown from "../../components/Dropdown/TranslationServicesDropdown";
+import AvaibilityDropdown from "../../components/Dropdown/AvailabilityDropdown";
 import WorkExperience from "../../components/WorkExperience/WorkExperience";
 import { useUser } from "../../utils/contexts/UserContext";
-import AvaibilityDropdown from "../../components/Dropdown/AvailabilityDropdown";
 import { toast } from "react-toastify";
-import { updateAvailability } from "../../services/ProfileService/ProfileService";
+import {
+  getProfile,
+  updateAvailability,
+} from "../../services/ProfileService/ProfileService";
 import { useForm } from "react-hook-form";
 import api from "../../services/api";
+import SimpleLoader from "../../components/Loader/SimpleLoader";
+import Education from "../../components/Education/Education";
+import Certificate from "../../components/Certificate/Certificate";
 
 const ProfileEditing = () => {
-  const { user, userId } = useUser();
+  const [loading, setLoading] = useState(false);
+  const { user, userId, setUser } = useUser();
   const [availability, setAvailability] = useState(
     user?.data?.availability || ""
   );
   const [userTitle, setUserTitle] = useState(
     user?.data?.professionalTitle || ""
   );
-  const [editingItemId, setEditingItemId] = useState(null);
   const { handleSubmit } = useForm();
   const [intro, setIntro] = useState(user?.data?.introduction || "");
-  const handleEditClick = (id) => {
-    setEditingItemId(id);
-  };
 
-  const handleCancel = () => {
-    setEditingItemId(null);
-  };
+  const [project, setProject] = useState(user?.data?.projectUrls?.[0] || null);
+  const [projectPreview, setProjectPreview] = useState(null);
 
-  const handleSave = (id) => {
-    console.log(`Saved item ${id}`);
-    setEditingItemId(null);
+  const [work, setWork] = useState(user?.data?.workExperiences || null);
+  const [addWork, setAddWork] = useState(
+    user?.data?.workExperiences?.length || 0
+  );
+
+  const handleProjectChange = (e) => {
+    const file = e.target.files[0];
+    setProject(file);
+    setProjectPreview(URL.createObjectURL(file));
   };
 
   const addIntroduction = async () => {
@@ -49,11 +55,29 @@ const ProfileEditing = () => {
     }
   };
 
-  const addWorkExperience = () => {
-    <WorkExperience />;
+  const addProject = async () => {
+    setLoading(true);
+    const formData = new FormData();
+    formData.append("file", project);
+
+    try {
+      const response = await api.post(
+        `translator/${userId}/certificate`,
+        formData,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        }
+      );
+      toast.success("Added project successfully!");
+    } catch (err) {
+      toast.error("Something went wrong.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
+    setWork(user?.data?.workExperiences);
     if (!availability && user.data.availability) {
       setAvailability(user.data.availability);
       setUserTitle(user.data.professionalTitle);
@@ -74,6 +98,8 @@ const ProfileEditing = () => {
       toast.error("Something went wrong.");
     }
   };
+
+  console.log(user);
 
   return (
     <>
@@ -179,145 +205,52 @@ Max. 300 symbols"
             <h1 className="text-2xl font-bold">Work & Project Experience</h1>
             <div>
               <h1 className="font-bold text-lg mb-2">Work</h1>
-              <div className="flex items-center gap-10 mb-5">
-                <div className="flex w-full h-70 gap-10 items-center">
-                  <button
-                    onClick={addWorkExperience}
-                    className="w-20 h-20 bg-[#EAF4F4] outline-1 outline-[#dcdcdc] rounded-sm text-2xl text-[#777777]"
-                  >
-                    +
-                  </button>
-                  {/* <WorkExperience /> */}
-                </div>
+              <div>
+                <WorkExperience works={work} />
               </div>
             </div>
-            <div>
+            <div className="mt-10">
               <h1 className="font-bold text-lg mb-2">Projects</h1>
-              <input type="file" id="fileInput" className="hidden" />
-              <div>
+              <input
+                type="file"
+                id="fileInput"
+                className="hidden"
+                onChange={handleProjectChange}
+              />
+              {project ? (
+                <iframe
+                  src={project || projectPreview}
+                  width={240}
+                  height="100%"
+                  className="border"
+                  title="PDF Preview"
+                />
+              ) : (
                 <label
                   htmlFor="fileInput"
-                  className="bg-[#EAF4F4] border-1 border-[#DCDCDC] p-3 w-50 h-30 rounded-sm text-sm cursor-pointer"
+                  className="block bg-[#EAF4F4] border-1 border-[#DCDCDC] p-3 w-50 h-30 rounded-sm text-center pt-12 cursor-pointer"
                 >
                   Upload
                 </label>
-              </div>
-            </div>
-            {editingItemId === 4 ? (
-              <div className="flex justify-end mt-15 gap-2">
+              )}
+
+              <div className="flex justify-end w-50 mt-10 gap-2">
                 <button
-                  onClick={handleCancel}
+                  onClick={addProject}
                   className="w-25 h-8 text-[#38BF4C] border-1 rounded-lg"
                 >
-                  Cancel
-                </button>
-                <button
-                  onClick={() => handleSave(4)}
-                  className="w-25 h-8 bg-[#38BF4C] text-white border-1 rounded-lg"
-                >
-                  Save
+                  Add
                 </button>
               </div>
-            ) : (
-              <div className="flex w-full justify-end mt-15">
-                <button
-                  onClick={() => handleEditClick(4)}
-                  className="flex justify-center items-center gap-2 text-[#38BF4C] border-1 rounded-lg w-25 h-8"
-                >
-                  Edit
-                  <img src={pen} alt="pen icon" className="w-4 h-4" />
-                </button>
-              </div>
-            )}
+            </div>
           </div>
           <hr className="mt-10 mb-5" />
           <div className="pl-10 pr-20 pb-5">
             <h1 className="text-2xl font-bold">Education & Certifications</h1>
-            <div className="flex ml-5 gap-25 mt-2">
-              <div>
-                <h1 className="font-bold">Educational Background</h1>
-                <div>
-                  <div className="flex items-center gap-2 my-3">
-                    <h1 className="w-30">Degree:</h1>
-                    <input
-                      type="text"
-                      className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-60 h-7 rounded-sm text-sm"
-                    />
-                  </div>
-                  <div className="flex items-center gap-2 mb-3">
-                    <h1 className="w-30">University Name:</h1>
-                    <input
-                      type="text"
-                      className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-60 h-7 rounded-sm text-sm"
-                    />
-                  </div>
-                  <div className="flex items-center gap-2 mb-3">
-                    <h1 className="w-30">Graduation Year:</h1>
-                    <input
-                      type="text"
-                      className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-60 h-7 rounded-sm text-sm"
-                    />
-                  </div>
-                  <div className="w-full flex justify-end mt-3">
-                    <button className="text-[#38BF4C] border-2 rounded-md pl-6 pr-6 pt-1 pb-1 w-60">
-                      Add Degree
-                    </button>
-                  </div>
-                </div>
-              </div>
-              <div>
-                <h1 className="font-bold">Certifications & Accreditations</h1>
-                <div>
-                  <div className="flex items-center gap-2 my-3">
-                    <h1 className="w-35">Certificate Title:</h1>
-                    <input
-                      type="text"
-                      className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-60 h-7 rounded-sm text-sm"
-                    />
-                  </div>
-                  <div className="flex items-center gap-2 my-3">
-                    <h1 className="w-35">Year of Certification:</h1>
-                    <input
-                      type="text"
-                      className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-60 h-7 rounded-sm text-sm"
-                    />
-                  </div>
-                  <div className="flex gap-2 my-3">
-                    <h1 className="w-35">Upload Certification:</h1>
-                    <input
-                      type="file"
-                      className="bg-[#EAF4F4] border-1 border-[#DCDCDC] p-3 w-60 h-20 rounded-sm text-sm"
-                    />
-                  </div>
-                </div>
-              </div>
+            <div className="flex justify-between">
+              <Education />
+              <Certificate />
             </div>
-            {editingItemId === 5 ? (
-              <div className="flex justify-end mt-15 gap-2">
-                <button
-                  onClick={handleCancel}
-                  className="w-25 h-8 text-[#38BF4C] border-1 rounded-lg"
-                >
-                  Cancel
-                </button>
-                <button
-                  onClick={() => handleSave(5)}
-                  className="w-25 h-8 bg-[#38BF4C] text-white border-1 rounded-lg"
-                >
-                  Save
-                </button>
-              </div>
-            ) : (
-              <div className="flex w-full justify-end mt-15">
-                <button
-                  onClick={() => handleEditClick(5)}
-                  className="flex justify-center items-center gap-2 text-[#38BF4C] border-1 rounded-lg w-25 h-8"
-                >
-                  Edit
-                  <img src={pen} alt="pen icon" className="w-4 h-4" />
-                </button>
-              </div>
-            )}
           </div>
         </main>
       </div>
