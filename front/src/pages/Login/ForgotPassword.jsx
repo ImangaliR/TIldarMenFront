@@ -99,7 +99,7 @@ function ForgotPassword() {
             <p className="text-[#574F4A]">
               We will send you a code to reset your password
             </p>
-            <form onSubmit={handleSubmit(handleResetPassword)} className="mt-5">
+            <div className="mt-5">
               <div className="flex items-center">
                 <p className="mb-2">Email</p>
                 {loading && (
@@ -196,7 +196,7 @@ function ForgotPassword() {
                   </button>
                 </div>
               )}
-            </form>
+            </div>
           </div>
         </main>
       </div>
