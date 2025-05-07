@@ -22,6 +22,8 @@ import TranslatorDetails from "./pages/Home/TranslatorDetails";
 import CreateProject from "./pages/Profile/CreateProject";
 import ForgotPassword from "./pages/Login/ForgotPassword";
 import EditProject from "./pages/Profile/EditProject";
+import Chat from "./pages/Chat/Chat";
+import ChatDetails from "./pages/Chat/ChatDetails";
 
 const AppRoutes = () => {
   const { userRole, userId } = useUser();
@@ -48,6 +50,9 @@ const AppRoutes = () => {
           />
         }
       >
+        <Route path="chat" element={<Chat />}>
+          <Route path="chat-details/:id" element={<ChatDetails />}></Route>
+        </Route>
         <Route element={<BaseLayout />}>
           <Route path="profile" element={<Profile />} />
           {/* <Route path="settings" element={<Settings />} /> */}

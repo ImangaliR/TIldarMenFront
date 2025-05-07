@@ -46,7 +46,10 @@ const Navbar = () => {
           ))}
         </div>
         <div className="flex items-center min-w-30 lg:min-w-40 gap-3">
-          <button className="bg-[#f1f1f1] rounded-full p-2">
+          <button
+            onClick={() => navigate("/chat")}
+            className="bg-[#f1f1f1] rounded-full p-2"
+          >
             <img
               src={chaticon}
               alt="chat icon"
