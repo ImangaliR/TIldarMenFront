@@ -121,7 +121,10 @@ const CreateProject = () => {
         toast.error("Something went wrong");
         console.error("Error filtering users:", err);
       })
-      .finally(setLoading(false));
+      .finally(() => {
+        setLoading(false);
+        navigate("/employer/post-projects");
+      });
   };
 
   return (

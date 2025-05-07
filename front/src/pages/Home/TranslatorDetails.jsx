@@ -143,6 +143,8 @@ const TranslatorDetails = () => {
       } else {
         toast.error("Failed to leave request");
       }
+    } finally {
+      setIsOpen(!isOpen);
     }
   };
 

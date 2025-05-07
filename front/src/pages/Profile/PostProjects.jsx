@@ -23,7 +23,7 @@ const PostProjects = () => {
       .catch((err) => {
         console.error("Error fetching locations:", err);
       });
-  }, []);
+  }, [projects]);
 
   useEffect(() => {}, [projects]);
 
@@ -53,7 +53,7 @@ const PostProjects = () => {
         <div>
           <h1 className="text-3xl font-bold">Posting Projects</h1>
           <div className="bg-white w-280 min-h-170 px-15 py-10 rounded-md shadow-md mt-2">
-            <div className="flex items-center justify-end w-full h-10 mb-15">
+            <div className="flex items-center justify-end w-full h-10 mb-10">
               <button
                 onClick={() => navigate("create-project")}
                 className="py-1.5 px-5 bg-[#38BF4C] text-white rounded-xl"
