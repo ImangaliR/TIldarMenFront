@@ -189,7 +189,7 @@ function ForgotPassword() {
                     />
                   </div>
                   <button
-                    type="submit"
+                    onClick={handleResetPassword}
                     className="w-full bg-[#34C759] py-3 px-4 rounded-lg"
                   >
                     Reset Password
