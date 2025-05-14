@@ -128,6 +128,7 @@ const TranslatorDetails = () => {
     setIsOpen(!isOpen);
   };
   const leaveRequest = async (jobId) => {
+    setIsOpen(!isOpen);
     try {
       const res = await api.post(
         `/job-request/${userId}/send/${id}/job/${jobId}`
@@ -143,8 +144,6 @@ const TranslatorDetails = () => {
       } else {
         toast.error("Failed to leave request");
       }
-    } finally {
-      setIsOpen(!isOpen);
     }
   };
 
