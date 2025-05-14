@@ -102,7 +102,11 @@ const AppliedProjects = () => {
                         {formatDate(application.appliedAt)}
                       </td>
                       <td className="w-fit py-4">
-                        {application.status === "PENDING" ? (
+                        {application.type === "Application" ? (
+                          <button className="bg-indigo-500 text-white border-1 px-14 py-1 rounded-lg">
+                            Chat
+                          </button>
+                        ) : application.status === "PENDING" ? (
                           <div className="flex gap-2 items-center justify-center">
                             <button
                               onClick={() =>

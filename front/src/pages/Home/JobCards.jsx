@@ -1,5 +1,8 @@
 import warn from "../../assets/warn.png";
 import chatgreen from "../../assets/chatgreen.png";
+import { useUser } from "../../utils/contexts/UserContext";
+import { toast } from "react-toastify";
+import api from "./../../services/api";
 
 const languageColors = {
   0: "#FFF27F",
@@ -15,6 +18,7 @@ const languageColors = {
 };
 
 const JobCards = ({ job }) => {
+  const { userId } = useUser();
   function formatDate(dateString) {
     const options = {
       day: "2-digit",
@@ -25,6 +29,24 @@ const JobCards = ({ job }) => {
     const date = new Date(dateString);
     return date.toLocaleDateString("en-US", options).replace(",", " -");
   }
+
+  const enrollProject = async (id) => {
+    if (!userId) {
+      toast.error("Please log in to apply for a job");
+      return;
+    }
+
+    try {
+      const res = await api.post(`/job-application/${userId}/send/${id}`);
+      toast.success("Application sent");
+    } catch (err) {
+      if (err.response?.data?.data?.includes("already")) {
+        toast.error("You have already applied for this job");
+      } else {
+        toast.error("Something went wrong");
+      }
+    }
+  };
 
   return (
     <>
@@ -97,9 +119,12 @@ const JobCards = ({ job }) => {
             Report
             <img src={warn} alt="warn icon" className="w-4 h-4 mt-1" />
           </button>
-          <button className="text-[#2A9E97] border-3 rounded-sm font-semibold flex items-center justify-center gap-2 w-30 h-9">
-            Chat
-            <img src={chatgreen} alt="chat icon" className="w-4 h-4 mt-1" />
+          <button
+            onClick={() => enrollProject(job?.id)}
+            className="bg-[#2A9E97] text-white rounded-sm font-semibold flex items-center justify-center gap-2 w-30 h-9"
+          >
+            Apply
+            {/* <img src={chatgreen} alt="chat icon" className="w-4 h-4 mt-1" /> */}
           </button>
         </div>
       </div>
