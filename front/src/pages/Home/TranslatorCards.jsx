@@ -35,8 +35,8 @@ const TranslatorCards = ({
           </div>
         </div>
         <div className="h-65 grid justify-between mt-3 mx-5">
-          <div className="my-1 w-full">
-            <h1 className="text-[#8F8F8F] w-30">Languages:</h1>
+          <div className="my-1 w-75">
+            <h1 className="text-[#8F8F8F]">Languages:</h1>
             <div className="max-h-14 w-full overflow-y-auto overflow-x-hidden">
               {languages?.map((language, i) => (
                 <p key={i} className="ml-5 mb-2 pr-22">
@@ -45,8 +45,8 @@ const TranslatorCards = ({
               ))}
             </div>
           </div>
-          <div className="my-1 w-full">
-            <h1 className="text-[#8F8F8F] w-30">Services:</h1>
+          <div className="my-1 w-75">
+            <h1 className="text-[#8F8F8F]">Services:</h1>
             <div className="max-h-14 w-full overflow-y-auto overflow-x-hidden">
               {serviceTypes?.map((service, i) => (
                 <p key={i} className="ml-5 mb-2 pr-22">
@@ -55,8 +55,8 @@ const TranslatorCards = ({
               ))}
             </div>
           </div>
-          <div className="my-1 w-full">
-            <h1 className="text-[#8F8F8F] w-30">Specialization:</h1>
+          <div className="my-1 w-75">
+            <h1 className="text-[#8F8F8F]">Specialization:</h1>
             <div className="max-h-14 w-full overflow-y-auto overflow-x-hidden">
               {specializations?.map((specialization, i) => (
                 <p key={i} className="ml-5 mb-2 pr-22">

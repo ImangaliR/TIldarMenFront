@@ -89,7 +89,7 @@ const Translators = () => {
               setSelectedLocations={setSelectedLocations}
               setSelectedServices={setSelectedServices}
             />
-            <main className="max-w-280 w-full">
+            <main className="max-w-260">
               <p className="text-2xl mb-1">Results ({resultCount})</p>
               <div className="grid grid-cols-2 gap-x-1 gap-y-3 xl:grid-cols-3 xl:gap-x-3 xl:gap-y-5 ">
                 {translatorCards}
