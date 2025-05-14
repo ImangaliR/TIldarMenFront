@@ -3,6 +3,7 @@ import api from "../../services/api";
 import { useNavigate, useParams } from "react-router-dom";
 import profileicon from "../../assets/profileicon.png";
 import vector from "../../assets/vector.png";
+import { toast } from "react-toastify";
 
 const statusColors = {
   REJECTED: "#FDD3D0",
@@ -14,6 +15,7 @@ const ProjectApplicants = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [applicants, setApplicants] = useState([]);
+  const [refreshFlag, setRefreshFlag] = useState(false);
 
   useEffect(() => {
     api
@@ -24,7 +26,11 @@ const ProjectApplicants = () => {
       .catch((err) => {
         console.error("Error fetching locations:", err);
       });
-  }, []);
+  }, [id, refreshFlag]);
+
+  const refreshApplicants = () => {
+    setRefreshFlag((prev) => !prev);
+  };
 
   function formatDate(dateString) {
     const options = {
@@ -42,6 +48,30 @@ const ProjectApplicants = () => {
   const formatStatus = (str) => {
     if (!str) return "";
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+  };
+
+  const acceptRequest = async (id) => {
+    try {
+      const res = await api.put(
+        `/job-application/${id}/application?status=accepted`
+      );
+      refreshApplicants();
+      toast.success("Request accepted");
+    } catch (err) {
+      toast.error("Something went wrong");
+    }
+  };
+
+  const rejectRequest = async (id) => {
+    try {
+      const res = await api.put(
+        `/job-application/${id}/application?status=rejected`
+      );
+      refreshApplicants();
+      toast.success("Request rejected");
+    } catch (err) {
+      toast.error("Something went wrong");
+    }
   };
 
   return (
@@ -124,7 +154,35 @@ const ProjectApplicants = () => {
                         {applicant.rating.toFixed(2)}
                       </td>
 
-                      <td className="px-4 py-2 text-center">Approve</td>
+                      <td className="px-4 py-2 text-center">
+                        {applicant.status === "PENDING" &&
+                        applicant.type === "Application" ? (
+                          <div className="flex gap-2 items-center justify-center">
+                            <button
+                              onClick={() =>
+                                acceptRequest(applicant.applicationId)
+                              }
+                              className="text-green-500 border-1 px-3 py-1 rounded-lg"
+                            >
+                              Accept
+                            </button>
+                            <button
+                              onClick={() =>
+                                rejectRequest(applicant.applicationId)
+                              }
+                              className="text-red-500 border-1 px-3 py-1 rounded-lg"
+                            >
+                              Reject
+                            </button>
+                          </div>
+                        ) : applicant.status === "ACCEPTED" ? (
+                          <button className="bg-indigo-500 text-white border-1 px-14 py-1 rounded-lg">
+                            Chat
+                          </button>
+                        ) : (
+                          <p className="text-xl">---</p>
+                        )}
+                      </td>
                     </tr>
                   ))}
                 </tbody>

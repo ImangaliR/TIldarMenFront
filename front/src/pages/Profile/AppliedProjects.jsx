@@ -40,8 +40,6 @@ const AppliedProjects = () => {
     });
   }
 
-  console.log(applications);
-
   const acceptRequest = async (id) => {
     try {
       const res = await api.put(`/job-request/${id}/request?status=accepted`);
@@ -56,7 +54,7 @@ const AppliedProjects = () => {
     try {
       const res = await api.put(`/job-request/${id}/request?status=rejected`);
       refreshApplications();
-      toast.success("Request accepted");
+      toast.success("Request rejected");
     } catch (err) {
       toast.error("Something went wrong");
     }
@@ -102,11 +100,8 @@ const AppliedProjects = () => {
                         {formatDate(application.appliedAt)}
                       </td>
                       <td className="w-fit py-4">
-                        {application.type === "Application" ? (
-                          <button className="bg-indigo-500 text-white border-1 px-14 py-1 rounded-lg">
-                            Chat
-                          </button>
-                        ) : application.status === "PENDING" ? (
+                        {application.status === "PENDING" &&
+                        application.type === "Request" ? (
                           <div className="flex gap-2 items-center justify-center">
                             <button
                               onClick={() =>
