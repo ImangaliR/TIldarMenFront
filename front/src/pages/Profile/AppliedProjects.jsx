@@ -1,141 +1,143 @@
 import React, { useEffect, useState } from "react";
 import api from "../../services/api";
-import TokenService from "../../services/token.service";
-
-const projectData = [
-  {
-    name: "Project1",
-    status: "In Negotiation",
-    price: 30000,
-    deadline: "DD/MM/YYYY",
-    activity: "Chat",
-  },
-  {
-    name: "Project Title",
-    status: "Selected",
-    price: 40000,
-    deadline: "DD/MM/YYYY",
-    activity: "Report",
-  },
-  {
-    name: "Project Title2",
-    status: "Pending",
-    price: 10000,
-    deadline: "DD/MM/YYYY",
-    activity: "Chat",
-  },
-  {
-    name: "Project Title 3",
-    status: "Rejected",
-    price: 10000,
-    deadline: "DD/MM/YYYY",
-    activity: "",
-    selected: true,
-  },
-  {
-    name: "Project Title 4",
-    status: "No Status",
-    price: 20000,
-    deadline: "DD/MM/YYYY",
-    activity: "",
-  },
-];
+import { toast } from "react-toastify";
+import { useUser } from "../../utils/contexts/UserContext";
 
 const statusColors = {
-  "In Negotiation": "bg-yellow-100 text-yellow-700",
-  Selected: "bg-green-100 text-green-700",
-  Pending: "bg-purple-100 text-purple-700",
-  Rejected: "bg-red-100 text-red-700",
-  "No Status": "bg-gray-200 text-gray-600",
+  ACCEPTED: "bg-green-100 text-green-700",
+  PENDING: "bg-purple-200 text-purple-800",
+  REJECTED: "bg-red-100 text-red-700",
 };
 
 const AppliedProjects = () => {
-  const userID = TokenService.getUserId();
+  const { userId } = useUser();
   const [applications, setApplications] = useState([]);
-  const [requests, setRequests] = useState([]);
+  const [refreshFlag, setRefreshFlag] = useState(false);
 
   useEffect(() => {
     const fetchApplications = async () => {
       try {
-        const response = await api.get(`/translator/${userID}/applications`);
+        const response = await api.get(`/translator/${userId}/applications`);
         setApplications(response.data?.data);
       } catch (err) {
-        console.error("Axios Error:", err);
-        console.log(err.response?.data || "Failed to fetch cities.");
+        toast.error("Something went wrong");
       }
     };
 
     fetchApplications();
-  }, []);
+  }, [userId, refreshFlag]);
 
-  useEffect(() => {
-    const fetchRequests = async () => {
-      try {
-        const response = await api.get(`/translator/${userID}/requests`);
-        setRequests(response.data?.data);
-      } catch (err) {
-        console.error("Axios Error:", err);
-        console.log(err.response?.data || "Failed to fetch cities.");
-      }
-    };
+  const refreshApplications = () => {
+    setRefreshFlag((prev) => !prev);
+  };
 
-    fetchRequests();
-  }, []);
+  function formatDate(dateString) {
+    const date = new Date(dateString);
+    return date.toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    });
+  }
+
+  console.log(applications);
+
+  const acceptRequest = async (id) => {
+    try {
+      const res = await api.put(`/job-request/${id}/request?status=accepted`);
+      refreshApplications();
+      toast.success("Request accepted");
+    } catch (err) {
+      toast.error("Something went wrong");
+    }
+  };
+
+  const rejectRequest = async (id) => {
+    try {
+      const res = await api.put(`/job-request/${id}/request?status=rejected`);
+      refreshApplications();
+      toast.success("Request accepted");
+    } catch (err) {
+      toast.error("Something went wrong");
+    }
+  };
 
   return (
     <>
-      <main className="w-full">
+      <main>
         <div className="bg-white w-280 h-200 rounded-lg shadow-xs">
           <div className="overflow-x-auto p-20">
-            <table className="min-w-full bg-white shadow-sm rounded-lg">
-              <thead>
-                <tr className="text-left text-sm font-medium text-gray-500 border-b">
-                  <th className="py-3 px-4">Project Name</th>
-                  <th className="py-3 px-4">Status</th>
-                  <th className="py-3 px-4">Price</th>
-                  <th className="py-3 px-4">Deadline</th>
-                  <th className="py-3 px-4">Activity</th>
-                  <th className="py-3 px-4"></th>
-                </tr>
-              </thead>
-              <tbody className="text-sm">
-                {projectData.map((project, index) => (
-                  <tr
-                    key={index}
-                    className={`border-b hover:bg-gray-50 ${
-                      project.selected ? "bg-gray-100" : ""
-                    }`}
-                  >
-                    <td className="py-3 px-4 font-medium text-gray-800">
-                      {project.name}
-                    </td>
-                    <td className="py-3 px-4">
-                      <span
-                        className={`text-xs px-3 py-1 rounded-full font-semibold ${
-                          statusColors[project.status]
-                        }`}
-                      >
-                        {project.status}
-                      </span>
-                    </td>
-                    <td className="py-3 px-4">{project.price}</td>
-                    <td className="py-3 px-4">{project.deadline}</td>
-                    <td className="py-3 px-4">
-                      {project.activity === "Chat" && (
-                        <button className="bg-indigo-600 text-white text-xs px-4 py-1 rounded-full">
-                          Chat
-                        </button>
-                      )}
-                      {project.activity === "Report" && (
-                        <button className="text-red-500 border border-red-400 text-xs px-4 py-1 rounded-full">
-                          Report
-                        </button>
-                      )}
-                    </td>
+            {applications?.length > 0 ? (
+              <table className="min-w-full divide-y divide-gray-200 text-sm shadow-sm">
+                <thead className="text-[#7D7D7D] text-center">
+                  <tr>
+                    <th className="py-4 px-4 font-semibold">Project Name</th>
+                    <th className="py-4 px-4 font-semibold">Status</th>
+                    <th className="py-4 px-4 font-semibold">Price</th>
+                    <th className="py-4 px-4 font-semibold">Offer Sent</th>
+                    <th className="py-4 px-4 font-semibold">Activity</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody className="divide-y divide-gray-100">
+                  {applications?.map((application, index) => (
+                    <tr key={index} className="hover:bg-blue-50 text-center">
+                      <td className="py-4 px-4 font-medium text-gray-800">
+                        {application.job.title}
+                      </td>
+                      <td className="py-4 px-4">
+                        <span
+                          className={`py-2 px-3 rounded-full ${
+                            statusColors[application.status]
+                          }`}
+                        >
+                          {application.status === "PENDING"
+                            ? "Pending"
+                            : application.status === "ACCEPTED"
+                            ? "Accepted"
+                            : "Rejected"}
+                        </span>
+                      </td>
+                      <td className="py-4 px-4">{application.job.price}</td>
+                      <td className="py-4 px-4">
+                        {formatDate(application.appliedAt)}
+                      </td>
+                      <td className="w-fit py-4">
+                        {application.status === "PENDING" ? (
+                          <div className="flex gap-2 items-center justify-center">
+                            <button
+                              onClick={() =>
+                                acceptRequest(application.applicationId)
+                              }
+                              className="text-green-500 border-1 px-3 py-1 rounded-lg"
+                            >
+                              Accept
+                            </button>
+                            <button
+                              onClick={() =>
+                                rejectRequest(application.applicationId)
+                              }
+                              className="text-red-500 border-1 px-3 py-1 rounded-lg"
+                            >
+                              Reject
+                            </button>
+                          </div>
+                        ) : application.status === "ACCEPTED" ? (
+                          <button className="bg-indigo-500 text-white border-1 px-14 py-1 rounded-lg">
+                            Chat
+                          </button>
+                        ) : (
+                          <p className="text-xl">---</p>
+                        )}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            ) : (
+              <div className="flex items-center justify-center mt-50">
+                <p className="text-[#8b8b8b] text-3xl">No applications yet</p>
+              </div>
+            )}
           </div>
         </div>
       </main>

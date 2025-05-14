@@ -52,7 +52,7 @@ const Sidebar = () => {
             icon: profiledit,
           },
           {
-            name: "Applied Projects",
+            name: "Project Offers",
             href: "translator/applied-projects",
             icon: timemanagement,
           },
