@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useForm } from "react-hook-form";
 import api from "./../../services/api";
 import { toast } from "react-toastify";
 import hiddeneye from "../../assets/hiddeneye.png";
@@ -9,7 +8,8 @@ import SimpleLoader from "../../components/Loader/SimpleLoader";
 
 function ForgotPassword() {
   const navigate = useNavigate();
-  const { handleSubmit } = useForm();
+  const [sendCooldown, setSendCooldown] = useState(false);
+  const [resetCooldown, setResetCooldown] = useState(false);
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [codeIsSent, setCodeIsSent] = useState(false);
@@ -21,12 +21,16 @@ function ForgotPassword() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const handleSendCode = async () => {
-    setLoading(true);
+    if (sendCooldown) return;
+
     if (!email) {
       setLoading(false);
       toast.warn("Please enter an email first");
       return;
     }
+
+    setLoading(true);
+    setSendCooldown(true);
 
     const formData = new FormData();
     formData.append("email", email);
@@ -45,11 +49,12 @@ function ForgotPassword() {
       }
     } finally {
       setLoading(false);
+      setTimeout(() => setSendCooldown(false), 5000);
     }
   };
 
   const handleResetPassword = async () => {
-    setLoading(true);
+    if (resetCooldown) return;
 
     if (!email) {
       setLoading(false);
@@ -62,6 +67,9 @@ function ForgotPassword() {
       toast.warn("Passwords don't match");
       return;
     }
+
+    setResetCooldown(true);
+    setLoading(true);
 
     let data = {
       email: email,
@@ -84,6 +92,7 @@ function ForgotPassword() {
       }
     } finally {
       setLoading(false);
+      setTimeout(() => setResetCooldown(false), 5000);
     }
   };
 
@@ -118,6 +127,7 @@ function ForgotPassword() {
                 />
                 <button
                   type="button"
+                  disabled={sendCooldown}
                   onClick={handleSendCode}
                   className="bg-[#34C759] py-3 px-4 rounded-lg"
                 >
@@ -190,6 +200,7 @@ function ForgotPassword() {
                   </div>
                   <button
                     onClick={handleResetPassword}
+                    disabled={resetCooldown}
                     className="w-full bg-[#34C759] py-3 px-4 rounded-lg"
                   >
                     Reset Password
