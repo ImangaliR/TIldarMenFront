@@ -74,7 +74,7 @@ const ReportJob = ({ id, handleLeaveReport }) => {
             </button>
           </div>
           <p className="block mb-3 ml-1">
-            <span className="font-bold">Report Type: </span>Translator
+            <span className="font-bold">Report Type: </span>Project
           </p>
           <form onSubmit={handleSubmit(leaveReport)} className="space-y-4">
             <div>
