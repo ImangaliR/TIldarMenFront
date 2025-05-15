@@ -8,6 +8,7 @@ import { useState, useEffect } from "react";
 import api from "./../../services/api";
 import { toast } from "react-toastify";
 import { useUser } from "../../utils/contexts/UserContext";
+import ReportTranslator from "../../components/Report/ReportTranslator";
 
 const languageColors = {
   0: "#FFF27F",
@@ -33,6 +34,8 @@ const TranslatorDetails = () => {
   const [hover, setHover] = useState(0);
   const { userId, userRole } = useUser();
   const [isOpen, setIsOpen] = useState(false);
+  const [isOpenReport, setIsOpenReport] = useState(false);
+
   const reviewStars = (rating) => (
     <div className="flex items-center gap-1">
       {[...Array(5)].map((_, i) => (
@@ -118,8 +121,6 @@ const TranslatorDetails = () => {
       });
   }, [userId]);
 
-  const report = async () => {};
-
   const handleLeaveRequest = () => {
     if (userRole !== "EMPLOYER") {
       toast.warn("Only employers can leave a request");
@@ -145,6 +146,13 @@ const TranslatorDetails = () => {
         toast.error("Failed to leave request");
       }
     }
+  };
+  const handleLeaveReport = () => {
+    if (userRole !== "EMPLOYER") {
+      toast.warn("Only employers can leave a request");
+      return;
+    }
+    setIsOpenReport(!isOpenReport);
   };
 
   return (
@@ -198,8 +206,14 @@ const TranslatorDetails = () => {
               {reviewStars(Math.floor(translator?.rating))}
             </div>
             <div className="relative min-w-43">
+              {isOpenReport && (
+                <ReportTranslator
+                  handleLeaveReport={handleLeaveReport}
+                  id={id}
+                />
+              )}
               <button
-                onClick={report}
+                onClick={handleLeaveReport}
                 className="absolute top-2 right-0 w-fit h-fit text-[#FF0000] bg-white border-1 rounded-sm font-semibold gap-2 px-4 py-1"
               >
                 Report

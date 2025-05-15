@@ -53,6 +53,24 @@ const JobCards = ({ job }) => {
     }
   };
 
+  const reportJob = async (id) => {
+    if (!userId) {
+      toast.error("Please log in to apply for a job");
+      return;
+    }
+
+    try {
+      const res = await api.post(`/job-application/${userId}/send/${id}`);
+      toast.success("Application sent");
+    } catch (err) {
+      if (err.response?.data?.data?.includes("already")) {
+        toast.error("You have already applied for this job");
+      } else {
+        toast.error("Something went wrong");
+      }
+    }
+  };
+
   return (
     <>
       <div className="bg-white shadow-sm rounded-lg px-10 py-6">

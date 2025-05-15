@@ -23,6 +23,10 @@ input {
   font-family: "Familjen Grotesk", sans-serif;
 }
 
+.report {
+  font-family: "Tajawal", sans-serif;
+}
+
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
