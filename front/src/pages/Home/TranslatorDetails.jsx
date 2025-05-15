@@ -148,10 +148,6 @@ const TranslatorDetails = () => {
     }
   };
   const handleLeaveReport = () => {
-    if (userRole !== "EMPLOYER") {
-      toast.warn("Only employers can leave a report");
-      return;
-    }
     setIsOpenReport(!isOpenReport);
   };
 

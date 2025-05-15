@@ -52,7 +52,16 @@ const ReportTranslator = ({ id, handleLeaveReport }) => {
       });
       toast.success("Successfully send report!");
     } catch (err) {
-      toast.error("Failed to leave report");
+      console.log(err);
+      if (
+        err.response?.data?.data?.includes(
+          "You are not allowed to report yourself"
+        )
+      ) {
+        toast.error("You are not allowed to report yourself");
+      } else {
+        toast.error("Failed to leave report");
+      }
     }
   };
 
