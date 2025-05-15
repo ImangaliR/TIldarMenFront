@@ -10,7 +10,7 @@ const RatingBar = ({ star, percent, count }) => {
       <img src={reviewstarfull} alt="full star icon" className="w-4 h-4" />
       <div className="relative w-48 h-3 bg-gray-200 rounded-full overflow-hidden">
         <div
-          className="absolute top-0 left-0 h-full bg-purple-500"
+          className="absolute top-0 left-0 h-full bg-gray-600"
           style={{ width: percent }}
         ></div>
       </div>

@@ -52,15 +52,7 @@ const ReportTranslator = ({ id, handleLeaveReport }) => {
       });
       toast.success("Successfully send report!");
     } catch (err) {
-      if (
-        err.response?.data?.data?.includes(
-          "You already have a request for this translator"
-        )
-      ) {
-        toast.error("You already leaved this request for this translator");
-      } else {
-        toast.error("Failed to leave report");
-      }
+      toast.error("Failed to leave report");
     }
   };
 
@@ -131,7 +123,6 @@ const ReportTranslator = ({ id, handleLeaveReport }) => {
                 accept="application/pdf"
                 id="fi"
                 className="hidden"
-                required
               />
               {reportFile ? (
                 <iframe
