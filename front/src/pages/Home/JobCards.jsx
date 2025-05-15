@@ -18,7 +18,7 @@ const languageColors = {
 };
 
 const JobCards = ({ job }) => {
-  const { userId } = useUser();
+  const { userRole, userId } = useUser();
   function formatDate(dateString) {
     const options = {
       day: "2-digit",
@@ -33,6 +33,11 @@ const JobCards = ({ job }) => {
   const enrollProject = async (id) => {
     if (!userId) {
       toast.error("Please log in to apply for a job");
+      return;
+    }
+
+    if (userRole !== "TRANSLATOR") {
+      toast.error("Only translators can apply for jobs");
       return;
     }
 
