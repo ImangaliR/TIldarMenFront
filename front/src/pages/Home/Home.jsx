@@ -47,6 +47,7 @@ const icons = [
 export const Home = () => {
   const navigate = useNavigate();
   const [kazakhstanCities, setKazakhstanCities] = useState([]);
+  const [featuredJobs, setFeaturedJobs] = useState([]);
   const [selectedCity, setSelectedCity] = useState("");
   const [hoveredIndex, setHoveredIndex] = useState(null);
 
@@ -62,12 +63,26 @@ export const Home = () => {
     fetchCities();
   }, []);
 
+  useEffect(() => {
+    const fetchFeaturedJobs = async () => {
+      try {
+        const response = await api.get("/jobs/firstEight");
+        const jobList = response.data?.data;
+        setFeaturedJobs(jobList);
+      } catch (err) {}
+    };
+
+    fetchFeaturedJobs();
+  }, []);
+
+  console.log("featuredJobs", featuredJobs);
+
   return (
     <>
       <Navbar />
       <main>
         <div className="relative pl-30 h-182 flex bg-[#F3F3F3]">
-          <div className="w-full flex flex-col">
+          <div className="w-full flex flex-col z-4">
             <h1 className="home text-6xl w-100 mt-35">
               DISCOVER HERE MORE{" "}
               <span className="text-[#71C39C]">PROJECTS</span>
@@ -77,7 +92,7 @@ export const Home = () => {
               A platform that connects passionate translators with clients who
               need clear, professional, and multilingual communication.
             </p>
-            <div className="flex items-center gap-5 bg-white w-fit mt-8 py-4 px-6 z-4">
+            <div className="flex items-center gap-5 bg-white w-fit mt-8 py-4 px-6">
               <div className="flex items-center gap-3">
                 <img src={search} alt="search icon" className="w-6 h-6" />
                 <input
@@ -137,7 +152,7 @@ export const Home = () => {
         </div>
         <div className="px-30 py-20 bg-white">
           <div className="flex items-center justify-between">
-            <h1 className="text-5xl font-bold">
+            <h1 className="home text-3xl font-bold">
               Explore by <span className="text-[#71C39C]">specializations</span>
             </h1>
             <div
@@ -150,7 +165,7 @@ export const Home = () => {
               <img src={arrow} alt="arrow icon" className="w-5 h-5" />
             </div>
           </div>
-          <div className="grid grid-cols-4 gap-5 mt-12">
+          <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mt-12">
             <div
               onMouseEnter={() => setHoveredIndex(0)}
               onMouseLeave={() => setHoveredIndex(null)}
@@ -391,7 +406,64 @@ export const Home = () => {
             </div>
           </div>
         </div>
-        <div></div>
+        <div className="relative flex  flex-col px-30 py-20 bg-[#F8F8FD]">
+          <div className="flex flex-col z-4">
+            <div className="flex items-center justify-between">
+              <h1 className="home text-3xl font-bold">
+                Latest <span className="text-[#71C39C]">jobs open</span>
+              </h1>
+              <div
+                className="flex items-center gap-3 cursor-pointer"
+                onClick={() => navigate("/project-catalog")}
+              >
+                <p className="text-[#71C39C] text-xl font-semibold">
+                  Show all jobs
+                </p>
+                <img src={arrow} alt="arrow icon" className="w-5 h-5" />
+              </div>
+            </div>
+            <div className="grid grid-cols-2 gap-5 mt-12">
+              {featuredJobs?.map((item, index) => (
+                <div key={index} className="flex gap-5 py-5 px-10 bg-white">
+                  <img
+                    src={item?.employerProfilePicture}
+                    alt="icon"
+                    className="w-15 h-15 object-cover rounded-full mt-2"
+                  />
+                  <div>
+                    <h1 className="text-lg font-semibold py-2">
+                      {item?.title}
+                    </h1>
+                    <p className="text-[#515B6F] text-lg">{item?.location}</p>
+                    <div className="flex items-center gap-2 mt-3">
+                      <p className="rounded-full text-[#56CDAD] bg-green-50 w-fit px-3 py-1">
+                        Full-Time
+                      </p>
+                      {item?.specializations[0] && (
+                        <p className="rounded-full text-[#FFB836] border-1 w-fit px-3 py-1">
+                          {item?.specializations[0]?.name}
+                        </p>
+                      )}
+                      {item?.serviceTypes[0] && (
+                        <p className="rounded-full text-[#4640DE] border-1 w-fit px-3 py-1">
+                          {item?.serviceTypes[0]?.name}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="">
+            <img
+              src={rectangles}
+              alt="rectangles"
+              className="object-cover absolute top-0 right-0 w-200 h-full z-1"
+            />
+            <div className="absolute top-0 left-0 w-40 h-20 bg-white [clip-path:polygon(0_0,100%_0,0_100%)] z-3"></div>
+          </div>
+        </div>
       </main>
       <footer className="bg-[#202430] text-white px-30 py-10">
         <div className="flex justify-between gap-10 text-[#D6DDEB] mt-5">
@@ -415,7 +487,7 @@ export const Home = () => {
               <p className="py-5 cursor-pointer">Privacy Policy</p>
             </div>
             <div>
-              <h className="text-lg font-bold text-white">Recources</h>
+              <h1 className="text-lg font-bold text-white">Recources</h1>
               <p className="py-5 cursor-pointer">Help Docs</p>
               <p className="cursor-pointer">Guide</p>
               <p className="py-5 cursor-pointer">Updates</p>
