@@ -7,12 +7,23 @@ import chel from "../../assets/chel.png";
 import arrow from "../../assets/arrow.png";
 import arrowdown from "../../assets/arrowdown.png";
 import rightarrow from "../../assets/rightarrow.png";
+import arrowrighthover from "../../assets/arrowrighthover.png";
 import business from "../../assets/business.png";
+import businesshover from "../../assets/businesshover.png";
 import sales from "../../assets/sales.png";
+import saleshover from "../../assets/saleshover.png";
+import micro from "../../assets/micro.png";
+import microhover from "../../assets/microhover.png";
+import humanresources from "../../assets/humanresources.png";
+import humanresourceshover from "../../assets/humanresourceshover.png";
 import overall from "../../assets/overall.png";
+import overallhover from "../../assets/overallhover.png";
 import finance from "../../assets/finance.png";
+import financehover from "../../assets/financehover.png";
 import engineering from "../../assets/engineering.png";
+import engineeringhover from "../../assets/engineeringhover.png";
 import technology from "../../assets/technology.png";
+import technologyhover from "../../assets/technologyhover.png";
 import instagram from "../../assets/instagram.png";
 import facebook from "../../assets/facebook.png";
 import linkedin from "../../assets/linkedin.png";
@@ -21,10 +32,22 @@ import { useNavigate } from "react-router-dom";
 import api from "../../services/api";
 import { useEffect, useState } from "react";
 
+const icons = [
+  { default: overall, hover: overallhover, alt: "overall icon" },
+  { default: sales, hover: saleshover, alt: "sales icon" },
+  { default: micro, hover: microhover, alt: "microphone icon" },
+  { default: finance, hover: financehover, alt: "money icon" },
+  { default: technology, hover: technologyhover, alt: "technology icon" },
+  { default: engineering, hover: engineeringhover, alt: "engineering icon" },
+  { default: business, hover: businesshover, alt: "business icon" },
+  { default: humanresources, hover: humanresourceshover, alt: "people icon" },
+];
+
 export const Home = () => {
   const navigate = useNavigate();
   const [kazakhstanCities, setKazakhstanCities] = useState([]);
   const [selectedCity, setSelectedCity] = useState("");
+  const [hoveredIndex, setHoveredIndex] = useState(null);
 
   useEffect(() => {
     const fetchCities = async () => {
@@ -46,7 +69,7 @@ export const Home = () => {
           <div className="w-full flex flex-col">
             <h1 className="home text-6xl w-100 mt-35">
               DISCOVER HERE MORE{" "}
-              <span className="text-[#26A4FF]">PROJECTS</span>
+              <span className="text-[#71C39C]">PROJECTS</span>
             </h1>
             <img src={blueline} alt="blue line" className="w-93 py-4" />
             <p className="text-[#515B6F] w-110 text-xl">
@@ -86,7 +109,7 @@ export const Home = () => {
                   />
                 </div>
               </div>
-              <button className="font-bold bg-[#4640DE] text-white px-7 py-3">
+              <button className="font-bold bg-[#71C39C] text-white px-7 py-3">
                 Search my projects
               </button>
             </div>
@@ -114,100 +137,252 @@ export const Home = () => {
         <div className="px-30 py-20 bg-white">
           <div className="flex items-center justify-between">
             <h1 className="text-5xl font-bold">
-              Explore by <span className="text-[#26A4FF]">specializations</span>
+              Explore by <span className="text-[#71C39C]">specializations</span>
             </h1>
             <div
               className="flex items-center gap-3 cursor-pointer"
               onClick={() => navigate("/project-catalog")}
             >
-              <p className="text-[#4640DE] text-xl font-semibold">
+              <p className="text-[#71C39C] text-xl font-semibold">
                 Show all projects
               </p>
               <img src={arrow} alt="arrow icon" className="w-5 h-5" />
             </div>
           </div>
           <div className="grid grid-cols-4 gap-5 mt-12">
-            <div className="flex flex-col justify-center p-6 w-74 h-50 border-2 border-[#D6DDEB]">
+            <div
+              onMouseEnter={() => setHoveredIndex(0)}
+              onMouseLeave={() => setHoveredIndex(null)}
+              className="flex flex-col justify-center p-6 w-74 h-50 border-2 border-[#D6DDEB] hover:border-none hover:bg-[#71C39C] hover:text-white cursor-pointer transition-all duration-75 ease-in-out"
+            >
               <img
-                src={overall}
+                src={hoveredIndex === 0 ? icons[0].hover : icons[0].default}
                 alt="pen and ruler icon"
-                className="w-10 h-10"
+                className="w-10 h-10 mb-3"
               />
               <h1 className="text-2xl font-bold py-2">Overall</h1>
-              <div className="flex items-center gap-3 cursor-pointer">
-                <p className="text-[#7C8493] pb-1">Available projects</p>
+              <div className="flex items-center gap-3">
+                <p
+                  className={
+                    hoveredIndex === 0
+                      ? "text-white pb-1"
+                      : "text-[#7C8493] pb-1"
+                  }
+                >
+                  Available projects
+                </p>
                 <img
-                  src={rightarrow}
+                  src={hoveredIndex === 0 ? arrowrighthover : rightarrow}
                   alt="arrow right icon"
                   className="w-5 h-5"
                 />
               </div>
             </div>
-            <div className="flex flex-col justify-center p-6 w-74 h-50 border-2 border-[#D6DDEB]">
-              <img src={sales} alt="sales icon" className="w-10 h-10" />
+            <div
+              onMouseEnter={() => setHoveredIndex(1)}
+              onMouseLeave={() => setHoveredIndex(null)}
+              className="flex flex-col justify-center p-6 w-74 h-50 border-2 border-[#D6DDEB] hover:border-none hover:bg-[#71C39C] hover:text-white cursor-pointer transition-all duration-75 ease-in-out"
+            >
+              <img
+                src={hoveredIndex === 1 ? icons[1].hover : icons[1].default}
+                alt="sales icon"
+                className="w-10 h-10 mb-3"
+              />
               <h1 className="text-2xl font-bold py-2 text-nowrap">
                 Marketing Translation
               </h1>
-              <div className="flex items-center gap-3 cursor-pointer">
-                <p className="text-[#7C8493] pb-1">Available projects</p>
+              <div className="flex items-center gap-3">
+                <p
+                  className={
+                    hoveredIndex === 1
+                      ? "text-white pb-1"
+                      : "text-[#7C8493] pb-1"
+                  }
+                >
+                  Available projects
+                </p>
                 <img
-                  src={rightarrow}
+                  src={hoveredIndex === 1 ? arrowrighthover : rightarrow}
                   alt="arrow right icon"
                   className="w-5 h-5"
                 />
               </div>
             </div>
-            <div className="flex flex-col justify-center p-6 w-74 h-50 border-2 border-[#D6DDEB]">
-              <img src={finance} alt="money icon" className="w-10 h-10" />
+            <div
+              onMouseEnter={() => setHoveredIndex(2)}
+              onMouseLeave={() => setHoveredIndex(null)}
+              className="flex flex-col justify-center p-6 w-74 h-50 border-2 border-[#D6DDEB] hover:border-none hover:bg-[#71C39C] hover:text-white cursor-pointer transition-all duration-75 ease-in-out"
+            >
+              <img
+                src={hoveredIndex === 2 ? icons[2].hover : icons[2].default}
+                alt="sales icon"
+                className="w-10 h-10 mb-3"
+              />
+              <h1 className="text-2xl font-bold py-2 text-nowrap">
+                Legal Translation
+              </h1>
+              <div className="flex items-center gap-3">
+                <p
+                  className={
+                    hoveredIndex === 2
+                      ? "text-white pb-1"
+                      : "text-[#7C8493] pb-1"
+                  }
+                >
+                  Available projects
+                </p>
+                <img
+                  src={hoveredIndex === 2 ? arrowrighthover : rightarrow}
+                  alt="arrow right icon"
+                  className="w-5 h-5"
+                />
+              </div>
+            </div>
+            <div
+              onMouseEnter={() => setHoveredIndex(3)}
+              onMouseLeave={() => setHoveredIndex(null)}
+              className="flex flex-col justify-center p-6 w-74 h-50 border-2 border-[#D6DDEB] hover:border-none hover:bg-[#71C39C] hover:text-white cursor-pointer transition-all duration-75 ease-in-out"
+            >
+              <img
+                src={hoveredIndex === 3 ? icons[3].hover : icons[3].default}
+                alt="money icon"
+                className="w-10 h-10 mb-3"
+              />
               <h1 className="text-2xl font-bold py-2 text-nowrap">
                 Financial Translation
               </h1>
-              <div className="flex items-center gap-3 cursor-pointer">
-                <p className="text-[#7C8493] pb-1">Available projects</p>
+              <div className="flex items-center gap-3">
+                <p
+                  className={
+                    hoveredIndex === 3
+                      ? "text-white pb-1"
+                      : "text-[#7C8493] pb-1"
+                  }
+                >
+                  Available projects
+                </p>
                 <img
-                  src={rightarrow}
+                  src={hoveredIndex === 3 ? arrowrighthover : rightarrow}
                   alt="arrow right icon"
                   className="w-5 h-5"
                 />
               </div>
             </div>
-            <div className="flex flex-col justify-center p-6 w-74 h-50 border-2 border-[#D6DDEB]">
-              <img src={technology} alt="monitor icon" className="w-10 h-10" />
+            <div
+              onMouseEnter={() => setHoveredIndex(4)}
+              onMouseLeave={() => setHoveredIndex(null)}
+              className="flex flex-col justify-center p-6 w-74 h-50 border-2 border-[#D6DDEB] hover:border-none hover:bg-[#71C39C] hover:text-white cursor-pointer transition-all duration-75 ease-in-out"
+            >
+              <img
+                src={hoveredIndex === 4 ? icons[4].hover : icons[4].default}
+                alt="monitor icon"
+                className="w-10 h-10 mb-3"
+              />
               <h1 className="text-2xl font-bold py-2 text-nowrap">
                 Technical Translation
               </h1>
-              <div className="flex items-center gap-3 cursor-pointer">
-                <p className="text-[#7C8493] pb-1">Available projects</p>
+              <div className="flex items-center gap-3">
+                <p
+                  className={
+                    hoveredIndex === 4
+                      ? "text-white pb-1"
+                      : "text-[#7C8493] pb-1"
+                  }
+                >
+                  Available projects
+                </p>
                 <img
-                  src={rightarrow}
+                  src={hoveredIndex === 4 ? arrowrighthover : rightarrow}
                   alt="arrow right icon"
                   className="w-5 h-5"
                 />
               </div>
             </div>
-            <div className="flex flex-col justify-center p-6 w-74 h-50 border-2 border-[#D6DDEB]">
-              <img src={engineering} alt="code icon" className="w-10 h-10" />
+            <div
+              onMouseEnter={() => setHoveredIndex(5)}
+              onMouseLeave={() => setHoveredIndex(null)}
+              className="flex flex-col justify-center p-6 w-74 h-50 border-2 border-[#D6DDEB] hover:border-none hover:bg-[#71C39C] hover:text-white cursor-pointer transition-all duration-75 ease-in-out"
+            >
+              <img
+                src={hoveredIndex === 5 ? icons[5].hover : icons[5].default}
+                alt="code icon"
+                className="w-10 h-10 mb-3"
+              />
               <h1 className="text-2xl font-bold py-2 text-nowrap">
                 Software Localization
               </h1>
-              <div className="flex items-center gap-3 cursor-pointer">
-                <p className="text-[#7C8493] pb-1">Available projects</p>
+              <div className="flex items-center gap-3 w-fit">
+                <p
+                  className={
+                    hoveredIndex === 5
+                      ? "text-white pb-1"
+                      : "text-[#7C8493] pb-1"
+                  }
+                >
+                  Available projects
+                </p>
                 <img
-                  src={rightarrow}
+                  src={hoveredIndex === 5 ? arrowrighthover : rightarrow}
                   alt="arrow right icon"
                   className="w-5 h-5"
                 />
               </div>
             </div>
-            <div className="flex flex-col justify-center p-6 w-74 h-50 border-2 border-[#D6DDEB]">
-              <img src={business} alt="business icon" className="w-10 h-10" />
+            <div
+              onMouseEnter={() => setHoveredIndex(6)}
+              onMouseLeave={() => setHoveredIndex(null)}
+              className="flex flex-col justify-center p-6 w-74 h-50 border-2 border-[#D6DDEB] hover:border-none hover:bg-[#71C39C] hover:text-white cursor-pointer transition-all duration-75 ease-in-out"
+            >
+              <img
+                src={hoveredIndex === 6 ? icons[6].hover : icons[6].default}
+                alt="business icon"
+                className="w-10 h-10 mb-3"
+              />
               <h1 className="text-2xl font-bold py-2 text-nowrap">
                 Diplomatic Translation
               </h1>
-              <div className="flex items-center gap-3 cursor-pointer">
-                <p className="text-[#7C8493] pb-1">Available projects</p>
+              <div className="flex items-center gap-3">
+                <p
+                  className={
+                    hoveredIndex === 6
+                      ? "text-white pb-1"
+                      : "text-[#7C8493] pb-1"
+                  }
+                >
+                  Available projects
+                </p>
                 <img
-                  src={rightarrow}
+                  src={hoveredIndex === 6 ? arrowrighthover : rightarrow}
+                  alt="arrow right icon"
+                  className="w-5 h-5"
+                />
+              </div>
+            </div>
+            <div
+              onMouseEnter={() => setHoveredIndex(7)}
+              onMouseLeave={() => setHoveredIndex(null)}
+              className="flex flex-col justify-center p-6 w-74 h-50 border-2 border-[#D6DDEB] hover:border-none hover:bg-[#71C39C] hover:text-white cursor-pointer transition-all duration-75 ease-in-out"
+            >
+              <img
+                src={hoveredIndex === 7 ? icons[7].hover : icons[7].default}
+                alt="business icon"
+                className="w-10 h-10 mb-3"
+              />
+              <h1 className="text-2xl font-bold py-2 text-nowrap">
+                Literary Translation
+              </h1>
+              <div className="flex items-center gap-3">
+                <p
+                  className={
+                    hoveredIndex === 7
+                      ? "text-white pb-1"
+                      : "text-[#7C8493] pb-1"
+                  }
+                >
+                  Available projects
+                </p>
+                <img
+                  src={hoveredIndex === 7 ? arrowrighthover : rightarrow}
                   alt="arrow right icon"
                   className="w-5 h-5"
                 />
@@ -240,24 +415,6 @@ export const Home = () => {
               <p className="cursor-pointer">Guide</p>
               <p className="py-5 cursor-pointer">Updates</p>
               <p className="cursor-pointer">Contact Us</p>
-            </div>
-            <div>
-              <h1 className="text-lg font-bold text-white">
-                Get job notifications
-              </h1>
-              <p className="w-65 py-5">
-                The latest project news, articles, sent to your inbox weekly.
-              </p>
-              <div className="flex items-center gap-3 mt-4">
-                <input
-                  type="text"
-                  placeholder="Email Address"
-                  className="bg-white px-4 py-2 focus:outline-none"
-                />
-                <button className="font-bold bg-[#4640DE] text-white px-5 py-2">
-                  Subscribe
-                </button>
-              </div>
             </div>
           </div>
         </div>
