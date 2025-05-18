@@ -9,6 +9,7 @@ import arrow from "../../assets/arrow.png";
 import arrowdown from "../../assets/arrowdown.png";
 import rightarrow from "../../assets/rightarrow.png";
 import arrowrighthover from "../../assets/arrowrighthover.png";
+import postproject from "../../assets/postproject.png";
 import business from "../../assets/business.png";
 import businesshover from "../../assets/businesshover.png";
 import sales from "../../assets/sales.png";
@@ -404,6 +405,30 @@ export const Home = () => {
                 />
               </div>
             </div>
+          </div>
+        </div>
+        <div className="bg-white px-30 pb-20">
+          <div className="relative bg-[#71C39C] px-30 pt-15 flex justify-between">
+            <div>
+              <h1 className="text-5xl w-90 text-white font-semibold">
+                Start posting jobs today
+              </h1>
+              <button
+                onClick={() => navigate("/signup")}
+                className="mt-20 bg-white text-[#71C39C] px-7 py-3 font-semibold"
+              >
+                Sign Up For Free
+              </button>
+            </div>
+            <div className="h-[280px] overflow-hidden">
+              <img
+                src={postproject}
+                alt="post project image"
+                className="w-100"
+              />
+            </div>
+            <div className="absolute top-0 left-0 w-30 h-15 bg-white [clip-path:polygon(0_0,100%_0,0_100%)] z-3"></div>
+            <div className="w-30 h-15 absolute bottom-0 right-0 bg-white [clip-path:polygon(100%_0,100%_100%,0_100%)] z-3"></div>
           </div>
         </div>
         <div className="relative flex  flex-col px-30 py-20 bg-[#F8F8FD]">
