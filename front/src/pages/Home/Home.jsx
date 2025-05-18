@@ -1,6 +1,7 @@
 import Navbar from "../../components/layout/Navbar";
 import gps from "../../assets/location.png";
 import search from "../../assets/search.png";
+import logo from "../../assets/logo.png";
 import blueline from "../../assets/blueline.png";
 import rectangles from "../../assets/rectangles.png";
 import chel from "../../assets/chel.png";
@@ -390,11 +391,15 @@ export const Home = () => {
             </div>
           </div>
         </div>
+        <div></div>
       </main>
       <footer className="bg-[#202430] text-white px-30 py-10">
         <div className="flex justify-between gap-10 text-[#D6DDEB] mt-5">
           <div>
-            <h1 className="text-2xl font-bold text-white">TildarMen</h1>
+            <div className="flex items-center gap-3">
+              <img src={logo} alt="logo icon" className="w-7 h-7" />
+              <h1 className="text-2xl font-bold text-white">TildarMen</h1>
+            </div>
             <p className="w-100 py-5">
               A platform that connects passionate translators with clients who
               need clear, professional, and multilingual communication.
