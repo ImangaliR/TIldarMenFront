@@ -53,6 +53,41 @@ export const Home = () => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [title, setTitle] = useState("");
 
+  const handleSearchMarketing = () => {
+    const query = new URLSearchParams();
+    query.append("specialization", "Marketing Translation");
+    navigate(`/project-catalog?${query.toString()}`);
+  };
+  const handleSearchLegal = () => {
+    const query = new URLSearchParams();
+    query.append("specialization", "Legal Translation");
+    navigate(`/project-catalog?${query.toString()}`);
+  };
+  const handleSearchFinancial = () => {
+    const query = new URLSearchParams();
+    query.append("specialization", "Financial Translation");
+    navigate(`/project-catalog?${query.toString()}`);
+  };
+  const handleSearchTechnical = () => {
+    const query = new URLSearchParams();
+    query.append("specialization", "Technical Translation");
+    navigate(`/project-catalog?${query.toString()}`);
+  };
+  const handleSearchSoftware = () => {
+    const query = new URLSearchParams();
+    query.append("specialization", "Software Translation");
+    navigate(`/project-catalog?${query.toString()}`);
+  };
+  const handleSearchDiplomatic = () => {
+    const query = new URLSearchParams();
+    query.append("specialization", "Diplomatic Translation");
+    navigate(`/project-catalog?${query.toString()}`);
+  };
+  const handleSearchLiterary = () => {
+    const query = new URLSearchParams();
+    query.append("specialization", "Literary Translation");
+    navigate(`/project-catalog?${query.toString()}`);
+  };
   const handleSearch = () => {
     const query = new URLSearchParams();
     if (title) query.append("title", title);
@@ -181,6 +216,7 @@ export const Home = () => {
             <div
               onMouseEnter={() => setHoveredIndex(0)}
               onMouseLeave={() => setHoveredIndex(null)}
+              onClick={() => navigate("/project-catalog")}
               className="flex flex-col justify-center p-6 w-74 h-50 border-2 border-[#D6DDEB] hover:border-none hover:bg-[#71C39C] hover:text-white cursor-pointer transition-all duration-75 ease-in-out"
             >
               <img
@@ -209,6 +245,7 @@ export const Home = () => {
             <div
               onMouseEnter={() => setHoveredIndex(1)}
               onMouseLeave={() => setHoveredIndex(null)}
+              onClick={handleSearchMarketing}
               className="flex flex-col justify-center p-6 w-74 h-50 border-2 border-[#D6DDEB] hover:border-none hover:bg-[#71C39C] hover:text-white cursor-pointer transition-all duration-75 ease-in-out"
             >
               <img
@@ -239,6 +276,7 @@ export const Home = () => {
             <div
               onMouseEnter={() => setHoveredIndex(2)}
               onMouseLeave={() => setHoveredIndex(null)}
+              onClick={handleSearchLegal}
               className="flex flex-col justify-center p-6 w-74 h-50 border-2 border-[#D6DDEB] hover:border-none hover:bg-[#71C39C] hover:text-white cursor-pointer transition-all duration-75 ease-in-out"
             >
               <img
@@ -269,6 +307,7 @@ export const Home = () => {
             <div
               onMouseEnter={() => setHoveredIndex(3)}
               onMouseLeave={() => setHoveredIndex(null)}
+              onClick={handleSearchFinancial}
               className="flex flex-col justify-center p-6 w-74 h-50 border-2 border-[#D6DDEB] hover:border-none hover:bg-[#71C39C] hover:text-white cursor-pointer transition-all duration-75 ease-in-out"
             >
               <img
@@ -299,6 +338,7 @@ export const Home = () => {
             <div
               onMouseEnter={() => setHoveredIndex(4)}
               onMouseLeave={() => setHoveredIndex(null)}
+              onClick={handleSearchTechnical}
               className="flex flex-col justify-center p-6 w-74 h-50 border-2 border-[#D6DDEB] hover:border-none hover:bg-[#71C39C] hover:text-white cursor-pointer transition-all duration-75 ease-in-out"
             >
               <img
@@ -329,6 +369,7 @@ export const Home = () => {
             <div
               onMouseEnter={() => setHoveredIndex(5)}
               onMouseLeave={() => setHoveredIndex(null)}
+              onClick={handleSearchSoftware}
               className="flex flex-col justify-center p-6 w-74 h-50 border-2 border-[#D6DDEB] hover:border-none hover:bg-[#71C39C] hover:text-white cursor-pointer transition-all duration-75 ease-in-out"
             >
               <img
@@ -359,6 +400,7 @@ export const Home = () => {
             <div
               onMouseEnter={() => setHoveredIndex(6)}
               onMouseLeave={() => setHoveredIndex(null)}
+              onClick={handleSearchDiplomatic}
               className="flex flex-col justify-center p-6 w-74 h-50 border-2 border-[#D6DDEB] hover:border-none hover:bg-[#71C39C] hover:text-white cursor-pointer transition-all duration-75 ease-in-out"
             >
               <img
@@ -389,6 +431,7 @@ export const Home = () => {
             <div
               onMouseEnter={() => setHoveredIndex(7)}
               onMouseLeave={() => setHoveredIndex(null)}
+              onClick={handleSearchLiterary}
               className="flex flex-col justify-center p-6 w-74 h-50 border-2 border-[#D6DDEB] hover:border-none hover:bg-[#71C39C] hover:text-white cursor-pointer transition-all duration-75 ease-in-out"
             >
               <img

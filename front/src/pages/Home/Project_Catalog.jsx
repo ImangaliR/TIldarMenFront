@@ -24,24 +24,33 @@ const ProjectCatalog = () => {
     const params = new URLSearchParams(location.search);
     const title = params.get("title") || "";
     const city = params.get("locations");
+    const specialization = params.get("specialization");
 
     setUserSearch(title);
     if (city) {
       setSelectedLocations([city]);
     }
-
-    const initialFilters = {
-      locations: city ? [city] : [],
-      languages: [],
-      serviceTypes: [],
-      specializations: [],
-    };
-
-    fetchJobs(title, initialFilters);
+    if (specialization) {
+      setSelectedSpecializations([specialization]);
+    }
   }, []);
 
   useEffect(() => {
-    fetchJobs(userSearch);
+    const params = new URLSearchParams(location.search);
+    const title = params.get("title") || "";
+    const city = params.get("locations");
+    const specialization = params.get("specialization");
+
+    const filters = {
+      locations: city ? [city] : selectedLocations,
+      languages: selectedLanguages,
+      serviceTypes: selectedServices,
+      specializations: specialization
+        ? [specialization]
+        : selectedSpecializations,
+    };
+
+    fetchJobs(title || userSearch, filters);
   }, [
     userSearch,
     selectedLanguages,
@@ -65,6 +74,7 @@ const ProjectCatalog = () => {
         `/jobs/filter?title=${searchQuery}`,
         postChecks
       );
+      console.log("Response", response.data.data);
       setJobs(response?.data?.data);
       setJobCount(response?.data?.data.length);
     } catch (err) {
@@ -82,6 +92,7 @@ const ProjectCatalog = () => {
           setUserSearch={setUserSearch}
           handleSearch={fetchJobs}
           placeholder={"Please enter a job title"}
+          value={userSearch}
         />
         <div className="flex gap-5 my-10 w-full">
           <JobsFilter

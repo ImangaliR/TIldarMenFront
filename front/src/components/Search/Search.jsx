@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-const Search = ({ setUserSearch, handleSearch, placeholder }) => {
-  const [inputValue, setInputValue] = useState("");
+const Search = ({ setUserSearch, handleSearch, placeholder, value }) => {
+  const [inputValue, setInputValue] = useState(value || "");
 
   const onSearchClick = () => {
     setUserSearch?.(inputValue);
