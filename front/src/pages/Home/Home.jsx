@@ -51,6 +51,14 @@ export const Home = () => {
   const [featuredJobs, setFeaturedJobs] = useState([]);
   const [selectedCity, setSelectedCity] = useState("");
   const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [title, setTitle] = useState("");
+
+  const handleSearch = () => {
+    const query = new URLSearchParams();
+    if (title) query.append("title", title);
+    if (selectedCity) query.append("locations", selectedCity);
+    navigate(`/project-catalog?${query.toString()}`);
+  };
 
   useEffect(() => {
     const fetchCities = async () => {
@@ -96,6 +104,8 @@ export const Home = () => {
                 <img src={search} alt="search icon" className="w-6 h-6" />
                 <input
                   type="text"
+                  onChange={(e) => setTitle(e.target.value)}
+                  value={title}
                   placeholder="Project title or keyword"
                   className="border-b border-[#dfdfdf] p-2 w-70 focus:outline-none"
                 />
@@ -124,7 +134,10 @@ export const Home = () => {
                   />
                 </div>
               </div>
-              <button className="font-bold bg-[#71C39C] text-white px-7 py-3">
+              <button
+                onClick={handleSearch}
+                className="font-bold bg-[#71C39C] text-white px-7 py-3"
+              >
                 Search my projects
               </button>
             </div>

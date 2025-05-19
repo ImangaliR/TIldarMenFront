@@ -6,6 +6,7 @@ import api from "../../services/api";
 import { toast } from "react-toastify";
 import JobsFilter from "../../components/Filter/JobsFilter";
 import SimpleLoader from "./../../components/Loader/SimpleLoader";
+import { useLocation } from "react-router-dom";
 
 const ProjectCatalog = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -17,18 +18,42 @@ const ProjectCatalog = () => {
   const [selectedLocations, setSelectedLocations] = useState([]);
   const [selectedServices, setSelectedServices] = useState([]);
 
+  const location = useLocation();
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const title = params.get("title") || "";
+    const city = params.get("locations");
+
+    setUserSearch(title);
+    if (city) {
+      setSelectedLocations([city]);
+    }
+
+    const initialFilters = {
+      locations: city ? [city] : [],
+      languages: [],
+      serviceTypes: [],
+      specializations: [],
+    };
+
+    fetchJobs(title, initialFilters);
+  }, []);
+
   useEffect(() => {
     fetchJobs(userSearch);
   }, [
+    userSearch,
     selectedLanguages,
     selectedSpecializations,
     selectedLocations,
     selectedServices,
   ]);
 
-  const fetchJobs = async (searchQuery = "") => {
+  const fetchJobs = async (searchQuery = "", filters = null) => {
     setIsLoading(true);
-    var postChecks = {
+
+    var postChecks = filters || {
       locations: selectedLocations,
       languages: selectedLanguages,
       serviceTypes: selectedServices,
