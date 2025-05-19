@@ -53,7 +53,6 @@ const Education = () => {
       setEducationYear("");
       toast.success("Added education successfully!");
     } catch (err) {
-      console.log(err);
       if (err.message.includes("Network Error")) {
         toast.error("File size is too large.");
       } else {
