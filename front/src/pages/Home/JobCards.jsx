@@ -61,6 +61,14 @@ const JobCards = ({ job }) => {
     setIsOpenReport(!isOpenReport);
   };
 
+  function isUrgent(startDate) {
+    const now = new Date();
+    const start = new Date(startDate);
+    const diffInMs = start - now;
+    const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
+    return diffInDays <= 3;
+  }
+
   return (
     <>
       <div className="bg-white shadow-sm rounded-lg px-10 py-6">
@@ -70,8 +78,14 @@ const JobCards = ({ job }) => {
             <p>{formatDate(job?.startDate)}, </p>
             <p>{formatDate(job?.endDate)}</p>
           </h2>
-          <p className="bg-[#05E400] text-white px-6 py-1 text-center rounded-sm">
-            New
+          <p
+            className={
+              isUrgent(job?.startDate)
+                ? "bg-red-700 text-white px-6 py-1 text-center rounded-sm"
+                : "bg-[#05E400] text-white px-6 py-1 text-center rounded-sm"
+            }
+          >
+            {isUrgent(job?.startDate) ? "Urgent" : "New"}
           </p>
         </div>
         <div className="w-full mb-6">

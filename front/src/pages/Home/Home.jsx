@@ -76,8 +76,6 @@ export const Home = () => {
     fetchFeaturedJobs();
   }, []);
 
-  console.log("featuredJobs", featuredJobs);
-
   return (
     <>
       <Navbar />
