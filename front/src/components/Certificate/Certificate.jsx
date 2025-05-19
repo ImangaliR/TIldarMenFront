@@ -50,7 +50,11 @@ const Certificate = () => {
       setCertificate(null);
       toast.success("Added certificate successfully!");
     } catch (err) {
-      toast.error("Something went wrong.");
+      if (err.message.includes("Network Error")) {
+        toast.error("File size is too large.");
+      } else {
+        toast.error("Something went wrong.");
+      }
     } finally {
       setLoading(false);
     }
@@ -116,7 +120,7 @@ const Certificate = () => {
                 {certificate ? (
                   <div>
                     <iframe
-                      src={certificate || previewUrl}
+                      src={previewUrl}
                       width={240}
                       height={150}
                       className="border rounded mt-1"

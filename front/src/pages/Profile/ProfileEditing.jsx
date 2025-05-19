@@ -1,4 +1,4 @@
-import React, { use, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import profileicon from "../../assets/profileicon.png";
 import UploadVideo from "./UploadVideo";
 import SpecializationDropdown from "../../components/Dropdown/SpecializationDropdown";
@@ -30,7 +30,7 @@ const ProfileEditing = () => {
   const { handleSubmit } = useForm();
   const [intro, setIntro] = useState(user?.data?.introduction || "");
 
-  const [project, setProject] = useState(user?.data?.projectUrls?.[0] || null);
+  const [project, setProject] = useState(null);
   const [projectPreview, setProjectPreview] = useState(null);
 
   const [work, setWork] = useState(user?.data?.workExperiences || null);
@@ -40,7 +40,6 @@ const ProfileEditing = () => {
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
-    console.log(file);
     if (file) {
       setProject(file);
       setProjectPreview(URL.createObjectURL(file));
@@ -82,7 +81,11 @@ const ProfileEditing = () => {
       setUser(updatedProfile);
       toast.success("Added project successfully!");
     } catch (err) {
-      toast.error("Something went wrong.");
+      if (err.message.includes("Network Error")) {
+        toast.error("File size is too large.");
+      } else {
+        toast.error("Something went wrong.");
+      }
     } finally {
       setLoading(false);
     }
@@ -93,6 +96,7 @@ const ProfileEditing = () => {
       const response = await api.delete(`translator/${userId}/project/1`);
       const updatedProfile = await getProfile();
       setUser(updatedProfile);
+      setProjectPreview(null);
       toast.success("Deleted project successfully!");
     } catch (err) {
       toast.error("Something went wrong.");
@@ -100,7 +104,8 @@ const ProfileEditing = () => {
   };
 
   useEffect(() => {
-    setProject(user?.data?.projectUrls?.[0]);
+    setProject(user?.data?.projectUrls?.[0] || null);
+    setProjectPreview(user?.data?.projectUrls?.[0] || null);
     setWork(user?.data?.workExperiences);
     if (!availability && user.data.availability) {
       setAvailability(user.data.availability);
@@ -248,12 +253,30 @@ Max. 300 symbols"
               {project ? (
                 <>
                   <iframe
-                    src={project || projectPreview}
+                    src={projectPreview}
                     width={240}
                     height="100%"
                     className="border rounded"
                     title="PDF Preview"
                   />
+                </>
+              ) : (
+                <label
+                  htmlFor="file"
+                  className="block bg-[#EAF4F4] border-1 border-[#DCDCDC] p-3 w-50 h-30 rounded-sm text-center pt-12 cursor-pointer"
+                >
+                  Upload
+                </label>
+              )}
+              <div className="flex justify-start mt-10 gap-5">
+                {user?.data?.projectUrls?.[0] ? (
+                  <button
+                    onClick={deleteProject}
+                    className="w-25 h-8 text-[#FF0000] border-1 rounded-lg"
+                  >
+                    Delete
+                  </button>
+                ) : (
                   <div className="flex gap-3 mt-5">
                     <button
                       onClick={() => {
@@ -276,23 +299,6 @@ Max. 300 symbols"
                       </div>
                     )}
                   </div>
-                </>
-              ) : (
-                <label
-                  htmlFor="file"
-                  className="block bg-[#EAF4F4] border-1 border-[#DCDCDC] p-3 w-50 h-30 rounded-sm text-center pt-12 cursor-pointer"
-                >
-                  Upload
-                </label>
-              )}
-              <div className="flex justify-start mt-10 gap-5">
-                {user?.data?.projectUrls?.[0] && (
-                  <button
-                    onClick={deleteProject}
-                    className="w-25 h-8 text-[#FF0000] border-1 rounded-lg"
-                  >
-                    Delete
-                  </button>
                 )}
               </div>
             </div>

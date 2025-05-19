@@ -10,9 +10,7 @@ const Education = () => {
   const [loading, setLoading] = useState(false);
   const { user, userId, setUser } = useUser();
   const { handleSubmit } = useForm();
-  const [education, setEducation] = useState(
-    user?.data?.educations?.[0]?.degreeUrl || null
-  );
+  const [education, setEducation] = useState(null);
   const [educationPreview, setEducationPreview] = useState(null);
   const [educationDegree, setEducationDegree] = useState("");
   const [educationYear, setEducationYear] = useState("");
@@ -55,7 +53,12 @@ const Education = () => {
       setEducationYear("");
       toast.success("Added education successfully!");
     } catch (err) {
-      toast.error("Something went wrong.");
+      console.log(err);
+      if (err.message.includes("Network Error")) {
+        toast.error("File size is too large.");
+      } else {
+        toast.error("Something went wrong.");
+      }
     } finally {
       setLoading(false);
     }
@@ -130,7 +133,7 @@ const Education = () => {
                 {education ? (
                   <div>
                     <iframe
-                      src={education || educationPreview}
+                      src={educationPreview}
                       width={240}
                       height="100%"
                       className="border rounded mt-1"
