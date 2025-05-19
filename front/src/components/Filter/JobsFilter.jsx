@@ -1,6 +1,444 @@
 import { useEffect, useState } from "react";
 import api from "../../services/api";
 
+const languages = [
+  {
+    name: "Afrikaans",
+  },
+  {
+    name: "Albanian",
+  },
+  {
+    name: "Amharic",
+  },
+  {
+    name: "Arabic",
+  },
+  {
+    name: "Armenian",
+  },
+  {
+    name: "Azerbaijani",
+  },
+  {
+    name: "Basque",
+  },
+  {
+    name: "Belarusian",
+  },
+  {
+    name: "Bengali",
+  },
+  {
+    name: "Bosnian",
+  },
+  {
+    name: "Bulgarian",
+  },
+  {
+    name: "Catalan",
+  },
+  {
+    name: "Cebuano",
+  },
+  {
+    name: "Chinese",
+  },
+  {
+    name: "Corsican",
+  },
+  {
+    name: "Croatian",
+  },
+  {
+    name: "Czech",
+  },
+  {
+    name: "Danish",
+  },
+  {
+    name: "Dutch",
+  },
+  {
+    name: "English",
+  },
+  {
+    name: "Esperanto",
+  },
+  {
+    name: "Estonian",
+  },
+  {
+    name: "Finnish",
+  },
+  {
+    name: "French",
+  },
+  {
+    name: "Galician",
+  },
+  {
+    name: "Georgian",
+  },
+  {
+    name: "German",
+  },
+  {
+    name: "Greek",
+  },
+  {
+    name: "Gujarati",
+  },
+  {
+    name: "Haitian Creole",
+  },
+  {
+    name: "Hausa",
+  },
+  {
+    name: "Hebrew",
+  },
+  {
+    name: "Hindi",
+  },
+  {
+    name: "Hungarian",
+  },
+  {
+    name: "Icelandic",
+  },
+  {
+    name: "Igbo",
+  },
+  {
+    name: "Indonesian",
+  },
+  {
+    name: "Irish",
+  },
+  {
+    name: "Italian",
+  },
+  {
+    name: "Japanese",
+  },
+  {
+    name: "Javanese",
+  },
+  {
+    name: "Kannada",
+  },
+  {
+    name: "Kazakh",
+  },
+  {
+    name: "Khmer",
+  },
+  {
+    name: "Korean",
+  },
+  {
+    name: "Kurdish",
+  },
+  {
+    name: "Kyrgyz",
+  },
+  {
+    name: "Lao",
+  },
+  {
+    name: "Latin",
+  },
+  {
+    name: "Latvian",
+  },
+  {
+    name: "Lithuanian",
+  },
+  {
+    name: "Luxembourgish",
+  },
+  {
+    name: "Macedonian",
+  },
+  {
+    name: "Malagasy",
+  },
+  {
+    name: "Malay",
+  },
+  {
+    name: "Malayalam",
+  },
+  {
+    name: "Maltese",
+  },
+  {
+    name: "Maori",
+  },
+  {
+    name: "Marathi",
+  },
+  {
+    name: "Mongolian",
+  },
+  {
+    name: "Myanmar",
+  },
+  {
+    name: "Nepali",
+  },
+  {
+    name: "Norwegian",
+  },
+  {
+    name: "Odia (Oriya)",
+  },
+  {
+    name: "Pashto",
+  },
+  {
+    name: "Persian",
+  },
+  {
+    name: "Polish",
+  },
+  {
+    name: "Portuguese",
+  },
+  {
+    name: "Punjabi",
+  },
+  {
+    name: "Romanian",
+  },
+  {
+    name: "Russian",
+  },
+  {
+    name: "Samoan",
+  },
+  {
+    name: "Scottish Gaelic",
+  },
+  {
+    name: "Serbian",
+  },
+  {
+    name: "Sesotho",
+  },
+  {
+    name: "Shona",
+  },
+  {
+    name: "Sindhi",
+  },
+  {
+    name: "Sinhala",
+  },
+  {
+    name: "Slovak",
+  },
+  {
+    name: "Slovenian",
+  },
+  {
+    name: "Somali",
+  },
+  {
+    name: "Spanish",
+  },
+  {
+    name: "Sundanese",
+  },
+  {
+    name: "Swahili",
+  },
+  {
+    name: "Swedish",
+  },
+  {
+    name: "Tagalog",
+  },
+  {
+    name: "Tajik",
+  },
+  {
+    name: "Tamil",
+  },
+  {
+    name: "Tatar",
+  },
+  {
+    name: "Telugu",
+  },
+  {
+    name: "Thai",
+  },
+  {
+    name: "Turkish",
+  },
+  {
+    name: "Ukrainian",
+  },
+  {
+    name: "Urdu",
+  },
+  {
+    name: "Uzbek",
+  },
+  {
+    name: "Vietnamese",
+  },
+  {
+    name: "Welsh",
+  },
+  {
+    name: "Xhosa",
+  },
+  {
+    name: "Yiddish",
+  },
+  {
+    name: "Yoruba",
+  },
+  {
+    name: "Zulu",
+  },
+];
+
+const specialization = [
+  {
+    name: "Legal Translation",
+  },
+  {
+    name: "Medical Translation",
+  },
+  {
+    name: "Technical Translation",
+  },
+  {
+    name: "Financial Translation",
+  },
+  {
+    name: "Marketing Translation",
+  },
+  {
+    name: "Literary Translation",
+  },
+  {
+    name: "Scientific Translation",
+  },
+  {
+    name: "Software Localization",
+  },
+  {
+    name: "Website Localization",
+  },
+  {
+    name: "Diplomatic Translation",
+  },
+];
+
+const location = [
+  {
+    city: "Almaty",
+  },
+  {
+    city: "Astana",
+  },
+  {
+    city: "Shymkent",
+  },
+  {
+    city: "Aktobe",
+  },
+  {
+    city: "Karaganda",
+  },
+  {
+    city: "Taraz",
+  },
+  {
+    city: "Pavlodar",
+  },
+  {
+    city: "Oskemen",
+  },
+  {
+    city: "Semey",
+  },
+  {
+    city: "Atyrau",
+  },
+  {
+    city: "Aktau",
+  },
+  {
+    city: "Kostanay",
+  },
+  {
+    city: "Kyzylorda",
+  },
+  {
+    city: "Oral",
+  },
+  {
+    city: "Petropavl",
+  },
+  {
+    city: "Taldykorgan",
+  },
+  {
+    city: "Ekibastuz",
+  },
+  {
+    city: "Turkestan",
+  },
+  {
+    city: "Kokshetau",
+  },
+  {
+    city: "Zhanaozen",
+  },
+  {
+    city: "Rudny",
+  },
+];
+
+const service = [
+  {
+    name: "Book Translation",
+  },
+  {
+    name: "Real-time Interpretation",
+  },
+  {
+    name: "Video Game Localization",
+  },
+  {
+    name: "Movie & TV Subtitle Translation",
+  },
+  {
+    name: "Website Localization",
+  },
+  {
+    name: "Software Localization",
+  },
+  {
+    name: "Medical Translation",
+  },
+  {
+    name: "Legal Document Translation",
+  },
+  {
+    name: "Financial Document Translation",
+  },
+  {
+    name: "Marketing & Advertising Translation",
+  },
+];
+
 const JobsFilter = ({
   setSelectedServices,
   setSelectedLocations,
@@ -11,61 +449,12 @@ const JobsFilter = ({
   selectedSpecializations,
   selectedLanguages,
 }) => {
-  const [languages, setLanguages] = useState([]);
-  const [specialization, setSpecialization] = useState([]);
-  const [location, setLocation] = useState([]);
-  const [service, setService] = useState([]);
-
   const handleReset = () => {
     setSelectedLanguages([]);
     setSelectedLocations([]);
     setSelectedServices([]);
     setSelectedSpecializations([]);
   };
-
-  useEffect(() => {
-    api
-      .get("/language/all")
-      .then((res) => {
-        setLanguages(res.data.data);
-      })
-      .catch((err) => {
-        console.error("Error fetching languages:", err);
-      });
-  }, []);
-
-  useEffect(() => {
-    api
-      .get("/specialization/all")
-      .then((res) => {
-        setSpecialization(res.data.data);
-      })
-      .catch((err) => {
-        console.error("Error fetching specializations:", err);
-      });
-  }, []);
-
-  useEffect(() => {
-    api
-      .get("/service-types/all")
-      .then((res) => {
-        setService(res.data.data);
-      })
-      .catch((err) => {
-        console.error("Error fetching service types:", err);
-      });
-  }, []);
-
-  useEffect(() => {
-    api
-      .get("/location/all")
-      .then((res) => {
-        setLocation(res.data.data);
-      })
-      .catch((err) => {
-        console.error("Error fetching locations:", err);
-      });
-  }, []);
 
   const handleLanguageCheck = (item) => {
     setSelectedLanguages((prev) =>

@@ -5,8 +5,10 @@ import JobCards from "./JobCards";
 import api from "../../services/api";
 import { toast } from "react-toastify";
 import JobsFilter from "../../components/Filter/JobsFilter";
+import SimpleLoader from "./../../components/Loader/SimpleLoader";
 
 const ProjectCatalog = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const [jobCount, setJobCount] = useState(0);
   const [jobs, setJobs] = useState([]);
   const [userSearch, setUserSearch] = useState("");
@@ -25,6 +27,7 @@ const ProjectCatalog = () => {
   ]);
 
   const fetchJobs = async (searchQuery = "") => {
+    setIsLoading(true);
     var postChecks = {
       locations: selectedLocations,
       languages: selectedLanguages,
@@ -41,6 +44,8 @@ const ProjectCatalog = () => {
       setJobCount(response?.data?.data.length);
     } catch (err) {
       toast.error("Failed to fetch jobs.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -65,7 +70,14 @@ const ProjectCatalog = () => {
             selectedServices={selectedServices}
           />
           <main className="w-220 lg:w-260">
-            <p className="text-2xl mb-1">Results ({jobCount})</p>
+            <div className="flex items-center gap-10">
+              <p className="text-2xl mb-1">Results ({jobCount})</p>
+              {isLoading && (
+                <div className="flex items-center justify-center">
+                  <SimpleLoader className="h-7" />
+                </div>
+              )}
+            </div>
             <div className="grid grid-cols-1 gap-4">
               {jobs.map((job, i) => (
                 <JobCards key={i} job={job} />

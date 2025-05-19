@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import TranslatorsFilter from "../../components/Filter/TranslatorsFilter";
 import { Outlet } from "react-router-dom";
 import { useMatch } from "react-router-dom";
+import SimpleLoader from "../../components/Loader/SimpleLoader";
 
 const Translators = () => {
   const [resultCount, setResultCount] = useState(0);
@@ -18,6 +19,7 @@ const Translators = () => {
   const [selectedAvailabilities, setSelectedAvailabilities] = useState([]);
   const [selectedLocations, setSelectedLocations] = useState([]);
   const [selectedServices, setSelectedServices] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     fetchTranslators(userSearch);
@@ -30,6 +32,7 @@ const Translators = () => {
   ]);
 
   const fetchTranslators = async (searchQuery = "") => {
+    setIsLoading(true);
     var postChecks = {
       locations: selectedLocations,
       languages: selectedLanguages,
@@ -47,6 +50,8 @@ const Translators = () => {
       setResultCount(response.data?.data.length);
     } catch (err) {
       toast.error("Failed to fetch translators.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -90,7 +95,14 @@ const Translators = () => {
               setSelectedServices={setSelectedServices}
             />
             <main className="max-w-260">
-              <p className="text-2xl mb-1">Results ({resultCount})</p>
+              <div className="flex items-center gap-10">
+                <p className="text-2xl mb-1">Results ({resultCount})</p>
+                {isLoading && (
+                  <div className="flex items-center justify-center">
+                    <SimpleLoader className="h-7" />
+                  </div>
+                )}
+              </div>
               <div className="grid grid-cols-2 gap-x-1 gap-y-3 xl:grid-cols-3 xl:gap-x-3 xl:gap-y-5 ">
                 {translatorCards}
               </div>
