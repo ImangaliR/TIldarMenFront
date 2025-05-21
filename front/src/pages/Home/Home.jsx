@@ -123,14 +123,14 @@ export const Home = () => {
     <>
       <Navbar />
       <main>
-        <div className="relative pl-4 md:pl-30 h-182 flex bg-[#F3F3F3]">
-          <div className="w-full flex flex-col z-4">
-            <h1 className="home text-5xl md:text-6xl w-100 mt-35">
+        <div className="relative md:pl-30 h-182 flex bg-[#F3F3F3]">
+          <div className="w-full flex flex-col z-4 px-4">
+            <h1 className="home text-4xl md:text-6xl md:w-100 mt-25 md:mt-35">
               DISCOVER HERE MORE{" "}
               <span className="text-[#71C39C]">PROJECTS</span>
             </h1>
-            <img src={blueline} alt="blue line" className="w-70 md:w-93 py-4" />
-            <p className="text-[#515B6F] w-80 md:w-110 md:text-xl">
+            <img src={blueline} alt="blue line" className="w-55 md:w-93 py-4" />
+            <p className="text-[#515B6F] md:w-110 md:text-xl">
               A platform that connects passionate translators with clients who
               need clear, professional, and multilingual communication.
             </p>
@@ -142,16 +142,16 @@ export const Home = () => {
                   onChange={(e) => setTitle(e.target.value)}
                   value={title}
                   placeholder="Project title or keyword"
-                  className="border-b border-[#dfdfdf] p-2 w-70 focus:outline-none"
+                  className="border-b border-[#dfdfdf] p-2 w-60 md:w-70 focus:outline-none"
                 />
               </div>
               <div className="flex items-center gap-3">
                 <img src={gps} alt="gps icon" className="w-7 h-7" />
-                <div className="relative">
+                <div className="relative w-full">
                   <select
                     value={selectedCity || ""}
                     onChange={(e) => setSelectedCity(e.target.value)}
-                    className="border-b border-[#dfdfdf] focus:outline-none appearance-none p-2 w-70 text-[#8a8a8a]"
+                    className="border-b border-[#dfdfdf] focus:outline-none appearance-none p-2 w-full md:min-w-70 text-[#8a8a8a]"
                   >
                     <option disabled value="">
                       Select a city

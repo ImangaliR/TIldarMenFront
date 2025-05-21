@@ -38,7 +38,7 @@ const Navbar = () => {
           <button onClick={() => navigate("/home")}>TildarMen</button>
         </h1>
 
-        <div className="hidden md:flex items-center justify-between min-w-60 md:min-w-72 lg:min-w-100 text-[#585858] lg:text-lg cursor-pointer">
+        <div className="hidden md:flex items-center justify-between min-w-72 lg:min-w-100 text-[#585858] lg:text-lg cursor-pointer">
           {navigation.map((item, i) => (
             <NavLink
               to={item.href}
