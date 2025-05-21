@@ -134,7 +134,7 @@ export const Home = () => {
               A platform that connects passionate translators with clients who
               need clear, professional, and multilingual communication.
             </p>
-            <div className="grid md:flex items-center gap-5 bg-white w-fit mt-8 px-3 py-4 md:px-6">
+            <div className="grid md:flex items-center gap-5 bg-white w-full md:w-fit mt-8 px-3 py-4 md:px-6">
               <div className="flex items-center gap-3">
                 <img src={search} alt="search icon" className="w-6 h-6" />
                 <input
@@ -142,7 +142,7 @@ export const Home = () => {
                   onChange={(e) => setTitle(e.target.value)}
                   value={title}
                   placeholder="Project title or keyword"
-                  className="border-b border-[#dfdfdf] p-2 w-60 md:w-70 focus:outline-none"
+                  className="border-b border-[#dfdfdf] p-2 w-full md:w-70 focus:outline-none"
                 />
               </div>
               <div className="flex items-center gap-3">
