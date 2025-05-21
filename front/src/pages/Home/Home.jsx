@@ -123,18 +123,18 @@ export const Home = () => {
     <>
       <Navbar />
       <main>
-        <div className="relative pl-30 h-182 flex bg-[#F3F3F3]">
+        <div className="relative pl-4 md:pl-30 h-182 flex bg-[#F3F3F3]">
           <div className="w-full flex flex-col z-4">
-            <h1 className="home text-6xl w-100 mt-35">
+            <h1 className="home text-5xl md:text-6xl w-100 mt-35">
               DISCOVER HERE MORE{" "}
               <span className="text-[#71C39C]">PROJECTS</span>
             </h1>
-            <img src={blueline} alt="blue line" className="w-93 py-4" />
-            <p className="text-[#515B6F] w-110 text-xl">
+            <img src={blueline} alt="blue line" className="w-70 md:w-93 py-4" />
+            <p className="text-[#515B6F] w-80 md:w-110 md:text-xl">
               A platform that connects passionate translators with clients who
               need clear, professional, and multilingual communication.
             </p>
-            <div className="flex items-center gap-5 bg-white w-fit mt-8 py-4 px-6">
+            <div className="grid md:flex items-center gap-5 bg-white w-fit mt-8 px-3 py-4 md:px-6">
               <div className="flex items-center gap-3">
                 <img src={search} alt="search icon" className="w-6 h-6" />
                 <input
@@ -154,7 +154,7 @@ export const Home = () => {
                     className="border-b border-[#dfdfdf] focus:outline-none appearance-none p-2 w-70 text-[#8a8a8a]"
                   >
                     <option disabled value="">
-                      -- Select a city --
+                      Select a city
                     </option>
                     {kazakhstanCities.map((item, index) => (
                       <option key={index} value={item.city}>
@@ -187,32 +187,36 @@ export const Home = () => {
             <img
               src={rectangles}
               alt="rectangles"
-              className="object-cover absolute bottom-0 right-0 w-232 z-1"
+              className="object-cover absolute bottom-0 right-0 w-232 h-full z-1"
             />
             <img
               src={chel}
               alt="person image"
-              className="object-cover absolute bottom-0 right-30 h-165 z-2"
+              className="hidden md:block object-cover absolute bottom-0 right-30 h-165 z-2"
             />
-            <div className="w-100 h-50 absolute bottom-0 right-0 bg-white [clip-path:polygon(100%_0,100%_100%,0_100%)] z-3"></div>
+            <div className="w-60 h-25 md:w-100 md:h-50 absolute bottom-0 right-0 bg-white [clip-path:polygon(100%_0,100%_100%,0_100%)] z-3"></div>
           </div>
         </div>
-        <div className="px-30 py-20 bg-white">
+        <div className="px-5 md:px-30 py-20 bg-white">
           <div className="flex items-center justify-between">
-            <h1 className="home text-3xl font-bold">
+            <h1 className="home text-2xl md:text-3xl font-bold">
               Explore by <span className="text-[#71C39C]">specializations</span>
             </h1>
             <div
-              className="flex items-center gap-3 cursor-pointer"
+              className="flex items-center gap-2 md:gap-3 cursor-pointer"
               onClick={() => navigate("/project-catalog")}
             >
-              <p className="text-[#71C39C] text-xl font-semibold">
+              <p className="text-[#71C39C] md:text-xl font-semibold">
                 Show all projects
               </p>
-              <img src={arrow} alt="arrow icon" className="w-5 h-5" />
+              <img
+                src={arrow}
+                alt="arrow icon"
+                className="w-4 h-4 md:w-5 md:h-5"
+              />
             </div>
           </div>
-          <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mt-12">
+          <div className="grid justify-center pl-4 md:pl-0 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mt-12">
             <div
               onMouseEnter={() => setHoveredIndex(0)}
               onMouseLeave={() => setHoveredIndex(null)}
@@ -461,70 +465,79 @@ export const Home = () => {
             </div>
           </div>
         </div>
-        <div className="bg-white px-30 pb-20">
-          <div className="relative bg-[#71C39C] px-30 pt-15 flex justify-between">
+        <div className="bg-white px-5 md:px-30 pb-20">
+          <div className="relative bg-[#71C39C] px-7 md:px-30 pt-8 md:pt-15 md:flex justify-between">
             <div>
-              <h1 className="text-5xl w-90 text-white font-semibold">
+              <h1 className="text-4xl md:text-5xl w-52 md:w-90 text-white font-semibold">
                 Start posting jobs today
               </h1>
               <button
                 onClick={() => navigate("/signup")}
-                className="mt-20 bg-white text-[#71C39C] px-7 py-3 font-semibold"
+                className="mt-10 md:mt-20 bg-white text-[#71C39C] px-6 py-2 md:px-7 md:py-3 font-semibold"
               >
                 Sign Up For Free
               </button>
             </div>
-            <div className="h-[280px] overflow-hidden">
+            <div className="mt-10 md:mt-0 h-[190px] md:h-[280px] overflow-hidden">
               <img
                 src={postproject}
                 alt="post project image"
                 className="w-100"
               />
             </div>
-            <div className="absolute top-0 left-0 w-30 h-15 bg-white [clip-path:polygon(0_0,100%_0,0_100%)] z-3"></div>
-            <div className="w-30 h-15 absolute bottom-0 right-0 bg-white [clip-path:polygon(100%_0,100%_100%,0_100%)] z-3"></div>
+            <div className="absolute top-0 left-0 w-25 h-10 md:w-30 md:h-15 bg-white [clip-path:polygon(0_0,100%_0,0_100%)] z-3"></div>
+            <div className="w-25 h-10 md:w-30 md:h-15 absolute bottom-0 right-0 bg-white [clip-path:polygon(100%_0,100%_100%,0_100%)] z-3"></div>
           </div>
         </div>
-        <div className="relative flex  flex-col px-30 py-20 bg-[#F8F8FD]">
+        <div className="relative flex flex-col px-5 md:px-30 py-20 bg-[#F8F8FD]">
           <div className="flex flex-col z-4">
             <div className="flex items-center justify-between">
-              <h1 className="home text-3xl font-bold">
+              <h1 className="home text-2xl md:text-3xl font-bold">
                 Latest <span className="text-[#71C39C]">jobs open</span>
               </h1>
               <div
-                className="flex items-center gap-3 cursor-pointer"
+                className="flex items-center gap-2 md:gap-3 cursor-pointer"
                 onClick={() => navigate("/project-catalog")}
               >
-                <p className="text-[#71C39C] text-xl font-semibold">
+                <p className="text-[#71C39C] md:text-xl font-semibold">
                   Show all jobs
                 </p>
-                <img src={arrow} alt="arrow icon" className="w-5 h-5" />
+                <img
+                  src={arrow}
+                  alt="arrow icon"
+                  className="w-4 md:w-5 h-4 md:h-5 mt-0.5 md:mt-0"
+                />
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-5 mt-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-12">
               {featuredJobs?.map((item, index) => (
-                <div key={index} className="flex gap-5 py-5 px-10 bg-white">
+                <div
+                  key={index}
+                  className="flex gap-5 py-2 md:py-5 px-5 md:px-10 bg-white"
+                >
                   <img
                     src={item?.employerProfilePicture}
                     alt="icon"
-                    className="w-15 h-15 object-cover rounded-full mt-2"
+                    className="w-12 h-12 md:w-15 md:h-15 object-cover rounded-full mt-2"
                   />
                   <div>
-                    <h1 className="text-lg font-semibold py-2">
+                    <h1 className="md:text-lg font-semibold py-2">
                       {item?.title}
                     </h1>
-                    <p className="text-[#515B6F] text-lg">{item?.location}</p>
-                    <div className="flex items-center gap-2 mt-3">
-                      <p className="rounded-full text-[#56CDAD] bg-green-50 w-fit px-3 py-1">
+                    <p className="text-[#515B6F] md:text-lg">
+                      {item?.location}
+                    </p>
+                    <div className="md:flex items-center gap-2 mt-3">
+                      <p className="rounded-full text-[#56CDAD] bg-green-50 w-fit px-3 py-1 text-nowrap">
                         Full-Time
                       </p>
                       {item?.specializations[0] && (
-                        <p className="rounded-full text-[#FFB836] border-1 w-fit px-3 py-1">
+                        <p className="mt-2 md:mt-0 rounded-full text-sm md:text-md text-[#FFB836] border-1 w-fit px-3 py-1">
                           {item?.specializations[0]?.name}
                         </p>
                       )}
                       {item?.serviceTypes[0] && (
-                        <p className="rounded-full text-[#4640DE] border-1 w-fit px-3 py-1">
+                        <p className="mt-2 md:mt-0 rounded-full text-sm md:text-md text-[#4640DE] border-1 w-fit px-3 py-1">
                           {item?.serviceTypes[0]?.name}
                         </p>
                       )}
@@ -544,14 +557,14 @@ export const Home = () => {
           </div>
         </div>
       </main>
-      <footer className="bg-[#202430] text-white px-30 py-10">
-        <div className="flex justify-between gap-10 text-[#D6DDEB] mt-5">
+      <footer className="bg-[#202430] text-white px-5 md:px-30 py-10">
+        <div className="md:flex justify-between gap-10 text-[#D6DDEB] mt-5">
           <div>
             <div className="flex items-center gap-3">
               <img src={logo} alt="logo icon" className="w-7 h-7" />
               <h1 className="text-2xl font-bold text-white">TildarMen</h1>
             </div>
-            <p className="w-100 py-5">
+            <p className="md:w-100 py-5">
               A platform that connects passionate translators with clients who
               need clear, professional, and multilingual communication.
             </p>
@@ -575,9 +588,9 @@ export const Home = () => {
           </div>
         </div>
         <hr className="border-white border-t-2 my-10 w-full opacity-10" />
-        <div className="flex items-center justify-between">
+        <div className="flex items-center flex-col md:flex-row justify-between">
           <h1 className="opacity-50">2025 @ TildarMen. All rights reserved.</h1>
-          <div className="flex items-center gap-5">
+          <div className="flex items-center gap-5 mt-5 md:mt-0">
             <img
               src={facebook}
               alt="icon"
