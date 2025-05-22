@@ -93,7 +93,7 @@ function Signup() {
         <header className="text-3xl md:text-4xl text-center font-extrabold p-8 m-2 bg-[#71C39C] text-[#E8EAF6] rounded-2xl">
           <button onClick={() => navigate("/home")}>TildarMen</button>
         </header>
-        <main className="flex flex-col flex-grow items-center scale-95">
+        <main className="flex flex-col md:flex-grow items-center scale-95">
           {loading && (
             <div className="flex justify-center my-4">
               <SimpleLoader className="h-9 w-9 text-blue-500" />
@@ -102,7 +102,7 @@ function Signup() {
           <form
             onSubmit={handleSubmit(handleSignup)}
             name="signup-form"
-            className="bg-white h-fit w-80 md:w-235 px-5 md:px-15 rounded-2xl shadow-sm"
+            className="bg-white h-fit w-full md:w-235 px-5 md:px-15 rounded-2xl shadow-sm"
           >
             <button type="button" onClick={() => navigate("/home")}>
               <img src={logo} alt="logo" className="w-15 h-15 mt-8 mb-2" />
@@ -123,7 +123,7 @@ function Signup() {
                   required
                   onChange={(e) => setFirstname(e.target.value)}
                   className="rounded-lg border-2 border-[#d1d5d8] bg-white
-            pl-4 pt-2 pb-2 shadow-xs w-70 md:w-100 mt-1"
+            pl-4 pt-2 pb-2 shadow-xs w-full md:w-100 mt-1"
                 />
               </div>
               <div className="mt-2 md:mt-0">
@@ -137,7 +137,7 @@ function Signup() {
                   required
                   onChange={(e) => setLastname(e.target.value)}
                   className="rounded-lg border-2 border-[#d1d5d8] bg-white
-            pl-4 pt-2 pb-2 shadow-xs w-70 md:w-100 mt-1"
+            pl-4 pt-2 pb-2 shadow-xs w-full md:w-100 mt-1"
                 />
               </div>
             </div>
@@ -154,12 +154,12 @@ function Signup() {
                     required
                     onChange={(e) => setEmail(e.target.value)}
                     className="rounded-lg border-2 border-[#d1d5d8] bg-white
-            pl-4 pt-2 pb-2 shadow-xs w-42 md:w-73 mt-1"
+            pl-4 pt-2 pb-2 shadow-xs w-full md:w-73 mt-1"
                   />
                   <button
                     type="button"
                     onClick={handleVerifyCode}
-                    className="px-3 py-2  text-[#38BF4C] border-2 rounded-lg shadow-xs"
+                    className="px-3 py-2 text-[#38BF4C] text-nowrap border-2 rounded-lg shadow-xs"
                   >
                     Send code
                   </button>
@@ -178,7 +178,7 @@ function Signup() {
                   required
                   onChange={(e) => setPhoneNumber(e.target.value)}
                   className="rounded-lg border-2 border-[#d1d5d8] bg-white
-            pl-4 pt-2 pb-2 shadow-xs w-70 md:w-100 mt-1"
+            pl-4 pt-2 pb-2 shadow-xs w-full md:w-100 mt-1"
                 />
               </div>
             </div>
@@ -198,7 +198,7 @@ function Signup() {
                     value={password}
                     minLength={8}
                     className="rounded-lg border-2 border-[#d1d5d8] bg-white
-            pl-4 pt-2 pb-2 shadow-xs w-70 md:w-100 mt-1"
+            pl-4 pt-2 pb-2 shadow-xs w-full md:w-100 mt-1"
                   />
                   <img
                     src={showPassword ? openeye : hiddeneye}
@@ -224,7 +224,7 @@ function Signup() {
                     value={confirmPassword}
                     minLength={8}
                     className={`rounded-lg border-2 border-[#d1d5d8] bg-white
-            pl-4 pt-2 pb-2 shadow-xs w-70 md:w-100 mt-1 ${
+            pl-4 pt-2 pb-2 shadow-xs w-full md:w-100 mt-1 ${
               !passwordMatch ? "border-red-400" : "border-gray-300"
             }`}
                   />
@@ -253,7 +253,7 @@ function Signup() {
                   value={verificationCode}
                   onChange={(e) => setverificationCode(e.target.value)}
                   className="rounded-lg border-2 border-[#d1d5d8] bg-white
-            pl-4 pt-2 pb-2 shadow-xs w-70 md:w-100 mt-1"
+            pl-4 pt-2 pb-2 shadow-xs w-full md:w-100 mt-1"
                 />
               </div>
             )}
