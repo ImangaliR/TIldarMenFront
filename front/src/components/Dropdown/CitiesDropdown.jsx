@@ -10,10 +10,7 @@ const CitiesDropdown = ({ value, onChange }) => {
         const response = await api.get("/location/all");
         const cityList = response.data?.data;
         setKazakhstanCities(cityList);
-      } catch (err) {
-        console.error("Axios Error:", err);
-        console.log(err.response?.data || "Failed to fetch cities.");
-      }
+      } catch (err) {}
     };
 
     fetchCities();
@@ -25,7 +22,7 @@ const CitiesDropdown = ({ value, onChange }) => {
         <select
           value={value || ""}
           onChange={onChange}
-          className="bg-[#EAF4F4] border border-gray-300 w-54 md:w-72 lg:w-90 xl:w-114 h-9 mt-1 mb-5 pl-2 rounded-sm"
+          className="bg-[#EAF4F4] border border-gray-300 w-full md:w-72 lg:w-90 xl:w-114 h-9 mt-1 mb-5 pl-2 rounded-sm"
         >
           <option disabled value="">
             -- Select a city --
