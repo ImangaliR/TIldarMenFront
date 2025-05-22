@@ -173,7 +173,7 @@ export const Home = () => {
                 onClick={handleSearch}
                 className="font-bold bg-[#71C39C] text-white px-7 py-3"
               >
-                Search my projects
+                Search projects
               </button>
             </div>
             <p className="mt-6 text-[#202430]">

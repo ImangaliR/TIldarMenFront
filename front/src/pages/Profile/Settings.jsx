@@ -160,22 +160,22 @@ const Settings = () => {
     <>
       {userRole === "EMPLOYER" ? (
         <>
-          <main className="bg-white shadow-sm rounded-sm text-sm pt-10 pl-15 pr-15 md:pt-15 md:pr-20 md:pl-20 lg:pt-25 lg:pr-25 lg:pl-25">
+          <main className="bg-white shadow-sm rounded-sm text-sm py-10 px-2 md:p-25">
             <UploadProfilePicture />
 
             <form
               onSubmit={handleSubmit(employerInfoUpdate)}
               name="update user input"
-              className="mt-15"
+              className="px-5 mt-15"
             >
-              <div className="flex gap-4">
+              <div className="md:flex gap-4">
                 <div>
                   <p className="ml-2">Company Name</p>
                   <input
                     type="text"
                     onChange={(e) => setName(e.target.value)}
                     placeholder={userSettings.firstName}
-                    className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-54 md:w-72 lg:w-90 xl:w-114 h-9 mt-1 mb-5 rounded-sm text-sm"
+                    className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-full md:w-72 lg:w-90 xl:w-114 h-9 mt-1 mb-5 rounded-sm text-sm"
                   />
                 </div>
                 <div>
@@ -184,11 +184,11 @@ const Settings = () => {
                     type="text"
                     onChange={(e) => setSurname(e.target.value)}
                     placeholder={userSettings.lastName}
-                    className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-54 md:w-72 lg:w-90 xl:w-114 h-9 mt-1 mb-5 rounded-sm text-sm"
+                    className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-full md:w-72 lg:w-90 xl:w-114 h-9 mt-1 mb-5 rounded-sm text-sm"
                   />
                 </div>
               </div>
-              <div className="flex gap-4">
+              <div className="md:flex gap-4">
                 <div>
                   <p className="ml-2">Phone Number</p>
                   <input
@@ -197,7 +197,7 @@ const Settings = () => {
                     maxLength={11}
                     minLength={11}
                     placeholder={userSettings.phoneNumber}
-                    className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-54 md:w-72 lg:w-90 xl:w-114 h-9 mt-1 mb-5 rounded-sm text-sm"
+                    className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-full md:w-72 lg:w-90 xl:w-114 h-9 mt-1 mb-5 rounded-sm text-sm"
                   />
                 </div>
                 <div>
@@ -206,11 +206,11 @@ const Settings = () => {
                     type="email"
                     disabled
                     value={userSettings.email || ""}
-                    className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-54 md:w-72 lg:w-90 xl:w-114 h-9 mt-1 mb-5 rounded-sm text-sm"
+                    className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-full md:w-72 lg:w-90 xl:w-114 h-9 mt-1 mb-5 rounded-sm text-sm"
                   />
                 </div>
               </div>
-              <div className="flex gap-4">
+              <div className="md:flex gap-4">
                 <div>
                   <div className="flex items-center gap-2">
                     <p className="ml-2">Location</p>
@@ -231,7 +231,7 @@ const Settings = () => {
                     type="text"
                     value={introduction || ""}
                     onChange={(e) => setIntroduction(e.target.value)}
-                    className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-54 md:w-72 lg:w-90 xl:w-114 h-40 mt-1 mb-5 py-2 rounded-sm text-sm resize-none"
+                    className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-full md:w-72 lg:w-90 xl:w-114 h-40 mt-1 mb-5 py-2 rounded-sm text-sm resize-none"
                   />
                 </div>
               </div>
@@ -248,10 +248,10 @@ const Settings = () => {
             <form
               action={handleSubmit(passwordChange)}
               name="change password"
-              className="mt-15"
+              className="px-5 mt-15"
             >
               <h1>Password & Security</h1>
-              <div className="flex gap-4">
+              <div className="md:flex gap-4">
                 <div className="flex items-center relative">
                   <img
                     src={key}
@@ -263,7 +263,7 @@ const Settings = () => {
                     onChange={(e) => setCurrentPassword(e.target.value)}
                     minLength={8}
                     placeholder="Enter Current Password"
-                    className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-9 lg:pl-10 w-54 md:w-72 lg:w-90 xl:w-114 h-9 mt-1 mb-5 rounded-sm text-sm"
+                    className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-9 lg:pl-10 w-full md:w-72 lg:w-90 xl:w-114 h-9 mt-1 mb-5 rounded-sm text-sm"
                   />
                   <img
                     src={showCurrentPassword ? openeye : hiddeneye}
@@ -285,7 +285,7 @@ const Settings = () => {
                     onChange={(e) => setNewPassword(e.target.value)}
                     minLength={8}
                     placeholder="Enter New Password"
-                    className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-9 lg:pl-10 w-54 md:w-72 lg:w-90 xl:w-114 h-9 mt-1 mb-5 rounded-sm text-sm"
+                    className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-9 lg:pl-10 w-full md:w-72 lg:w-90 xl:w-114 h-9 mt-1 mb-5 rounded-sm text-sm"
                   />
                   <img
                     src={showNewPassword ? openeye : hiddeneye}
@@ -296,7 +296,7 @@ const Settings = () => {
                 </div>
               </div>
               <div className="flex items-center justify-between">
-                <div className="relative">
+                <div className="w-full md:w-fit relative">
                   <img
                     src={key}
                     alt="key icon"
@@ -307,7 +307,7 @@ const Settings = () => {
                     onChange={(e) => setConfirmNewPassword(e.target.value)}
                     minLength={8}
                     placeholder="Confirm New Password"
-                    className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-9 lg:pl-10 w-54 md:w-72 lg:w-90 xl:w-114 h-9 mt-1 mb-5 rounded-sm text-sm"
+                    className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-9 lg:pl-10 w-full md:w-72 lg:w-90 xl:w-114 h-9 mt-1 mb-5 rounded-sm text-sm"
                   />
                   <img
                     src={showConfirmPassword ? openeye : hiddeneye}
@@ -329,7 +329,7 @@ const Settings = () => {
               </div>
             </form>
 
-            <div className="mt-12 pb-12">
+            <div className="px-5 mt-12">
               <h1 className="text-[#585858] font-semibold text-lg lg:text-xl">
                 Delete you account
               </h1>
@@ -361,14 +361,14 @@ const Settings = () => {
           </main>
         </>
       ) : (
-        <main className="bg-white shadow-sm rounded-sm text-sm pt-10 pl-15 pr-15 md:pt-15 md:pr-20 md:pl-20 lg:pt-25 lg:pr-25 lg:pl-25">
+        <main className="bg-white w-full shadow-sm rounded-sm text-sm py-10 px-2 md:px-25">
           <UploadProfilePicture />
           <form
             onSubmit={handleSubmit(userInfoUpdate)}
             name="update user input"
-            className="mt-15"
+            className="px-5 md:px-0 mt-15"
           >
-            <div className="flex gap-4">
+            <div className="md:flex gap-4">
               <div>
                 <p className="ml-2">Name</p>
                 <input
@@ -376,7 +376,7 @@ const Settings = () => {
                   maxLength={40}
                   onChange={(e) => setName(e.target.value)}
                   placeholder={userSettings.firstName}
-                  className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-54 md:w-72 lg:w-90 xl:w-114 h-9 mt-1 mb-5 rounded-sm text-sm"
+                  className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-full md:w-72 lg:w-90 xl:w-114 h-9 mt-1 mb-5 rounded-sm text-sm"
                 />
               </div>
               <div>
@@ -386,11 +386,11 @@ const Settings = () => {
                   maxLength={40}
                   onChange={(e) => setSurname(e.target.value)}
                   placeholder={userSettings.lastName}
-                  className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-54 md:w-72 lg:w-90 xl:w-114 h-9 mt-1 mb-5 rounded-sm text-sm"
+                  className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-full md:w-72 lg:w-90 xl:w-114 h-9 mt-1 mb-5 rounded-sm text-sm"
                 />
               </div>
             </div>
-            <div className="flex gap-4">
+            <div className="md:flex gap-4">
               <div>
                 <p className="ml-2">Phone Number</p>
                 <input
@@ -399,7 +399,7 @@ const Settings = () => {
                   maxLength={11}
                   minLength={11}
                   placeholder={userSettings.phoneNumber}
-                  className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-54 md:w-72 lg:w-90 xl:w-114 h-9 mt-1 mb-5 rounded-sm text-sm"
+                  className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-full md:w-72 lg:w-90 xl:w-114 h-9 mt-1 mb-5 rounded-sm text-sm"
                 />
               </div>
               <div>
@@ -408,18 +408,18 @@ const Settings = () => {
                   type="email"
                   value={userSettings.email || ""}
                   disabled
-                  className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-54 md:w-72 lg:w-90 xl:w-114 h-9 mt-1 mb-5 rounded-sm text-sm cursor-not-allowed"
+                  className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-full md:w-72 lg:w-90 xl:w-114 h-9 mt-1 mb-5 rounded-sm text-sm cursor-not-allowed"
                 />
               </div>
             </div>
-            <div className="flex gap-4">
+            <div className="md:flex gap-4">
               <div>
                 <p className="ml-2">Role</p>
                 <input
                   type="text"
                   disabled
                   value={userRole === "EMPLOYER" ? "Employer" : "Translator"}
-                  className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-54 md:w-72 lg:w-90 xl:w-114 h-9 mt-1 mb-5 rounded-sm text-sm cursor-not-allowed"
+                  className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-full md:w-72 lg:w-90 xl:w-114 h-9 mt-1 mb-5 rounded-sm text-sm cursor-not-allowed"
                 />
               </div>
               <div>
@@ -446,10 +446,10 @@ const Settings = () => {
           <form
             action={handleSubmit(passwordChange)}
             name="change password"
-            className="mt-15"
+            className="px-5 md:px-0 mt-15"
           >
             <h1>Password & Security</h1>
-            <div className="flex gap-4">
+            <div className="md:flex gap-4">
               <div className="flex items-center relative">
                 <img
                   src={key}
@@ -461,7 +461,7 @@ const Settings = () => {
                   onChange={(e) => setCurrentPassword(e.target.value)}
                   minLength={8}
                   placeholder="Enter Current Password"
-                  className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-9 lg:pl-10 w-54 md:w-72 lg:w-90 xl:w-114 h-9 mt-1 mb-5 rounded-sm text-sm"
+                  className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-9 lg:pl-10 w-full md:w-72 lg:w-90 xl:w-114 h-9 mt-1 mb-5 rounded-sm text-sm"
                 />
                 <img
                   src={showCurrentPassword ? openeye : hiddeneye}
@@ -483,7 +483,7 @@ const Settings = () => {
                   onChange={(e) => setNewPassword(e.target.value)}
                   minLength={8}
                   placeholder="Enter New Password"
-                  className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-9 lg:pl-10 w-54 md:w-72 lg:w-90 xl:w-114 h-9 mt-1 mb-5 rounded-sm text-sm"
+                  className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-9 lg:pl-10 w-full md:w-72 lg:w-90 xl:w-114 h-9 mt-1 mb-5 rounded-sm text-sm"
                 />
                 <img
                   src={showNewPassword ? openeye : hiddeneye}
@@ -494,7 +494,7 @@ const Settings = () => {
               </div>
             </div>
             <div className="flex items-center justify-between">
-              <div className="relative">
+              <div className="w-full md:w-fit relative">
                 <img
                   src={key}
                   alt="key icon"
@@ -505,7 +505,7 @@ const Settings = () => {
                   onChange={(e) => setConfirmNewPassword(e.target.value)}
                   minLength={8}
                   placeholder="Confirm New Password"
-                  className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-9 lg:pl-10 w-54 md:w-72 lg:w-90 xl:w-114 h-9 mt-1 mb-5 rounded-sm text-sm"
+                  className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-9 lg:pl-10 w-full md:w-72 lg:w-90 xl:w-114 h-9 mt-1 mb-5 rounded-sm text-sm"
                 />
                 <img
                   src={showConfirmPassword ? openeye : hiddeneye}
@@ -527,7 +527,7 @@ const Settings = () => {
             </div>
           </form>
 
-          <div className="mt-12 pb-12">
+          <div className="px-5 md:px-0 mt-12">
             <h1 className="text-[#585858] font-semibold text-lg lg:text-xl">
               Delete you account
             </h1>

@@ -44,19 +44,19 @@ const UploadProfilePicture = () => {
   };
 
   return (
-    <div className="flex items-center gap-10">
-      <div className="ml-7 mb-4">
+    <div className="flex items-center gap-4 md:gap-10">
+      <div className="mx-4 md:ml-7 mb-4">
         {preview !== null ? (
           <img
             src={preview}
             alt="profile picture"
-            className="w-30 h-30 rounded-full object-cover"
+            className="w-25 h-25 md:w-30 md:h-30 rounded-full object-cover"
           />
         ) : (
           <img
             src={userRole === "TRANSLATOR" ? profileicon : employericon}
             alt="profile picture"
-            className="w-30 h-30 rounded-full object-cover"
+            className="w-25 h-25 md:w-30 md:h-30 rounded-full object-cover"
           />
         )}
       </div>
@@ -76,13 +76,13 @@ const UploadProfilePicture = () => {
               <div className="flex items-center gap-2">
                 <button
                   onClick={cancelUpload}
-                  className="border-2 border-[#8F8F8F] rounded-lg text-[#70B27A] px-5 pt-2 pb-2"
+                  className="border-2 border-[#8F8F8F] rounded-lg text-[#70B27A] px-4 md:px-5 pt-2 pb-2"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={changeProfilePicture}
-                  className="border-2 border-[#8F8F8F] rounded-lg text-[#70B27A] px-5 pt-2 pb-2"
+                  className="border-2 border-[#8F8F8F] rounded-lg text-[#70B27A] px-4 md:px-5 pt-2 pb-2"
                 >
                   Confirm
                 </button>
@@ -90,12 +90,14 @@ const UploadProfilePicture = () => {
             ) : (
               <label
                 htmlFor="fileInput"
-                className="border-2 border-[#8F8F8F] rounded-lg text-[#70B27A] px-6 pt-2 pb-2 cursor-pointer"
+                className="border-2 border-[#8F8F8F] rounded-lg text-[#70B27A] px-4 md:px-6 pt-2 pb-2 cursor-pointer"
               >
                 Upload Profile Picture
               </label>
             )}
-            <div>{isLoading && <SimpleLoader className="w-8 h-8" />}</div>
+            <div>
+              {isLoading && <SimpleLoader className="w-6 md:w-8 h-6 md:h-8" />}
+            </div>
           </div>
           <p className="text-[#8F8F8F] mt-4">
             This will be displayed on your profile at the website

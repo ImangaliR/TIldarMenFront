@@ -101,7 +101,7 @@ const Sidebar = () => {
 
   return (
     <>
-      <div className="grid sticky top-0 justify-center bg-[#fcfcfc] pr-2 pl-2 w-68 h-screen mt-0.5 shadow-sm">
+      <div className="hidden md:grid sticky top-0 justify-center bg-[#fcfcfc] pr-2 pl-2 w-68 h-screen mt-0.5 shadow-sm">
         <div className="flex flex-col items-center justify-center mt-5">
           <div className="grid justify-center w-30 h-30">
             <img
