@@ -93,7 +93,7 @@ const Certificate = () => {
                 required
                 value={certificateTitle}
                 onChange={(e) => setCertificateTitle(e.target.value)}
-                className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-60 h-7 rounded-sm text-sm"
+                className="bg-[#EAF4F4] border-1 border-[#DCDCDC] md:pl-3 w-full md:w-60 h-7 rounded-sm text-sm"
               />
             </div>
             <div className="flex items-center gap-2 my-3">
@@ -103,7 +103,7 @@ const Certificate = () => {
                 required
                 value={certificateYear}
                 onChange={(e) => setCertificateYear(e.target.value)}
-                className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-60 h-7 rounded-sm text-sm"
+                className="bg-[#EAF4F4] border-1 border-[#DCDCDC] md:pl-3 w-full md:w-60 h-7 rounded-sm text-sm"
               />
             </div>
             <div>
@@ -129,7 +129,7 @@ const Certificate = () => {
                     <div className="flex items-center justify-end gap-3 mt-5">
                       {loading && (
                         <div className="flex h-full items-center justify-center">
-                          <SimpleLoader className="h-7" />
+                          <SimpleLoader className="h-6 md:h-7" />
                         </div>
                       )}
                       <button
@@ -153,7 +153,7 @@ const Certificate = () => {
                 ) : (
                   <label
                     htmlFor="fileIn"
-                    className="bg-[#EAF4F4] border-1 border-[#DCDCDC] p-3 w-60 h-30 rounded-sm cursor-pointer text-center pt-11 text-[#8F8F8F]"
+                    className="bg-[#EAF4F4] border-1 border-[#DCDCDC] p-3 w-full md:w-60 h-30 rounded-sm cursor-pointer text-center pt-11 text-[#8F8F8F]"
                   >
                     Upload
                   </label>
@@ -162,6 +162,7 @@ const Certificate = () => {
             </div>
           </div>
         </form>
+
         <div className="mt-10">
           {user?.data?.certificates &&
             user?.data?.certificates.map((certificate) => (
@@ -173,7 +174,7 @@ const Certificate = () => {
                       type="text"
                       required
                       value={certificate?.title}
-                      className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-60 h-7 rounded-sm text-sm"
+                      className="bg-[#EAF4F4] border-1 border-[#DCDCDC] md:pl-3 w-full md:w-60 h-7 rounded-sm text-sm"
                     />
                   </div>
                   <div className="flex items-center gap-2 my-3">
@@ -182,7 +183,7 @@ const Certificate = () => {
                       type="number"
                       required
                       value={certificate?.year}
-                      className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-60 h-7 rounded-sm text-sm"
+                      className="bg-[#EAF4F4] border-1 border-[#DCDCDC] md:pl-3 w-full md:w-60 h-7 rounded-sm text-sm"
                     />
                   </div>
                   <div>

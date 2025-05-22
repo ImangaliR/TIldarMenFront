@@ -130,20 +130,24 @@ const ProfileEditing = () => {
 
   return (
     <>
-      <div>
-        <h1 className="text-3xl font-bold ml-10 mb-2">Profile</h1>
+      <div className="w-full md:w-fit">
+        <h1 className="text-2xl md:text-3xl font-bold ml-5 md:ml-10 mb-2">
+          Profile
+        </h1>
         <main className="bg-white shadow-sm rounded-sm p-6">
           <form
             name="update user profile"
             onSubmit={handleSubmit(updateProfile)}
-            className="pl-15 pr-20 pt-10"
+            className="md:pl-15 md:pr-20 md:pt-10"
           >
-            <div className="flex items-center gap-10">
-              <img
-                src={user?.data?.profileImageUrl || profileicon}
-                alt="profile icon"
-                className="w-35 h-35 rounded-full object-cover"
-              />
+            <div className="grid md:flex items-center gap-10">
+              <div className="flex md:block justify-center">
+                <img
+                  src={user?.data?.profileImageUrl || profileicon}
+                  alt="profile icon"
+                  className="w-30 h-30 md:w-35 md:h-35 rounded-full object-cover"
+                />
+              </div>
               <div className="">
                 <div className="flex items-center gap-2 mb-3">
                   <p className="w-35 font-bold">Full Name:</p>
@@ -151,7 +155,7 @@ const ProfileEditing = () => {
                     type="text"
                     disabled
                     value={user?.data?.firstName + " " + user?.data?.lastName}
-                    className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-50 md:w-55 lg:w-60 xl:w-80 h-7 rounded-sm text-sm"
+                    className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-full md:w-55 lg:w-60 xl:w-80 h-7 rounded-sm text-sm"
                   />
                 </div>
                 <div className="flex items-center gap-2 mb-3">
@@ -160,7 +164,7 @@ const ProfileEditing = () => {
                     type="text"
                     disabled
                     value={user?.data?.location?.city}
-                    className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-50 md:w-55 lg:w-60 xl:w-80 h-7 rounded-sm text-sm"
+                    className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-full md:w-55 lg:w-60 xl:w-80 h-7 rounded-sm text-sm"
                   />
                 </div>
                 <div className="flex items-center gap-2 mb-3">
@@ -169,7 +173,7 @@ const ProfileEditing = () => {
                     type="text"
                     value={userTitle}
                     onChange={(e) => setUserTitle(e.target.value)}
-                    className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-50 md:w-55 lg:w-60 xl:w-80 h-7 rounded-sm text-sm"
+                    className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-full md:w-55 lg:w-60 xl:w-80 h-7 rounded-sm text-sm"
                   />
                 </div>
                 <div className="flex items-center gap-2 mb-3">
@@ -181,7 +185,7 @@ const ProfileEditing = () => {
                 </div>
               </div>
             </div>
-            <div className="flex justify-end mt-15 gap-2">
+            <div className="flex justify-end mt-5 md:mt-15 gap-2">
               <button
                 type="submit"
                 className="justify-center items-center gap-2 text-[#38BF4C] border-1 rounded-lg w-25 h-8"
@@ -193,9 +197,9 @@ const ProfileEditing = () => {
 
           <hr className="mt-10 mb-5" />
 
-          <div className="pl-10 pr-20">
-            <h1 className="text-2xl font-bold">Introduction</h1>
-            <div className="flex gap-30 pl-5">
+          <div className="md:pl-10 md:pr-20">
+            <h1 className="text-xl md:text-2xl font-bold">Introduction</h1>
+            <div className="grid md:flex gap-15 md:gap-30 md:pl-5">
               <div className="grid">
                 <h1 className="font-bold mb-1">About</h1>
                 <textarea
@@ -204,11 +208,11 @@ const ProfileEditing = () => {
                   onChange={(e) => setIntro(e.target.value)}
                   placeholder="Write something to introduce yourself.
 Max. 300 symbols"
-                  className="bg-[#EAF4F4] border-1 border-[#DCDCDC] p-3 w-55 h-40 md:w-60 lg:w-75 xl:w-90 rounded-sm text-sm resize-none"
+                  className="bg-[#EAF4F4] border-1 border-[#DCDCDC] p-3 w-full h-40 md:w-60 lg:w-75 xl:w-90 rounded-sm text-sm resize-none"
                 />
                 <button
                   onClick={addIntroduction}
-                  className="justify-center items-center gap-2 text-[#38BF4C] border-1 rounded-lg w-25 h-8 mt-10"
+                  className="justify-center items-center gap-2 text-[#38BF4C] border-1 rounded-lg w-25 h-8 mt-5 md:mt-10"
                 >
                   Save
                 </button>
@@ -219,11 +223,11 @@ Max. 300 symbols"
 
           <hr className="mt-10 mb-5" />
 
-          <div className="pl-10 pr-20">
-            <h1 className="text-2xl font-bold">
+          <div className="md:pl-10 md:pr-20">
+            <h1 className="text-xl md:text-2xl font-bold">
               Language & Translation Details
             </h1>
-            <div className="flex items-start gap-10 pl-5 mt-2">
+            <div className="grid md:flex items-start gap-10 md:pl-5 mt-2">
               <LanguageDropdown />
               <TranslationServicesDropdown />
               <SpecializationDropdown />
@@ -232,11 +236,13 @@ Max. 300 symbols"
 
           <hr className="mt-10 mb-5" />
 
-          <div className="pl-10 pr-20">
-            <h1 className="text-2xl font-bold">Work & Project Experience</h1>
+          <div className="md:pl-10 md:pr-20">
+            <h1 className="text-xl md:text-2xl font-bold">
+              Work & Project Experience
+            </h1>
             <div>
-              <h1 className="font-bold text-lg mb-2">Work</h1>
-              <div>
+              <h1 className="font-bold md:text-lg mb-2">Work</h1>
+              <div className="w-full">
                 <WorkExperience works={work} />
               </div>
             </div>
@@ -268,7 +274,7 @@ Max. 300 symbols"
                   Upload
                 </label>
               )}
-              <div className="flex justify-start mt-10 gap-5">
+              <div className="flex justify-start mt-5 md:mt-10 gap-5">
                 {user?.data?.projectUrls?.[0] ? (
                   <button
                     onClick={deleteProject}
@@ -277,7 +283,7 @@ Max. 300 symbols"
                     Delete
                   </button>
                 ) : (
-                  <div className="flex gap-3 mt-5">
+                  <div className="flex gap-3 md:mt-5">
                     <button
                       onClick={() => {
                         setProject(null);
@@ -306,9 +312,11 @@ Max. 300 symbols"
 
           <hr className="mt-10 mb-5" />
 
-          <div className="pl-10 pr-20 pb-5">
-            <h1 className="text-2xl font-bold">Education & Certifications</h1>
-            <div className="flex justify-between">
+          <div className="md:pl-10 md:pr-20 pb-5">
+            <h1 className="text-xl md:text-2xl font-bold">
+              Education & Certifications
+            </h1>
+            <div className="w-full grid gap-10 md:gap-0 md:flex md:justify-between">
               <Education />
               <Certificate />
             </div>

@@ -84,8 +84,8 @@ const Education = () => {
 
   return (
     <>
-      <div className="flex ml-5 gap-25 mt-2">
-        <div>
+      <div className="md:ml-5 mt-2">
+        <div className="w-full">
           <h1 className="font-bold">Educational Background</h1>
           <form name="addegree" onSubmit={handleSubmit(addEducation)}>
             <div className="flex items-center gap-2 my-3">
@@ -95,7 +95,7 @@ const Education = () => {
                 type="text"
                 value={educationDegree}
                 onChange={(e) => setEducationDegree(e.target.value)}
-                className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-60 h-7 rounded-sm text-sm"
+                className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-full md:w-60 h-7 rounded-sm text-sm"
               />
             </div>
             <div className="flex items-center gap-2 mb-3">
@@ -105,7 +105,7 @@ const Education = () => {
                 type="text"
                 value={educationUni}
                 onChange={(e) => setEducationUni(e.target.value)}
-                className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-60 h-7 rounded-sm text-sm"
+                className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-full md:w-60 h-7 rounded-sm text-sm"
               />
             </div>
             <div className="flex items-center gap-2 mb-3">
@@ -115,10 +115,10 @@ const Education = () => {
                 type="text"
                 value={educationYear}
                 onChange={(e) => setEducationYear(e.target.value)}
-                className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-60 h-7 rounded-sm text-sm"
+                className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-full md:w-60 h-7 rounded-sm text-sm"
               />
             </div>
-            <div className="w-full flex justify-end mt-3">
+            <div className="flex justify-end mt-3">
               <input
                 required
                 type="file"
@@ -141,7 +141,7 @@ const Education = () => {
                     <div className="flex items-center justify-end gap-3 mt-3">
                       {loading && (
                         <div className="flex h-full items-center justify-center">
-                          <SimpleLoader className="h-7" />
+                          <SimpleLoader className="h-6 md:h-7" />
                         </div>
                       )}
                       <button
@@ -165,7 +165,7 @@ const Education = () => {
                 ) : (
                   <label
                     htmlFor="fileInpt"
-                    className="block border-1 pt-1 w-60 h-8 rounded-md cursor-pointer text-center text-[#38BF4C]"
+                    className="block border-1 pt-1 w-55 md:w-60 h-8 rounded-md cursor-pointer text-center text-[#38BF4C]"
                   >
                     Add Degree
                   </label>
@@ -183,7 +183,7 @@ const Education = () => {
                     type="text"
                     value={education?.degree}
                     onChange={(e) => setEducationDegree(e.target.value)}
-                    className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-60 h-7 rounded-sm text-sm"
+                    className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-full md:w-60 h-7 rounded-sm text-sm"
                   />
                 </div>
                 <div className="flex items-center gap-2 mb-3">
@@ -193,7 +193,7 @@ const Education = () => {
                     type="text"
                     value={education?.university}
                     onChange={(e) => setEducationUni(e.target.value)}
-                    className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-60 h-7 rounded-sm text-sm"
+                    className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-full md:w-60 h-7 rounded-sm text-sm"
                   />
                 </div>
                 <div className="flex items-center gap-2 mb-3">
@@ -203,10 +203,10 @@ const Education = () => {
                     type="text"
                     value={education?.graduationYear}
                     onChange={(e) => setEducationYear(e.target.value)}
-                    className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-60 h-7 rounded-sm text-sm"
+                    className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-full md:w-60 h-7 rounded-sm text-sm"
                   />
                 </div>
-                <div className="flex items-center justify-end gap-5">
+                <div className="flex items-center justify-end gap-3 md:gap-5">
                   <ul>
                     <li>
                       <a

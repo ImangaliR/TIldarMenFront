@@ -19,9 +19,7 @@ const SpecializationDropdown = () => {
       .then((res) => {
         setSpecialization(res.data.data);
       })
-      .catch((err) => {
-        console.error("Error fetching Specialization:", err);
-      })
+      .catch((err) => {})
       .finally(() => {
         setLoading(false);
       });
@@ -60,7 +58,10 @@ const SpecializationDropdown = () => {
   return (
     <>
       <div>
-        <form onSubmit={handleSubmit(updateSpecialization)} className="w-75">
+        <form
+          onSubmit={handleSubmit(updateSpecialization)}
+          className="w-full md:w-75"
+        >
           <label className="block mb-2 font-semibold text-black">
             Specialization
           </label>

@@ -19,9 +19,7 @@ const TranslationServicesDropdown = () => {
       .then((res) => {
         setTranslationServices(res.data.data);
       })
-      .catch((err) => {
-        console.error("Error fetching Translation Services:", err);
-      })
+      .catch((err) => {})
       .finally(() => {
         setLoading(false);
       });
@@ -69,7 +67,7 @@ const TranslationServicesDropdown = () => {
       <div>
         <form
           onSubmit={handleSubmit(updateTranslationServices)}
-          className="w-75"
+          className="w-full md:w-75"
         >
           <label className="block mb-2 font-semibold text-black">
             Type of Translation Services

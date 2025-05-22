@@ -64,39 +64,39 @@ const WorkExperience = ({ works }) => {
 
   return (
     <>
-      <div className="grid grid-cols-2 gap-x-40 gap-y-10 items-baseline">
+      <div className="grid grid-cols-1 md:grid-cols-2 md:gap-x-40 gap-y-10 md:items-baseline">
         <form onSubmit={handleSubmit(handleAddWork)}>
-          <div className="grid justify-center bg-[#EAF4F4] outline-1 outline-[#dcdcdc] rounded-sm py-5">
-            <div className="flex gap-3">
+          <div className="grid justify-center bg-[#EAF4F4] outline-1 outline-[#dcdcdc] rounded-sm py-5 px-3">
+            <div className="flex gap-1 md:gap-3">
               <p className="min-w-20">Role*</p>
               <input
                 required
                 value={role}
                 onChange={(e) => setRole(e.target.value)}
                 type="text"
-                className="px-3 bg-[#EAF4F4] border-1 border-[#DCDCDC] rounded-sm w-70 h-8"
+                className="px-3 bg-[#EAF4F4] border-1 border-[#DCDCDC] rounded-sm w-full md:w-70 h-8"
               />
             </div>
-            <div className="flex gap-3 mt-2">
+            <div className="flex gap-1 md:gap-3 mt-2">
               <p className="min-w-20">Company</p>
               <input
                 required
                 value={company}
                 onChange={(e) => setCompany(e.target.value)}
                 type="text"
-                className="px-3 bg-[#EAF4F4] border-1 border-[#DCDCDC] rounded-sm w-70 h-8"
+                className="px-3 bg-[#EAF4F4] border-1 border-[#DCDCDC] rounded-sm w-full md:w-70 h-8"
               />
             </div>
-            <div className="flex gap-3 mt-2">
+            <div className="flex gap-1 md:gap-3 mt-2">
               <p className="min-w-20">Duration*</p>
-              <div className="flex gap-2">
+              <div className="grid w-full md:w-fit md:flex gap-2">
                 <input
                   required
                   value={startDate}
                   onChange={(e) => setStartDate(e.target.value)}
                   type="date"
                   placeholder="Start Date"
-                  className="bg-[#EAF4F4] border-1 border-[#DCDCDC] rounded-sm w-34 h-8 pl-3 text-sm"
+                  className="bg-[#EAF4F4] border-1 border-[#DCDCDC] rounded-sm w-full md:w-34 h-8 pl-3 text-sm"
                 />
                 <input
                   required
@@ -104,22 +104,22 @@ const WorkExperience = ({ works }) => {
                   onChange={(e) => setEndDate(e.target.value)}
                   type="date"
                   placeholder="End Date"
-                  className="bg-[#EAF4F4] border-1 border-[#DCDCDC] rounded-sm w-34 h-8 pl-3 text-sm"
+                  className="bg-[#EAF4F4] border-1 border-[#DCDCDC] rounded-sm w-full md:w-34 h-8 pl-3 text-sm"
                 />
               </div>
             </div>
-            <div className="flex gap-3 mt-2">
+            <div className="flex gap-1 md:gap-3 mt-2">
               <p className="min-w-20">Description</p>
               <textarea
                 required
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 type="text"
-                className="bg-[#EAF4F4] border-1 border-[#DCDCDC] p-3 w-70 h-30 rounded-sm text-sm resize-none"
+                className="bg-[#EAF4F4] border-1 border-[#DCDCDC] p-3 w-full md:w-70 h-30 rounded-sm text-sm resize-none"
               />
             </div>
           </div>
-          <div className="flex justify-end mt-10">
+          <div className="flex justify-end mt-5 md:mt-10">
             <button
               type="submit"
               className="w-25 h-8 text-[#38BF4C] border-1 rounded-lg"
@@ -131,50 +131,50 @@ const WorkExperience = ({ works }) => {
         {works &&
           works?.map((work, i) => (
             <div key={i}>
-              <div className="grid justify-center bg-[#EAF4F4] outline-1 outline-[#dcdcdc] rounded-sm py-5">
-                <div className="flex gap-3">
+              <div className="grid md:justify-center bg-[#EAF4F4] outline-1 outline-[#dcdcdc] rounded-sm py-5 px-3">
+                <div className="flex gap-1 md:gap-3">
                   <p className="min-w-20">Role*</p>
                   <input
                     type="text"
                     defaultValue={work?.position}
-                    className="px-3 bg-[#EAF4F4] border-1 border-[#DCDCDC] rounded-sm w-70 h-8"
+                    className="px-3 bg-[#EAF4F4] border-1 border-[#DCDCDC] rounded-sm w-full md:w-70 h-8"
                   />
                 </div>
-                <div className="flex gap-3 mt-2">
+                <div className="flex gap-1 md:gap-3 mt-2">
                   <p className="min-w-20">Company</p>
                   <input
                     type="text"
                     defaultValue={work?.companyName}
-                    className="px-3 bg-[#EAF4F4] border-1 border-[#DCDCDC] rounded-sm w-70 h-8"
+                    className="px-3 bg-[#EAF4F4] border-1 border-[#DCDCDC] rounded-sm w-full md:w-70 h-8"
                   />
                 </div>
-                <div className="flex gap-3 mt-2">
+                <div className="flex gap-1 md:gap-3 mt-2">
                   <p className="min-w-20">Duration*</p>
-                  <div className="flex gap-2">
+                  <div className="grid w-full md:w-fit md:flex gap-2">
                     <input
                       type="date"
                       defaultValue={toInputDate(work?.startDate)}
                       placeholder="Start Date"
-                      className="px-3 bg-[#EAF4F4] border-1 border-[#DCDCDC] rounded-sm w-34 h-8 pl-3 text-sm"
+                      className="px-3 bg-[#EAF4F4] border-1 border-[#DCDCDC] rounded-sm w-full md:w-34 h-8 pl-3 text-sm"
                     />
                     <input
                       type="date"
                       defaultValue={toInputDate(work?.endDate)}
                       placeholder="End Date"
-                      className="px-3 bg-[#EAF4F4] border-1 border-[#DCDCDC] rounded-sm w-34 h-8 pl-3 text-sm"
+                      className="px-3 bg-[#EAF4F4] border-1 border-[#DCDCDC] rounded-sm w-full md:w-34 h-8 pl-3 text-sm"
                     />
                   </div>
                 </div>
-                <div className="flex gap-3 mt-2">
+                <div className="flex gap-1 md:gap-3 mt-2">
                   <p className="min-w-20">Description</p>
                   <textarea
                     type="text"
                     defaultValue={work?.description}
-                    className="px-3 bg-[#EAF4F4] border-1 border-[#DCDCDC] p-3 w-70 h-30 rounded-sm text-sm resize-none"
+                    className="px-3 bg-[#EAF4F4] border-1 border-[#DCDCDC] p-3 w-full md:w-70 h-30 rounded-sm text-sm resize-none"
                   />
                 </div>
               </div>
-              <div className="flex justify-end mt-10">
+              <div className="flex justify-end mt-5 md:mt-10">
                 <button
                   onClick={() => deleteWork(work?.id)}
                   className="w-25 h-8 text-[#FF0000] border-1 rounded-lg"

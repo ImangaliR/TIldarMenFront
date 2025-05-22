@@ -19,9 +19,7 @@ const LanguageDropdown = () => {
       .then((res) => {
         setLanguages(res.data.data);
       })
-      .catch((err) => {
-        console.error("Error fetching languages:", err);
-      })
+      .catch((err) => {})
       .finally(() => {
         setLoading(false);
       });
@@ -60,7 +58,7 @@ const LanguageDropdown = () => {
   return (
     <>
       <div>
-        <form onSubmit={handleSubmit(addLanguage)} className="w-75">
+        <form onSubmit={handleSubmit(addLanguage)} className="w-full md:w-75">
           <label className="block mb-2 font-semibold text-black">
             Languages
           </label>

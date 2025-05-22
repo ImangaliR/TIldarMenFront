@@ -91,12 +91,14 @@ const UploadVideo = () => {
                 <div className="flex gap-4">
                   <button
                     onClick={deleteVideo}
-                    className="border-1 rounded-lg text-[#FF0000] px-5 py-1 mt-10"
+                    className="border-1 rounded-lg text-[#FF0000] px-5 py-1 mt-5 md:mt-10"
                   >
                     Delete
                   </button>
                   <div>
-                    {isLoading && <SimpleLoader className="w-8 h-8 mt-10" />}
+                    {isLoading && (
+                      <SimpleLoader className="w-6 h-6 md:w-8 md:h-8 mt-10" />
+                    )}
                   </div>
                 </div>
               </div>
@@ -110,7 +112,7 @@ const UploadVideo = () => {
                 </label>
                 <div className="flex gap-4">
                   {selectedFile && (
-                    <div className="flex items-center gap-2 mt-10">
+                    <div className="flex items-center gap-2 mt-5 md:mt-10">
                       <button
                         onClick={cancelUpload}
                         className="border-1 rounded-lg text-[#38BF4C] px-5 py-1"
@@ -126,7 +128,9 @@ const UploadVideo = () => {
                     </div>
                   )}
                   <div>
-                    {isLoading && <SimpleLoader className="w-8 h-8 mt-10" />}
+                    {isLoading && (
+                      <SimpleLoader className="w-6 h-6 md:w-8 md:h-8 mt-10" />
+                    )}
                   </div>
                 </div>
               </div>
