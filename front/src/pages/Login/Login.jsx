@@ -45,7 +45,7 @@ function Login() {
   return (
     <>
       <div className="login flex flex-col min-h-screen overflow-hidden">
-        <header className="text-3xl md:text-4xl text-center font-extrabold p-8 mt-2 mr-2 ml-2 mb-7 bg-[#71C39C] text-[#E8EAF6] rounded-2xl">
+        <header className="text-3xl md:text-4xl text-center font-extrabold p-8 mt-2 mx-2 mb-7 bg-[#71C39C] text-[#E8EAF6] rounded-2xl">
           <button onClick={() => navigate("/home")}>TildarMen</button>
         </header>
         <main className="flex-grow mt-5">
@@ -54,7 +54,7 @@ function Login() {
               <SimpleLoader className="h-9 w-9 text-blue-500" />
             </div>
           )}
-          <div className="flex flex-col items-center bg-white w-100 h-fit md:w-140 rounded-2xl mx-auto shadow-lg outline-1">
+          <div className="flex flex-col items-center bg-white w-75 h-fit md:w-140 rounded-2xl mx-auto shadow-lg outline-1">
             <button onClick={() => navigate("/")}>
               <img src={logo} alt="logo" className="w-17.5 h-17.5 mt-10" />
             </button>
@@ -72,7 +72,7 @@ function Login() {
               <input
                 type="email"
                 placeholder="Email"
-                className="rounded-3xl border-2 border-[#d1d5d8] bg-white pl-4 pt-3 pb-3 shadow-xs w-75 md:w-94 mb-3 mt-7"
+                className="rounded-3xl border-2 border-[#d1d5d8] bg-white pl-4 pt-3 pb-3 shadow-xs w-65 md:w-94 mb-3 mt-7"
                 onChange={(e) => setEmail(e.target.value)}
                 value={email}
                 required
@@ -81,7 +81,7 @@ function Login() {
                 <input
                   type={showPassword ? "text" : "password"}
                   placeholder="Password"
-                  className="rounded-3xl border-2 border-[#d1d5d8] bg-white pl-4 pt-3 pb-3 shadow-xs w-75 md:w-94"
+                  className="rounded-3xl border-2 border-[#d1d5d8] bg-white pl-4 pt-3 pb-3 shadow-xs w-65 md:w-94"
                   onChange={(e) => setPassword(e.target.value)}
                   value={password}
                   required
@@ -93,7 +93,7 @@ function Login() {
                   onClick={() => setShowPassword(!showPassword)}
                 />
               </div>
-              <div className="flex justify-end w-73 md:w-88">
+              <div className="flex justify-end w-60 md:w-88">
                 <button
                   type="button"
                   onClick={() => navigate("/forgot-password")}
@@ -104,14 +104,14 @@ function Login() {
               </div>
               <button
                 type="submit"
-                className="w-75 h-12 md:w-94 md:h-14 bg-[#2A9E97] text-white rounded-3xl text-lg md:text-xl font-medium"
+                className="w-65 h-12 md:w-94 md:h-14 bg-[#2A9E97] text-white rounded-3xl text-lg md:text-xl font-medium"
               >
                 Login
               </button>
             </form>
             <button
               onClick={() => navigate("/signup")}
-              className="text-[#3949AB] font-semibold lg:text-lg mt-13 mb-1"
+              className="text-[#3949AB] font-semibold lg:text-lg mt-10 md:mt-13 mb-1"
             >
               Create new account?
             </button>

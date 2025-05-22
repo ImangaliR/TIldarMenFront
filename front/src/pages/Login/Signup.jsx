@@ -102,7 +102,7 @@ function Signup() {
           <form
             onSubmit={handleSubmit(handleSignup)}
             name="signup-form"
-            className="bg-white w-150 h-fit md:180 lg:w-235 pl-15 pr-15 rounded-2xl shadow-sm"
+            className="bg-white h-fit w-80 md:w-235 px-5 md:px-15 rounded-2xl shadow-sm"
           >
             <button type="button" onClick={() => navigate("/home")}>
               <img src={logo} alt="logo" className="w-15 h-15 mt-8 mb-2" />
@@ -111,7 +111,7 @@ function Signup() {
             <p className="text-[#8B9AA6] text-sm md:text-lg mt-1">
               Enter your details below to create your account and get started
             </p>
-            <div className="flex justify-between text-[#374753] mt-3">
+            <div className="md:flex justify-between text-[#374753] mt-3">
               <div>
                 <p className="after:content-['*'] after:text-[#FF0000]">
                   First Name
@@ -123,10 +123,10 @@ function Signup() {
                   required
                   onChange={(e) => setFirstname(e.target.value)}
                   className="rounded-lg border-2 border-[#d1d5d8] bg-white
-            pl-4 pt-2 pb-2 shadow-xs w-55 lg:w-100 mt-1"
+            pl-4 pt-2 pb-2 shadow-xs w-70 md:w-100 mt-1"
                 />
               </div>
-              <div>
+              <div className="mt-2 md:mt-0">
                 <p className="after:content-['*'] after:text-[#FF0000]">
                   Last Name
                 </p>
@@ -137,11 +137,11 @@ function Signup() {
                   required
                   onChange={(e) => setLastname(e.target.value)}
                   className="rounded-lg border-2 border-[#d1d5d8] bg-white
-            pl-4 pt-2 pb-2 shadow-xs w-55 lg:w-100 mt-1"
+            pl-4 pt-2 pb-2 shadow-xs w-70 md:w-100 mt-1"
                 />
               </div>
             </div>
-            <div className="flex justify-between text-[#374753] mt-3">
+            <div className="md:flex justify-between text-[#374753] mt-3">
               <div>
                 <p className="after:content-['*'] after:text-[#FF0000]">
                   Email
@@ -154,7 +154,7 @@ function Signup() {
                     required
                     onChange={(e) => setEmail(e.target.value)}
                     className="rounded-lg border-2 border-[#d1d5d8] bg-white
-            pl-4 pt-2 pb-2 shadow-xs w-28 lg:w-73 mt-1"
+            pl-4 pt-2 pb-2 shadow-xs w-42 md:w-73 mt-1"
                   />
                   <button
                     type="button"
@@ -165,7 +165,7 @@ function Signup() {
                   </button>
                 </div>
               </div>
-              <div>
+              <div className="mt-2 md:mt-0">
                 <p className="after:content-['*'] after:text-[#FF0000]">
                   Phone Number
                 </p>
@@ -178,11 +178,11 @@ function Signup() {
                   required
                   onChange={(e) => setPhoneNumber(e.target.value)}
                   className="rounded-lg border-2 border-[#d1d5d8] bg-white
-            pl-4 pt-2 pb-2 shadow-xs w-55 lg:w-100 mt-1"
+            pl-4 pt-2 pb-2 shadow-xs w-70 md:w-100 mt-1"
                 />
               </div>
             </div>
-            <div className="flex justify-between text-[#374753] mt-3">
+            <div className="md:flex justify-between text-[#374753] mt-3">
               <div>
                 <p className="after:content-['*'] after:text-[#FF0000]">
                   Password
@@ -198,7 +198,7 @@ function Signup() {
                     value={password}
                     minLength={8}
                     className="rounded-lg border-2 border-[#d1d5d8] bg-white
-            pl-4 pt-2 pb-2 shadow-xs w-55 lg:w-100 mt-1"
+            pl-4 pt-2 pb-2 shadow-xs w-70 md:w-100 mt-1"
                   />
                   <img
                     src={showPassword ? openeye : hiddeneye}
@@ -208,8 +208,7 @@ function Signup() {
                   />
                 </div>
               </div>
-
-              <div>
+              <div className="mt-2 md:mt-0">
                 <p className="after:content-['*'] after:text-[#FF0000]">
                   Confirm Password
                 </p>
@@ -225,7 +224,7 @@ function Signup() {
                     value={confirmPassword}
                     minLength={8}
                     className={`rounded-lg border-2 border-[#d1d5d8] bg-white
-            pl-4 pt-2 pb-2 shadow-xs w-55 lg:w-100 mt-1 ${
+            pl-4 pt-2 pb-2 shadow-xs w-70 md:w-100 mt-1 ${
               !passwordMatch ? "border-red-400" : "border-gray-300"
             }`}
                   />
@@ -254,18 +253,18 @@ function Signup() {
                   value={verificationCode}
                   onChange={(e) => setverificationCode(e.target.value)}
                   className="rounded-lg border-2 border-[#d1d5d8] bg-white
-            pl-4 pt-2 pb-2 shadow-xs w-55 lg:w-100 mt-1"
+            pl-4 pt-2 pb-2 shadow-xs w-70 md:w-100 mt-1"
                 />
               </div>
             )}
             <div className="flex justify-center gap-8 font-medium mt-8">
               <p className="text-[#374753] scale-105 mt-2">You are.....</p>
               <label
-                className={`w-55 h-15 outline-1 rounded-lg text-center cursor-pointer
+                className={`w-55 h-30 md:h-15 outline-1 rounded-lg text-center cursor-pointer
                 ${role === "employer" ? "text-[#71C39C]" : "text-black "}`}
               >
                 <input
-                  className="scale-150 ml-2 mr-3 mt-3"
+                  className="scale-150 mx-3 mt-3"
                   type="radio"
                   name="employment"
                   value="employer"
@@ -275,11 +274,11 @@ function Signup() {
                 Customer, hiring for a project
               </label>
               <label
-                className={`w-55 h-15 outline-1 rounded-lg text-center cursor-pointer
+                className={`w-55 h-30 md:h-15 outline-1 rounded-lg text-center cursor-pointer
                 ${role === "translator" ? "text-[#71C39C]" : "text-black "}`}
               >
                 <input
-                  className="scale-150 ml-2 mr-3 mt-3"
+                  className="scale-150 mx-3 mt-3"
                   type="radio"
                   name="employment"
                   checked={role === "translator"}
@@ -289,7 +288,7 @@ function Signup() {
                 Translator, looking for work
               </label>
             </div>
-            <div className="flex justify-between w-full mt-8 font-medium">
+            <div className="flex justify-between w-full gap-5 md:gap-0 mt-8 font-medium">
               <button
                 type="button"
                 onClick={() => navigate("/login")}
@@ -304,8 +303,8 @@ function Signup() {
                 Confirm
               </button>
             </div>
-            <div className="flex justify-center w-full mt-8 text-[#838383] font-medium md:text-lg mb-2">
-              <p>Already have an account?</p>
+            <div className="flex justify-center gap-1 w-full mt-8 text-[#838383] font-medium md:text-lg mb-2">
+              <p>Already have an account ?</p>
               <button
                 type="button"
                 onClick={() => navigate("/login")}
@@ -317,7 +316,7 @@ function Signup() {
           </form>
         </main>
 
-        <footer className="text-center text-[#333333] font-medium text-xl cursor-pointer mb-3">
+        <footer className="text-center text-[#333333] font-medium md:text-xl cursor-pointer mb-3">
           SUPPORT
         </footer>
       </div>

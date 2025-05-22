@@ -102,7 +102,7 @@ function ForgotPassword() {
         <header className="text-3xl md:text-4xl text-center font-extrabold p-8 mt-2 mr-2 ml-2 mb-7 bg-[#71C39C] text-[#E8EAF6] rounded-2xl">
           <button onClick={() => navigate("/home")}>TildarMen</button>
         </header>
-        <main className="flex flex-grow justify-center items-center">
+        <main className="flex flex-grow justify-center items-center px-3 md:px-0">
           <div className="bg-white p-10 rounded-2xl forgot-password flex flex-col mb-20">
             <h1 className="text-3xl font-bold">Reset Password</h1>
             <p className="text-[#574F4A]">
