@@ -143,6 +143,15 @@ const Navbar = () => {
     }
   };
 
+  const handleProfileClickMobile = () => {
+    if (userRole && userId) {
+      setIsProfileMenuOpen(!isProfileMenuOpen);
+      setIsMobileMenuOpen(!isMobileMenuOpen);
+    } else {
+      toast.error("Please login to access your profile settings");
+    }
+  };
+
   return (
     <>
       <nav className="flex items-center justify-between p-5 bg-white shadow-sm">
@@ -264,10 +273,7 @@ const Navbar = () => {
               Notifications
             </button>
             <div
-              onClick={() => {
-                setIsProfileMenuOpen(!isProfileMenuOpen);
-                setIsMobileMenuOpen(!isMobileMenuOpen);
-              }}
+              onClick={handleProfileClickMobile}
               className="flex items-center justify-between w-full"
             >
               <button
@@ -281,10 +287,20 @@ const Navbar = () => {
               </button>
               <img src={rightarrow} alt="arrow" className="w-4 h-4" />
             </div>
-            <div onClick={handleLogout} className="flex items-center gap-2">
-              <img src={logouticon} alt="" className="w-4 h-4" />
-              <button className="text-red-500">Logout</button>
-            </div>
+
+            {userId && userRole ? (
+              <div onClick={handleLogout} className="flex items-center gap-2">
+                <img src={logouticon} alt="" className="w-4 h-4" />
+                <button className="text-red-500">Logout</button>
+              </div>
+            ) : (
+              <button
+                onClick={() => navigate("/login")}
+                className="w-full text-left"
+              >
+                Login
+              </button>
+            )}
           </div>
         )}
 
