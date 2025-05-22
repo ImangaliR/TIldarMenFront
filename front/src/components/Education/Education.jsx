@@ -165,7 +165,7 @@ const Education = () => {
                 ) : (
                   <label
                     htmlFor="fileInpt"
-                    className="block border-1 pt-1 w-55 md:w-60 h-8 rounded-md cursor-pointer text-center text-[#38BF4C]"
+                    className="block border-1 pt-1 w-full px-2 md:px-0 md:w-60 h-8 rounded-md cursor-pointer text-center text-[#38BF4C]"
                   >
                     Add Degree
                   </label>
