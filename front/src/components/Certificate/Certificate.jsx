@@ -93,7 +93,7 @@ const Certificate = () => {
                 required
                 value={certificateTitle}
                 onChange={(e) => setCertificateTitle(e.target.value)}
-                className="bg-[#EAF4F4] border-1 border-[#DCDCDC] md:pl-3 w-full md:w-60 h-7 rounded-sm text-sm"
+                className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-full md:w-60 h-7 rounded-sm text-sm"
               />
             </div>
             <div className="flex items-center gap-2 my-3">
@@ -103,7 +103,7 @@ const Certificate = () => {
                 required
                 value={certificateYear}
                 onChange={(e) => setCertificateYear(e.target.value)}
-                className="bg-[#EAF4F4] border-1 border-[#DCDCDC] md:pl-3 w-full md:w-60 h-7 rounded-sm text-sm"
+                className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-full md:w-60 h-7 rounded-sm text-sm"
               />
             </div>
             <div>
@@ -174,7 +174,7 @@ const Certificate = () => {
                       type="text"
                       required
                       value={certificate?.title}
-                      className="bg-[#EAF4F4] border-1 border-[#DCDCDC] md:pl-3 w-full md:w-60 h-7 rounded-sm text-sm"
+                      className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-full md:w-60 h-7 rounded-sm text-sm"
                     />
                   </div>
                   <div className="flex items-center gap-2 my-3">
@@ -183,7 +183,7 @@ const Certificate = () => {
                       type="number"
                       required
                       value={certificate?.year}
-                      className="bg-[#EAF4F4] border-1 border-[#DCDCDC] md:pl-3 w-full md:w-60 h-7 rounded-sm text-sm"
+                      className="bg-[#EAF4F4] border-1 border-[#DCDCDC] pl-3 w-full md:w-60 h-7 rounded-sm text-sm"
                     />
                   </div>
                   <div>
