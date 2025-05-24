@@ -1,73 +1,20 @@
-import React from "react";
 import reviewstar from "../../assets/reviewstar.png";
 import reviewstarfull from "../../assets/reviewstarfull.png";
 import employericon from "../../assets/employericon.png";
 
 const ReviewCard = ({ reviews }) => {
-  const reviewStars = (rating) => {
-    switch (rating) {
-      case 1:
-        return (
-          <div className="flex items-center gap-2">
-            <img src={reviewstarfull} alt="full star" className="w-4 h-4" />
-            <img src={reviewstar} alt="empty star" className="w-4 h-4" />
-            <img src={reviewstar} alt="empty star" className="w-4 h-4" />
-            <img src={reviewstar} alt="empty star" className="w-4 h-4" />
-            <img src={reviewstar} alt="empty star" className="w-4 h-4" />
-          </div>
-        );
-      case 2:
-        return (
-          <div className="flex items-center gap-2">
-            <img src={reviewstarfull} alt="full star" className="w-4 h-4" />
-            <img src={reviewstarfull} alt="full star" className="w-4 h-4" />
-            <img src={reviewstar} alt="empty star" className="w-4 h-4" />
-            <img src={reviewstar} alt="empty star" className="w-4 h-4" />
-            <img src={reviewstar} alt="empty star" className="w-4 h-4" />
-          </div>
-        );
-      case 3:
-        return (
-          <div className="flex items-center gap-2">
-            <img src={reviewstarfull} alt="full star" className="w-4 h-4" />
-            <img src={reviewstarfull} alt="full star" className="w-4 h-4" />
-            <img src={reviewstarfull} alt="full star" className="w-4 h-4" />
-            <img src={reviewstar} alt="empty star" className="w-4 h-4" />
-            <img src={reviewstar} alt="empty star" className="w-4 h-4" />
-          </div>
-        );
-      case 4:
-        return (
-          <div className="flex items-center gap-2">
-            <img src={reviewstarfull} alt="full star" className="w-4 h-4" />
-            <img src={reviewstarfull} alt="full star" className="w-4 h-4" />
-            <img src={reviewstarfull} alt="full star" className="w-4 h-4" />
-            <img src={reviewstarfull} alt="full star" className="w-4 h-4" />
-            <img src={reviewstar} alt="empty star" className="w-4 h-4" />
-          </div>
-        );
-      case 5:
-        return (
-          <div className="flex items-center gap-2">
-            <img src={reviewstarfull} alt="full star" className="w-4 h-4" />
-            <img src={reviewstarfull} alt="full star" className="w-4 h-4" />
-            <img src={reviewstarfull} alt="full star" className="w-4 h-4" />
-            <img src={reviewstarfull} alt="full star" className="w-4 h-4" />
-            <img src={reviewstarfull} alt="full star" className="w-4 h-4" />
-          </div>
-        );
-      default:
-        return (
-          <div className="flex items-center gap-2">
-            <img src={reviewstar} alt="empty star" className="w-4 h-4" />
-            <img src={reviewstar} alt="empty star" className="w-4 h-4" />
-            <img src={reviewstar} alt="empty star" className="w-4 h-4" />
-            <img src={reviewstar} alt="empty star" className="w-4 h-4" />
-            <img src={reviewstar} alt="empty star" className="w-4 h-4" />
-          </div>
-        );
-    }
-  };
+  const reviewStars = (rating) => (
+    <div className="flex items-center gap-1 md:gap-2">
+      {[...Array(5)].map((_, i) => (
+        <img
+          key={i}
+          src={i < rating ? reviewstarfull : reviewstar}
+          alt={i < rating ? "full star" : "empty star"}
+          className="w-4 h-4"
+        />
+      ))}
+    </div>
+  );
 
   function formatDate(dateString) {
     const options = {
@@ -92,23 +39,26 @@ const ReviewCard = ({ reviews }) => {
           <img
             src={review?.profileImageUrl || employericon}
             alt="employer icon"
-            className="w-13 h-13 rounded-full object-cover"
+            className="w-10 h-10 md:w-13 md:h-13 rounded-full object-cover"
           />
-          <div className="w-full mb-5">
-            <div className="flex justify-between items-center">
-              <h1 className="font-semibold text-lg">
+          <div className="w-full mb-2 md:mb-5">
+            <div className="grid gap-2 md:gap-0 md:flex justify-between items-center">
+              <h1 className="font-semibold md:text-lg">
                 {review?.firstName} {review?.lastName}
               </h1>
               {reviewStars(review?.rating)}
             </div>
-            <p className="text-sm text-[#878787]">
+            <p className="mt-2 md:mt-0 text-sm text-[#878787]">
               {formatDate(review?.creationDate)}
             </p>
-            <textarea
+            {/* <textarea
               defaultValue={review?.comment || ""}
               disabled
-              className="text-[#6e6e6e] mt-1 resize-none w-full pr-2"
-            />
+              className="text-[#6e6e6e] mt-2 resize-none w-full pr-2 pb-2"
+            /> */}
+            <p className="text-[#6e6e6e] mt-2 md:mt-1 w-full">
+              {review?.comment || ""}
+            </p>
           </div>
         </div>
       ))}

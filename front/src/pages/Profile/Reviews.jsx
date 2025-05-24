@@ -82,10 +82,7 @@ const Reviews = () => {
       try {
         const response = await api.get(`/review/${userID}/all`);
         setReviews(response.data?.data);
-      } catch (err) {
-        console.error("Axios Error:", err);
-        console.log(err.response?.data || "Failed to fetch cities.");
-      }
+      } catch (err) {}
     };
 
     fetchReviews();
@@ -108,15 +105,15 @@ const Reviews = () => {
 
   return (
     <>
-      <main className=" bg-white w-280 h-max min-h-130 rounded-lg p-5">
-        <div className="flex gap-2">
-          <div className="p-5 rounded-lg border-1 border-[#dcdcdc] sticky top-5 h-max">
+      <main className="bg-white w-full md:w-280 md:h-max md:min-h-130 rounded-lg p-5">
+        <div className="grid md:flex gap-2">
+          <div className="p-5 rounded-lg border-1 border-[#dcdcdc] md:sticky top-5 h-max">
             <div>
-              <div className="flex flex-col items-center w-80">
+              <div className="flex flex-col items-center md:w-80">
                 <img
                   src={customerreviews}
                   alt=""
-                  className="w-25 h-25 shadow-sm rounded-full"
+                  className="w-22 md:w-25 h-22 md:h-25 shadow-sm rounded-full"
                 />
                 <h1 className="mt-4 text-lg text-[#5e5e5e]">
                   Customer Reviews
@@ -143,14 +140,16 @@ const Reviews = () => {
             </div>
           </div>
           {reviews?.length !== 0 ? (
-            <div className="ml-5">
-              <div className="w-170 border-1 border-[#dcdcdc] border-b-0 rounded-lg rounded-b-none p-1">
+            <div className="md:ml-5">
+              <div className="md:w-170 border-1 border-[#dcdcdc] md:border-b-0 rounded-lg md:rounded-b-none p-1">
                 <ReviewCard reviews={reviews} />
               </div>
             </div>
           ) : (
-            <div className="flex flex-1 justify-center items-center">
-              <p className="text-[#8b8b8b] text-3xl">No reviews yet</p>
+            <div className="min-h-40 flex flex-1 justify-center items-center">
+              <p className="text-[#8b8b8b] text-xl md:text-3xl">
+                No reviews yet
+              </p>
             </div>
           )}
         </div>
