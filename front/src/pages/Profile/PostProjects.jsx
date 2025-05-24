@@ -20,9 +20,7 @@ const PostProjects = () => {
       .then((res) => {
         setProjects(res.data.data);
       })
-      .catch((err) => {
-        console.error("Error fetching locations:", err);
-      });
+      .catch((err) => {});
   }, [projects]);
 
   useEffect(() => {}, [projects]);
@@ -50,13 +48,15 @@ const PostProjects = () => {
       {isCreatePage || isApplicantsPage || isEditPage ? (
         <Outlet />
       ) : (
-        <div>
-          <h1 className="text-3xl font-bold">Posting Projects</h1>
-          <div className="bg-white w-280 min-h-170 px-15 py-10 rounded-md shadow-md mt-2">
-            <div className="flex items-center justify-end w-full h-10 mb-10">
+        <div className="w-full">
+          <h1 className="text-2xl md:text-3xl ml-2 md:ml-0 font-bold">
+            Posting Projects
+          </h1>
+          <div className="bg-white px-2 py-4 md:w-280 md:min-h-170 md:px-15 md:py-10 rounded-md shadow-md mt-2">
+            <div className="flex items-center justify-end w-full h-10 mb-3 md:mb-10">
               <button
                 onClick={() => navigate("create-project")}
-                className="py-1.5 px-5 bg-[#38BF4C] text-white rounded-xl"
+                className="py-1.5 px-5 bg-[#38BF4C] text-white text-sm md:text-base rounded-xl"
               >
                 New Project
               </button>
@@ -66,30 +66,30 @@ const PostProjects = () => {
                 <table className="min-w-full divide-y divide-gray-200 text-sm">
                   <thead className="text-[#7D7D7D]">
                     <tr>
-                      <th className="px-4 py-4 text-center font-semibold">
+                      <th className="p-1 md:p-4 text-center font-semibold">
                         Project Title
                       </th>
-                      <th className="px-4 py-4 text-center font-semibold">
+                      <th className="p-1 md:p-4 text-center font-semibold">
                         Start Date
                       </th>
-                      <th className="px-4 py-4 text-center font-semibold">
+                      <th className="p-1 md:p-4 text-center font-semibold">
                         End Date
                       </th>
-                      <th className="px-4 py-4 text-center font-semibold">
+                      <th className="p-1 md:p-4 text-center font-semibold">
                         Published Date
                       </th>
-                      <th className="px-4 py-4 text-center font-semibold">
+                      <th className="p-1 md:p-4 text-center font-semibold">
                         Price
                       </th>
-                      <th className="px-4 py-4 text-center font-semibold">
+                      <th className="p-1 md:p-4 text-center font-semibold">
                         Number of Applicants
                       </th>
-                      <th className="px-4 py-4 text-center font-semibold">
+                      <th className="p-1 md:p-4 text-center font-semibold">
                         Actions
                       </th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-gray-100">
+                  <tbody className="divide-y divide-gray-100 text-xs md:text-base">
                     {projects?.map((proj, idx) => (
                       <tr
                         key={idx}
@@ -99,7 +99,7 @@ const PostProjects = () => {
                           onClick={() =>
                             navigate(`project-applicants/${proj.id}`)
                           }
-                          className="px-4 py-3 text-center text-black"
+                          className="p-1 md:px-4 md:py-3 text-center text-black"
                         >
                           {proj.title}
                         </td>
@@ -107,7 +107,7 @@ const PostProjects = () => {
                           onClick={() =>
                             navigate(`project-applicants/${proj.id}`)
                           }
-                          className="px-4 py-3 text-center"
+                          className="p-1 md:px-4 md:py-3 text-center"
                         >
                           {formatDate(proj.startDate)}
                         </td>
@@ -115,7 +115,7 @@ const PostProjects = () => {
                           onClick={() =>
                             navigate(`project-applicants/${proj.id}`)
                           }
-                          className="px-4 py-3 text-center"
+                          className="p-1 md:px-4 md:py-3 text-center"
                         >
                           {formatDate(proj.endDate)}
                         </td>
@@ -123,7 +123,7 @@ const PostProjects = () => {
                           onClick={() =>
                             navigate(`project-applicants/${proj.id}`)
                           }
-                          className="px-4 py-3 text-center text-blue-600"
+                          className="p-1 md:px-4 md:py-3 text-center text-blue-600"
                         >
                           {formatDateRange(proj.publicationDate)}
                         </td>
@@ -131,7 +131,7 @@ const PostProjects = () => {
                           onClick={() =>
                             navigate(`project-applicants/${proj.id}`)
                           }
-                          className="px-4 py-3 text-center"
+                          className="p-1 md:px-4 md:py-3 text-center"
                         >
                           {proj.price}₸
                         </td>
@@ -139,13 +139,13 @@ const PostProjects = () => {
                           onClick={() =>
                             navigate(`project-applicants/${proj.id}`)
                           }
-                          className="px-4 py-3 text-center text-blue-600"
+                          className="p-1 md:px-4 md:py-3 text-center text-blue-600"
                         >
                           {proj.applicantsCount}
                         </td>
                         <td
                           onClick={() => navigate(`edit-project/${proj.id}`)}
-                          className="px-4 py-3 text-gray-400 text-center cursor-pointer hover:brightness-120"
+                          className="p-1 md:px-4 md:py-3 text-gray-400 text-center cursor-pointer hover:brightness-120"
                         >
                           <button className="flex items-center gap-1 text-[#38BF4C] w-full">
                             Edit

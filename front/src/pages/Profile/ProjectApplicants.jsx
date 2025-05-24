@@ -23,9 +23,7 @@ const ProjectApplicants = () => {
       .then((res) => {
         setApplicants(res.data.data);
       })
-      .catch((err) => {
-        console.error("Error fetching locations:", err);
-      });
+      .catch((err) => {});
   }, [id, refreshFlag]);
 
   const refreshApplicants = () => {
@@ -77,49 +75,49 @@ const ProjectApplicants = () => {
   return (
     <>
       <main className="w-full">
-        <div className="flex items-center text-lg gap-3 ml-5">
+        <div className="flex items-center md:text-lg gap-3 ml-2 md:ml-5">
           <button
             onClick={() => navigate("/employer/post-projects")}
             className="my-2"
           >
             Post projects
           </button>
-          <img src={vector} alt="vector icon" className="w-2" />
+          <img src={vector} alt="vector icon" className="w-1.5 md:w-2" />
           <h1 className="text-[#317BFF]">Project applicants</h1>
         </div>
-        <div className="bg-white w-280 h-200 rounded-lg shadow-xs">
-          <div className="overflow-x-auto p-20">
+        <div className="bg-white md:w-280 md:h-200 rounded-lg shadow-xs">
+          <div className="overflow-x-auto md:p-20">
             {applicants?.length !== 0 ? (
               <table className="min-w-full divide-y divide-gray-200 text-sm shadow-sm">
                 <thead className="text-[#7D7D7D]">
                   <tr>
-                    <th className="py-4 px-4 text-center font-semibold">
+                    <th className="p-1.5 md:p-4 text-center font-semibold">
                       Profile Image
                     </th>
-                    <th className="py-4 px-4 text-center font-semibold">
+                    <th className="p-1.5 md:p-4 text-center font-semibold">
                       Full Name
                     </th>
-                    <th className="py-4 px-4 text-center font-semibold">
+                    <th className="p-1.5 md:p-4 text-center font-semibold">
                       Status
                     </th>
-                    <th className="py-4 px-4 text-center font-semibold">
+                    <th className="p-3 md:p-4 text-center font-semibold">
                       Send at
                     </th>
-                    <th className="py-4 px-4 text-center font-semibold">
+                    <th className="p-1.5 md:p-4 text-center font-semibold">
                       Price
                     </th>
-                    <th className="py-4 px-4 text-center font-semibold">
+                    <th className="p-1.5 md:p-4 text-center font-semibold">
                       Rating
                     </th>
-                    <th className="py-4 px-4 text-center font-semibold">
+                    <th className="p-1.5 md:p-4 text-center font-semibold">
                       Activity
                     </th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-100">
+                <tbody className="divide-y divide-gray-100 text-xs md:text-base">
                   {applicants?.map((applicant, idx) => (
                     <tr key={idx} className={`hover:bg-blue-50`}>
-                      <td className="flex justify-center px-4 py-2">
+                      <td className="flex justify-center items-center p-1.5 md:px-4 md:py-2">
                         <img
                           src={applicant?.profileImageUrl || profileicon}
                           alt="profile image"
@@ -127,13 +125,13 @@ const ProjectApplicants = () => {
                         />
                       </td>
 
-                      <td className="px-4 py-2 text-center">
+                      <td className="p-1.5 md:px-4 md:py-2 text-center">
                         {applicant.firstName} {applicant.lastName}
                       </td>
 
-                      <td className="px-4 py-2 text-center">
+                      <td className="p-1.5 md:px-4 md:py-2 text-center">
                         <p
-                          className="rounded-lg py-1"
+                          className="rounded-lg text-xs md:text-base py-1"
                           style={{
                             backgroundColor: statusColors[applicant.status],
                           }}
@@ -142,27 +140,27 @@ const ProjectApplicants = () => {
                         </p>
                       </td>
 
-                      <td className="px-4 py-2 text-center text-blue-600">
+                      <td className="p-1.5 md:px-4 md:py-2 text-center text-blue-600">
                         {formatDate(applicant.sendAt)}
                       </td>
 
-                      <td className="px-4 py-2 text-center">
+                      <td className="p-1.5 md:px-4 md:py-2 text-center">
                         {applicant.price}₸
                       </td>
 
-                      <td className="px-4 py-2 text-center">
+                      <td className="p-1.5 md:px-4 md:py-2 text-center">
                         {applicant.rating.toFixed(2)}
                       </td>
 
-                      <td className="px-4 py-2 text-center">
+                      <td className="p-1.5 md:px-4 md:py-2 text-center">
                         {applicant.status === "PENDING" &&
                         applicant.type === "Application" ? (
-                          <div className="flex gap-2 items-center justify-center">
+                          <div className="grid md:flex gap-2 items-center justify-center">
                             <button
                               onClick={() =>
                                 acceptRequest(applicant.applicationId)
                               }
-                              className="text-green-500 border-1 px-3 py-1 rounded-lg"
+                              className="text-green-500 border-1 px-1 md:px-3 py-1 rounded-lg"
                             >
                               Accept
                             </button>
@@ -170,13 +168,13 @@ const ProjectApplicants = () => {
                               onClick={() =>
                                 rejectRequest(applicant.applicationId)
                               }
-                              className="text-red-500 border-1 px-3 py-1 rounded-lg"
+                              className="text-red-500 border-1 px-1 md:px-3 py-1 rounded-lg"
                             >
                               Reject
                             </button>
                           </div>
                         ) : applicant.status === "ACCEPTED" ? (
-                          <button className="bg-indigo-500 text-white border-1 px-14 py-1 rounded-lg">
+                          <button className="bg-indigo-500 text-white border-1 px-2 md:px-14 py-1 rounded-lg">
                             Chat
                           </button>
                         ) : (
@@ -188,8 +186,10 @@ const ProjectApplicants = () => {
                 </tbody>
               </table>
             ) : (
-              <div className="flex items-center justify-center mt-50">
-                <p className="text-[#8b8b8b] text-3xl">No applicants yet</p>
+              <div className="min-h-50 flex items-center justify-center md:mt-35">
+                <p className="text-[#8b8b8b] text-xl md:text-3xl">
+                  No applicants yet
+                </p>
               </div>
             )}
           </div>

@@ -59,9 +59,7 @@ const EditProject = () => {
       .then((res) => {
         setSpecialization(res.data.data);
       })
-      .catch((err) => {
-        console.error("Error fetching Specialization:", err);
-      });
+      .catch((err) => {});
   }, []);
 
   useEffect(() => {
@@ -70,9 +68,7 @@ const EditProject = () => {
       .then((res) => {
         setTranslationServices(res.data.data);
       })
-      .catch((err) => {
-        console.error("Error fetching Translation Services:", err);
-      });
+      .catch((err) => {});
   }, []);
 
   useEffect(() => {
@@ -81,9 +77,7 @@ const EditProject = () => {
       .then((res) => {
         setLanguages(res.data.data);
       })
-      .catch((err) => {
-        console.error("Error fetching languages:", err);
-      });
+      .catch((err) => {});
   }, []);
 
   useEffect(() => {
@@ -92,9 +86,7 @@ const EditProject = () => {
       .then((res) => {
         setLocations(res.data.data);
       })
-      .catch((err) => {
-        console.error("Error fetching locations:", err);
-      });
+      .catch((err) => {});
   }, []);
 
   const toInputDate = (dateStr) => {
@@ -156,8 +148,6 @@ const EditProject = () => {
       specializations: addSpecialization.map((name) => ({ name })),
     };
 
-    console.log(data);
-
     api
       .put(`jobs/${userId}/update/${id}`, data)
       .then((res) => {
@@ -172,25 +162,27 @@ const EditProject = () => {
   return (
     <>
       <div>
-        <h1 className="text-center text-4xl font-bold mb-5">
+        <h1 className="text-center text-3xl md:text-4xl font-bold mb-5">
           Edit your project
         </h1>
-        <div className="w-280 bg-white px-20 py-8 rounded-md shadow-xs">
+        <div className="md:w-280 bg-white py-4 px-4 md:px-20 md:py-8 rounded-md shadow-xs">
           <div>
             <form onSubmit={handleSubmit(updateJob)}>
               <div className="flex items-center justify-between mb-5">
-                <h1 className="text-3xl font-bold">Fill the Information</h1>
-                <div className="flex items-center gap-5">
+                <h1 className="text-xl md:text-3xl font-bold">
+                  Fill the Information
+                </h1>
+                <div className="flex items-center gap-2 md:gap-5">
                   <button
                     type="button"
                     onClick={() => navigate("/employer/post-projects")}
-                    className="py-2 px-4 border-1 rounded-lg"
+                    className="py-1 px-2 md:py-2 md:px-4 border-1 rounded-lg"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
-                    className="py-2 px-4 text-[#38BF4C] border-1 rounded-lg"
+                    className="py-1 px-2 md:py-2 md:px-4 text-[#38BF4C] border-1 rounded-lg"
                   >
                     Update
                   </button>

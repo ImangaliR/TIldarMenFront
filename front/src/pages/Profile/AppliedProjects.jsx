@@ -76,7 +76,7 @@ const AppliedProjects = () => {
                     <th className="p-1 md:p-4 font-semibold">Activity</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-100">
+                <tbody className="divide-y divide-gray-100 text-xs md:text-base">
                   {applications?.map((application, index) => (
                     <tr key={index} className="hover:bg-blue-50 text-center">
                       <td className="p-1 md:p-4 font-medium text-gray-800">
