@@ -224,6 +224,25 @@ const Navbar = () => {
         </div>
 
         <div className="md:hidden flex items-center gap-3">
+          <div className="flex items-center gap-2 z-50">
+            <button
+              onClick={() => navigate("/chat")}
+              className={`text-left bg-[#f1f1f1] rounded-full p-1.5`}
+            >
+              <img
+                src={chaticon}
+                alt="chat icon"
+                className="min-w-4 h-4 lg:min-w-5 lg:h-5"
+              />
+            </button>
+            <button className={`text-left bg-[#f1f1f1] rounded-full p-1.5`}>
+              <img
+                src={bellicon}
+                alt="bell icon"
+                className="min-w-4 h-4 lg:min-w-5 lg:h-5"
+              />
+            </button>
+          </div>
           <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
             {isProfileMenuOpen
               ? []
@@ -242,7 +261,7 @@ const Navbar = () => {
         </div>
 
         {isMobileMenuOpen && (
-          <div className="absolute top-18 left-0 w-full bg-white flex flex-col px-7 py-4 gap-4 md:hidden z-50 border-y-1 border-[#dbdbdb] shadow-lg">
+          <div className="md:hidden absolute top-18 left-0 w-full flex flex-col px-7 py-4 gap-4 z-50 border-y-1 border-[#dbdbdb] shadow-lg bg-white">
             {navigation.map((item, i) => (
               <NavLink
                 to={item.href}
@@ -257,23 +276,6 @@ const Navbar = () => {
                 {item.name}
               </NavLink>
             ))}
-            <button
-              onClick={() => navigate("/chat")}
-              className={`w-full text-left ${
-                isChatPage ? "text-[#71C39C] font-semibold" : "text-[#585858]"
-              }`}
-            >
-              Chat
-            </button>
-            <button
-              className={`w-full text-left ${
-                isNotificationPage
-                  ? "text-[#71C39C] font-semibold"
-                  : "text-[#585858]"
-              }`}
-            >
-              Notifications
-            </button>
             <div
               onClick={handleProfileClickMobile}
               className="flex items-center justify-between w-full"
