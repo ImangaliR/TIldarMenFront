@@ -17,18 +17,20 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 const Navbar = () => {
+  const match1 = useMatch("/translator/applied-projects");
+  const match2 = useMatch("/translator/settings");
+  const match3 = useMatch("/translator/profile-edit");
+  const match4 = useMatch("/translator/reviews");
+  const match5 = useMatch("/employer/settings");
+  const match6 = useMatch("/employer/payment");
+  const match7 = useMatch("/employer/post-projects");
+
   const navigate = useNavigate();
   const isChatPage = useMatch("/chat");
   const isNotificationPage = useMatch("/notification");
-  const isProfilePage = useMatch(
-    "/translator/settings" ||
-      "/employer/settings" ||
-      "/translator/profile-edit" ||
-      "/employer/payment" ||
-      "/translator/applied-projects" ||
-      "/translator/reviews" ||
-      "/employer/post-projects"
-  );
+  const isProfilePage =
+    match1 || match2 || match3 || match4 || match5 || match6 || match7;
+
   const { logout, user, userRole, userId } = useUser();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
