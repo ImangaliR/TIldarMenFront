@@ -13,9 +13,7 @@ const Payment = () => {
       .then((res) => {
         setTransactions(res.data.data);
       })
-      .catch((err) => {
-        console.error("Error fetching locations:", err);
-      });
+      .catch((err) => {});
   }, []);
 
   function formatDate(dateString) {
@@ -38,13 +36,18 @@ const Payment = () => {
 
   return (
     <>
-      <main className="bg-white w-280 h-180 py-20 px-25 rounded-md shadow-xs">
-        <div className="border-1 h-full border-[#DCDCDC] rounded-xl p-8">
-          <h1 className="font-semibold text-xl mb-5">Transcation History</h1>
+      <main className="bg-white md:w-280 md:h-180 md:py-20 md:px-25 rounded-md shadow-xs">
+        <div className="border-1 h-full border-[#DCDCDC] rounded-md p-2 md:p-8">
+          <h1 className="font-semibold text-lg md:text-xl mb-2 md:mb-5">
+            Transcation History
+          </h1>
           {transactions?.length !== 0 ? (
             transactions.map((transaction, i) => (
-              <div key={i} className="flex items-center justify-between py-2">
-                <div className="flex items-center gap-5">
+              <div
+                key={i}
+                className="flex items-center gap-2 md:gap-0 md:justify-between py-2 text-sm md:text-base"
+              >
+                <div className="flex items-center gap-3 md:gap-5">
                   <img
                     src={transaction?.profileImageUrl || profileicon}
                     alt="profile image"
@@ -72,7 +75,7 @@ const Payment = () => {
               </div>
             ))
           ) : (
-            <div className="flex items-center justify-center mt-50">
+            <div className="min-h-50 flex items-center justify-center md:mt-50">
               <p className="text-[#8b8b8b] text-3xl">No transactions yet</p>
             </div>
           )}
