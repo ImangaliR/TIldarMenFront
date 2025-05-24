@@ -24,12 +24,22 @@ const Navbar = () => {
   const match5 = useMatch("/employer/settings");
   const match6 = useMatch("/employer/payment");
   const match7 = useMatch("/employer/post-projects");
+  const match8 = useMatch("/employer/post-projects/edit-project/:id");
+  const match9 = useMatch("/employer/post-projects/project-applicants/:id");
+  const match10 = useMatch("/employer/post-projects/create-project");
 
   const navigate = useNavigate();
-  const isChatPage = useMatch("/chat");
-  const isNotificationPage = useMatch("/notification");
   const isProfilePage =
-    match1 || match2 || match3 || match4 || match5 || match6 || match7;
+    match1 ||
+    match2 ||
+    match3 ||
+    match4 ||
+    match5 ||
+    match6 ||
+    match7 ||
+    match8 ||
+    match9 ||
+    match10;
 
   const { logout, user, userRole, userId } = useUser();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
