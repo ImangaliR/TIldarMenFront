@@ -62,29 +62,29 @@ const AppliedProjects = () => {
 
   return (
     <>
-      <main>
-        <div className="bg-white w-280 h-200 rounded-lg shadow-xs">
-          <div className="overflow-x-auto p-20">
+      <main className="w-full">
+        <div className="bg-white md:w-280 min-h-50 md:h-200 rounded-lg shadow-xs">
+          <div className="overflow-x-auto md:p-20">
             {applications?.length > 0 ? (
               <table className="min-w-full divide-y divide-gray-200 text-sm shadow-sm">
                 <thead className="text-[#7D7D7D] text-center">
                   <tr>
-                    <th className="py-4 px-4 font-semibold">Project Name</th>
-                    <th className="py-4 px-4 font-semibold">Status</th>
-                    <th className="py-4 px-4 font-semibold">Price</th>
-                    <th className="py-4 px-4 font-semibold">Offer Sent</th>
-                    <th className="py-4 px-4 font-semibold">Activity</th>
+                    <th className="p-1 md:p-4 font-semibold">Project Name</th>
+                    <th className="p-1 md:p-4 font-semibold">Status</th>
+                    <th className="p-1 md:p-4 font-semibold">Price</th>
+                    <th className="p-1 md:p-4 font-semibold">Offer Sent</th>
+                    <th className="p-1 md:p-4 font-semibold">Activity</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-100">
                   {applications?.map((application, index) => (
                     <tr key={index} className="hover:bg-blue-50 text-center">
-                      <td className="py-4 px-4 font-medium text-gray-800">
+                      <td className="p-1 md:p-4 font-medium text-gray-800">
                         {application.job.title}
                       </td>
-                      <td className="py-4 px-4">
+                      <td className="p-1 md:p-4">
                         <span
-                          className={`py-2 px-3 rounded-full ${
+                          className={`text-xs py-1 px-1.5 md:py-2 md:px-3 rounded-full ${
                             statusColors[application.status]
                           }`}
                         >
@@ -95,19 +95,19 @@ const AppliedProjects = () => {
                             : "Rejected"}
                         </span>
                       </td>
-                      <td className="py-4 px-4">{application.job.price}</td>
-                      <td className="py-4 px-4">
+                      <td className="p-1 md:p-4">{application.job.price}</td>
+                      <td className="p-1 md:p-4">
                         {formatDate(application.appliedAt)}
                       </td>
-                      <td className="w-fit py-4">
+                      <td className="text-xs w-fit py-1 md:py-4">
                         {application.status === "PENDING" &&
                         application.type === "Request" ? (
-                          <div className="flex gap-2 items-center justify-center">
+                          <div className="grid md:flex gap-2 items-center justify-center">
                             <button
                               onClick={() =>
                                 acceptRequest(application.applicationId)
                               }
-                              className="text-green-500 border-1 px-3 py-1 rounded-lg"
+                              className="text-green-500 border-1 px-1 md:px-3 py-1 rounded-lg"
                             >
                               Accept
                             </button>
@@ -115,13 +115,13 @@ const AppliedProjects = () => {
                               onClick={() =>
                                 rejectRequest(application.applicationId)
                               }
-                              className="text-red-500 border-1 px-3 py-1 rounded-lg"
+                              className="text-red-500 border-1 px-1 md:px-3 py-1 rounded-lg"
                             >
                               Reject
                             </button>
                           </div>
                         ) : application.status === "ACCEPTED" ? (
-                          <button className="bg-indigo-500 text-white border-1 px-14 py-1 rounded-lg">
+                          <button className="bg-indigo-500 text-white border-1 px-2 md:px-14 py-1 rounded-lg">
                             Chat
                           </button>
                         ) : (
@@ -133,8 +133,10 @@ const AppliedProjects = () => {
                 </tbody>
               </table>
             ) : (
-              <div className="flex items-center justify-center mt-50">
-                <p className="text-[#8b8b8b] text-3xl">No applications yet</p>
+              <div className="flex items-center justify-center mt-25 md:mt-50">
+                <p className="text-[#8b8b8b] text-xl md:text-3xl">
+                  No applications yet
+                </p>
               </div>
             )}
           </div>
