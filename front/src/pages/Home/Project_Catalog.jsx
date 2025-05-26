@@ -74,7 +74,6 @@ const ProjectCatalog = () => {
         `/jobs/filter?title=${searchQuery}`,
         postChecks
       );
-      console.log("Response", response.data.data);
       setJobs(response?.data?.data);
       setJobCount(response?.data?.data.length);
     } catch (err) {

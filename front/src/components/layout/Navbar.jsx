@@ -274,13 +274,6 @@ const Navbar = () => {
                 {item.name}
               </NavLink>
             ))}
-
-            {userId && userRole && (
-              <div onClick={handleLogout} className="flex items-center gap-2">
-                <img src={logouticon} alt="" className="w-4 h-4" />
-                <button className="text-red-500">Logout</button>
-              </div>
-            )}
           </div>
         )}
 
