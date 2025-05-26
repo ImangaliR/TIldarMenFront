@@ -151,6 +151,7 @@ const Navbar = () => {
 
   const handleProfileClickMobile = () => {
     if (userRole && userId) {
+      setIsMobileMenuOpen(false);
       setIsProfileMenuOpen(!isProfileMenuOpen);
     } else {
       toast.error("Please login to access your profile settings");
@@ -242,7 +243,12 @@ const Navbar = () => {
             className="w-7 h-7 object-cover rounded-full"
           />
 
-          <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+          <button
+            onClick={() => {
+              setIsMobileMenuOpen(!isMobileMenuOpen);
+              setIsProfileMenuOpen(false);
+            }}
+          >
             {!isMobileMenuOpen && (
               <img src={burger} alt="menu" className="w-6 h-6" />
             )}
@@ -264,7 +270,10 @@ const Navbar = () => {
               <NavLink
                 to={item.href}
                 key={i}
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  setIsProfileMenuOpen(false);
+                }}
                 className={({ isActive }) =>
                   `w-full ${
                     isActive ? "font-semibold text-[#71C39C]" : "text-[#585858]"
