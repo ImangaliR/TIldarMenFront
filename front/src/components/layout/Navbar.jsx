@@ -154,6 +154,7 @@ const Navbar = () => {
       setIsProfileMenuOpen(!isProfileMenuOpen);
     } else {
       toast.error("Please login to access your profile settings");
+      navigate("/login");
     }
   };
 
