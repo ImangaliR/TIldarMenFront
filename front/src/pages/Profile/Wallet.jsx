@@ -3,10 +3,12 @@ import api from "../../services/api";
 import { toast } from "react-toastify";
 import { useUser } from "../../utils/contexts/UserContext";
 import stripe from "../../assets/stripe.png";
+import SimpleLoader from "./../../components/Loader/SimpleLoader";
 
 const Wallet = () => {
   const [walletDashboard, setWalletDashboard] = useState(null);
   const { userId } = useUser();
+  const [isloading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const getAccountDashboard = async () => {
@@ -20,47 +22,16 @@ const Wallet = () => {
   }, [userId]);
 
   const createAccount = async () => {
+    setIsLoading(true);
     try {
       const res = await api.post(`stripe/account/${userId}`);
       window.location.href = res.data.data.onboardingUrl;
     } catch (err) {
       toast.error("Failed to create account");
+    } finally {
+      setIsLoading(false);
     }
   };
-
-  /* const handleCreateAccount = () => {
-    toast.warn(
-      <div className="ml-2">
-        <p className="text-center">Create account</p>
-        <div className="flex items-center justify-center gap-2 mt-1">
-          <button
-            className="px-3 py-1 rounded-md"
-            onClick={() => {
-              createAccount();
-              toast.dismiss();
-            }}
-          >
-            <p className="bg-green-400 text-white text-sm border-1 px-3 py-1 rounded-md">
-              Confirm
-            </p>
-          </button>
-          <button
-            className="bg-gray-400 text-white px-3 py-1 rounded-md"
-            onClick={() => toast.dismiss()}
-          >
-            <p className="text-sm">Cancel</p>
-          </button>
-        </div>
-      </div>,
-      {
-        position: "bottom-right",
-        autoClose: false,
-        closeOnClick: false,
-        draggable: false,
-        hideProgressBar: true,
-      }
-    );
-  }; */
 
   return (
     <>
@@ -86,6 +57,11 @@ const Wallet = () => {
               >
                 Create Account
               </button>
+              {isloading && (
+                <div className="flex h-full items-center justify-center">
+                  <SimpleLoader className="h-6 md:h-7" />
+                </div>
+              )}
             </div>
           )}
         </div>

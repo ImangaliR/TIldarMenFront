@@ -260,7 +260,7 @@ function Signup() {
             <div className="flex justify-center gap-8 font-medium mt-8">
               <p className="text-[#374753] scale-105 mt-2">You are.....</p>
               <label
-                className={`w-55 h-30 md:h-15 outline-1 rounded-lg text-center cursor-pointer
+                className={`w-30 md:w-55 h-20 md:h-15 outline-1 rounded-lg text-center cursor-pointer
                 ${role === "employer" ? "text-[#71C39C]" : "text-black "}`}
               >
                 <input
@@ -271,10 +271,13 @@ function Signup() {
                   checked={role === "employer"}
                   onChange={() => setRole("employer")}
                 ></input>
-                Customer, hiring for a project
+                <span className="block md:hidden">Customer</span>
+                <span className="hidden md:block">
+                  Customer, hiring for a project
+                </span>
               </label>
               <label
-                className={`w-55 h-30 md:h-15 outline-1 rounded-lg text-center cursor-pointer
+                className={`w-30 md:w-55 h-20 md:h-15 outline-1 rounded-lg text-center cursor-pointer
                 ${role === "translator" ? "text-[#71C39C]" : "text-black "}`}
               >
                 <input
@@ -285,7 +288,10 @@ function Signup() {
                   value="translator"
                   onChange={() => setRole("translator")}
                 ></input>
-                Translator, looking for work
+                <span className="block md:hidden">Translator</span>
+                <span className="hidden md:block">
+                  Translator, looking for work
+                </span>
               </label>
             </div>
             <div className="flex justify-between w-full gap-5 md:gap-0 mt-8 font-medium">
