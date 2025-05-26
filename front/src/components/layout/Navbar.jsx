@@ -99,6 +99,11 @@ const Navbar = () => {
             href: "/translator/reviews",
             icon: reviewicon,
           },
+          {
+            name: "Wallet",
+            href: "/translator/wallet",
+            icon: [],
+          },
         ]);
       }
     }

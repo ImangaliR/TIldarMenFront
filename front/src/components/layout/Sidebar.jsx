@@ -6,6 +6,7 @@ import timemanagement from "../../assets/time-management.png";
 import reviewicon from "../../assets/review.png";
 import logouticon from "../../assets/logout.png";
 import payment from "../../assets/payment.png";
+import wallet from "../../assets/wallet.png";
 import { useUser } from "../../utils/contexts/UserContext";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -61,10 +62,23 @@ const Sidebar = () => {
             href: "translator/reviews",
             icon: reviewicon,
           },
+          {
+            name: "Wallet",
+            href: "translator/wallet",
+            icon: wallet,
+          },
         ]);
       }
     }
   }, [userId, userRole]);
+
+  /* const handleWalletClick = async () => {
+    if (walletDashboard) {
+      window.location.href = walletDashboard;
+    } else {
+      handleCreateAccount();
+    }
+  }; */
 
   const handleLogout = () => {
     toast.warn(

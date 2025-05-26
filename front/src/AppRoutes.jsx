@@ -22,6 +22,11 @@ import TranslatorDetails from "./pages/Home/TranslatorDetails";
 import CreateProject from "./pages/Profile/CreateProject";
 import ForgotPassword from "./pages/Login/ForgotPassword";
 import EditProject from "./pages/Profile/EditProject";
+import ChatDetails from "./pages/Chat/ChatDetails";
+import Chat from "./pages/Chat/Chat";
+import Wallet from "./pages/Profile/Wallet";
+import AccountSuccess from "./pages/Profile/AccountSuccess";
+import AccountFail from "./pages/Profile/AccountFail";
 
 const AppRoutes = () => {
   const { userRole, userId } = useUser();
@@ -38,6 +43,9 @@ const AppRoutes = () => {
       <Route path="translators" element={<Translators />}>
         <Route path="translator-details/:id" element={<TranslatorDetails />} />
       </Route>
+      <Route path="chat" element={<Chat />}>
+        <Route path="chat-details/:id" element={<ChatDetails />} />
+      </Route>
 
       {/* Protected Routes */}
       <Route
@@ -48,9 +56,10 @@ const AppRoutes = () => {
           />
         }
       >
+        <Route path="success" element={<AccountSuccess />} />
+        <Route path="fail" element={<AccountFail />} />
         <Route element={<BaseLayout />}>
           <Route path="profile" element={<Profile />} />
-          {/* <Route path="settings" element={<Settings />} /> */}
 
           {/* Translator Routes */}
           <Route element={<RoleBasedRoute allowedRoles={"TRANSLATOR"} />}>
@@ -59,6 +68,7 @@ const AppRoutes = () => {
               <Route path="applied-projects" element={<AppliedProjects />} />
               <Route path="reviews" element={<Reviews />} />
               <Route path="settings" element={<Settings />} />
+              <Route path="wallet" element={<Wallet />} />
             </Route>
           </Route>
 
