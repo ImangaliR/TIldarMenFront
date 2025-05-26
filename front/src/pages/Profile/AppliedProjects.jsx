@@ -62,8 +62,8 @@ const AppliedProjects = () => {
 
   return (
     <>
-      <main className="w-full">
-        <div className="bg-white md:w-280 min-h-50 md:h-200 rounded-lg shadow-xs">
+      <main className="w-full md:w-fit">
+        <div className="bg-white md:w-280 min-h-50 md:h-max rounded-lg shadow-xs">
           <div className="overflow-x-auto md:p-20">
             {applications?.length > 0 ? (
               <table className="min-w-full divide-y divide-gray-200 text-sm shadow-sm">
@@ -99,7 +99,7 @@ const AppliedProjects = () => {
                       <td className="p-1 md:p-4">
                         {formatDate(application.appliedAt)}
                       </td>
-                      <td className="text-xs w-fit py-1 md:py-4">
+                      <td className="text-xs md:text-base w-fit py-1 md:py-4">
                         {application.status === "PENDING" &&
                         application.type === "Request" ? (
                           <div className="grid md:flex gap-2 items-center justify-center">
@@ -133,7 +133,7 @@ const AppliedProjects = () => {
                 </tbody>
               </table>
             ) : (
-              <div className="flex items-center justify-center mt-25 md:mt-50">
+              <div className="min-h-50 flex items-center justify-center mt-5 md:mt-10">
                 <p className="text-[#8b8b8b] text-xl md:text-3xl">
                   No applications yet
                 </p>

@@ -361,7 +361,7 @@ const Settings = () => {
           </main>
         </>
       ) : (
-        <main className="bg-white w-full shadow-sm rounded-sm text-sm py-10 px-2 md:px-25">
+        <main className="bg-white w-full md:h-fit md:w-fit shadow-sm rounded-sm text-sm py-10 px-2 md:px-25">
           <UploadProfilePicture />
           <form
             onSubmit={handleSubmit(userInfoUpdate)}

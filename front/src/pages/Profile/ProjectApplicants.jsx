@@ -74,7 +74,7 @@ const ProjectApplicants = () => {
 
   return (
     <>
-      <main className="w-full">
+      <main className="w-full md:w-fit">
         <div className="flex items-center md:text-lg gap-3 ml-2 md:ml-5">
           <button
             onClick={() => navigate("/employer/post-projects")}

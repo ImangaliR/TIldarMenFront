@@ -48,7 +48,7 @@ const PostProjects = () => {
       {isCreatePage || isApplicantsPage || isEditPage ? (
         <Outlet />
       ) : (
-        <div className="w-full">
+        <div className="w-full md:w-fit">
           <h1 className="text-2xl md:text-3xl ml-2 md:ml-0 font-bold">
             Posting Projects
           </h1>
