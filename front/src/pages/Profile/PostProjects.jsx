@@ -162,7 +162,7 @@ const PostProjects = () => {
                 </table>
               </div>
             ) : (
-              <div className="min-h-50 flex items-center justify-center md:mt-50">
+              <div className="min-h-50 flex items-center justify-center mt-10 md:mt-50">
                 <p className="text-[#8b8b8b] text-xl md:text-3xl">
                   No projects yet
                 </p>
