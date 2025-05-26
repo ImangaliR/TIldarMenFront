@@ -52,12 +52,6 @@ const Navbar = () => {
     { name: "Translators", href: "/translators" },
   ];
 
-  const menuOpen = () => {
-    if (isMobileMenuOpen || isProfileMenuOpen) {
-      return true;
-    } else return false;
-  };
-
   const closeMenus = () => {
     setIsMobileMenuOpen(false);
     setIsProfileMenuOpen(false);
@@ -158,7 +152,6 @@ const Navbar = () => {
   const handleProfileClickMobile = () => {
     if (userRole && userId) {
       setIsProfileMenuOpen(!isProfileMenuOpen);
-      setIsMobileMenuOpen(!isMobileMenuOpen);
     } else {
       toast.error("Please login to access your profile settings");
     }
@@ -168,24 +161,7 @@ const Navbar = () => {
     <>
       <nav className="flex items-center justify-between p-5 bg-white shadow-sm">
         <h1 className="text-2xl lg:text-3xl font-bold ml-2 md:ml-5 text-[#71C39C]">
-          {isProfileMenuOpen ? (
-            <div
-              onClick={() => {
-                setIsMobileMenuOpen(!isMobileMenuOpen);
-                setIsProfileMenuOpen(!isProfileMenuOpen);
-              }}
-              className="flex items-center gap-2"
-            >
-              <img
-                src={rightarrow}
-                alt="arrow sign"
-                className="w-3 h-3 -scale-x-100"
-              />
-              <button className="text-base font-normal">back</button>
-            </div>
-          ) : (
-            <button onClick={() => navigate("/home")}>TildarMen</button>
-          )}
+          <button onClick={() => navigate("/home")}>TildarMen</button>
         </h1>
 
         <div className="hidden md:flex items-center justify-between min-w-72 lg:min-w-100 text-[#585858] lg:text-lg cursor-pointer">
@@ -253,14 +229,25 @@ const Navbar = () => {
               />
             </button>
           </div>
+
+          <img
+            onClick={handleProfileClickMobile}
+            src={
+              userRole === "EMPLOYER"
+                ? user?.data?.profileImageUrl || employericon
+                : user?.data?.profileImageUrl || profileicon
+            }
+            alt="profile icon"
+            className="w-7 h-7 object-cover rounded-full"
+          />
+
           <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
-            {isProfileMenuOpen
-              ? []
-              : !isMobileMenuOpen && (
-                  <img src={burger} alt="menu" className="w-6 h-6" />
-                )}
+            {!isMobileMenuOpen && (
+              <img src={burger} alt="menu" className="w-6 h-6" />
+            )}
           </button>
-          {menuOpen() && (
+
+          {isMobileMenuOpen && (
             <img
               onClick={closeMenus}
               src={deletesign}
@@ -286,34 +273,12 @@ const Navbar = () => {
                 {item.name}
               </NavLink>
             ))}
-            <div
-              onClick={handleProfileClickMobile}
-              className="flex items-center justify-between w-full"
-            >
-              <button
-                className={`w-full text-left ${
-                  isProfilePage
-                    ? "text-[#71C39C] font-semibold"
-                    : "text-[#585858]"
-                }`}
-              >
-                Profile
-              </button>
-              <img src={rightarrow} alt="arrow" className="w-4 h-4" />
-            </div>
 
-            {userId && userRole ? (
+            {userId && userRole && (
               <div onClick={handleLogout} className="flex items-center gap-2">
                 <img src={logouticon} alt="" className="w-4 h-4" />
                 <button className="text-red-500">Logout</button>
               </div>
-            ) : (
-              <button
-                onClick={() => navigate("/login")}
-                className="w-full text-left"
-              >
-                Login
-              </button>
             )}
           </div>
         )}

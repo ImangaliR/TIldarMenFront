@@ -162,8 +162,10 @@ const PostProjects = () => {
                 </table>
               </div>
             ) : (
-              <div className="flex items-center justify-center mt-50">
-                <p className="text-[#8b8b8b] text-3xl">No projects yet</p>
+              <div className="min-h-50 flex items-center justify-center md:mt-50">
+                <p className="text-[#8b8b8b] text-xl md:text-3xl">
+                  No projects yet
+                </p>
               </div>
             )}
           </div>

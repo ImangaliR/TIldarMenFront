@@ -36,7 +36,7 @@ const Payment = () => {
 
   return (
     <>
-      <main className="bg-white md:w-280 md:h-180 md:py-20 md:px-25 rounded-md shadow-xs">
+      <main className="bg-white w-full md:w-280 md:h-180 md:py-20 md:px-25 rounded-md shadow-xs">
         <div className="border-1 h-full border-[#DCDCDC] rounded-md p-2 md:p-8">
           <h1 className="font-semibold text-lg md:text-xl mb-2 md:mb-5">
             Transcation History
@@ -75,8 +75,10 @@ const Payment = () => {
               </div>
             ))
           ) : (
-            <div className="min-h-50 flex items-center justify-center md:mt-50">
-              <p className="text-[#8b8b8b] text-3xl">No transactions yet</p>
+            <div className="min-h-40 flex items-center justify-center md:mt-50">
+              <p className="text-[#8b8b8b] text-xl md:text-3xl">
+                No transactions yet
+              </p>
             </div>
           )}
         </div>

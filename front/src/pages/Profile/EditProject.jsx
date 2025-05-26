@@ -162,7 +162,7 @@ const EditProject = () => {
   return (
     <>
       <div>
-        <h1 className="text-center text-3xl md:text-4xl font-bold mb-5">
+        <h1 className="text-center text-2xl md:text-4xl font-bold mb-5">
           Edit your project
         </h1>
         <div className="md:w-280 bg-white py-4 px-4 md:px-20 md:py-8 rounded-md shadow-xs">
