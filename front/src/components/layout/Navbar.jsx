@@ -9,12 +9,13 @@ import reviewicon from "../../assets/review.png";
 import logouticon from "../../assets/logout.png";
 import payment from "../../assets/payment.png";
 import burger from "../../assets/burger.png";
-import rightarrow from "../../assets/rightarrow.png";
+import bell_unread from "../../assets/bell_unread.png";
 import deletesign from "../../assets/delete_sign.png";
 import { NavLink, useMatch, useNavigate } from "react-router-dom";
 import { useUser } from "../../utils/contexts/UserContext";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import api from "../../services/api";
 
 const Navbar = () => {
   const match1 = useMatch("/translator/applied-projects");
@@ -45,6 +46,8 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
   const [profileNavigation, setProfileNavigation] = useState([]);
+  const [notifications, setNotifications] = useState([]);
+  const [hasUnread, setHasUnread] = useState(false);
 
   const navigation = [
     { name: "Home", href: "/home" },
@@ -56,6 +59,22 @@ const Navbar = () => {
     setIsMobileMenuOpen(false);
     setIsProfileMenuOpen(false);
   };
+
+  useEffect(() => {
+    if (notifications) {
+      const unreadExists = notifications.some((n) => n.read === false);
+      setHasUnread(unreadExists);
+    }
+  }, [notifications]);
+
+  useEffect(() => {
+    api
+      .get("/notification/getAll")
+      .then((res) => {
+        setNotifications(res.data.data);
+      })
+      .catch((err) => {});
+  }, [notifications]);
 
   useEffect(() => {
     if (userId) {
@@ -198,12 +217,16 @@ const Navbar = () => {
           </button>
           <button
             onClick={() => navigate("/notifications")}
-            className="bg-[#f1f1f1] rounded-full p-2"
+            className={`rounded-full ${hasUnread ? "" : "p-2 bg-[#f1f1f1]"} `}
           >
             <img
-              src={bellicon}
+              src={hasUnread ? bell_unread : bellicon}
               alt="bell icon"
-              className="min-w-4 h-4 lg:min-w-5 lg:h-5"
+              className={`${
+                hasUnread
+                  ? "w-8 h-8 md:w-9 md:h-9"
+                  : "min-w-4 h-4 lg:min-w-5 lg:h-5"
+              } `}
             />
           </button>
           <button className="ml-2 md:ml-4" onClick={handleProfileClick}>
@@ -233,12 +256,18 @@ const Navbar = () => {
             </button>
             <button
               onClick={() => navigate("/notifications")}
-              className={`text-left bg-[#f1f1f1] rounded-full p-1.5`}
+              className={`rounded-full text-left ${
+                hasUnread ? "" : "p-2 bg-[#f1f1f1]"
+              } `}
             >
               <img
-                src={bellicon}
+                src={hasUnread ? bell_unread : bellicon}
                 alt="bell icon"
-                className="min-w-4 h-4 lg:min-w-5 lg:h-5"
+                className={`${
+                  hasUnread
+                    ? "w-7 md:w-8 h-7 md:h-8"
+                    : "min-w-4 h-4 lg:min-w-5 lg:h-5"
+                } `}
               />
             </button>
           </div>

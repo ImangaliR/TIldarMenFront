@@ -20,17 +20,24 @@ const Notifications = () => {
       .finally(() => {
         setIsLoading(false);
       });
-  }, []);
+  }, [notifications]);
 
   function formatDate(dateString) {
-    const options = {
+    const date = new Date(dateString);
+
+    const datePart = date.toLocaleDateString("en-US", {
       day: "2-digit",
       month: "short",
       year: "numeric",
+    });
+
+    const timePart = date.toLocaleTimeString("en-US", {
+      hour: "2-digit",
+      minute: "2-digit",
       hour12: true,
-    };
-    const date = new Date(dateString);
-    return date.toLocaleDateString("en-US", options).replace(",", " -");
+    });
+
+    return `${datePart} - ${timePart}`;
   }
 
   return (
@@ -55,9 +62,7 @@ const Notifications = () => {
                           navigate(`notification-details/${notification.id}`)
                         }
                         className={`shadow-sm md:shadow-none hover:shadow-md flex items-center justify-between rounded-lg px-5 py-3 mb-4 cursor-pointer border-1 border-[#dcdcdc] ${
-                          notification.read
-                            ? "bg-white"
-                            : "bg-blue-100 hover:bg-blue-200"
+                          notification.read ? "bg-white" : "bg-[#71C39C]"
                         }`}
                       >
                         <div
@@ -78,7 +83,7 @@ const Notifications = () => {
                           {notification.read ? (
                             []
                           ) : (
-                            <p className="text-blue-400 border-1 rounded-xl px-2 py-1">
+                            <p className="text-[#71C39C] border-1 rounded-xl px-2 py-1">
                               New
                             </p>
                           )}
