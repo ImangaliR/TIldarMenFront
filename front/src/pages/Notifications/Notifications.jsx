@@ -62,7 +62,7 @@ const Notifications = () => {
                           navigate(`notification-details/${notification.id}`)
                         }
                         className={`shadow-sm md:shadow-none hover:shadow-md flex items-center justify-between rounded-lg px-5 py-3 mb-4 cursor-pointer border-1 border-[#dcdcdc] ${
-                          notification.read ? "bg-white" : "bg-[#71C39C]"
+                          notification.read ? "bg-gray-200" : "bg-white"
                         }`}
                       >
                         <div
@@ -83,7 +83,7 @@ const Notifications = () => {
                           {notification.read ? (
                             []
                           ) : (
-                            <p className="text-[#71C39C] border-1 rounded-xl px-2 py-1">
+                            <p className="text-gray-200 border-1 rounded-xl px-2 py-1">
                               New
                             </p>
                           )}
