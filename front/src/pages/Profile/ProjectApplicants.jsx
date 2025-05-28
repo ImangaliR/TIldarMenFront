@@ -131,7 +131,7 @@ const ProjectApplicants = () => {
 
                       <td className="p-1.5 md:px-4 md:py-2 text-center">
                         <p
-                          className="rounded-lg text-xs md:text-base py-1"
+                          className="rounded-lg text-xs md:text-base py-1 md:p-1"
                           style={{
                             backgroundColor: statusColors[applicant.status],
                           }}
