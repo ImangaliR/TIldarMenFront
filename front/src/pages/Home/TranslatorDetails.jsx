@@ -55,7 +55,7 @@ const TranslatorDetails = () => {
       .then((res) => {
         setTranslator(res.data.data);
       })
-      .catch(err);
+      .catch((err) => console.log(err));
   }, [id]);
 
   useEffect(() => {
@@ -64,7 +64,7 @@ const TranslatorDetails = () => {
       .then((res) => {
         setReviews(res.data.data);
       })
-      .catch(err);
+      .catch((err) => console.log(err));
   }, [id]);
 
   const encodeSpaces = (url) => {
