@@ -40,6 +40,8 @@ const Notifications = () => {
     return `${datePart} - ${timePart}`;
   }
 
+  console.log(notifications);
+
   return (
     <>
       <Navbar />
@@ -61,11 +63,16 @@ const Notifications = () => {
                         onClick={() =>
                           navigate(`notification-details/${notification.id}`)
                         }
-                        className={`shadow-sm md:shadow-none hover:shadow-md flex items-center justify-between rounded-lg px-5 py-3 mb-4 cursor-pointer border-1 border-[#dcdcdc] ${
+                        className={`shadow-sm md:shadow-none hover:shadow-md flex items-center justify-between rounded-lg px-2 md:px-5 py-3 mb-4 cursor-pointer border-1 border-[#dcdcdc] ${
                           notification.read ? "bg-[#f4f4f4]" : "bg-white"
                         }`}
                       >
-                        <div className="flex items-center w-full justify-between">
+                        <img
+                          src={notification.profileImageUrl}
+                          alt="profile image"
+                          className="w-10 h-10 rounded-full object-cover"
+                        />
+                        <div className="ml-2 md:ml-5 flex items-center w-full justify-between">
                           <p className="font-semibold md:text-lg">
                             {notification.title}
                           </p>

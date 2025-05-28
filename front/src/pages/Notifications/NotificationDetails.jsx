@@ -35,6 +35,8 @@ const NotificationDetails = () => {
     return date.toLocaleDateString("en-US", options).replace(",", " -");
   }
 
+  console.log(notification);
+
   return (
     <>
       <div
@@ -56,11 +58,24 @@ const NotificationDetails = () => {
             </div>
           ) : (
             <div className="rounded-lg px-4 py-1 md:px-8 md:py-4">
-              <div className="flex items-center justify-between">
-                <p className="md:text-xl font-semibold">{notification.title}</p>
-                <p className="md:text-xl">{formatDate(notification.sendAt)}</p>
+              <div className="flex gap-5">
+                <img
+                  src={notification.profileImageUrl}
+                  alt="profile image"
+                  className="w-15 h-15 rounded-full object-cover"
+                />
+                <div className="grid items-center">
+                  <p className="md:text-xl font-semibold">
+                    {notification.title}
+                  </p>
+                  <p className="md:text-lg">
+                    {formatDate(notification.sendAt)}
+                  </p>
+                </div>
               </div>
-              <p className="text-gray-500 mt-4">{notification.message}</p>
+              <p className="text-gray-500 mt-4 md:text-lg">
+                {notification.message}
+              </p>
             </div>
           )}
         </div>
