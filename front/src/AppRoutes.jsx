@@ -27,6 +27,8 @@ import Chat from "./pages/Chat/Chat";
 import Wallet from "./pages/Profile/Wallet";
 import AccountSuccess from "./pages/Profile/AccountSuccess";
 import AccountFail from "./pages/Profile/AccountFail";
+import Notifications from "./pages/Notifications/Notifications";
+import NotificationDetails from "./pages/Notifications/NotificationDetails";
 
 const AppRoutes = () => {
   const { userRole, userId } = useUser();
@@ -43,9 +45,6 @@ const AppRoutes = () => {
       <Route path="translators" element={<Translators />}>
         <Route path="translator-details/:id" element={<TranslatorDetails />} />
       </Route>
-      <Route path="chat" element={<Chat />}>
-        <Route path="chat-details/:id" element={<ChatDetails />} />
-      </Route>
 
       {/* Protected Routes */}
       <Route
@@ -56,6 +55,15 @@ const AppRoutes = () => {
           />
         }
       >
+        <Route path="chat" element={<Chat />}>
+          <Route path="chat-details/:id" element={<ChatDetails />} />
+        </Route>
+        <Route path="notifications" element={<Notifications />}>
+          <Route
+            path="notification-details/:id"
+            element={<NotificationDetails />}
+          />
+        </Route>
         <Route path="success" element={<AccountSuccess />} />
         <Route path="fail" element={<AccountFail />} />
         <Route element={<BaseLayout />}>

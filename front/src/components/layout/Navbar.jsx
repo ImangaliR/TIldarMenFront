@@ -196,7 +196,10 @@ const Navbar = () => {
               className="min-w-4 h-4 lg:min-w-5 lg:h-5"
             />
           </button>
-          <button className="bg-[#f1f1f1] rounded-full p-2">
+          <button
+            onClick={() => navigate("/notifications")}
+            className="bg-[#f1f1f1] rounded-full p-2"
+          >
             <img
               src={bellicon}
               alt="bell icon"
@@ -228,7 +231,10 @@ const Navbar = () => {
                 className="min-w-4 h-4 lg:min-w-5 lg:h-5"
               />
             </button>
-            <button className={`text-left bg-[#f1f1f1] rounded-full p-1.5`}>
+            <button
+              onClick={() => navigate("/notifications")}
+              className={`text-left bg-[#f1f1f1] rounded-full p-1.5`}
+            >
               <img
                 src={bellicon}
                 alt="bell icon"
