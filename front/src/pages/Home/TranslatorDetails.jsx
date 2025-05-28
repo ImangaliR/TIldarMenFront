@@ -55,7 +55,7 @@ const TranslatorDetails = () => {
       .then((res) => {
         setTranslator(res.data.data);
       })
-      .catch((err) => console.log(err));
+      .catch(err);
   }, [id]);
 
   useEffect(() => {
@@ -64,7 +64,7 @@ const TranslatorDetails = () => {
       .then((res) => {
         setReviews(res.data.data);
       })
-      .catch((err) => console.log(err));
+      .catch(err);
   }, [id]);
 
   const encodeSpaces = (url) => {
@@ -116,9 +116,7 @@ const TranslatorDetails = () => {
       .then((res) => {
         setJobs(res.data.data);
       })
-      .catch((err) => {
-        console.error("Error fetching locations:", err);
-      });
+      .catch((err) => {});
   }, [userId]);
 
   const handleLeaveRequest = () => {
@@ -186,7 +184,7 @@ const TranslatorDetails = () => {
                 <span className="text-[#2A9E97]">
                   {translator?.location?.city != null
                     ? translator?.location?.city
-                    : "Location"}
+                    : ""}
                 </span>
               </h2>
               <h2 className="text-lg mb-2">
