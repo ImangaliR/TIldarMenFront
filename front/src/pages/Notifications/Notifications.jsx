@@ -62,31 +62,16 @@ const Notifications = () => {
                           navigate(`notification-details/${notification.id}`)
                         }
                         className={`shadow-sm md:shadow-none hover:shadow-md flex items-center justify-between rounded-lg px-5 py-3 mb-4 cursor-pointer border-1 border-[#dcdcdc] ${
-                          notification.read ? "bg-gray-200" : "bg-white"
+                          notification.read ? "bg-[#f4f4f4]" : "bg-white"
                         }`}
                       >
-                        <div
-                          className={`flex items-center w-full ${
-                            notification.read
-                              ? "justify-between"
-                              : "gap-3 md:gap-5"
-                          }`}
-                        >
+                        <div className="flex items-center w-full justify-between">
                           <p className="font-semibold md:text-lg">
                             {notification.title}
                           </p>
                           <p className="md:text-lg">
                             {formatDate(notification.sendAt)}
                           </p>
-                        </div>
-                        <div>
-                          {notification.read ? (
-                            []
-                          ) : (
-                            <p className="text-gray-200 border-1 rounded-xl px-2 py-1">
-                              New
-                            </p>
-                          )}
                         </div>
                       </div>
                     </div>

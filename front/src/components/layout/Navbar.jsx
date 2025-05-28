@@ -217,17 +217,16 @@ const Navbar = () => {
           </button>
           <button
             onClick={() => navigate("/notifications")}
-            className={`rounded-full ${hasUnread ? "" : "p-2 bg-[#f1f1f1]"} `}
+            className="relative rounded-full p-2 bg-[#f1f1f1]"
           >
             <img
-              src={hasUnread ? bell_unread : bellicon}
+              src={bellicon}
               alt="bell icon"
-              className={`${
-                hasUnread
-                  ? "w-8 h-8 md:w-9 md:h-9"
-                  : "min-w-4 h-4 lg:min-w-5 lg:h-5"
-              } `}
+              className="min-w-4 h-4 lg:min-w-5 lg:h-5"
             />
+            {hasUnread && (
+              <span className="absolute bg-red-500 rounded-full w-2 h-2 top-1.5 right-2"></span>
+            )}
           </button>
           <button className="ml-2 md:ml-4" onClick={handleProfileClick}>
             <img
@@ -256,19 +255,16 @@ const Navbar = () => {
             </button>
             <button
               onClick={() => navigate("/notifications")}
-              className={`rounded-full text-left ${
-                hasUnread ? "" : "p-2 bg-[#f1f1f1]"
-              } `}
+              className="relative rounded-full text-left p-2 bg-[#f1f1f1]"
             >
               <img
-                src={hasUnread ? bell_unread : bellicon}
+                src={bellicon}
                 alt="bell icon"
-                className={`${
-                  hasUnread
-                    ? "w-7 md:w-8 h-7 md:h-8"
-                    : "min-w-4 h-4 lg:min-w-5 lg:h-5"
-                } `}
+                className="min-w-4 h-4 lg:min-w-5 lg:h-5"
               />
+              {hasUnread && (
+                <span className="absolute bg-red-500 rounded-full w-2 h-2 top-1.5 right-2"></span>
+              )}
             </button>
           </div>
 
