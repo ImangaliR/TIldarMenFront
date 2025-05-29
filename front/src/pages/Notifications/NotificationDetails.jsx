@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import SimpleLoader from "../../components/Loader/SimpleLoader";
 import { useUser } from "../../utils/contexts/UserContext";
 import rightarrow from "../../assets/rightarrow.png";
+import employericon from "../../assets/employericon.png";
+import profileicon from "../../assets/profileicon.png";
 
 const NotificationDetails = () => {
   const { id } = useParams();
@@ -57,13 +59,23 @@ const NotificationDetails = () => {
           ) : (
             <div className="rounded-lg px-4 py-1 md:px-8 md:py-4">
               <div className="flex gap-5">
-                {notification.profileImageUrl && (
-                  <img
-                    src={notification.profileImageUrl}
-                    alt="profile image"
-                    className="w-15 h-15 rounded-full object-cover"
-                  />
-                )}
+                <img
+                  src={
+                    notification.profileImageUrl
+                      ? notification.profileImageUrl
+                      : notification.type === "APPLICATION_SEND"
+                      ? profileicon
+                      : notification.type === "REQUEST_RESPONDED"
+                      ? profileicon
+                      : notification.type === "APPLICATION_RESPONDED"
+                      ? employericon
+                      : notification.type === "REQUEST_SEND"
+                      ? employericon
+                      : notification.type === "PAYMENT_RECEIVED" && employericon
+                  }
+                  alt="profile image"
+                  className="w-15 h-15 rounded-full object-cover"
+                />
                 <div className="grid items-center">
                   <p className="md:text-xl font-semibold">
                     {notification.title}
@@ -80,42 +92,42 @@ const NotificationDetails = () => {
                 {notification.type === "JOB_POSTED" ? (
                   <button
                     onClick={() => navigate("/project-catalog")}
-                    className="px-5 py-2 border-1 rounded-lg"
+                    className="text-[#71C39C] px-5 py-2 border-1 rounded-lg"
                   >
                     Got to projects catalog
                   </button>
                 ) : notification.type === "APPLICATION_SEND" ? (
                   <button
                     onClick={() => navigate("/employer/post-projects")}
-                    className="px-5 py-2 border-1 rounded-lg"
+                    className="text-[#71C39C] px-5 py-2 border-1 rounded-lg"
                   >
                     Go to profile
                   </button>
                 ) : notification.type === "REQUEST_RESPONDED" ? (
                   <button
                     onClick={() => navigate("/employer/post-projects")}
-                    className="px-5 py-2 border-1 rounded-lg"
+                    className="text-[#71C39C] px-5 py-2 border-1 rounded-lg"
                   >
                     Go to profile
                   </button>
                 ) : notification.type === "APPLICATION_RESPONDED" ? (
                   <button
                     onClick={() => navigate("/translator/applied-projects")}
-                    className="px-5 py-2 border-1 rounded-lg"
+                    className="text-[#71C39C] px-5 py-2 border-1 rounded-lg"
                   >
                     Go to profile
                   </button>
                 ) : notification.type === "REQUEST_SEND" ? (
                   <button
                     onClick={() => navigate("/translator/applied-projects")}
-                    className="px-5 py-2 border-1 rounded-lg"
+                    className="text-[#71C39C] px-5 py-2 border-1 rounded-lg"
                   >
                     Go to profile
                   </button>
                 ) : notification.type === "PAYMENT_SENT" ? (
                   <button
                     onClick={() => navigate("/employer/payment")}
-                    className="px-5 py-2 border-1 rounded-lg"
+                    className="text-[#71C39C] px-5 py-2 border-1 rounded-lg"
                   >
                     Go to transactions
                   </button>
@@ -123,7 +135,7 @@ const NotificationDetails = () => {
                   notification.type === "PAYMENT_RECEIVED" && (
                     <button
                       onClick={() => navigate("/translator/wallet")}
-                      className="px-5 py-2 border-1 rounded-lg"
+                      className="text-[#71C39C] px-5 py-2 border-1 rounded-lg"
                     >
                       Go to Wallet
                     </button>

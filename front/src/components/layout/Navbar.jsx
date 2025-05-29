@@ -68,13 +68,20 @@ const Navbar = () => {
   }, [notifications]);
 
   useEffect(() => {
-    api
-      .get("/notification/getAll")
-      .then((res) => {
-        setNotifications(res.data.data);
-      })
-      .catch((err) => {});
-  }, [notifications]);
+    const fetchNotifications = () => {
+      api
+        .get("/notification/getAll")
+        .then((res) => {
+          setNotifications(res.data.data);
+        })
+        .catch((err) => {});
+    };
+
+    fetchNotifications();
+
+    const intervalId = setInterval(fetchNotifications, 30000);
+    return () => clearInterval(intervalId);
+  }, []);
 
   useEffect(() => {
     if (userId) {
