@@ -56,7 +56,7 @@ const Search = ({
             <div className="relative">
               <img src={filter} alt="filter icon" className="w-16 rounded-md" />
               {filterUsed && (
-                <span className="bg-red-500 w-1.5 h-1.5 absolute top-0.5 right-0.5 rounded-full "></span>
+                <span className="bg-red-500 w-2 h-2 absolute top-0.5 right-0.5 rounded-full "></span>
               )}
             </div>
           </button>

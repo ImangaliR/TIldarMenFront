@@ -162,7 +162,7 @@ const JobCards = ({ job }) => {
             <img
               src={warn}
               alt="warn icon"
-              className="w-4 h-4 mt-0.5 md:mt-1"
+              className="hidden md:block w-4 h-4 mt-0.5 md:mt-1"
             />
           </button>
           {isOpenReport && (
