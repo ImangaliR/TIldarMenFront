@@ -41,7 +41,7 @@ const NotificationDetails = () => {
     <>
       <div
         onClick={() => navigate("/notifications")}
-        className="flex items-center gap-2 md:px-60 cursor-pointer w-fit mt-5"
+        className="flex items-center gap-1 md:px-60 cursor-pointer w-fit mt-5 ml-4"
       >
         <img
           src={rightarrow}

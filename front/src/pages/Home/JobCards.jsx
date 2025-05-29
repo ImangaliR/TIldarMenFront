@@ -88,7 +88,30 @@ const JobCards = ({ job }) => {
             {isUrgent(job?.startDate) ? "Urgent" : "New"}
           </p>
         </div>
-        <div className="w-full mb-6">
+        <div className="md:hidden w-full mb-6">
+          <div className="md:flex items-baseline gap-1 md:gap-4">
+            <div className="mb-4 flex items-center justify-between">
+              <h1 className="md:text-lg font-semibold md:font-bold">
+                Language:
+              </h1>
+              <h1 className="top-0 md:text-lg font-semibold md:font-bold">
+                Price: {job?.price}₸
+              </h1>
+            </div>
+            <div className="grid grid-cols-3 md:grid-cols-5 gap-2">
+              {job?.languages?.map((language, i) => (
+                <p
+                  key={i}
+                  className={`text-[#585858] px-2 md:px-3 py-0.5 rounded-md text-center`}
+                  style={{ backgroundColor: languageColors[i % 10] }}
+                >
+                  {language?.name}
+                </p>
+              ))}
+            </div>
+          </div>
+        </div>
+        <div className="hidden md:block w-full mb-6">
           <div className="flex items-baseline justify-between gap-8">
             <div className="flex items-baseline gap-4">
               <h1 className="md:text-lg font-semibold md:font-bold">
@@ -111,11 +134,11 @@ const JobCards = ({ job }) => {
             </h1>
           </div>
         </div>
-        <div className="flex items-baseline mb-6">
+        <div className="flex items-baseline gap-2 mb-6">
           <h1 className="md:text-lg font-semibold md:font-boldmr-2">
-            Location:{" "}
+            Location:
           </h1>
-          <p> {job?.location}</p>
+          <p>{job?.location}</p>
         </div>
         <div className="mb-6">
           <h1 className="md:text-lg font-semibold  md:font-boldmb-1">
@@ -131,7 +154,7 @@ const JobCards = ({ job }) => {
         </div>
         <div className="flex items-baseline mb-6">
           <h1 className="md:text-lg font-semibold md:font-bold">
-            Specialization:{" "}
+            Specialization:
           </h1>
           <div className="ml-2 grid md:grid-cols-3 gap-2">
             {job?.specializations?.map((specialization, i) => (
@@ -143,7 +166,7 @@ const JobCards = ({ job }) => {
         </div>
         <div className="flex items-baseline mb-6">
           <h1 className="md:text-lg font-semibold md:font-bold">
-            Service Types:{" "}
+            Service Types:
           </h1>
           <div className="ml-2 grid md:grid-cols-2 gap-2">
             {job?.serviceTypes?.map((serviceType, i) => (

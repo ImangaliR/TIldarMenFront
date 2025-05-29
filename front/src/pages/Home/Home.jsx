@@ -33,6 +33,7 @@ import twitter from "../../assets/twitter.png";
 import { useNavigate } from "react-router-dom";
 import api from "../../services/api";
 import { useEffect, useState } from "react";
+import employericon from "../../assets/employericon.png";
 
 const icons = [
   { default: overall, hover: overallhover, alt: "overall icon" },
@@ -221,7 +222,6 @@ export const Home = () => {
               onMouseEnter={() => setHoveredIndex(0)}
               onMouseLeave={() => setHoveredIndex(null)}
               onTouchStart={() => setHoveredIndex(0)}
-              /* onTouchEnd={() => setHoveredIndex(null)} */
               onClick={() => navigate("/project-catalog")}
               className="flex flex-col justify-center p-6 w-74 h-50 border-2 border-[#D6DDEB] hover:border-none hover:bg-[#71C39C] hover:text-white cursor-pointer transition-all duration-75 ease-in-out"
             >
@@ -252,7 +252,6 @@ export const Home = () => {
               onMouseEnter={() => setHoveredIndex(1)}
               onMouseLeave={() => setHoveredIndex(null)}
               onTouchStart={() => setHoveredIndex(1)}
-              /* onTouchEnd={() => setHoveredIndex(null)} */
               onClick={handleSearchMarketing}
               className="flex flex-col justify-center p-6 w-74 h-50 border-2 border-[#D6DDEB] hover:border-none hover:bg-[#71C39C] hover:text-white cursor-pointer transition-all duration-75 ease-in-out"
             >
@@ -285,7 +284,6 @@ export const Home = () => {
               onMouseEnter={() => setHoveredIndex(2)}
               onMouseLeave={() => setHoveredIndex(null)}
               onTouchStart={() => setHoveredIndex(2)}
-              /* onTouchEnd={() => setHoveredIndex(null)} */
               onClick={handleSearchLegal}
               className="flex flex-col justify-center p-6 w-74 h-50 border-2 border-[#D6DDEB] hover:border-none hover:bg-[#71C39C] hover:text-white cursor-pointer transition-all duration-75 ease-in-out"
             >
@@ -318,7 +316,6 @@ export const Home = () => {
               onMouseEnter={() => setHoveredIndex(3)}
               onMouseLeave={() => setHoveredIndex(null)}
               onTouchStart={() => setHoveredIndex(3)}
-              /* onTouchEnd={() => setHoveredIndex(null)} */
               onClick={handleSearchFinancial}
               className="flex flex-col justify-center p-6 w-74 h-50 border-2 border-[#D6DDEB] hover:border-none hover:bg-[#71C39C] hover:text-white cursor-pointer transition-all duration-75 ease-in-out"
             >
@@ -351,7 +348,6 @@ export const Home = () => {
               onMouseEnter={() => setHoveredIndex(4)}
               onMouseLeave={() => setHoveredIndex(null)}
               onTouchStart={() => setHoveredIndex(4)}
-              /* onTouchEnd={() => setHoveredIndex(null)} */
               onClick={handleSearchTechnical}
               className="flex flex-col justify-center p-6 w-74 h-50 border-2 border-[#D6DDEB] hover:border-none hover:bg-[#71C39C] hover:text-white cursor-pointer transition-all duration-75 ease-in-out"
             >
@@ -384,7 +380,6 @@ export const Home = () => {
               onMouseEnter={() => setHoveredIndex(5)}
               onMouseLeave={() => setHoveredIndex(null)}
               onTouchStart={() => setHoveredIndex(5)}
-              /* onTouchEnd={() => setHoveredIndex(null)} */
               onClick={handleSearchSoftware}
               className="flex flex-col justify-center p-6 w-74 h-50 border-2 border-[#D6DDEB] hover:border-none hover:bg-[#71C39C] hover:text-white cursor-pointer transition-all duration-75 ease-in-out"
             >
@@ -417,7 +412,6 @@ export const Home = () => {
               onMouseEnter={() => setHoveredIndex(6)}
               onMouseLeave={() => setHoveredIndex(null)}
               onTouchStart={() => setHoveredIndex(6)}
-              /* onTouchEnd={() => setHoveredIndex(null)} */
               onClick={handleSearchDiplomatic}
               className="flex flex-col justify-center p-6 w-74 h-50 border-2 border-[#D6DDEB] hover:border-none hover:bg-[#71C39C] hover:text-white cursor-pointer transition-all duration-75 ease-in-out"
             >
@@ -450,7 +444,6 @@ export const Home = () => {
               onMouseEnter={() => setHoveredIndex(7)}
               onMouseLeave={() => setHoveredIndex(null)}
               onTouchStart={() => setHoveredIndex(7)}
-              /* onTouchEnd={() => setHoveredIndex(null)} */
               onClick={handleSearchLiterary}
               className="flex flex-col justify-center p-6 w-74 h-50 border-2 border-[#D6DDEB] hover:border-none hover:bg-[#71C39C] hover:text-white cursor-pointer transition-all duration-75 ease-in-out"
             >
@@ -532,7 +525,11 @@ export const Home = () => {
                   className="flex gap-5 py-2 md:py-5 px-5 md:px-10 bg-white"
                 >
                   <img
-                    src={item?.employerProfilePicture}
+                    src={
+                      item.employerProfilePicture
+                        ? item.employerProfilePicture
+                        : employericon
+                    }
                     alt="icon"
                     className="w-12 h-12 md:w-15 md:h-15 object-cover rounded-full mt-2"
                   />
