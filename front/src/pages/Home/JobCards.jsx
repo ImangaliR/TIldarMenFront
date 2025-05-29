@@ -72,18 +72,27 @@ const JobCards = ({ job }) => {
   return (
     <>
       <div className="bg-white shadow-sm rounded-lg p-5 md:px-10 md:py-6">
-        <h1 className="md:text-lg font-semibold md:font-bold">{job?.title}</h1>
+        <div className="flex items-center justify-between gap-5">
+          <h1 className="md:text-lg font-semibold md:font-bold">
+            {job?.title}
+          </h1>
+          <p
+            className={`md:hidden text-white px-3 py-0.5 md:px-6 md:py-1 text-sm rounded-sm
+              ${isUrgent(job?.startDate) ? "bg-red-700" : "bg-[#05E400]"}
+            `}
+          >
+            {isUrgent(job?.startDate) ? "Urgent" : "New"}
+          </p>
+        </div>
         <div className="flex items-center justify-between mb-6">
           <h2 className="flex items-center text-[#949494] gap-2 font-semibold ml-3">
             <p>{formatDate(job?.startDate)}, </p>
             <p>{formatDate(job?.endDate)}</p>
           </h2>
           <p
-            className={
-              isUrgent(job?.startDate)
-                ? "bg-red-700 text-white px-4 md:px-6 py-1 text-center rounded-sm"
-                : "bg-[#05E400] text-white px-4 md:px-6 py-1 text-center rounded-sm"
-            }
+            className={`hidden md:block text-white px-4 md:px-6 py-1 text-center rounded-sm
+              ${isUrgent(job?.startDate) ? "bg-red-700" : "bg-[#05E400]"}
+            `}
           >
             {isUrgent(job?.startDate) ? "Urgent" : "New"}
           </p>
