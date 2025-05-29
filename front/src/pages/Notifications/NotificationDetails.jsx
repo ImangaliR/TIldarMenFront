@@ -35,8 +35,6 @@ const NotificationDetails = () => {
     return date.toLocaleDateString("en-US", options).replace(",", " -");
   }
 
-  console.log(notification);
-
   return (
     <>
       <div
