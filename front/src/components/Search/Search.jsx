@@ -15,6 +15,7 @@ const Search = ({
   selectedLocations,
   selectedSpecializations,
   selectedLanguages,
+  filterUsed,
 }) => {
   const [inputValue, setInputValue] = useState(value || "");
   const [mobileFilterOn, setMobileFilterOn] = useState(false);
@@ -52,7 +53,12 @@ const Search = ({
             onClick={() => setMobileFilterOn(!mobileFilterOn)}
             className="flex md:hidden ml-2"
           >
-            <img src={filter} alt="filter icon" className="w-16 rounded-md" />
+            <div className="relative">
+              <img src={filter} alt="filter icon" className="w-16 rounded-md" />
+              {filterUsed && (
+                <span className="bg-red-500 w-1.5 h-1.5 absolute top-0.5 right-0.5 rounded-full "></span>
+              )}
+            </div>
           </button>
         </div>
         {mobileFilterOn && (

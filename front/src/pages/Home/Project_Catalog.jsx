@@ -17,6 +17,7 @@ const ProjectCatalog = () => {
   const [selectedSpecializations, setSelectedSpecializations] = useState([]);
   const [selectedLocations, setSelectedLocations] = useState([]);
   const [selectedServices, setSelectedServices] = useState([]);
+  const [filterUsed, setFilterUsed] = useState(false);
 
   const location = useLocation();
 
@@ -51,6 +52,7 @@ const ProjectCatalog = () => {
     };
 
     fetchJobs(title || userSearch, filters);
+    isFilterUsed();
   }, [
     userSearch,
     selectedLanguages,
@@ -83,6 +85,19 @@ const ProjectCatalog = () => {
     }
   };
 
+  const isFilterUsed = () => {
+    if (
+      selectedLanguages.length > 0 ||
+      selectedServices.length > 0 ||
+      selectedLocations.length > 0 ||
+      selectedSpecializations.length > 0
+    ) {
+      setFilterUsed(true);
+    } else {
+      setFilterUsed(false);
+    }
+  };
+
   return (
     <>
       <Navbar />
@@ -100,6 +115,7 @@ const ProjectCatalog = () => {
           selectedLocations={selectedLocations}
           setSelectedServices={setSelectedServices}
           selectedServices={selectedServices}
+          filterUsed={filterUsed}
         />
         <div className="flex gap-5 my-10 w-full">
           <JobsFilter

@@ -498,7 +498,7 @@ const JobMobileFilter = ({
           </button>
         </div>
 
-        <div className="-medium">
+        <div>
           <div className="mb-5 bg-white rounded-md">
             <h1 className="font-semibold">Languages</h1>
             <div className="max-h-50 overflow-y-auto mt-1">
