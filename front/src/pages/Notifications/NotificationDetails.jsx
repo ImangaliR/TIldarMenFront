@@ -76,46 +76,46 @@ const NotificationDetails = () => {
               <p className="text-gray-500 mt-4 md:text-lg">
                 {notification.message}
               </p>
-              <div className="flex justify-center">
+              <div className="flex justify-center mt-5 md:mt-10">
                 {notification.type === "JOB_POSTED" ? (
                   <button
                     onClick={() => navigate("/project-catalog")}
-                    className="px-5 py-2 mt-2 border-1 rounded-lg"
+                    className="px-5 py-2 border-1 rounded-lg"
                   >
                     Got to projects catalog
                   </button>
                 ) : notification.type === "APPLICATION_SEND" ? (
                   <button
                     onClick={() => navigate("/employer/post-projects")}
-                    className="px-5 py-2 mt-2 border-1 rounded-lg"
+                    className="px-5 py-2 border-1 rounded-lg"
                   >
                     Go to profile
                   </button>
                 ) : notification.type === "REQUEST_RESPONDED" ? (
                   <button
                     onClick={() => navigate("/employer/post-projects")}
-                    className="px-5 py-2 mt-2 border-1 rounded-lg"
+                    className="px-5 py-2 border-1 rounded-lg"
                   >
                     Go to profile
                   </button>
                 ) : notification.type === "APPLICATION_RESPONDED" ? (
                   <button
                     onClick={() => navigate("/translator/applied-projects")}
-                    className="px-5 py-2 mt-2 border-1 rounded-lg"
+                    className="px-5 py-2 border-1 rounded-lg"
                   >
                     Go to profile
                   </button>
                 ) : notification.type === "REQUEST_SEND" ? (
                   <button
                     onClick={() => navigate("/translator/applied-projects")}
-                    className="px-5 py-2 mt-2 border-1 rounded-lg"
+                    className="px-5 py-2 border-1 rounded-lg"
                   >
                     Go to profile
                   </button>
                 ) : notification.type === "PAYMENT_SENT" ? (
                   <button
                     onClick={() => navigate("/employer/payment")}
-                    className="px-5 py-2 mt-2 border-1 rounded-lg"
+                    className="px-5 py-2 border-1 rounded-lg"
                   >
                     Go to transactions
                   </button>
@@ -123,7 +123,7 @@ const NotificationDetails = () => {
                   notification.type === "PAYMENT_RECEIVED" && (
                     <button
                       onClick={() => navigate("/translator/wallet")}
-                      className="px-5 py-2 mt-2 border-1 rounded-lg"
+                      className="px-5 py-2 border-1 rounded-lg"
                     >
                       Go to Wallet
                     </button>
