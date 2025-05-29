@@ -48,7 +48,6 @@ const Notifications = () => {
 
     return `${datePart} - ${timePart}`;
   }
-  console.log(notifications);
 
   return (
     <>
