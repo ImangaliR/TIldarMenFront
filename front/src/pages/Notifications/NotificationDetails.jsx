@@ -59,11 +59,13 @@ const NotificationDetails = () => {
           ) : (
             <div className="rounded-lg px-4 py-1 md:px-8 md:py-4">
               <div className="flex gap-5">
-                <img
-                  src={notification.profileImageUrl}
-                  alt="profile image"
-                  className="w-15 h-15 rounded-full object-cover"
-                />
+                {notification.profileImageUrl && (
+                  <img
+                    src={notification.profileImageUrl}
+                    alt="profile image"
+                    className="w-15 h-15 rounded-full object-cover"
+                  />
+                )}
                 <div className="grid items-center">
                   <p className="md:text-xl font-semibold">
                     {notification.title}
@@ -76,6 +78,60 @@ const NotificationDetails = () => {
               <p className="text-gray-500 mt-4 md:text-lg">
                 {notification.message}
               </p>
+              <div className="flex justify-center">
+                {notification.type === "JOB_POSTED" ? (
+                  <button
+                    onClick={() => navigate("/project-catalog")}
+                    className="px-5 py-2 mt-2 border-1 rounded-lg"
+                  >
+                    Got to projects catalog
+                  </button>
+                ) : notification.type === "APPLICATION_SEND" ? (
+                  <button
+                    onClick={() => navigate("/employer/post-projects")}
+                    className="px-5 py-2 mt-2 border-1 rounded-lg"
+                  >
+                    Go to profile
+                  </button>
+                ) : notification.type === "REQUEST_RESPONDED" ? (
+                  <button
+                    onClick={() => navigate("/employer/post-projects")}
+                    className="px-5 py-2 mt-2 border-1 rounded-lg"
+                  >
+                    Go to profile
+                  </button>
+                ) : notification.type === "APPLICATION_RESPONDED" ? (
+                  <button
+                    onClick={() => navigate("/translator/applied-projects")}
+                    className="px-5 py-2 mt-2 border-1 rounded-lg"
+                  >
+                    Go to profile
+                  </button>
+                ) : notification.type === "REQUEST_SEND" ? (
+                  <button
+                    onClick={() => navigate("/translator/applied-projects")}
+                    className="px-5 py-2 mt-2 border-1 rounded-lg"
+                  >
+                    Go to profile
+                  </button>
+                ) : notification.type === "PAYMENT_SENT" ? (
+                  <button
+                    onClick={() => navigate("/employer/payment")}
+                    className="px-5 py-2 mt-2 border-1 rounded-lg"
+                  >
+                    Go to transactions
+                  </button>
+                ) : (
+                  notification.type === "PAYMENT_RECEIVED" && (
+                    <button
+                      onClick={() => navigate("/translator/wallet")}
+                      className="px-5 py-2 mt-2 border-1 rounded-lg"
+                    >
+                      Go to Wallet
+                    </button>
+                  )
+                )}
+              </div>
             </div>
           )}
         </div>

@@ -67,11 +67,13 @@ const Notifications = () => {
                           notification.read ? "bg-[#f4f4f4]" : "bg-white"
                         }`}
                       >
-                        <img
-                          src={notification.profileImageUrl}
-                          alt="profile image"
-                          className="w-10 h-10 rounded-full object-cover"
-                        />
+                        {notification.profileImageUrl && (
+                          <img
+                            src={notification.profileImageUrl}
+                            alt="profile image"
+                            className="w-10 h-10 rounded-full object-cover"
+                          />
+                        )}
                         <div className="ml-2 md:ml-5 flex items-center w-full justify-between">
                           <p className="font-semibold md:text-lg">
                             {notification.title}
