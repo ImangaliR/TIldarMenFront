@@ -92,6 +92,14 @@ const ProjectCatalog = () => {
           handleSearch={fetchJobs}
           placeholder={"Please enter a job title"}
           value={userSearch}
+          setSelectedLanguages={setSelectedLanguages}
+          selectedLanguages={selectedLanguages}
+          setSelectedSpecializations={setSelectedSpecializations}
+          selectedSpecializations={selectedSpecializations}
+          setSelectedLocations={setSelectedLocations}
+          selectedLocations={selectedLocations}
+          setSelectedServices={setSelectedServices}
+          selectedServices={selectedServices}
         />
         <div className="flex gap-5 my-10 w-full">
           <JobsFilter
@@ -104,12 +112,14 @@ const ProjectCatalog = () => {
             setSelectedServices={setSelectedServices}
             selectedServices={selectedServices}
           />
-          <main className="w-220 lg:w-260">
+          <main className="w-full md:w-220 lg:w-260 px-2 md:px-0">
             <div className="flex items-center gap-10">
-              <p className="text-2xl mb-1">Results ({jobCount})</p>
+              <p className="text-xl md:text-2xl mb-1 pl-1 md:pl-0">
+                Results ({jobCount})
+              </p>
               {isLoading && (
                 <div className="flex items-center justify-center">
-                  <SimpleLoader className="h-7" />
+                  <SimpleLoader className="h-6 md:h-7" />
                 </div>
               )}
             </div>

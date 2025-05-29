@@ -71,8 +71,8 @@ const JobCards = ({ job }) => {
 
   return (
     <>
-      <div className="bg-white shadow-sm rounded-lg px-10 py-6">
-        <h1 className="text-lg font-bold">{job?.title}</h1>
+      <div className="bg-white shadow-sm rounded-lg p-5 md:px-10 md:py-6">
+        <h1 className="md:text-lg font-semibold md:font-bold">{job?.title}</h1>
         <div className="flex items-center justify-between mb-6">
           <h2 className="flex items-center text-[#949494] gap-2 font-semibold ml-3">
             <p>{formatDate(job?.startDate)}, </p>
@@ -81,8 +81,8 @@ const JobCards = ({ job }) => {
           <p
             className={
               isUrgent(job?.startDate)
-                ? "bg-red-700 text-white px-6 py-1 text-center rounded-sm"
-                : "bg-[#05E400] text-white px-6 py-1 text-center rounded-sm"
+                ? "bg-red-700 text-white px-4 md:px-6 py-1 text-center rounded-sm"
+                : "bg-[#05E400] text-white px-4 md:px-6 py-1 text-center rounded-sm"
             }
           >
             {isUrgent(job?.startDate) ? "Urgent" : "New"}
@@ -91,12 +91,14 @@ const JobCards = ({ job }) => {
         <div className="w-full mb-6">
           <div className="flex items-baseline justify-between gap-8">
             <div className="flex items-baseline gap-4">
-              <h1 className="text-lg font-bold">Language</h1>
-              <div className="grid grid-cols-5 gap-2">
+              <h1 className="md:text-lg font-semibold md:font-bold">
+                Language
+              </h1>
+              <div className="grid md:grid-cols-5 gap-2">
                 {job?.languages?.map((language, i) => (
                   <p
                     key={i}
-                    className={`text-[#585858] px-3 py-0.5 rounded-md text-center`}
+                    className={`text-[#585858] px-2 md:px-3 py-0.5 rounded-md text-center`}
                     style={{ backgroundColor: languageColors[i % 10] }}
                   >
                     {language?.name}
@@ -104,15 +106,21 @@ const JobCards = ({ job }) => {
                 ))}
               </div>
             </div>
-            <h1 className="top-0 text-lg font-bold">Price: {job?.price}₸</h1>
+            <h1 className="top-0 md:text-lg font-semibold md:font-bold">
+              Price: {job?.price}₸
+            </h1>
           </div>
         </div>
         <div className="flex items-baseline mb-6">
-          <h1 className="text-lg font-bold mr-2">Location: </h1>
+          <h1 className="md:text-lg font-semibold md:font-boldmr-2">
+            Location:{" "}
+          </h1>
           <p> {job?.location}</p>
         </div>
         <div className="mb-6">
-          <h1 className="text-lg font-bold mb-1">Description</h1>
+          <h1 className="md:text-lg font-semibold  md:font-boldmb-1">
+            Description
+          </h1>
           <p
             className={`ml-3  px-4 py-3 ${
               job?.description ? "bg-[#EAEAEA]" : ""
@@ -122,8 +130,10 @@ const JobCards = ({ job }) => {
           </p>
         </div>
         <div className="flex items-baseline mb-6">
-          <h1 className="text-lg font-bold">Specialization: </h1>
-          <div className="ml-2 grid grid-cols-3 gap-2">
+          <h1 className="md:text-lg font-semibold md:font-bold">
+            Specialization:{" "}
+          </h1>
+          <div className="ml-2 grid md:grid-cols-3 gap-2">
             {job?.specializations?.map((specialization, i) => (
               <p key={i} className="text-[#196FD3]">
                 #{specialization?.name}
@@ -132,8 +142,10 @@ const JobCards = ({ job }) => {
           </div>
         </div>
         <div className="flex items-baseline mb-6">
-          <h1 className="text-lg font-bold">Service Types: </h1>
-          <div className="ml-2 grid grid-cols-2 gap-2">
+          <h1 className="md:text-lg font-semibold md:font-bold">
+            Service Types:{" "}
+          </h1>
+          <div className="ml-2 grid md:grid-cols-2 gap-2">
             {job?.serviceTypes?.map((serviceType, i) => (
               <p key={i} className="text-[#196FD3]">
                 #{serviceType?.name}
@@ -144,20 +156,23 @@ const JobCards = ({ job }) => {
         <div className="flex items-center justify-end gap-2">
           <button
             onClick={() => setIsOpenReport(!isOpenReport)}
-            className="text-[#D8000D] border-3 rounded-sm font-semibold flex items-center justify-center gap-2 w-30 h-9"
+            className="text-[#D8000D] border-3 rounded-sm font-semibold flex items-center justify-center gap-1 md:gap-2 w-20 md:w-30 h-9"
           >
             Report
-            <img src={warn} alt="warn icon" className="w-4 h-4 mt-1" />
+            <img
+              src={warn}
+              alt="warn icon"
+              className="w-4 h-4 mt-0.5 md:mt-1"
+            />
           </button>
           {isOpenReport && (
             <ReportJob handleLeaveReport={handleLeaveReport} id={job?.id} />
           )}
           <button
             onClick={() => enrollProject(job?.id)}
-            className="bg-[#2A9E97] text-white rounded-sm font-semibold flex items-center justify-center gap-2 w-30 h-9"
+            className="bg-[#2A9E97] text-white rounded-sm font-semibold flex items-center justify-center gap-2 w-20 md:w-30 h-9"
           >
             Apply
-            {/* <img src={chatgreen} alt="chat icon" className="w-4 h-4 mt-1" /> */}
           </button>
         </div>
       </div>

@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import api from "../../services/api";
+import rightarrow from "../../assets/rightarrow.png";
 
 const languages = [
   {
@@ -439,7 +438,7 @@ const service = [
   },
 ];
 
-const JobsFilter = ({
+const JobMobileFilter = ({
   setSelectedServices,
   setSelectedLocations,
   setSelectedSpecializations,
@@ -448,6 +447,7 @@ const JobsFilter = ({
   selectedLocations,
   selectedSpecializations,
   selectedLanguages,
+  setMobileFilterOn,
 }) => {
   const handleReset = () => {
     setSelectedLanguages([]);
@@ -479,9 +479,17 @@ const JobsFilter = ({
 
   return (
     <>
-      <section className="hidden md:block h-fit w-65 px-3 py-5">
-        <div className="flex items-center justify-between mb-2 bg-white rounded-md p-2">
-          <h1 className="text-xl font-bold">Filters</h1>
+      <section className="fixed top-0 left-0 w-full h-full bg-white z-50 overflow-y-auto px-3 py-5">
+        <div className="flex items-center justify-between mb-2  rounded-md">
+          <div className="flex items-center gap-2">
+            <img
+              onClick={() => setMobileFilterOn(false)}
+              src={rightarrow}
+              alt="arrow"
+              className="rotate-180 w-4 h-4 "
+            />
+            <h1 className="text-lg font-semibold">Filters</h1>
+          </div>
           <button
             onClick={handleReset}
             className="text-sm text-[#192DF7] cursor-pointer"
@@ -490,8 +498,8 @@ const JobsFilter = ({
           </button>
         </div>
 
-        <div className="text-lg font-medium">
-          <div className="mb-5 bg-white rounded-md p-2">
+        <div className="-medium">
+          <div className="mb-5 bg-white rounded-md">
             <h1 className="font-semibold">Languages</h1>
             <div className="max-h-50 overflow-y-auto mt-1">
               {languages.map((lang, i) => (
@@ -508,7 +516,7 @@ const JobsFilter = ({
             </div>
           </div>
 
-          <div className="mb-5 bg-white rounded-md p-2">
+          <div className="mb-5 bg-white rounded-md">
             <h1 className="font-semibold">Specializations</h1>
             <div className="max-h-60 overflow-y-auto mt-1">
               {specialization.map((spec, i) => (
@@ -525,7 +533,7 @@ const JobsFilter = ({
             </div>
           </div>
 
-          <div className="mb-5 bg-white rounded-md p-2">
+          <div className="mb-5 bg-white rounded-md">
             <h1 className="font-semibold">Locations</h1>
             <div className="max-h-60 overflow-y-auto mt-1">
               {location.map((loc, i) => (
@@ -542,7 +550,7 @@ const JobsFilter = ({
             </div>
           </div>
 
-          <div className="mb-5 bg-white rounded-md p-2">
+          <div className="mb-5 bg-white rounded-md">
             <h1 className="font-semibold">Services</h1>
             <div className="max-h-60 overflow-y-auto mt-1">
               {service.map((ser, i) => (
@@ -564,4 +572,4 @@ const JobsFilter = ({
   );
 };
 
-export default JobsFilter;
+export default JobMobileFilter;
