@@ -17,7 +17,10 @@ export default function useAuth() {
         throw new Error("No access token received");
       }
     } catch (err) {
-      console.error("❌ Login Error:", err.response?.data || err.message);
+      console.error(
+        "❌ Login Error:",
+        err.response?.data?.message || err.message
+      );
       setError(err.response?.data || "Unknown error");
       return null;
     }

@@ -11,20 +11,20 @@ import { useForm } from "react-hook-form";
 
 function Login() {
   const navigate = useNavigate();
-  const { handleSubmit } = useForm();
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm();
   const { login, user, userRole } = useUser();
   const { loginUser, error } = useAuth();
   const [loading, setLoading] = useState(false);
-  const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
+  const [loginError, setLoginError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleLogin = async () => {
+  const handleLogin = async ({ email, password }) => {
     setLoading(true);
-    let data = {
-      username: email,
-      password: password,
-    };
+    let data = { username: email, password };
 
     try {
       const user = await loginUser(data);
@@ -33,10 +33,20 @@ function Login() {
         toast.success("Logged in successfully!");
         navigate("/home");
       } else {
-        toast.error("Incorrect email or password");
+        console.log(error);
+        if (error?.message?.includes("Bad credentials")) {
+          setLoginError(
+            "Please check your password and username and try again"
+          );
+        } else if (
+          error?.message?.includes("UserDetailsService returned null")
+        ) {
+          setLoginError("User with this username does not exist");
+        } else {
+          setLoginError("Something went wrong");
+        }
       }
     } catch (err) {
-      toast.warn("Something went wrong");
     } finally {
       setLoading(false);
     }
@@ -51,7 +61,7 @@ function Login() {
         <main className="flex-grow px-2 mt-5">
           {loading && (
             <div className="flex justify-center my-4">
-              <SimpleLoader className="h-9 w-9 text-blue-500" />
+              <SimpleLoader className="w-6 md:w-9 text-blue-500" />
             </div>
           )}
           <div className="flex flex-col items-center mx-auto bg-white h-fit md:w-140 rounded-2xl shadow-lg outline-1">
@@ -64,6 +74,9 @@ function Login() {
             <p className="text-[#474747] text-sm md:text-lg">
               Please enter your details
             </p>
+            {loginError && (
+              <p className="text-red-500 text-sm md:text-base">{loginError}</p>
+            )}
             <form
               onSubmit={handleSubmit(handleLogin)}
               name="login-form"
@@ -72,19 +85,18 @@ function Login() {
               <input
                 type="email"
                 placeholder="Email"
-                className="rounded-3xl border-2 border-[#d1d5d8] bg-white pl-4 pt-3 pb-3 shadow-xs w-full md:w-94 mb-3 mt-7"
-                onChange={(e) => setEmail(e.target.value)}
-                value={email}
-                required
+                className="rounded-3xl border-2 border-[#d1d5d8] bg-white pl-4 pt-3 pb-3 shadow-xs w-full md:w-94 mb-3 mt-5 md:mt-7"
+                {...register("email", { required: true })}
               />
+              {errors?.email && (
+                <p className="text-red-500 text-sm">{errors?.email?.message}</p>
+              )}
               <div className="w-full md:w-fit relative">
                 <input
                   type={showPassword ? "text" : "password"}
                   placeholder="Password"
                   className="rounded-3xl border-2 border-[#d1d5d8] bg-white pl-4 pt-3 pb-3 shadow-xs w-full md:w-94"
-                  onChange={(e) => setPassword(e.target.value)}
-                  value={password}
-                  required
+                  {...register("password", { required: true })}
                 />
                 <img
                   src={showPassword ? openeye : hiddeneye}
@@ -93,6 +105,11 @@ function Login() {
                   onClick={() => setShowPassword(!showPassword)}
                 />
               </div>
+              {errors.password && (
+                <p className="text-red-500 text-sm">
+                  {errors.password.message}
+                </p>
+              )}
               <div className="flex justify-end w-full pr-2 md:w-88">
                 <button
                   type="button"
@@ -105,13 +122,14 @@ function Login() {
               <button
                 type="submit"
                 className="w-full h-12 md:w-94 md:h-14 bg-[#2A9E97] text-white rounded-3xl text-lg md:text-xl font-medium"
+                disabled={loading}
               >
-                Login
+                {loading ? "Logging in..." : "Login"}
               </button>
             </form>
             <button
               onClick={() => navigate("/signup")}
-              className="text-[#3949AB] font-semibold lg:text-lg mt-10 md:mt-13 mb-1"
+              className="text-[#3949AB] font-semibold md:text-lg mt-5 md:mt-9 mb-2"
             >
               Create new account?
             </button>
