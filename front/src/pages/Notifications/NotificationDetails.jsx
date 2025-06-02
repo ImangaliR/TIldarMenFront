@@ -101,7 +101,7 @@ const NotificationDetails = () => {
                     onClick={() => navigate("/project-catalog")}
                     className="text-[#71C39C] px-5 py-2 border-1 rounded-lg"
                   >
-                    Got to projects catalog
+                    Go to projects catalog
                   </button>
                 ) : notification.type === "APPLICATION_SEND" ? (
                   <button
