@@ -165,7 +165,7 @@ const EditProject = () => {
         <h1 className="text-center text-2xl md:text-4xl font-bold mb-5">
           Edit your project
         </h1>
-        <div className="md:w-280 bg-white py-4 px-4 md:px-20 md:py-8 rounded-md shadow-xs">
+        <div className="md:w-280 bg-white py-4 px-2 md:px-20 md:py-8 rounded-md shadow-xs">
           <div>
             <form onSubmit={handleSubmit(updateJob)}>
               <div className="flex items-center justify-between mb-5">
