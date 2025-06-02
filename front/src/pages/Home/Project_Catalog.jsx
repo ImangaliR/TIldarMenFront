@@ -101,7 +101,7 @@ const ProjectCatalog = () => {
   return (
     <>
       <Navbar />
-      <div className="grid justify-center">
+      <div className="grid md:justify-center">
         <Search
           setUserSearch={setUserSearch}
           handleSearch={fetchJobs}
