@@ -20,9 +20,11 @@ const Translators = () => {
   const [selectedLocations, setSelectedLocations] = useState([]);
   const [selectedServices, setSelectedServices] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [filterUsed, setFilterUsed] = useState(false);
 
   useEffect(() => {
     fetchTranslators(userSearch);
+    isFilterUsed();
   }, [
     selectedLanguages,
     selectedSpecializations,
@@ -69,19 +71,45 @@ const Translators = () => {
     />
   ));
 
+  const isFilterUsed = () => {
+    if (
+      selectedLanguages.length > 0 ||
+      selectedServices.length > 0 ||
+      selectedLocations.length > 0 ||
+      selectedSpecializations.length > 0 ||
+      selectedAvailabilities.length > 0
+    ) {
+      setFilterUsed(true);
+    } else {
+      setFilterUsed(false);
+    }
+  };
+
   return (
     <>
       <Navbar />
       {isDetailPage ? (
         <Outlet />
       ) : (
-        <div className="grid justify-center">
+        <div className="grid md:justify-center">
           <Search
             setUserSearch={setUserSearch}
             handleSearch={fetchTranslators}
             placeholder={"Please enter name or surname"}
+            value={userSearch}
+            setSelectedLanguages={setSelectedLanguages}
+            selectedLanguages={selectedLanguages}
+            setSelectedSpecializations={setSelectedSpecializations}
+            selectedSpecializations={selectedSpecializations}
+            setSelectedLocations={setSelectedLocations}
+            selectedLocations={selectedLocations}
+            setSelectedServices={setSelectedServices}
+            selectedServices={selectedServices}
+            setSelectedAvailabilities={setSelectedAvailabilities}
+            selectedAvailabilities={selectedAvailabilities}
+            filterUsed={filterUsed}
           />
-          <div className="flex gap-5 my-10">
+          <div className="flex gap-5 my-10 w-full">
             <TranslatorsFilter
               selectedLanguages={selectedLanguages}
               selectedSpecializations={selectedSpecializations}
@@ -94,16 +122,18 @@ const Translators = () => {
               setSelectedLocations={setSelectedLocations}
               setSelectedServices={setSelectedServices}
             />
-            <main className="max-w-260">
+            <main className="w-full md:max-w-260 px-2 md:px-0">
               <div className="flex items-center gap-10">
-                <p className="text-2xl mb-1">Results ({resultCount})</p>
+                <p className="text-xl md:text-2xl mb-1 pl-1 md:pl-0">
+                  Results ({resultCount})
+                </p>
                 {isLoading && (
                   <div className="flex items-center justify-center">
-                    <SimpleLoader className="h-7" />
+                    <SimpleLoader className="h-6 md:h-7" />
                   </div>
                 )}
               </div>
-              <div className="grid grid-cols-2 gap-x-1 gap-y-3 xl:grid-cols-3 xl:gap-x-3 xl:gap-y-5 ">
+              <div className="grid md:grid-cols-2 gap-x-1 gap-y-3 xl:grid-cols-3 xl:gap-x-3 xl:gap-y-5 ">
                 {translatorCards}
               </div>
             </main>

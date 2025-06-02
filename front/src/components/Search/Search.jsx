@@ -1,6 +1,8 @@
 import { useState } from "react";
 import filter from "../../assets/filter.png";
 import JobMobileFilter from "../Filter/JobMobileFilter";
+import { useMatch } from "react-router-dom";
+import TranslatorsModileFilter from "../Filter/TranslatorsMobileFilter";
 
 const Search = ({
   setUserSearch,
@@ -15,10 +17,13 @@ const Search = ({
   selectedLocations,
   selectedSpecializations,
   selectedLanguages,
+  setSelectedAvailabilities,
+  selectedAvailabilities,
   filterUsed,
 }) => {
   const [inputValue, setInputValue] = useState(value || "");
   const [mobileFilterOn, setMobileFilterOn] = useState(false);
+  const isCatalogPage = useMatch("/project-catalog");
 
   const onSearchClick = () => {
     setUserSearch?.(inputValue);
@@ -41,7 +46,7 @@ const Search = ({
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
             onKeyDown={handleKeyDown}
-            className="w-full md:min-w-280 bg-white py-2 pl-5 md:py-3 md:pl-10 rounded-lg border-1"
+            className="w-full md:min-w-280 bg-white py-2 pl-2 md:py-3 md:pl-10 rounded-lg border-1"
           />
           <button
             onClick={onSearchClick}
@@ -61,19 +66,35 @@ const Search = ({
             </div>
           </button>
         </div>
-        {mobileFilterOn && (
-          <JobMobileFilter
-            setMobileFilterOn={setMobileFilterOn}
-            setSelectedLanguages={setSelectedLanguages}
-            selectedLanguages={selectedLanguages}
-            setSelectedSpecializations={setSelectedSpecializations}
-            selectedSpecializations={selectedSpecializations}
-            setSelectedLocations={setSelectedLocations}
-            selectedLocations={selectedLocations}
-            setSelectedServices={setSelectedServices}
-            selectedServices={selectedServices}
-          />
-        )}
+
+        {mobileFilterOn &&
+          (isCatalogPage ? (
+            <JobMobileFilter
+              setMobileFilterOn={setMobileFilterOn}
+              setSelectedLanguages={setSelectedLanguages}
+              selectedLanguages={selectedLanguages}
+              setSelectedSpecializations={setSelectedSpecializations}
+              selectedSpecializations={selectedSpecializations}
+              setSelectedLocations={setSelectedLocations}
+              selectedLocations={selectedLocations}
+              setSelectedServices={setSelectedServices}
+              selectedServices={selectedServices}
+            />
+          ) : (
+            <TranslatorsModileFilter
+              setMobileFilterOn={setMobileFilterOn}
+              setSelectedLanguages={setSelectedLanguages}
+              selectedLanguages={selectedLanguages}
+              setSelectedSpecializations={setSelectedSpecializations}
+              selectedSpecializations={selectedSpecializations}
+              setSelectedLocations={setSelectedLocations}
+              selectedLocations={selectedLocations}
+              setSelectedServices={setSelectedServices}
+              selectedServices={selectedServices}
+              setSelectedAvailabilities={setSelectedAvailabilities}
+              selectedAvailabilities={selectedAvailabilities}
+            />
+          ))}
       </div>
     </>
   );

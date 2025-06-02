@@ -1,3 +1,5 @@
+import rightarrow from "../../assets/rightarrow.png";
+
 const languages = [
   {
     name: "Afrikaans",
@@ -436,7 +438,7 @@ const service = [
   },
 ];
 
-const TranslatorsFilter = ({
+const TranslatorsModileFilter = ({
   setSelectedServices,
   setSelectedLocations,
   setSelectedAvailabilities,
@@ -447,6 +449,7 @@ const TranslatorsFilter = ({
   selectedAvailabilities,
   selectedSpecializations,
   selectedLanguages,
+  setMobileFilterOn,
 }) => {
   const availability = ["Busy", "Available"];
 
@@ -485,108 +488,114 @@ const TranslatorsFilter = ({
 
   return (
     <>
-      <div className="hidden md:block">
-        <section className=" w-65 top-25 px-3 py-5">
-          <div className="flex items-center justify-between mb-2 bg-white rounded-md p-2">
-            <h1 className="text-xl font-bold">Filters</h1>
-            <button
-              onClick={handleReset}
-              className="text-sm text-[#192DF7] cursor-pointer"
-            >
-              reset
-            </button>
+      <section className="fixed top-0 left-0 w-full h-full bg-white z-50 overflow-y-auto px-3 py-5">
+        <div className="flex items-center justify-between mb-2 rounded-md">
+          <div className="flex items-center gap-2">
+            <img
+              onClick={() => setMobileFilterOn(false)}
+              src={rightarrow}
+              alt="arrow"
+              className="rotate-180 w-4 h-4 "
+            />
+            <h1 className="text-lg font-semibold">Filters</h1>
+          </div>
+          <button
+            onClick={handleReset}
+            className="text-sm text-[#192DF7] cursor-pointer"
+          >
+            reset
+          </button>
+        </div>
+
+        <div>
+          <div className="mb-5 bg-white rounded-md">
+            <h1>Languages</h1>
+            <div className="max-h-50 overflow-y-auto mt-1">
+              {languages.map((lang, i) => (
+                <label key={i} className="flex items-center space-x-2 ">
+                  <input
+                    type="checkbox"
+                    value={lang.name}
+                    checked={selectedLanguages.includes(lang.name)}
+                    onChange={() => handleLanguageCheck(lang.name)}
+                  />
+                  <span className="font-light py-1">{lang.name}</span>
+                </label>
+              ))}
+            </div>
           </div>
 
-          <div className="text-lg font-medium">
-            <div className="mb-5 bg-white rounded-md p-2">
-              <h1>Languages</h1>
-              <div className="max-h-50 overflow-y-auto mt-1">
-                {languages.map((lang, i) => (
-                  <label key={i} className="flex items-center space-x-2 ">
-                    <input
-                      type="checkbox"
-                      value={lang.name}
-                      checked={selectedLanguages.includes(lang.name)}
-                      onChange={() => handleLanguageCheck(lang.name)}
-                    />
-                    <span className="font-light py-1">{lang.name}</span>
-                  </label>
-                ))}
-              </div>
-            </div>
-
-            <div className="mb-5 bg-white rounded-md p-2">
-              <h1>Specializations</h1>
-              <div className="max-h-60 overflow-y-auto mt-1">
-                {specialization.map((spec, i) => (
-                  <label key={i} className="flex items-center space-x-2 ">
-                    <input
-                      type="checkbox"
-                      value={spec.name}
-                      checked={selectedSpecializations.includes(spec.name)}
-                      onChange={() => handleSpecializationCheck(spec.name)}
-                    />
-                    <span className="font-light py-1">{spec.name}</span>
-                  </label>
-                ))}
-              </div>
-            </div>
-
-            <div className="mb-5 bg-white rounded-md p-2">
-              <h1>Availability & Work Type</h1>
-              <div className="mt-1">
-                {availability.map((avai, i) => (
-                  <label key={i} className="flex items-center space-x-2 ">
-                    <input
-                      type="checkbox"
-                      value={avai}
-                      checked={selectedAvailabilities.includes(avai)}
-                      onChange={() => handleAvailabilityCheck(avai)}
-                    />
-                    <span className="font-light py-1">{avai}</span>
-                  </label>
-                ))}
-              </div>
-            </div>
-
-            <div className="mb-5 bg-white rounded-md p-2">
-              <h1>Locations</h1>
-              <div className="max-h-60 overflow-y-auto mt-1">
-                {location.map((loc, i) => (
-                  <label key={i} className="flex items-center space-x-2 ">
-                    <input
-                      type="checkbox"
-                      value={loc.city}
-                      checked={selectedLocations.includes(loc.city)}
-                      onChange={() => handleLocationCheck(loc.city)}
-                    />
-                    <span className="font-light py-1">{loc.city}</span>
-                  </label>
-                ))}
-              </div>
-            </div>
-
-            <div className="mb-5 bg-white rounded-md p-2">
-              <h1>Services</h1>
-              <div className="max-h-60 overflow-y-auto mt-1">
-                {service.map((ser, i) => (
-                  <label key={i} className="flex items-center space-x-2 ">
-                    <input
-                      type="checkbox"
-                      value={ser.name}
-                      checked={selectedServices.includes(ser.name)}
-                      onChange={() => handleServiceCheck(ser.name)}
-                    />
-                    <span className="font-light py-1">{ser.name}</span>
-                  </label>
-                ))}
-              </div>
+          <div className="mb-5 bg-white rounded-md">
+            <h1>Specializations</h1>
+            <div className="max-h-60 overflow-y-auto mt-1">
+              {specialization.map((spec, i) => (
+                <label key={i} className="flex items-center space-x-2 ">
+                  <input
+                    type="checkbox"
+                    value={spec.name}
+                    checked={selectedSpecializations.includes(spec.name)}
+                    onChange={() => handleSpecializationCheck(spec.name)}
+                  />
+                  <span className="font-light py-1">{spec.name}</span>
+                </label>
+              ))}
             </div>
           </div>
-        </section>
-      </div>
+
+          <div className="mb-5 bg-white rounded-md">
+            <h1>Availability & Work Type</h1>
+            <div className="mt-1">
+              {availability.map((avai, i) => (
+                <label key={i} className="flex items-center space-x-2 ">
+                  <input
+                    type="checkbox"
+                    value={avai}
+                    checked={selectedAvailabilities.includes(avai)}
+                    onChange={() => handleAvailabilityCheck(avai)}
+                  />
+                  <span className="font-light py-1">{avai}</span>
+                </label>
+              ))}
+            </div>
+          </div>
+
+          <div className="mb-5 bg-white rounded-md">
+            <h1>Locations</h1>
+            <div className="max-h-60 overflow-y-auto mt-1">
+              {location.map((loc, i) => (
+                <label key={i} className="flex items-center space-x-2 ">
+                  <input
+                    type="checkbox"
+                    value={loc.city}
+                    checked={selectedLocations.includes(loc.city)}
+                    onChange={() => handleLocationCheck(loc.city)}
+                  />
+                  <span className="font-light py-1">{loc.city}</span>
+                </label>
+              ))}
+            </div>
+          </div>
+
+          <div className="mb-5 bg-white rounded-md">
+            <h1>Services</h1>
+            <div className="max-h-60 overflow-y-auto mt-1">
+              {service.map((ser, i) => (
+                <label key={i} className="flex items-center space-x-2 ">
+                  <input
+                    type="checkbox"
+                    value={ser.name}
+                    checked={selectedServices.includes(ser.name)}
+                    onChange={() => handleServiceCheck(ser.name)}
+                  />
+                  <span className="font-light py-1">{ser.name}</span>
+                </label>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
     </>
   );
 };
 
-export default TranslatorsFilter;
+export default TranslatorsModileFilter;
