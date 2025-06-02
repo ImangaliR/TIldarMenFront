@@ -152,7 +152,7 @@ const TranslatorDetails = () => {
   return (
     <>
       <div>
-        <p className="pl-10 pt-3 text-sm">
+        <p className="pl-3 md:pl-10 pt-3 text-sm">
           <span
             className="cursor-pointer"
             onClick={() => navigate("/translators")}
@@ -162,15 +162,17 @@ const TranslatorDetails = () => {
           {" > "}
           <span className="font-semibold">Translator Details</span>
         </p>
-        <div className="flex items-center gap-8 px-40 py-5 w-full bg-[#EAF4F4]">
-          <img
-            src={translator?.profileImageUrl || profileicon}
-            alt="profile icon"
-            className="w-40 h-40 rounded-full object-cover"
-          />
+        <div className="md:flex items-center gap-4 md:gap-8 px-4 md:px-40 py-5 w-full bg-[#EAF4F4]">
+          <div className="flex justify-center md:block mb-2 md:mb-0">
+            <img
+              src={translator?.profileImageUrl || profileicon}
+              alt="profile icon"
+              className="w-30 md:w-40 h-30 md:h-40 rounded-full object-cover"
+            />
+          </div>
           <div className="h-fit flex justify-between w-full">
             <div>
-              <h1 className="text-2xl font-bold">
+              <h1 className="text-xl md:text-2xl font-bold">
                 {translator?.firstName != null ? translator?.firstName : "Full"}{" "}
                 {translator?.lastName != null ? translator?.lastName : "Name"}
               </h1>
@@ -179,7 +181,7 @@ const TranslatorDetails = () => {
                   ? translator?.professionalTitle
                   : "Professional Title"}
               </p>
-              <h2 className="text-lg mt-2">
+              <h2 className="md:text-lg mt-2">
                 Based In:{" "}
                 <span className="text-[#2A9E97]">
                   {translator?.location?.city != null
@@ -187,7 +189,7 @@ const TranslatorDetails = () => {
                     : ""}
                 </span>
               </h2>
-              <h2 className="text-lg mb-2">
+              <h2 className="md:text-lg mb-2">
                 Availability:{" "}
                 <span className="text-[#2A9E97]">
                   {translator?.availability !== " "
@@ -208,7 +210,7 @@ const TranslatorDetails = () => {
               )}
               <button
                 onClick={handleLeaveReport}
-                className="absolute top-2 right-0 w-fit h-fit text-[#FF0000] bg-white border-1 rounded-sm font-semibold gap-2 px-4 py-1"
+                className="absolute top-0 md:top-2 right-0 w-fit h-fit text-[#FF0000] bg-white border-1 rounded-sm font-semibold gap-2 px-3 md:px-4 py-0.5 md:py-1"
               >
                 Report
               </button>
@@ -247,22 +249,22 @@ const TranslatorDetails = () => {
                 )}
                 <button
                   onClick={handleLeaveRequest}
-                  className="absolute bottom-10 right-0 w-fit h-fit bg-[#2A9E97] text-white px-4 py-1 rounded-2xl"
+                  className="absolute bottom-15 md:bottom-10 right-0 w-fit h-fit bg-[#2A9E97] text-white px-3 md:px-4 py-0.5 md:py-1 rounded-2xl"
                 >
                   Leave request
                 </button>
               </div>
-              <button className="absolute bottom-0 right-0 w-fit h-fit text-[#2A9E97] border-1 px-4 py-1 rounded-2xl">
+              <button className="absolute bottom-6 md:bottom-0 right-0 w-fit h-fit text-[#2A9E97] border-1 px-3 md:px-4 py-0.5 md:py-1 rounded-2xl">
                 Chat with Translator
               </button>
             </div>
           </div>
         </div>
       </div>
-      <main className="bg-white w-full px-40 py-7">
+      <main className="bg-white wgap-4 md:-full px-4 md:px-40 py-7">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-15 mb-10">
           <div>
-            <h1 className="text-2xl font-bold">Introduction</h1>
+            <h1 className="text-xl md:text-2xl font-bold">Introduction</h1>
             <div>
               <h1 className="font-bold ml-5 mb-2">About me</h1>
               <p>{translator?.introduction}</p>
@@ -285,12 +287,12 @@ const TranslatorDetails = () => {
             </div>
           </div>
           <div>
-            <h1 className="text-2xl font-bold">
+            <h1 className="text-xl md:text-2xl font-bold">
               Specializations & Translator Details
             </h1>
             <div>
               <h1 className="ml-5 font-bold mb-2">Languages</h1>
-              <div className="w-fit grid grid-cols-3 xl:grid-cols-5 gap-2">
+              <div className="w-fit grid grid-cols-4 md:grid-cols-3 xl:grid-cols-5 gap-2">
                 {translator?.languages?.map((language, i) => (
                   <p
                     key={i}
@@ -306,7 +308,7 @@ const TranslatorDetails = () => {
               <h1 className="ml-5 font-bold mb-2">
                 Types of Translation Services
               </h1>
-              <div className="w-fit grid grid-cols-2 gap-2">
+              <div className="w-fit grid grid-cols-1 md:grid-cols-2 gap-2">
                 {translator?.serviceTypes?.map((service, i) => (
                   <p
                     key={i}
@@ -320,7 +322,7 @@ const TranslatorDetails = () => {
             </div>
             <div className="mt-10">
               <h1 className="ml-5 font-bold mb-2">Specialization</h1>
-              <div className="w-fit grid grid-cols-3 gap-2">
+              <div className="w-fit grid grid-cols-1 md:grid-cols-3 gap-2">
                 {translator?.specializations?.map((specialization, i) => (
                   <p
                     key={i}
@@ -335,9 +337,11 @@ const TranslatorDetails = () => {
           </div>
         </div>
         <div className="mb-10">
-          <h1 className="text-2xl font-bold">Work & Project Exprience</h1>
+          <h1 className="text-xl md:text-2xl font-bold">
+            Work & Project Exprience
+          </h1>
           <div>
-            <div className="grid grid-cols-2 gap-15">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-15">
               {translator?.workExperiences.map((workExperience, i) => (
                 <div key={i}>
                   <h1 className="font-bold">
@@ -366,7 +370,9 @@ const TranslatorDetails = () => {
           </div>
         </div>
         <div className="mb-10">
-          <h1 className="text-2xl font-bold">Education & Certifications</h1>
+          <h1 className="text-xl md:text-2xl font-bold">
+            Education & Certifications
+          </h1>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-15">
             <div>
               <h1 className="font-bold mb-2 ml-5">Educational Background</h1>
@@ -439,9 +445,9 @@ const TranslatorDetails = () => {
           </div>
         </div>
         <div className="mb-10">
-          <h1 className="text-2xl font-bold">Write your Review</h1>
+          <h1 className="text-xl md:text-2xl font-bold">Write your Review</h1>
           <div className="flex items-center gap-10 my-4">
-            <h1 className="text-xl font-bold">My rate</h1>
+            <h1 className="text-lg md:text-xl font-bold">My rate</h1>
             <div className="flex items-center gap-1">
               {[1, 2, 3, 4, 5].map((value) => (
                 <button
@@ -468,7 +474,7 @@ const TranslatorDetails = () => {
             </div>
           </div>
           <div>
-            <h1 className="text-xl font-bold">Review</h1>
+            <h1 className="text-lg md:text-xl font-bold">Review</h1>
             <div className="mt-2">
               <div className="w-wull h-fit relative">
                 <textarea
@@ -495,8 +501,10 @@ const TranslatorDetails = () => {
           </div>
         </div>
         <div className="mb-10">
-          <h1 className="text-2xl font-bold mb-10">Latest Reviews</h1>
-          <div className="grid grid-cols-3 gap-8">
+          <h1 className="text-xl md:text-2xl font-bold mb-5 md:mb-10">
+            Latest Reviews
+          </h1>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8">
             {reviews
               ? reviews.map((review, i) => (
                   <div
