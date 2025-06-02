@@ -59,23 +59,30 @@ const NotificationDetails = () => {
           ) : (
             <div className="rounded-lg px-4 py-1 md:px-8 md:py-4">
               <div className="flex gap-5">
-                <img
-                  src={
-                    notification.profileImageUrl
-                      ? notification.profileImageUrl
-                      : notification.type === "APPLICATION_SEND"
-                      ? profileicon
-                      : notification.type === "REQUEST_RESPONDED"
-                      ? profileicon
-                      : notification.type === "APPLICATION_RESPONDED"
-                      ? employericon
-                      : notification.type === "REQUEST_SEND"
-                      ? employericon
-                      : notification.type === "PAYMENT_RECEIVED" && employericon
-                  }
-                  alt="profile image"
-                  className="w-15 h-15 rounded-full object-cover"
-                />
+                {notification.type === "WELCOME" ||
+                notification.type === "JOB_POSTED" ||
+                notification.type === "PAYMENT_SENT" ? (
+                  []
+                ) : (
+                  <img
+                    src={
+                      notification.profileImageUrl
+                        ? notification.profileImageUrl
+                        : notification.type === "APPLICATION_SEND"
+                        ? profileicon
+                        : notification.type === "REQUEST_RESPONDED"
+                        ? profileicon
+                        : notification.type === "APPLICATION_RESPONDED"
+                        ? employericon
+                        : notification.type === "REQUEST_SEND"
+                        ? employericon
+                        : notification.type === "PAYMENT_RECEIVED" &&
+                          employericon
+                    }
+                    alt="profile image"
+                    className="w-15 h-15 rounded-full object-cover"
+                  />
+                )}
                 <div className="grid items-center">
                   <p className="md:text-xl font-semibold">
                     {notification.title}
