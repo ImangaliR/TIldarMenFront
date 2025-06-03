@@ -19,7 +19,6 @@ function Login() {
   const { login, user, userRole } = useUser();
   const { loginUser, error } = useAuth();
   const [loading, setLoading] = useState(false);
-  const [loginError, setLoginError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
   const handleLogin = async ({ email, password }) => {
@@ -32,19 +31,6 @@ function Login() {
         login(user);
         toast.success("Logged in successfully!");
         navigate("/home");
-      } else {
-        console.log(error);
-        if (error?.message?.includes("Bad credentials")) {
-          setLoginError(
-            "Please check your password and username and try again"
-          );
-        } else if (
-          error?.message?.includes("UserDetailsService returned null")
-        ) {
-          setLoginError("User with this username does not exist");
-        } else {
-          setLoginError("Something went wrong");
-        }
       }
     } catch (err) {
     } finally {
@@ -74,8 +60,14 @@ function Login() {
             <p className="text-[#474747] text-sm md:text-lg">
               Please enter your details
             </p>
-            {loginError && (
-              <p className="text-red-500 text-sm md:text-base">{loginError}</p>
+            {error && (
+              <p className="text-red-500 text-sm md:text-base">
+                {error?.message?.includes("Bad credentials")
+                  ? "Please check your password and username and try again"
+                  : error?.message?.includes("UserDetailsService returned null")
+                  ? "User with this username does not exist"
+                  : "Something went wrong"}
+              </p>
             )}
             <form
               onSubmit={handleSubmit(handleLogin)}
@@ -88,9 +80,6 @@ function Login() {
                 className="rounded-3xl border-2 border-[#d1d5d8] bg-white pl-4 pt-3 pb-3 shadow-xs w-full md:w-94 mb-3 mt-5 md:mt-7"
                 {...register("email", { required: true })}
               />
-              {errors?.email && (
-                <p className="text-red-500 text-sm">{errors?.email?.message}</p>
-              )}
               <div className="w-full md:w-fit relative">
                 <input
                   type={showPassword ? "text" : "password"}
@@ -105,11 +94,6 @@ function Login() {
                   onClick={() => setShowPassword(!showPassword)}
                 />
               </div>
-              {errors.password && (
-                <p className="text-red-500 text-sm">
-                  {errors.password.message}
-                </p>
-              )}
               <div className="flex justify-end w-full pr-2 md:w-88">
                 <button
                   type="button"
