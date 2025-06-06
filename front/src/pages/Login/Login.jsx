@@ -77,14 +77,18 @@ function Login() {
               <input
                 type="email"
                 placeholder="Email"
-                className="rounded-3xl border-2 border-[#d1d5d8] bg-white pl-4 pt-3 pb-3 shadow-xs w-full md:w-94 mb-3 mt-5 md:mt-7"
+                className={`rounded-3xl border-2 border-[#d1d5d8] bg-white pl-4 pt-3 pb-3 shadow-xs w-full md:w-94 mb-3 mt-5 md:mt-7 ${
+                  error ? "border-red-400" : ""
+                }`}
                 {...register("email", { required: true })}
               />
               <div className="w-full md:w-fit relative">
                 <input
                   type={showPassword ? "text" : "password"}
                   placeholder="Password"
-                  className="rounded-3xl border-2 border-[#d1d5d8] bg-white pl-4 pt-3 pb-3 shadow-xs w-full md:w-94"
+                  className={`rounded-3xl border-2 border-[#d1d5d8] bg-white pl-4 pt-3 pb-3 shadow-xs w-full md:w-94 ${
+                    error ? "border-red-400" : ""
+                  }`}
                   {...register("password", { required: true })}
                 />
                 <img
