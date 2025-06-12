@@ -3,9 +3,11 @@ import { useForm } from "react-hook-form";
 import deletesign from "../../assets/delete_sign.png";
 import api from "../../services/api";
 import { toast } from "react-toastify";
+import { useUser } from "../../utils/contexts/UserContext";
 
 const ReportTranslator = ({ id, handleLeaveReport }) => {
   const { handleSubmit } = useForm();
+  const { userId } = useUser();
   const [reportDetails, setReportDetails] = useState("");
   const [reportTitle, setReportTitle] = useState("");
   const [reportReason, setReportReason] = useState("");
@@ -20,6 +22,11 @@ const ReportTranslator = ({ id, handleLeaveReport }) => {
   };
 
   const leaveReport = async () => {
+    if (!userId) {
+      toast.error("You must be logged in to leave a report.");
+      return;
+    }
+
     handleLeaveReport();
 
     const formData = new FormData();
@@ -52,7 +59,6 @@ const ReportTranslator = ({ id, handleLeaveReport }) => {
       });
       toast.success("Successfully send report!");
     } catch (err) {
-      console.log(err);
       if (
         err.response?.data?.data?.includes(
           "You are not allowed to report yourself"
