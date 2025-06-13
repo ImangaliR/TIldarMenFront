@@ -12,6 +12,7 @@ const PostProjects = () => {
   );
   const isEditPage = useMatch("/employer/post-projects/edit-project/:id");
   const [projects, setProjects] = useState([]);
+  const [refreshFlag, setRefreshFlag] = useState(false);
   const { userId } = useUser();
 
   useEffect(() => {
@@ -21,9 +22,11 @@ const PostProjects = () => {
         setProjects(res.data.data);
       })
       .catch((err) => {});
-  }, [projects]);
+  }, [refreshFlag]);
 
-  useEffect(() => {}, [projects]);
+  const refreshJobs = () => {
+    setRefreshFlag((prev) => !prev);
+  };
 
   const formatDate = (isoDate) => {
     const date = new Date(isoDate);
@@ -46,7 +49,7 @@ const PostProjects = () => {
   return (
     <>
       {isCreatePage || isApplicantsPage || isEditPage ? (
-        <Outlet />
+        <Outlet refreshJobs={refreshJobs} />
       ) : (
         <div className="w-full md:w-fit">
           <h1 className="text-2xl md:text-3xl ml-2 md:ml-0 font-bold">

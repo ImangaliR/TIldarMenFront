@@ -125,7 +125,7 @@ const AppliedProjects = () => {
                             Chat
                           </button>
                         ) : (
-                          <p className="text-xl">---</p>
+                          <p className="text-xl">...</p>
                         )}
                       </td>
                     </tr>

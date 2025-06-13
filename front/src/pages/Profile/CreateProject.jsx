@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import { useUser } from "../../utils/contexts/UserContext";
 import { useForm } from "react-hook-form";
 
-const CreateProject = () => {
+const CreateProject = ({ refreshJobs }) => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const { handleSubmit } = useForm();
@@ -108,6 +108,7 @@ const CreateProject = () => {
       .post(`jobs/${userId}/add`, data)
       .then((res) => {
         toast.success("Successfully create a project" || res.data);
+        refreshJobs();
       })
       .catch((err) => {
         toast.error("Something went wrong");

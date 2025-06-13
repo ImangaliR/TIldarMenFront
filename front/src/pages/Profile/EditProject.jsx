@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import { useUser } from "../../utils/contexts/UserContext";
 import { useForm } from "react-hook-form";
 
-const EditProject = () => {
+const EditProject = ({ refreshJobs }) => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const { handleSubmit } = useForm();
@@ -152,6 +152,7 @@ const EditProject = () => {
       .put(`jobs/${userId}/update/${id}`, data)
       .then((res) => {
         toast.success("Successfully updated the project" || res.data);
+        refreshJobs();
       })
       .catch((err) => {
         toast.error("Something went wrong");

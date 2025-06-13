@@ -3,6 +3,7 @@ import api from "../../services/api";
 import { useNavigate, useParams } from "react-router-dom";
 import profileicon from "../../assets/profileicon.png";
 import vector from "../../assets/vector.png";
+import paymentcard from "../../assets/paymentcard.png";
 import { toast } from "react-toastify";
 
 const statusColors = {
@@ -16,6 +17,7 @@ const ProjectApplicants = () => {
   const navigate = useNavigate();
   const [applicants, setApplicants] = useState([]);
   const [refreshFlag, setRefreshFlag] = useState(false);
+  const [makePayment, setMakePayment] = useState(false);
 
   useEffect(() => {
     api
@@ -69,6 +71,17 @@ const ProjectApplicants = () => {
       toast.success("Request rejected");
     } catch (err) {
       toast.error("Something went wrong");
+    }
+  };
+
+  const makePaymentHandler = async (translatorId) => {
+    try {
+      const res = await api.post(`/stripe/payment/${translatorId}/job/${id}`);
+      toast.success("Payment successful");
+      setMakePayment(false);
+      refreshApplicants();
+    } catch (err) {
+      toast.error("Payment failed");
     }
   };
 
@@ -174,11 +187,47 @@ const ProjectApplicants = () => {
                             </button>
                           </div>
                         ) : applicant.status === "ACCEPTED" ? (
-                          <button className="bg-indigo-500 text-white border-1 px-2 md:px-14 py-1 rounded-lg">
-                            Chat
-                          </button>
+                          <div className="flex items-center gap-2">
+                            <button className="bg-[#575982] text-white border-1 px-2 md:px-10 py-1 rounded-lg">
+                              Chat
+                            </button>
+                            <button onClick={() => setMakePayment(true)}>
+                              <img
+                                src={paymentcard}
+                                alt=""
+                                className="w-11 h-11"
+                              />
+                            </button>
+                            {makePayment && (
+                              <div className="fixed inset-0 bg-black/30 backdrop-blur-sm flex items-center justify-center z-50">
+                                <div className="bg-white py-10 px-5 rounded-lg shadow-lg">
+                                  <h2 className="text-xl mb-4">Make Payment</h2>
+                                  <p className="mb-4">
+                                    Please proceed with the payment for{" "}
+                                    {applicant.firstName} {applicant.lastName}.
+                                  </p>
+                                  <div className="flex items-center justify-center gap-2">
+                                    <button
+                                      onClick={() =>
+                                        makePaymentHandler(applicant.id)
+                                      }
+                                      className="bg-[#575982] text-white w-full py-2 rounded-lg"
+                                    >
+                                      Proceed
+                                    </button>
+                                    <button
+                                      onClick={() => setMakePayment(false)}
+                                      className="text-red-500 border-1 w-full py-2 rounded-lg"
+                                    >
+                                      Close
+                                    </button>
+                                  </div>
+                                </div>
+                              </div>
+                            )}
+                          </div>
                         ) : (
-                          <p className="text-xl">---</p>
+                          <p className="text-xl">...</p>
                         )}
                       </td>
                     </tr>
