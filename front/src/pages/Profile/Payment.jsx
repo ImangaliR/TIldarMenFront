@@ -47,29 +47,31 @@ const Payment = () => {
                 key={i}
                 className="flex items-center gap-2 md:gap-0 md:justify-between py-2 text-sm md:text-base"
               >
-                <div className="flex items-center gap-3 md:gap-5">
-                  <img
-                    src={transaction?.profileImageUrl || profileicon}
-                    alt="profile image"
-                    className="w-11 h-11 rounded-full object-cover"
-                  />
+                <div className="flex items-center gap-5">
+                  <div className="w-100 flex items-center gap-3 md:gap-5">
+                    <img
+                      src={transaction?.profileImageUrl || profileicon}
+                      alt="profile image"
+                      className="w-11 h-11 rounded-full object-cover"
+                    />
+                    <div>
+                      <p className="font-semibold">
+                        {transaction.translatorFirstName}{" "}
+                        {transaction.translatorLastName}
+                      </p>
+                      <p className="text-[#70707A] text-sm">
+                        {transaction.description}
+                      </p>
+                    </div>
+                  </div>
                   <div>
                     <p className="font-semibold">
-                      {transaction.translatorFirstName}{" "}
-                      {transaction.translatorLastName}
+                      {formatDate(transaction.date)}
                     </p>
-                    <p className="text-[#70707A] text-sm">
-                      {transaction.description}
+                    <p className="font-light text-sm text-[#70707A]">
+                      {formateTime(transaction.date)}
                     </p>
                   </div>
-                </div>
-                <div>
-                  <p className="font-semibold">
-                    {formatDate(transaction.date)}
-                  </p>
-                  <p className="font-light text-sm text-[#70707A]">
-                    {formateTime(transaction.date)}
-                  </p>
                 </div>
                 <p className="font-semibold">{transaction.price}₸</p>
               </div>
