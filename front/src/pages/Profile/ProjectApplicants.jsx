@@ -81,7 +81,15 @@ const ProjectApplicants = () => {
       setMakePayment(false);
       refreshApplicants();
     } catch (err) {
-      toast.error("Payment failed");
+      if (
+        err?.response?.data?.data?.includes(
+          "This translator does not have a stripe account"
+        )
+      ) {
+        toast.error("This user does not have a Stripe account");
+      } else {
+        toast.error("Payment failed");
+      }
     }
   };
 
