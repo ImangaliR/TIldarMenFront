@@ -59,7 +59,7 @@ export const WebSocketProvider = ({ children }) => {
     };
   }, [token, userId]);
 
-  const subscribeTo = (destination) => {
+  const subscribeTo = async (destination) => {
     const client = clientRef.current;
     if (!client || !client.connected || subscriptionsRef.current[destination])
       return;
@@ -73,7 +73,7 @@ export const WebSocketProvider = ({ children }) => {
     console.log(`Subscribed to: ${destination}`);
   };
 
-  const sendMessage = (messageBody) => {
+  const sendMessage = async (messageBody) => {
     if (clientRef.current && clientRef.current.connected) {
       clientRef.current.publish({
         destination: "/app/chat",
@@ -82,7 +82,7 @@ export const WebSocketProvider = ({ children }) => {
     }
   };
 
-  const subscribeToUser = (recipientId) => {
+  const subscribeToUser = async (recipientId) => {
     if (clientRef.current && clientRef.current.connected) {
       client.subscribe(`/user/${recipientId}/queue/messages`, (message) => {
         const payload = JSON.parse(message.body);

@@ -59,7 +59,7 @@ const ChatDetails = () => {
     }
   }, [userId, recipientId, client]);
 
-  const handleSend = () => {
+  const handleSend = async () => {
     if (input.trim() && isConnected) {
       const message = {
         senderId: userId,
