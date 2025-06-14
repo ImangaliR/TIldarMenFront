@@ -26,7 +26,9 @@ import ChatDetails from "./pages/Chat/ChatDetails";
 import Chat from "./pages/Chat/Chat";
 import Wallet from "./pages/Profile/Wallet";
 import AccountSuccess from "./pages/Profile/AccountSuccess";
+import PaymentSuccess from "./pages/Profile/PaymentSuccess";
 import AccountFail from "./pages/Profile/AccountFail";
+import PaymentFail from "./pages/Profile/PaymentFail";
 import Notifications from "./pages/Notifications/Notifications";
 import NotificationDetails from "./pages/Notifications/NotificationDetails";
 
@@ -65,7 +67,9 @@ const AppRoutes = () => {
           />
         </Route>
         <Route path="success" element={<AccountSuccess />} />
+        <Route path="payment-success" element={<PaymentSuccess />} />
         <Route path="fail" element={<AccountFail />} />
+        <Route path="payment-fail" element={<PaymentFail />} />
         <Route element={<BaseLayout />}>
           <Route path="profile" element={<Profile />} />
 
