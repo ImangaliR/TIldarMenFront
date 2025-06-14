@@ -55,7 +55,7 @@ const TranslatorDetails = () => {
       .then((res) => {
         setTranslator(res.data.data);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {});
   }, [id]);
 
   useEffect(() => {
@@ -64,7 +64,7 @@ const TranslatorDetails = () => {
       .then((res) => {
         setReviews(res.data.data);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {});
   }, [id]);
 
   const encodeSpaces = (url) => {
@@ -147,6 +147,16 @@ const TranslatorDetails = () => {
   };
   const handleLeaveReport = () => {
     setIsOpenReport(!isOpenReport);
+  };
+
+  const handleChatWithTranslator = async () => {
+    if (!userId) {
+      toast.warn("You must be logged in to chat");
+      navigate("/login");
+      return;
+    }
+
+    navigate(`/chat/chat-details/${id}`);
   };
 
   return (
@@ -254,7 +264,10 @@ const TranslatorDetails = () => {
                   Leave request
                 </button>
               </div>
-              <button className="absolute bottom-6 md:bottom-0 right-0 w-fit h-fit text-[#2A9E97] border-1 px-3 md:px-4 py-0.5 md:py-1 rounded-2xl">
+              <button
+                onClick={handleChatWithTranslator}
+                className="absolute bottom-6 md:bottom-0 right-0 w-fit h-fit text-[#2A9E97] border-1 px-3 md:px-4 py-0.5 md:py-1 rounded-2xl"
+              >
                 Chat with Translator
               </button>
             </div>

@@ -1,57 +1,36 @@
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Navbar from "../../components/layout/Navbar";
 import { NavLink, Outlet, useMatch } from "react-router-dom";
 import TokenService from "../../services/token.service";
 import { useUser } from "../../utils/contexts/UserContext";
-import SockJS from "sockjs-client/dist/sockjs.min.js";
+import { useWebSocket } from "../../utils/contexts/WebSocketContext";
+import SockJS from "sockjs-client";
 import { Client } from "@stomp/stompjs";
+import ChatSidebar from "./ChatSidebar";
+import api from "../../services/api";
+import { toast } from "react-toastify";
 
 const Chat = () => {
   const isDetailPage = useMatch("/chat/chat-details/:id");
-  const token = TokenService.getLocalAccessToken();
+  const { client, isConnected, messages, setMessages } = useWebSocket();
   const { userId } = useUser();
-  const [messages, setMessages] = useState([]);
+  const [chats, setChats] = useState([]);
   const [input, setInput] = useState("");
-  const [client, setClient] = useState(null); // Replace with actual logged-in user ID
-  const recipientId = "1"; // Replace dynamically based on chat selection
+  const [recipientId, setRecipientId] = useState();
 
   useEffect(() => {
-    if (!token) return; // no token, do not connect
-    const socket = new SockJS(`https://tildarmen.duckdns.org/ws`);
-    const stompClient = new Client({
-      webSocketFactory: () => socket,
-      debug: (str) => console.log(str),
-      connectHeaders: {
-        Authorization: `Bearer ${token}`, // <-- Add your JWT token here
-      },
-      onConnect: () => {
-        console.log("Connected");
-
-        stompClient.subscribe(`/user/${userId}/queue/messages`, (message) => {
-          const payload = JSON.parse(message.body);
-          setMessages((prev) => [
-            ...prev,
-            `From ${payload.senderId}: ${payload.content}`,
-          ]);
-        });
-
-        stompClient.subscribe("/topic/public", (message) => {
-          const payload = JSON.parse(message.body);
-          setMessages((prev) => [...prev, `Public: ${payload.content}`]);
-        });
-      },
-      onStompError: (frame) => {
-        console.error("STOMP error:", frame);
-      },
-    });
-
-    stompClient.activate();
-    setClient(stompClient);
-
-    return () => {
-      stompClient.deactivate();
+    const fetchChats = async () => {
+      try {
+        const res = await api.get(`/users/chats`);
+        console.log(res.data.data);
+        setChats(res.data.data);
+      } catch (err) {
+        toast.error("Something went wrong");
+      }
     };
-  }, [token, userId]);
+
+    fetchChats();
+  }, [userId]);
 
   const sendPrivateMessage = () => {
     if (input.trim() && client?.connected) {
@@ -91,41 +70,18 @@ const Chat = () => {
   return (
     <>
       <Navbar />
-      <main className="flex gap-4 px-10 pt-5 pb-1">
-        <div className="bg-white rounded-lg h-screen min-w-95 shadow-md">
-          <div className="flex items-center justify-center gap-3 p-8">
-            <h1 className="font-bold text-xl">Messages</h1>
-            <p className="w-10 rounded-full bg-gray-200 text-center font-semibold">
-              12
-            </p>
-          </div>
-          <hr className="text-[#F3F3F3]" />
-          <div className="grid gap-2 py-4 px-5">
-            {/* {navigation.map((item, i) => (
-              <NavLink
-                key={i}
-                to={`/chat/chat-details/:${id}`}
-                className={({ isActive }) =>
-                  `flex gap-4 hover:bg-gray-100 p-3 rounded-xl ${
-                    isActive ? "bg-gray-100" : ""
-                  }`
-                }
-              >
-                <img
-                  src={profileicon}
-                  alt="profile image"
-                  className="w-12 h-12 object-cover rounded-lg"
-                />
-                <div>
-                  <h1 className="font-semibold text-lg">Florencio Dorrance</h1>
-                  <p className="text-start text-sm opacity-50">woohoooo</p>
-                </div>
-              </NavLink>
-            ))} */}
-          </div>
-        </div>
+      <main className="flex gap-4 md:px-10 pt-5 pb-1">
+        <ChatSidebar chats={chats} />
         {isDetailPage ? (
-          <Outlet />
+          <Outlet
+            client={client}
+            sendPrivateMessage={sendPrivateMessage}
+            setInput={setInput}
+            input={input}
+            messages={messages}
+            setMessages={setMessages}
+            setRecipientId={setRecipientId}
+          />
         ) : (
           <p className="flex flex-1 items-center justify-center text-xl pb-20">
             Select a chat to start messaging
