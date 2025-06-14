@@ -74,10 +74,9 @@ const ProjectApplicants = () => {
     }
   };
 
-  const makePaymentHandler = async (applicationId) => {
+  const makePaymentHandler = async (translatorId) => {
     try {
-      const res = await api.post(`/stripe/payment/${applicationId}/job/${id}`);
-      toast.success("Payment successful");
+      const res = await api.post(`/stripe/payment/${translatorId}/job/${id}`);
       setMakePayment(false);
       refreshApplicants();
     } catch (err) {
@@ -195,7 +194,7 @@ const ProjectApplicants = () => {
                             </button>
                           </div>
                         ) : applicant.status === "ACCEPTED" ? (
-                          <div className="flex items-center gap-2">
+                          <div className="md:flex items-center gap-2">
                             <button className="bg-[#575982] text-white border-1 px-2 md:px-10 py-1 rounded-lg">
                               Chat
                             </button>
@@ -203,7 +202,7 @@ const ProjectApplicants = () => {
                               <img
                                 src={paymentcard}
                                 alt=""
-                                className="w-11 h-11"
+                                className="w-10 h-8 md:w-11 md:h-11"
                               />
                             </button>
                             {makePayment && (
@@ -220,7 +219,7 @@ const ProjectApplicants = () => {
                                     <button
                                       onClick={() =>
                                         makePaymentHandler(
-                                          applicant.applicationId
+                                          applicant.translatorId
                                         )
                                       }
                                       className="bg-[#575982] text-white w-full py-1 md:py-2 rounded-lg"
