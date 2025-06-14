@@ -18,7 +18,7 @@ export const WebSocketProvider = ({ children }) => {
   useEffect(() => {
     if (!token || !userId) return;
 
-    const socket = new SockJS("http://34.42.251.169:8080/ws");
+    const socket = new SockJS("https://tildarmen.duckdns.org/ws");
     const stompClient = new Client({
       webSocketFactory: () => socket,
       debug: (str) => console.log(str),
