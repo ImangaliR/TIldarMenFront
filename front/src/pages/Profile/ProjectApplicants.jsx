@@ -74,9 +74,9 @@ const ProjectApplicants = () => {
     }
   };
 
-  const makePaymentHandler = async (translatorId) => {
+  const makePaymentHandler = async (applicationId) => {
     try {
-      const res = await api.post(`/stripe/payment/${translatorId}/job/${id}`);
+      const res = await api.post(`/stripe/payment/${applicationId}/job/${id}`);
       toast.success("Payment successful");
       setMakePayment(false);
       refreshApplicants();
@@ -200,24 +200,28 @@ const ProjectApplicants = () => {
                             </button>
                             {makePayment && (
                               <div className="fixed inset-0 bg-black/30 backdrop-blur-sm flex items-center justify-center z-50">
-                                <div className="bg-white py-10 px-5 rounded-lg shadow-lg">
-                                  <h2 className="text-xl mb-4">Make Payment</h2>
-                                  <p className="mb-4">
+                                <div className="bg-white py-8 md:py-10 px-4 md:px-5 rounded-lg shadow-lg">
+                                  <h2 className="text-lg md:text-xl mb-4">
+                                    Make Payment
+                                  </h2>
+                                  <p className="text-sm md:text-base mb-4">
                                     Please proceed with the payment for{" "}
                                     {applicant.firstName} {applicant.lastName}.
                                   </p>
                                   <div className="flex items-center justify-center gap-2">
                                     <button
                                       onClick={() =>
-                                        makePaymentHandler(applicant.id)
+                                        makePaymentHandler(
+                                          applicant.applicationId
+                                        )
                                       }
-                                      className="bg-[#575982] text-white w-full py-2 rounded-lg"
+                                      className="bg-[#575982] text-white w-full py-1 md:py-2 rounded-lg"
                                     >
                                       Proceed
                                     </button>
                                     <button
                                       onClick={() => setMakePayment(false)}
-                                      className="text-red-500 border-1 w-full py-2 rounded-lg"
+                                      className="text-red-500 border-1 w-full py-1 md:py-2 rounded-lg"
                                     >
                                       Close
                                     </button>
