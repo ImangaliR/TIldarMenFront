@@ -139,7 +139,7 @@ const ChatDetails = () => {
 
         <hr className="text-[#F3F3F3]" />
 
-        <div className="bg-white flex flex-col h-full max-h-[500px] md:max-h-[570px]">
+        <div className="bg-white flex flex-col h-full max-h-[490px] md:max-h-[570px]">
           <div className="chat-area flex-1 overflow-y-auto min-h-0 mt-5">
             {/* {messages?.map((msg, index) => (
               <div
