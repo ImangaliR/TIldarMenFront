@@ -8,7 +8,7 @@ const ChatSidebar = ({ chats }) => {
   return (
     <>
       <div
-        className={`bg-white md:rounded-lg h-170 w-full md:w-fit md:min-w-75 lg:min-w-95 shadow-md ${
+        className={`bg-white md:rounded-lg h-150 md:h-170 w-full md:w-fit md:min-w-75 lg:min-w-95 shadow-md ${
           isDetailPage ? "hidden md:block" : ""
         }`}
       >

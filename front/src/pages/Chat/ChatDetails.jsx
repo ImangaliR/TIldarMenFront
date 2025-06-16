@@ -112,7 +112,7 @@ const ChatDetails = () => {
 
   return (
     <>
-      <div className="w-full bg-white rounded-lg shadow-md">
+      <div className="w-full bg-white md:rounded-lg shadow-md">
         <div className="flex flex-center gap-4 py-5 px-6 md:px-8">
           <button className="md:hidden" onClick={() => navigate("/chat")}>
             <img src={rightarrow} alt="arrow" className="rotate-180 w-4 h-4 " />
@@ -139,7 +139,7 @@ const ChatDetails = () => {
 
         <hr className="text-[#F3F3F3]" />
 
-        <div className="bg-white flex flex-col h-full max-h-[520px] md:max-h-[570px]">
+        <div className="bg-white flex flex-col h-full max-h-[500px] md:max-h-[570px]">
           <div className="chat-area flex-1 overflow-y-auto min-h-0 mt-5">
             {/* {messages?.map((msg, index) => (
               <div
