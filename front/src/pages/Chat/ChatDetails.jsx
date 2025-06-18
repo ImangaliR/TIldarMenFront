@@ -118,10 +118,18 @@ const ChatDetails = () => {
     return date.toLocaleTimeString("en-US", options);
   };
 
+  const filteredMessages = messages.filter(
+    (msg) =>
+      (String(msg.senderId) === String(userId) &&
+        String(msg.recipientId) === String(recipientId)) ||
+      (String(msg.senderId) === String(recipientId) &&
+        String(msg.recipientId) === String(userId))
+  );
+
   const groupedMessages = [];
   let lastDate = null;
 
-  messages?.forEach((msg, index) => {
+  filteredMessages?.forEach((msg, index) => {
     const messageDate = formatDate(msg.date);
     const showDateLabel = messageDate !== lastDate;
     lastDate = messageDate;
@@ -134,6 +142,8 @@ const ChatDetails = () => {
       formattedTime: formatTime(msg.date),
     });
   });
+
+  console.log(messages);
 
   return (
     <>
@@ -166,8 +176,8 @@ const ChatDetails = () => {
 
         <div className="bg-white flex flex-col h-full max-h-[485px] md:max-h-[570px]">
           <div className="chat-area flex-1 overflow-y-auto min-h-0 mt-5">
-            {groupedMessages.map((msg, i) => (
-              <div key={i} className="bg-white">
+            {groupedMessages.map((msg) => (
+              <div key={msg.key} className="bg-white">
                 {msg.showDateLabel && (
                   <div className="flex justify-center my-3">
                     <span className="text-xs text-gray-500 bg-gray-100 px-3 py-1 rounded-full shadow-sm">
