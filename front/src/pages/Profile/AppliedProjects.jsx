@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import api from "../../services/api";
 import { toast } from "react-toastify";
 import { useUser } from "../../utils/contexts/UserContext";
+import { useNavigate } from "react-router-dom";
 
 const statusColors = {
   ACCEPTED: "bg-green-100 text-green-700",
@@ -11,6 +12,7 @@ const statusColors = {
 
 const AppliedProjects = () => {
   const { userId } = useUser();
+  const navigate = useNavigate();
   const [applications, setApplications] = useState([]);
   const [refreshFlag, setRefreshFlag] = useState(false);
 
@@ -69,8 +71,6 @@ const AppliedProjects = () => {
 
     navigate(`/chat/chat-details/${id}`);
   };
-
-  console.log("Applications:", applications);
 
   return (
     <>
@@ -135,7 +135,7 @@ const AppliedProjects = () => {
                         ) : application.status === "ACCEPTED" ? (
                           <button
                             onClick={() =>
-                              handleChatWithTranslator(application.id)
+                              handleChatWithTranslator(application.employerId)
                             }
                             className="bg-indigo-500 text-white border-1 px-2 md:px-14 py-1 rounded-lg"
                           >
