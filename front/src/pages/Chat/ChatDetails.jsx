@@ -60,16 +60,22 @@ const ChatDetails = () => {
   }, [userId, recipientId, client]);
 
   const handleSend = async () => {
-    if (input.trim() && isConnected) {
+    const trimmedInput = input.trim();
+
+    if (trimmedInput && isConnected) {
       const message = {
         senderId: userId,
         recipientId: recipientId,
-        content: input,
+        content: trimmedInput,
         date: new Date().toISOString(),
       };
 
       sendMessage(message);
       setInput("");
+
+      if (textareaRef.current) {
+        textareaRef.current.style.height = "auto";
+      }
     }
   };
 
@@ -82,9 +88,29 @@ const ChatDetails = () => {
   };
 
   const formatDate = (dateString) => {
-    const options = { day: "2-digit", month: "short", year: "numeric" };
     const date = new Date(dateString);
-    return date.toLocaleDateString("en-US", options);
+    const today = new Date();
+    const yesterday = new Date();
+    yesterday.setDate(today.getDate() - 1);
+
+    const isToday =
+      date.getDate() === today.getDate() &&
+      date.getMonth() === today.getMonth() &&
+      date.getFullYear() === today.getFullYear();
+
+    const isYesterday =
+      date.getDate() === yesterday.getDate() &&
+      date.getMonth() === yesterday.getMonth() &&
+      date.getFullYear() === yesterday.getFullYear();
+
+    if (isToday) return "Today";
+    if (isYesterday) return "Yesterday";
+
+    return date.toLocaleDateString("en-US", {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+    });
   };
 
   const formatTime = (dateString) => {
@@ -109,6 +135,8 @@ const ChatDetails = () => {
       formattedTime: formatTime(msg.date),
     });
   });
+
+  console.log(messages);
 
   return (
     <>
@@ -141,32 +169,6 @@ const ChatDetails = () => {
 
         <div className="bg-white flex flex-col h-full max-h-[485px] md:max-h-[570px]">
           <div className="chat-area flex-1 overflow-y-auto min-h-0 mt-5">
-            {/* {messages?.map((msg, index) => (
-              <div
-                key={index}
-                className={`flex items-end px-5 py-1  ${
-                  msg.senderId == userId ? "justify-end" : "justify-start"
-                }`}
-              >
-                <div className="relative bg-gray-50 px-6 pt-1 pb-5 rounded-lg shadow-sm max-w-xs sm:max-w-sm md:max-w-md">
-                  <p
-                    className={`break-words ${
-                      msg.senderId == userId ? "text-left" : "text-right"
-                    }`}
-                  >
-                    {msg.content}
-                  </p>
-                  <span
-                    className={`text-[10px] text-gray-400 absolute bottom-1 ${
-                      msg.senderId == userId ? "right-1" : "left-1"
-                    }`}
-                  >
-                    {formatDate(msg.date)}
-                  </span>
-                </div>
-              </div>
-            ))}
-            <div ref={messagesEndRef} /> */}
             {groupedMessages.map((msg) => (
               <div key={msg.key} className="bg-white">
                 {msg.showDateLabel && (
@@ -208,17 +210,21 @@ const ChatDetails = () => {
               ref={textareaRef}
               value={input}
               onChange={(e) => {
-                setInput(e.target.value);
+                const value = e.target.value;
+                setInput(value);
+
                 const el = e.target;
                 el.style.height = "auto";
-                el.style.height = `${Math.min(el.scrollHeight, 150)}px`;
+                if (value) {
+                  el.style.height = `${Math.min(el.scrollHeight, 150)}px`;
+                }
               }}
               onKeyDown={(e) => {
                 if (e.key === "Enter" && !e.shiftKey) {
                   handleSend();
                 }
               }}
-              className="w-full border-2 border-[#dcdcdc] pl-3 rounded-lg resize-none overflow-hidden transition-all duration-150 ease-in-out"
+              className="w-full min-h-9 border-2 border-[#dcdcdc] pl-3 rounded-lg resize-none overflow-hidden transition-all duration-150 ease-in-out"
               rows={1}
             />
             <button
