@@ -60,6 +60,18 @@ const AppliedProjects = () => {
     }
   };
 
+  const handleChatWithTranslator = async (id) => {
+    if (!userId) {
+      toast.warn("You must be logged in to chat");
+      navigate("/login");
+      return;
+    }
+
+    navigate(`/chat/chat-details/${id}`);
+  };
+
+  console.log("Applications:", applications);
+
   return (
     <>
       <main className="w-full md:w-fit">
@@ -121,7 +133,12 @@ const AppliedProjects = () => {
                             </button>
                           </div>
                         ) : application.status === "ACCEPTED" ? (
-                          <button className="bg-indigo-500 text-white border-1 px-2 md:px-14 py-1 rounded-lg">
+                          <button
+                            onClick={() =>
+                              handleChatWithTranslator(application.id)
+                            }
+                            className="bg-indigo-500 text-white border-1 px-2 md:px-14 py-1 rounded-lg"
+                          >
                             Chat
                           </button>
                         ) : (

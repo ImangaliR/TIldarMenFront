@@ -14,6 +14,8 @@ export const WebSocketProvider = ({ children }) => {
   const [client, setClient] = useState(null);
   const [messages, setMessages] = useState([]);
   const [isConnected, setIsConnected] = useState(false);
+  const [selectedUserId, setSelectedUserId] = useState(null);
+  const [unreadMessages, setUnreadMessages] = useState([]);
 
   useEffect(() => {
     if (!token || !userId) return;
@@ -86,7 +88,15 @@ export const WebSocketProvider = ({ children }) => {
     if (clientRef.current && clientRef.current.connected) {
       client.subscribe(`/user/${recipientId}/queue/messages`, (message) => {
         const payload = JSON.parse(message.body);
-        setMessages((prev) => [...prev, payload]);
+        if (selectedUserId === payload.senderId) {
+          setMessages((prev) => [...prev, payload]); // show in chat directly
+          // Optional scroll control should be done in UI component (ChatDetails) via useEffect
+        } else {
+          setUnreadMessages((prev) => ({
+            ...prev,
+            [payload.senderId]: (prev[payload.senderId] || 0) + 1,
+          }));
+        }
       });
     }
   };
@@ -101,6 +111,8 @@ export const WebSocketProvider = ({ children }) => {
         subscribeTo,
         sendMessage,
         subscribeToUser,
+        unreadMessages,
+        setUnreadMessages,
       }}
     >
       {children}

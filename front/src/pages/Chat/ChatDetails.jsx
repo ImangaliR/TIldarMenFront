@@ -60,17 +60,16 @@ const ChatDetails = () => {
   }, [userId, recipientId, client]);
 
   const handleSend = async () => {
-    const trimmedInput = input.trim();
-
-    if (trimmedInput && isConnected) {
+    if (input.trim() && isConnected) {
       const message = {
         senderId: userId,
         recipientId: recipientId,
-        content: trimmedInput,
+        content: input,
         date: new Date().toISOString(),
       };
 
       sendMessage(message);
+      setMessages((prev) => [...prev, message]);
       setInput("");
 
       if (textareaRef.current) {
@@ -131,7 +130,8 @@ const ChatDetails = () => {
       ...msg,
       key: index,
       showDateLabel,
-      formattedDate: messageDate,
+      formattedDate:
+        messageDate === "Invalid Date" ? "New Messages" : messageDate,
       formattedTime: formatTime(msg.date),
     });
   });
@@ -174,7 +174,7 @@ const ChatDetails = () => {
                 {msg.showDateLabel && (
                   <div className="flex justify-center my-3">
                     <span className="text-xs text-gray-500 bg-gray-100 px-3 py-1 rounded-full shadow-sm">
-                      {msg.formattedDate}
+                      {msg.formattedDate ? msg.formattedDate : "New Messages"}
                     </span>
                   </div>
                 )}
@@ -196,7 +196,7 @@ const ChatDetails = () => {
                         msg.senderId == userId ? "right-1" : "left-1"
                       }`}
                     >
-                      {formatTime(msg.date)}
+                      {msg.date ? formatTime(msg.date) : "just now"}
                     </span>
                   </div>
                 </div>
@@ -221,6 +221,7 @@ const ChatDetails = () => {
               }}
               onKeyDown={(e) => {
                 if (e.key === "Enter" && !e.shiftKey) {
+                  e.preventDefault();
                   handleSend();
                 }
               }}
@@ -229,7 +230,7 @@ const ChatDetails = () => {
             />
             <button
               onClick={handleSend}
-              className="text-[#71C39C] border-1 py-1 px-5 rounded-lg fonr-semibold"
+              className="text-[#71C39C] border-1 py-1 px-5 rounded-lg font-semibold"
             >
               Send
             </button>

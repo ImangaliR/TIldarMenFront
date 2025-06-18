@@ -5,6 +5,7 @@ import profileicon from "../../assets/profileicon.png";
 import vector from "../../assets/vector.png";
 import paymentcard from "../../assets/paymentcard.png";
 import { toast } from "react-toastify";
+import { useUser } from "../../utils/contexts/UserContext";
 
 const statusColors = {
   REJECTED: "#FDD3D0",
@@ -14,6 +15,7 @@ const statusColors = {
 
 const ProjectApplicants = () => {
   const { id } = useParams();
+  const { userId } = useUser();
   const navigate = useNavigate();
   const [applicants, setApplicants] = useState([]);
   const [refreshFlag, setRefreshFlag] = useState(false);
@@ -90,6 +92,16 @@ const ProjectApplicants = () => {
         toast.error("Payment failed");
       }
     }
+  };
+
+  const handleChatWithTranslator = async (id) => {
+    if (!userId) {
+      toast.warn("You must be logged in to chat");
+      navigate("/login");
+      return;
+    }
+
+    navigate(`/chat/chat-details/${id}`);
   };
 
   return (
@@ -195,7 +207,12 @@ const ProjectApplicants = () => {
                           </div>
                         ) : applicant.status === "ACCEPTED" ? (
                           <div className="md:flex items-center gap-2">
-                            <button className="bg-[#575982] text-white border-1 px-2 md:px-10 py-1 rounded-lg">
+                            <button
+                              onClick={() =>
+                                handleChatWithTranslator(applicant.translatorId)
+                              }
+                              className="bg-[#575982] text-white border-1 px-2 md:px-10 py-1 rounded-lg"
+                            >
                               Chat
                             </button>
                             <button onClick={() => setMakePayment(true)}>
