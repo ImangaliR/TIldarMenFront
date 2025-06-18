@@ -35,10 +35,14 @@ export const WebSocketProvider = ({ children }) => {
 
         stompClient.subscribe(`/user/${userId}/queue/messages`, (message) => {
           const payload = JSON.parse(message.body);
-          setMessages((prev) => [
-            ...prev,
-            `From ${payload.senderId}: ${payload.content}`,
-          ]);
+          const messageObject = {
+            chatId: `${userId}-${recipientId}`,
+            senderId: payload.senderId,
+            recipientId: payload.recipientId,
+            content: payload.content,
+            date: payload.date || new Date().toISOString(),
+          };
+          setMessages((prev) => [...prev, messageObject]);
         });
       },
       onDisconnect: () => {

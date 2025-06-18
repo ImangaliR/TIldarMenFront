@@ -130,8 +130,7 @@ const ChatDetails = () => {
       ...msg,
       key: index,
       showDateLabel,
-      formattedDate:
-        messageDate === "Invalid Date" ? "New Messages" : messageDate,
+      formattedDate: messageDate,
       formattedTime: formatTime(msg.date),
     });
   });
@@ -169,12 +168,12 @@ const ChatDetails = () => {
 
         <div className="bg-white flex flex-col h-full max-h-[485px] md:max-h-[570px]">
           <div className="chat-area flex-1 overflow-y-auto min-h-0 mt-5">
-            {groupedMessages.map((msg) => (
-              <div key={msg.key} className="bg-white">
+            {groupedMessages.map((msg, i) => (
+              <div key={i} className="bg-white">
                 {msg.showDateLabel && (
                   <div className="flex justify-center my-3">
                     <span className="text-xs text-gray-500 bg-gray-100 px-3 py-1 rounded-full shadow-sm">
-                      {msg.formattedDate ? msg.formattedDate : "New Messages"}
+                      {msg.formattedDate}
                     </span>
                   </div>
                 )}
