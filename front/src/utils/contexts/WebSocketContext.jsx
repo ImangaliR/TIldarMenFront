@@ -36,7 +36,7 @@ export const WebSocketProvider = ({ children }) => {
         stompClient.subscribe(`/user/${userId}/queue/messages`, (message) => {
           const payload = JSON.parse(message.body);
           const messageObject = {
-            chatId: `${userId}-${recipientId}`,
+            chatId: `${userId}-${payload.recipientId}`,
             senderId: payload.senderId,
             recipientId: payload.recipientId,
             content: payload.content,

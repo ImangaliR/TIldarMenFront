@@ -135,8 +135,6 @@ const ChatDetails = () => {
     });
   });
 
-  console.log(messages);
-
   return (
     <>
       <div className="w-full bg-white md:rounded-lg shadow-md">
