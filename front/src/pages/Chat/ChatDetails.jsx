@@ -18,6 +18,7 @@ const ChatDetails = () => {
     setMessages,
     sendMessage,
     subscribeToUser,
+    setSelectedUserId,
   } = useWebSocket();
   const { userId } = useUser();
   const [input, setInput] = useState("");
@@ -42,11 +43,9 @@ const ChatDetails = () => {
     const subscribeToRecipient = async () => {
       try {
         const response = await api.get(`/messages/${userId}/${recipientId}`);
-        console.log("Chat data:", response.data);
         setMessages(response.data.data);
-
-        // Now subscribe to recipient’s queue
         if (client?.connected) {
+          setSelectedUserId(recipientId);
           subscribeToUser(recipientId);
         }
       } catch (err) {
@@ -142,8 +141,6 @@ const ChatDetails = () => {
       formattedTime: formatTime(msg.date),
     });
   });
-
-  console.log(messages);
 
   return (
     <>

@@ -1,4 +1,11 @@
-import { createContext, useContext, useEffect, useRef, useState } from "react";
+import {
+  createContext,
+  use,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import SockJS from "sockjs-client";
 import { Client } from "@stomp/stompjs";
 import TokenService from "../../services/token.service";
@@ -10,12 +17,17 @@ export const WebSocketProvider = ({ children }) => {
   const token = TokenService.getLocalAccessToken();
   const { userId } = useUser();
   const clientRef = useRef(null);
-  const subscriptionsRef = useRef({});
   const [client, setClient] = useState(null);
   const [messages, setMessages] = useState([]);
   const [isConnected, setIsConnected] = useState(false);
   const [selectedUserId, setSelectedUserId] = useState(null);
-  const [unreadMessages, setUnreadMessages] = useState([]);
+  const [unreadMessages, setUnreadMessages] = useState({});
+  const [chatList, setChatList] = useState([]);
+  const selectedUserRef = useRef(null);
+
+  useEffect(() => {
+    selectedUserRef.current = selectedUserId;
+  }, [selectedUserId]);
 
   useEffect(() => {
     if (!token || !userId) return;
@@ -42,8 +54,33 @@ export const WebSocketProvider = ({ children }) => {
             content: payload.content,
             date: payload.date || new Date().toISOString(),
           };
-          setMessages((prev) => [...prev, messageObject]);
+
+          const isIncoming = payload.senderId !== userId;
+          const chatPartnerId = isIncoming
+            ? payload.senderId
+            : payload.recipientId;
+          if (selectedUserRef.current === chatPartnerId) {
+            setMessages((prev) => [...prev, messageObject]);
+          } else {
+            setUnreadMessages((prev) => ({
+              ...prev,
+              [payload.senderId]: (prev[payload.senderId] || 0) + 1,
+            }));
+          }
         });
+
+        /* stompClient.subscribe(`/user/${userId}/queue/chats`, (message) => {
+          const chatList = JSON.parse(message.body);
+          console.log("💬 Chat list received:", chatList);
+          // TODO: store chat list in state if needed, e.g.:
+          setChatList(chatList);
+        });
+
+        // Request chat list
+        stompClient.publish({
+          destination: "/app/getChats",
+          body: JSON.stringify({}),
+        }); */
       },
       onDisconnect: () => {
         console.log("❌ WebSocket Disconnected");
@@ -65,20 +102,6 @@ export const WebSocketProvider = ({ children }) => {
     };
   }, [token, userId]);
 
-  const subscribeTo = async (destination) => {
-    const client = clientRef.current;
-    if (!client || !client.connected || subscriptionsRef.current[destination])
-      return;
-
-    const subscription = client.subscribe(destination, (message) => {
-      const payload = JSON.parse(message.body);
-      setMessages((prev) => [...prev, payload]);
-    });
-
-    subscriptionsRef.current[destination] = subscription;
-    console.log(`Subscribed to: ${destination}`);
-  };
-
   const sendMessage = async (messageBody) => {
     if (clientRef.current && clientRef.current.connected) {
       clientRef.current.publish({
@@ -89,20 +112,11 @@ export const WebSocketProvider = ({ children }) => {
   };
 
   const subscribeToUser = async (recipientId) => {
-    if (clientRef.current && clientRef.current.connected) {
-      client.subscribe(`/user/${recipientId}/queue/messages`, (message) => {
-        const payload = JSON.parse(message.body);
-        if (selectedUserId === payload.senderId) {
-          setMessages((prev) => [...prev, payload]); // show in chat directly
-          // Optional scroll control should be done in UI component (ChatDetails) via useEffect
-        } else {
-          setUnreadMessages((prev) => ({
-            ...prev,
-            [payload.senderId]: (prev[payload.senderId] || 0) + 1,
-          }));
-        }
-      });
-    }
+    setSelectedUserId(recipientId);
+    setUnreadMessages((prev) => ({
+      ...prev,
+      [recipientId]: 0,
+    }));
   };
 
   return (
@@ -112,11 +126,11 @@ export const WebSocketProvider = ({ children }) => {
         isConnected,
         messages,
         setMessages,
-        subscribeTo,
         sendMessage,
         subscribeToUser,
         unreadMessages,
         setUnreadMessages,
+        setSelectedUserId,
       }}
     >
       {children}
